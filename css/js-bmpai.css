@@ -1,0 +1,12 @@
+body {
+    margin: 2%;
+    margin-top: 1%;
+}
+
+#canvas {
+    height: 400px;
+}
+
+#editor {
+    height: 170px;
+}
