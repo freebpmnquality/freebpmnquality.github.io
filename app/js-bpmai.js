@@ -4,7 +4,7 @@ editor.session.setMode("ace/mode/xml");
 
 var viewer = null;
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('#zoombuttons').hide();
     $('#canvas').hide();
 
@@ -16,25 +16,25 @@ $(document).ready(function() {
         loadDocumentByLink();
     }
 
-    $('#editor').keyup(function() {
+    $('#editor').keyup(function () {
         let bpmnXML = editor.getValue();
 
         defineXMLNamespace(bpmnXML);
     });
 
-    $('#expand').click(function() {
+    $('#expand').click(function () {
         $('#editor').height(370);
 
         editor.resize();
     });
 
-    $('#collapse').click(function() {
+    $('#collapse').click(function () {
         $('#editor').height(170);
 
         editor.resize();
     });
 
-    $('#clear').click(function() {
+    $('#clear').click(function () {
         editor.setValue('');
 
         $('#bpmnLink').val('');
@@ -42,7 +42,7 @@ $(document).ready(function() {
         window.location.href = './';
     });
 
-    $('#paste').click(function() {
+    $('#paste').click(function () {
         navigator.clipboard.readText().then(clipText => {
             editor.setValue('');
             editor.insert(clipText);
@@ -55,19 +55,19 @@ $(document).ready(function() {
         });
     });
 
-    $('#copy').click(function() {
-        navigator.clipboard.writeText(editor.getValue()).then(clipText => {});
+    $('#copy').click(function () {
+        navigator.clipboard.writeText(editor.getValue()).then(clipText => { });
     });
 
-    $('#zoomin').click(function() {
+    $('#zoomin').click(function () {
         resizeCanvas(50);
     });
 
-    $('#zoomout').click(function() {
+    $('#zoomout').click(function () {
         resizeCanvas(-50);
     });
 
-    $('#reload').click(function() {
+    $('#reload').click(function () {
         let bpmnLink = $('#bpmnLink').val();
 
         if (bpmnLink === null || bpmnLink === '') {
@@ -77,7 +77,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#analyzeDoc').click(function() {
+    $('#analyzeDoc').click(function () {
         $('#zoombuttons').show();
         $('#canvas').show();
 
@@ -93,7 +93,7 @@ $(document).ready(function() {
 
         viewer = new BpmnJS({ container: '#canvas' });
 
-        viewer.importXML(bpmnXML, function(err) {
+        viewer.importXML(bpmnXML, function (err) {
             if (err) {
                 $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
             } else {
@@ -123,7 +123,7 @@ $(document).ready(function() {
 function loadDocumentByLink() {
     let bpmnLink = $('#bpmnLink').val();
 
-    $.get(bpmnLink, function(data) {
+    $.get(bpmnLink, function (data) {
         editor.setValue('');
         editor.insert(data);
 
@@ -155,7 +155,7 @@ function resizeCanvas(change) {
 
         let bpmnXML = editor.getValue();
 
-        viewer.importXML(bpmnXML, function(err) {
+        viewer.importXML(bpmnXML, function (err) {
             if (err) {
                 $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
             } else {
@@ -190,7 +190,7 @@ function bpmnValidation(xmlDoc, prefix) {
             inclusiveGateways: 0,
             uncertainGateways: 0,
 
-            validate: function() {
+            validate: function () {
                 return this.invalidTasks === 0 && this.invalidEvents === 0 && this.gatewaysMismatch === 0 &&
                     this.startEvents === 1 && this.endEvents === 1 && this.inclusiveGateways === 0 &&
                     this.uncertainGateways === 0;
@@ -198,7 +198,7 @@ function bpmnValidation(xmlDoc, prefix) {
         }
 
         $('#recommendations').append('<div class="alert alert-light">' +
-            'Процесс <b>"' + processName + '"</b>' + '</div>');
+            'Process <b>"' + processName + '"</b>' + '</div>');
 
         for (let i = 0; i < process.length; i++) {
             // [start] Tasks analysis
@@ -228,22 +228,22 @@ function bpmnValidation(xmlDoc, prefix) {
 
                 if (incoming < 1) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
-                        'Задача <b>"' + name + '"</b> не имеет входящих потоков' + '</div>');
+                        'Task <b>"' + name + '"</b> does not have incoming flows' + '</div>');
                 }
 
                 if (incoming > 1) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
-                        'Задача <b>"' + name + '"</b> имеет несколько входящих потоков' + '</div>');
+                        'Task <b>"' + name + '"</b> has several incoming flows' + '</div>');
                 }
 
                 if (outgoing < 1) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
-                        'Задача <b>"' + name + '"</b> не имеет исходящих потоков' + '</div>');
+                        'Task <b>"' + name + '"</b> does not have outgoing flows' + '</div>');
                 }
 
                 if (outgoing > 1) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
-                        'Задача <b>"' + name + '"</b> имеет несколько исходящих потоков' + '</div>');
+                        'Task <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                 }
             }
             // [end] Tasks analysis
@@ -279,22 +279,22 @@ function bpmnValidation(xmlDoc, prefix) {
 
                     if (incoming < 1) {
                         $('#recommendations').append('<div class="alert alert-danger">' +
-                            'Событие <b>"' + name + '"</b> не имеет исходящих потоков' + '</div>');
+                            'Event <b>"' + name + '"</b> does not have incoming flows' + '</div>');
                     }
 
                     if (incoming > 1) {
                         $('#recommendations').append('<div class="alert alert-danger">' +
-                            'Событие <b>"' + name + '"</b> имеет несколько исходящих потоков' + '</div>');
+                            'Event <b>"' + name + '"</b> has several incoming flows' + '</div>');
                     }
 
                     if (outgoing < 1) {
                         $('#recommendations').append('<div class="alert alert-danger">' +
-                            'Событие <b>"' + name + '"</b> не имеет исходящих потоков' + '</div>');
+                            'Event <b>"' + name + '"</b> does not have outgoing flows' + '</div>');
                     }
 
                     if (outgoing > 1) {
                         $('#recommendations').append('<div class="alert alert-danger">' +
-                            'Событие <b>"' + name + '"</b> имеет несколько исходящих потоков' + '</div>');
+                            'Event <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                     }
                 }
             }
@@ -355,18 +355,18 @@ function bpmnValidation(xmlDoc, prefix) {
 
         if (warnings.inclusiveGateways > 0) {
             $('#recommendations').append('<div class="alert alert-danger">' +
-                'Процесс содержит <b>шлюзы типа OR</b>' + '</div>');
+                'Process contains <b>OR gateways</b>' + '</div>');
         }
 
         if (warnings.uncertainGateways > 0) {
             $('#recommendations').append('<div class="alert alert-danger">' +
-                'Процесс содержит <b>неопределенные шлюзы</b> (не развилки и не слияния)' + '</div>');
+                'Process contains <b>undefined gateways</b> (neither splits nor joins)' + '</div>');
         }
 
         let gatewaysMapping = {
-            'exclusive gateway' : 'XOR',
-            'parallel gateway' : 'AND',
-            'inclusive gateway' : 'OR'
+            'exclusive gateway': 'XOR',
+            'parallel gateway': 'AND',
+            'inclusive gateway': 'OR'
         };
 
         for (var key in splits) {
@@ -377,35 +377,35 @@ function bpmnValidation(xmlDoc, prefix) {
 
                 if (Math.abs(gatewaysMismatch) > 0) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
-                        'Несоответствие шлюзов типа <b>' + gatewaysMapping[key.replace('G', ' g')] 
-                            + '</b>' + '</div>');
+                        'Gateways mismatch of <b>' + gatewaysMapping[key.replace('G', ' g')]
+                        + '</b> type</div>');
                 }
             }
         }
 
         if (warnings.startEvents < 1) {
             $('#recommendations').append('<div class="alert alert-danger">' +
-                'Процесс не имеет <b>начальных событий</b>' + '</div>');
+                'Process does not have <b>start events</b></div>');
         }
 
         if (warnings.startEvents > 1) {
             $('#recommendations').append('<div class="alert alert-danger">' +
-                'Процесс имеет несколько <b>начальных событий</b>' + '</div>');
+                'Process has several <b>start events</b></div>');
         }
 
         if (warnings.endEvents < 1) {
             $('#recommendations').append('<div class="alert alert-danger">' +
-                'Процесс не имеет <b>конечных событий</b>' + '</div>');
+                'Process does not have <b>end events</b></div>');
         }
 
         if (warnings.endEvents > 1) {
             $('#recommendations').append('<div class="alert alert-danger">' +
-                'Процесс имеет несколько <b>конечных событий</b>' + '</div>');
+                'Process has several <b>end events</b></div>');
         }
 
         if (warnings.validate()) {
             $('#recommendations').append('<div class="alert alert-info">' +
-                'Замечаний нет</div>');
+                'No mistakes detected</div>');
         }
     }
 }
