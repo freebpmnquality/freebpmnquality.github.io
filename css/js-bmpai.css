@@ -10,3 +10,9 @@ body {
 #editor {
     height: 170px;
 }
+
+.highlight-overlay {
+    background-color: red;
+    opacity: 0.4;
+    pointer-events: none;
+}

@@ -114,7 +114,10 @@ $(document).ready(function() {
 
                 $('#recommendations').empty();
 
-                bpmnValidation(xmlDoc, prefix);
+                var overlays = viewer.get('overlays');
+                let elementRegistry = viewer.get('elementRegistry');
+
+                bpmnValidation(xmlDoc, prefix, overlays, elementRegistry);
             }
         });
     });
@@ -167,7 +170,26 @@ function resizeCanvas(change) {
     }
 }
 
-function bpmnValidation(xmlDoc, prefix) {
+function colorNode(elementId, overlays, elementRegistry) {
+    var shape = elementRegistry.get(elementId);
+
+    var $overlayHtml =
+        $('<div class="highlight-overlay">')
+        .css({
+            width: shape.width,
+            height: shape.height
+        });
+
+    overlays.add(elementId, {
+        position: {
+            top: 0,
+            left: 0
+        },
+        html: $overlayHtml
+    });
+}
+
+function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
     let processList = xmlDoc.getElementsByTagName(prefix + 'process');
 
     for (let k = 0; k < processList.length; k++) {
@@ -236,6 +258,9 @@ function bpmnValidation(xmlDoc, prefix) {
 
                 if (incoming !== 1 || outgoing !== 1) {
                     warnings.invalidTasks++;
+
+                    // color invalid tasks
+                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
                 }
 
                 if (incoming < 1) {
@@ -282,11 +307,24 @@ function bpmnValidation(xmlDoc, prefix) {
 
                 if (process[i].nodeName.toLowerCase().includes('startEvent'.toLowerCase())) {
                     warnings.startEvents++;
+
+                    if (warnings.startEvents > 1) {
+                        // color extra start events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                    }
                 } else if (process[i].nodeName.toLowerCase().includes('endEvent'.toLowerCase())) {
                     warnings.endEvents++;
+
+                    if (warnings.endEvents > 1) {
+                        // color extra end events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                    }
                 } else {
                     if (incoming !== 1 || outgoing !== 1) {
                         warnings.invalidEvents++;
+
+                        // color invalid events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
                     }
 
                     if (incoming < 1) {
@@ -356,10 +394,16 @@ function bpmnValidation(xmlDoc, prefix) {
                     }
                 } else {
                     warnings.uncertainGateways++;
+
+                    // color invalid gateways
+                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
                 }
 
                 if (process[i].nodeName.toLowerCase().includes('inclusiveGateway'.toLowerCase())) {
                     warnings.inclusiveGateways++;
+
+                    // color OR gateways
+                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
                 }
             }
             // [end] Gateways analysis
@@ -386,6 +430,12 @@ function bpmnValidation(xmlDoc, prefix) {
                         'Gateways mismatch of <b>' + key.replace('bpmn:', '')
                         .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
                         '</b> type</div>');
+
+                    for (let elem in elementRegistry._elements) {
+                        if (elementRegistry._elements[elem].element.type.toLowerCase().includes(key.toLowerCase())) {
+                            colorNode(elementRegistry._elements[elem].element.id, overlays, elementRegistry);
+                        }
+                    }
                 }
             }
         }
