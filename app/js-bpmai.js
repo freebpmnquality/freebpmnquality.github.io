@@ -480,3 +480,38 @@ function getParameterByName(name, url) {
 
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+function dropHandler(ev) {
+    ev.preventDefault();
+
+    if (ev.dataTransfer.items) {
+        for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+            if (ev.dataTransfer.items[i].kind === 'file') {
+                var file = ev.dataTransfer.items[i].getAsFile();
+                var reader = new FileReader();
+
+                $('#dragFileName').text(file.name);
+
+                reader.readAsText(file);
+                reader.onload = function() {
+                    editor.setValue('');
+                    editor.insert(reader.result);
+
+                    let bpmnXML = editor.getValue();
+
+                    defineXMLNamespace(bpmnXML);
+
+                    $('#bpmnLink').val('');
+                };
+            }
+        }
+    }
+}
+
+function dragOverHandler(ev) {
+    ev.preventDefault();
+}
+
+window.onbeforeunload = function(e) {
+    return 'Are you sure you want to leave this page? The changes you made will be lost.';
+};
