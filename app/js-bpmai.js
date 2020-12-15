@@ -179,6 +179,18 @@ function bpmnValidation(xmlDoc, prefix) {
         let processName = processList[k].attributes['name'] === undefined ?
             processList[k].attributes['id'].nodeValue :
             processList[k].attributes['name'].nodeValue;
+
+        let participants = xmlDoc.getElementsByTagName(prefix + 'participant');
+
+        for (let p = 0; p < participants.length; p++) {
+            if (participants[p].attributes['processRef'] !== undefined &&
+                participants[p].attributes['name'] !== undefined &&
+                participants[p].attributes['processRef'].nodeValue === processList[k].attributes['id'].nodeValue) {
+                processName = participants[p].attributes['name'].nodeValue;
+                break;
+            }
+        }
+
         processName = processName === '' ? processList[k].attributes['id'].nodeValue : processName;
 
         let warnings = {
