@@ -7,6 +7,7 @@ var viewer = null;
 $(document).ready(function() {
     $('#zoombuttons').hide();
     $('#canvas').hide();
+    $('#extra-tip').hide();
 
     let bpmnLinkParam = getParameterByName('doc');
 
@@ -87,6 +88,7 @@ $(document).ready(function() {
 function analyzeDoc_Click() {
     $('#zoombuttons').show();
     $('#canvas').show();
+    $('#extra-tip').show();
 
     $('#canvas').empty();
 
