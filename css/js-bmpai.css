@@ -12,7 +12,21 @@ body {
 }
 
 .highlight-overlay {
-    background-color: red;
+    background-color: #dc3545;
     opacity: 0.4;
     pointer-events: none;
+}
+
+.highlight-dropzone {
+    border-color: #007bff;
+    border-style: solid;
+    border-width: 2px;
+}
+
+#drop_zone {
+    height: 200px;
+}
+
+#dragFileName {
+    margin-top: 70px;
 }

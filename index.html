@@ -3,8 +3,7 @@
 
 <head>
     <title>freebpmnquality — Analyze BPMN Models</title>
-    <meta name="description"
-        content="Analyze BPMN business process model correctness. This online service helps to find modeling mistakes in BPMN diagrams." />
+    <meta name="description" content="Analyze BPMN business process model correctness. This online service helps to find modeling mistakes in BPMN diagrams." />
 
     <meta charset="utf-8">
 
@@ -13,7 +12,7 @@
     <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
-<body>
+<body ondragover="highlightDropzone(event)">
     <div class="jumbotron">
         <h1 class="display-4"><b>freebpmnquality</b> — Analyze BPMN Models</h1>
         <img class="rounded mx-auto d-block" alt="logo" height="300" src="logo_transparent.png" />
@@ -29,13 +28,11 @@
         </small>
         [/disable tip] -->
 
-        <div class="card" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
-            onclick="selectFile();">
+        <div class="card" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" onclick="selectFile();">
             <div class="card-body">
                 <p class="text-center text-muted" id="dragFileName">Drag & drop or click to upload the BPMN 2.0 file</p>
             </div>
         </div>
-        <br>
 
         <!-- [disable code editor and link access]
         <div class="input-group mb-3">
@@ -78,10 +75,10 @@
         <button type="button" class="btn btn-default btn-sm" id="zoomout">Zoom-Out</button>
     </div>
     <p>
-    <div id="canvas"></div>
+        <div id="canvas"></div>
     </p>
     <p>
-    <div id="recommendations"></div>
+        <div id="recommendations"></div>
     </p>
 
     <div class="card text-center">

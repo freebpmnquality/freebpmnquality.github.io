@@ -4,7 +4,7 @@ editor.session.setMode("ace/mode/xml");
 
 var viewer = null;
 
-$(document).ready(function () {
+$(document).ready(function() {
     $('#zoombuttons').hide();
     $('#canvas').hide();
 
@@ -16,25 +16,25 @@ $(document).ready(function () {
         loadDocumentByLink();
     }
 
-    $('#editor').keyup(function () {
+    $('#editor').keyup(function() {
         let bpmnXML = editor.getValue();
 
         defineXMLNamespace(bpmnXML);
     });
 
-    $('#expand').click(function () {
+    $('#expand').click(function() {
         $('#editor').height(370);
 
         editor.resize();
     });
 
-    $('#collapse').click(function () {
+    $('#collapse').click(function() {
         $('#editor').height(170);
 
         editor.resize();
     });
 
-    $('#clear').click(function () {
+    $('#clear').click(function() {
         editor.setValue('');
 
         $('#bpmnLink').val('');
@@ -42,7 +42,7 @@ $(document).ready(function () {
         window.location.href = './';
     });
 
-    $('#paste').click(function () {
+    $('#paste').click(function() {
         navigator.clipboard.readText().then(clipText => {
             editor.setValue('');
             editor.insert(clipText);
@@ -55,21 +55,21 @@ $(document).ready(function () {
         });
     });
 
-    $('#copy').click(function () {
-        navigator.clipboard.writeText(editor.getValue()).then(clipText => { });
+    $('#copy').click(function() {
+        navigator.clipboard.writeText(editor.getValue()).then(clipText => {});
     });
 
-    $('#zoomin').click(function () {
+    $('#zoomin').click(function() {
         resizeCanvas(50);
         analyzeDoc_Click();
     });
 
-    $('#zoomout').click(function () {
+    $('#zoomout').click(function() {
         resizeCanvas(-50);
         analyzeDoc_Click();
     });
 
-    $('#reload').click(function () {
+    $('#reload').click(function() {
         let bpmnLink = $('#bpmnLink').val();
 
         if (bpmnLink === null || bpmnLink === '') {
@@ -79,7 +79,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#analyzeDoc').click(function () {
+    $('#analyzeDoc').click(function() {
         analyzeDoc_Click();
     });
 });
@@ -100,7 +100,7 @@ function analyzeDoc_Click() {
 
     viewer = new BpmnJS({ container: '#canvas' });
 
-    viewer.importXML(bpmnXML, function (err) {
+    viewer.importXML(bpmnXML, function(err) {
         if (err) {
             $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
         } else {
@@ -132,7 +132,7 @@ function analyzeDoc_Click() {
 function loadDocumentByLink() {
     let bpmnLink = $('#bpmnLink').val();
 
-    $.get(bpmnLink, function (data) {
+    $.get(bpmnLink, function(data) {
         editor.setValue('');
         editor.insert(data);
 
@@ -164,7 +164,7 @@ function resizeCanvas(change) {
 
         let bpmnXML = editor.getValue();
 
-        viewer.importXML(bpmnXML, function (err) {
+        viewer.importXML(bpmnXML, function(err) {
             if (err) {
                 $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
             } else {
@@ -181,10 +181,10 @@ function colorNode(elementId, overlays, elementRegistry) {
 
     var $overlayHtml =
         $('<div class="highlight-overlay">')
-            .css({
-                width: shape.width,
-                height: shape.height
-            });
+        .css({
+            width: shape.width,
+            height: shape.height
+        });
 
     overlays.add(elementId, {
         position: {
@@ -230,7 +230,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             inclusiveGateways: 0,
             uncertainGateways: 0,
 
-            validate: function () {
+            validate: function() {
                 return this.invalidTasks === 0 && this.invalidEvents === 0 && this.gatewaysMismatch === 0 &&
                     this.startEvents === 1 && this.endEvents === 1 && this.inclusiveGateways === 0 &&
                     this.uncertainGateways === 0;
@@ -434,7 +434,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                 if (Math.abs(gatewaysMismatch) > 0) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
                         'Gateways mismatch of <b>' + key.replace('bpmn:', '')
-                            .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
+                        .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
                         '</b> type</div>');
 
                     for (let elem in elementRegistry._elements) {
@@ -493,7 +493,7 @@ function readFile(file) {
     $('#dragFileName').text(file.name);
 
     reader.readAsText(file);
-    reader.onload = function () {
+    reader.onload = function() {
         editor.setValue('');
         editor.insert(reader.result);
 
@@ -509,6 +509,7 @@ function readFile(file) {
 
 function dropHandler(ev) {
     ev.preventDefault();
+    $('#drop_zone').removeClass('highlight-dropzone');
 
     if (ev.dataTransfer.items) {
         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
@@ -522,6 +523,11 @@ function dropHandler(ev) {
 
 function dragOverHandler(ev) {
     ev.preventDefault();
+    $('#drop_zone').addClass('highlight-dropzone');
+}
+
+function highlightDropzone(ev) {
+    $('#drop_zone').addClass('highlight-dropzone');
 }
 
 function selectFile() {
@@ -536,6 +542,6 @@ function selectFile() {
     input.click();
 }
 
-window.onbeforeunload = function (e) {
+window.onbeforeunload = function(e) {
     return 'Are you sure you want to leave this page? The changes you made will be lost.';
 };
