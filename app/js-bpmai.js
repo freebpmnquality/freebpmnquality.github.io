@@ -61,10 +61,12 @@ $(document).ready(function () {
 
     $('#zoomin').click(function () {
         resizeCanvas(50);
+        analyzeDoc_Click();
     });
 
     $('#zoomout').click(function () {
         resizeCanvas(-50);
+        analyzeDoc_Click();
     });
 
     $('#reload').click(function () {
@@ -78,50 +80,54 @@ $(document).ready(function () {
     });
 
     $('#analyzeDoc').click(function () {
-        $('#zoombuttons').show();
-        $('#canvas').show();
-
-        $('#canvas').empty();
-
-        let bpmnXML = editor.getValue();
-
-        let prefix = $('#bpmnPrefix').val();
-
-        if (prefix.length > 1) {
-            prefix = prefix + ':';
-        }
-
-        viewer = new BpmnJS({ container: '#canvas' });
-
-        viewer.importXML(bpmnXML, function (err) {
-            if (err) {
-                $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
-            } else {
-                let canvas = viewer.get('canvas');
-
-                canvas.zoom('fit-viewport');
-
-                let xmlDoc = null;
-
-                if (window.DOMParser) {
-                    let parser = new DOMParser();
-                    xmlDoc = parser.parseFromString(bpmnXML, 'text/xml');
-                } else {
-                    xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
-                    xmlDoc.async = false;
-                    xmlDoc.loadXML(bpmnXML);
-                }
-
-                $('#recommendations').empty();
-
-                var overlays = viewer.get('overlays');
-                let elementRegistry = viewer.get('elementRegistry');
-
-                bpmnValidation(xmlDoc, prefix, overlays, elementRegistry);
-            }
-        });
+        analyzeDoc_Click();
     });
 });
+
+function analyzeDoc_Click() {
+    $('#zoombuttons').show();
+    $('#canvas').show();
+
+    $('#canvas').empty();
+
+    let bpmnXML = editor.getValue();
+
+    let prefix = $('#bpmnPrefix').val();
+
+    if (prefix.length > 1) {
+        prefix = prefix + ':';
+    }
+
+    viewer = new BpmnJS({ container: '#canvas' });
+
+    viewer.importXML(bpmnXML, function (err) {
+        if (err) {
+            $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
+        } else {
+            let canvas = viewer.get('canvas');
+
+            canvas.zoom('fit-viewport');
+
+            let xmlDoc = null;
+
+            if (window.DOMParser) {
+                let parser = new DOMParser();
+                xmlDoc = parser.parseFromString(bpmnXML, 'text/xml');
+            } else {
+                xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
+                xmlDoc.async = false;
+                xmlDoc.loadXML(bpmnXML);
+            }
+
+            $('#recommendations').empty();
+
+            var overlays = viewer.get('overlays');
+            let elementRegistry = viewer.get('elementRegistry');
+
+            bpmnValidation(xmlDoc, prefix, overlays, elementRegistry);
+        }
+    });
+}
 
 function loadDocumentByLink() {
     let bpmnLink = $('#bpmnLink').val();
@@ -496,6 +502,8 @@ function readFile(file) {
         defineXMLNamespace(bpmnXML);
 
         $('#bpmnLink').val('');
+
+        analyzeDoc_Click();
     };
 }
 

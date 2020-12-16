@@ -23,9 +23,11 @@
     </div>
 
     <div id="workzone">
+        <!-- [disable tip]
         <small>Drag & drop or click the area below to upload the BPMN 2.0 file, or paste its content to the code editor
             below, or use the link to file
         </small>
+        [/disable tip] -->
 
         <div class="card" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
             onclick="selectFile();">
@@ -35,6 +37,7 @@
         </div>
         <br>
 
+        <!-- [disable code editor and link access]
         <div class="input-group mb-3">
             <input type="text" class="form-control" id="bpmnLink" placeholder="Link to the BPMN 2.0 model file" />
             <div class="input-group-append">
@@ -63,6 +66,12 @@
                 <button class="btn btn-outline-info" id="analyzeDoc">Analyze</button>
             </div>
         </div>
+        [/disable code editor and link access] -->
+
+        <!-- [required hidden elements] -->
+        <div id="editor" hidden></div>
+        <input type="hidden" class="form-control" id="bpmnPrefix" />
+        <!-- [/required hidden elements] -->
     </div>
     <div class="btn-group" id="zoombuttons">
         <button type="button" class="btn btn-default btn-sm" id="zoomin">Zoom-In</button>
