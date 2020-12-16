@@ -176,7 +176,7 @@ function resizeCanvas(change) {
     }
 }
 
-function colorNode(elementId, overlays, elementRegistry) {
+function colorNode(elementId, overlays, elementRegistry, tip) {
     var shape = elementRegistry.get(elementId);
 
     var $overlayHtml =
@@ -184,7 +184,8 @@ function colorNode(elementId, overlays, elementRegistry) {
         .css({
             width: shape.width,
             height: shape.height
-        });
+        })
+        .html('<span class="tiptext">' + tip + '</span>');
 
     overlays.add(elementId, {
         position: {
@@ -266,7 +267,8 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     warnings.invalidTasks++;
 
                     // color invalid tasks
-                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                        'Tasks should have one incoming and one outgoing flow');
                 }
 
                 if (incoming < 1) {
@@ -316,21 +318,24 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
                     if (warnings.startEvents > 1) {
                         // color extra start events
-                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'There should be one start event');
                     }
                 } else if (process[i].nodeName.toLowerCase().includes('endEvent'.toLowerCase())) {
                     warnings.endEvents++;
 
                     if (warnings.endEvents > 1) {
                         // color extra end events
-                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'There should be one end event');
                     }
                 } else {
                     if (incoming !== 1 || outgoing !== 1) {
                         warnings.invalidEvents++;
 
                         // color invalid events
-                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'Intermediate events should have one incoming and one outgoing flow');
                     }
 
                     if (incoming < 1) {
@@ -402,14 +407,16 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     warnings.uncertainGateways++;
 
                     // color invalid gateways
-                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                        'This gateway is neither split nor join');
                 }
 
                 if (process[i].nodeName.toLowerCase().includes('inclusiveGateway'.toLowerCase())) {
                     warnings.inclusiveGateways++;
 
                     // color OR gateways
-                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry);
+                    colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                        'It is better to avoid inclusive gateways');
                 }
             }
             // [end] Gateways analysis
@@ -439,7 +446,8 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
                     for (let elem in elementRegistry._elements) {
                         if (elementRegistry._elements[elem].element.type.toLowerCase().includes(key.toLowerCase())) {
-                            colorNode(elementRegistry._elements[elem].element.id, overlays, elementRegistry);
+                            colorNode(elementRegistry._elements[elem].element.id, overlays, elementRegistry,
+                                'Gateways of such type are mismatched');
                         }
                     }
                 }
