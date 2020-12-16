@@ -4,7 +4,7 @@ editor.session.setMode("ace/mode/xml");
 
 var viewer = null;
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('#zoombuttons').hide();
     $('#canvas').hide();
 
@@ -16,25 +16,25 @@ $(document).ready(function() {
         loadDocumentByLink();
     }
 
-    $('#editor').keyup(function() {
+    $('#editor').keyup(function () {
         let bpmnXML = editor.getValue();
 
         defineXMLNamespace(bpmnXML);
     });
 
-    $('#expand').click(function() {
+    $('#expand').click(function () {
         $('#editor').height(370);
 
         editor.resize();
     });
 
-    $('#collapse').click(function() {
+    $('#collapse').click(function () {
         $('#editor').height(170);
 
         editor.resize();
     });
 
-    $('#clear').click(function() {
+    $('#clear').click(function () {
         editor.setValue('');
 
         $('#bpmnLink').val('');
@@ -42,7 +42,7 @@ $(document).ready(function() {
         window.location.href = './';
     });
 
-    $('#paste').click(function() {
+    $('#paste').click(function () {
         navigator.clipboard.readText().then(clipText => {
             editor.setValue('');
             editor.insert(clipText);
@@ -55,19 +55,19 @@ $(document).ready(function() {
         });
     });
 
-    $('#copy').click(function() {
-        navigator.clipboard.writeText(editor.getValue()).then(clipText => {});
+    $('#copy').click(function () {
+        navigator.clipboard.writeText(editor.getValue()).then(clipText => { });
     });
 
-    $('#zoomin').click(function() {
+    $('#zoomin').click(function () {
         resizeCanvas(50);
     });
 
-    $('#zoomout').click(function() {
+    $('#zoomout').click(function () {
         resizeCanvas(-50);
     });
 
-    $('#reload').click(function() {
+    $('#reload').click(function () {
         let bpmnLink = $('#bpmnLink').val();
 
         if (bpmnLink === null || bpmnLink === '') {
@@ -77,7 +77,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#analyzeDoc').click(function() {
+    $('#analyzeDoc').click(function () {
         $('#zoombuttons').show();
         $('#canvas').show();
 
@@ -93,7 +93,7 @@ $(document).ready(function() {
 
         viewer = new BpmnJS({ container: '#canvas' });
 
-        viewer.importXML(bpmnXML, function(err) {
+        viewer.importXML(bpmnXML, function (err) {
             if (err) {
                 $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
             } else {
@@ -126,7 +126,7 @@ $(document).ready(function() {
 function loadDocumentByLink() {
     let bpmnLink = $('#bpmnLink').val();
 
-    $.get(bpmnLink, function(data) {
+    $.get(bpmnLink, function (data) {
         editor.setValue('');
         editor.insert(data);
 
@@ -158,7 +158,7 @@ function resizeCanvas(change) {
 
         let bpmnXML = editor.getValue();
 
-        viewer.importXML(bpmnXML, function(err) {
+        viewer.importXML(bpmnXML, function (err) {
             if (err) {
                 $('#canvas').append('<div class="alert alert-danger">' + err + '</div>');
             } else {
@@ -175,10 +175,10 @@ function colorNode(elementId, overlays, elementRegistry) {
 
     var $overlayHtml =
         $('<div class="highlight-overlay">')
-        .css({
-            width: shape.width,
-            height: shape.height
-        });
+            .css({
+                width: shape.width,
+                height: shape.height
+            });
 
     overlays.add(elementId, {
         position: {
@@ -224,7 +224,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             inclusiveGateways: 0,
             uncertainGateways: 0,
 
-            validate: function() {
+            validate: function () {
                 return this.invalidTasks === 0 && this.invalidEvents === 0 && this.gatewaysMismatch === 0 &&
                     this.startEvents === 1 && this.endEvents === 1 && this.inclusiveGateways === 0 &&
                     this.uncertainGateways === 0;
@@ -428,7 +428,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                 if (Math.abs(gatewaysMismatch) > 0) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
                         'Gateways mismatch of <b>' + key.replace('bpmn:', '')
-                        .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
+                            .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
                         '</b> type</div>');
 
                     for (let elem in elementRegistry._elements) {
@@ -481,6 +481,24 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+function readFile(file) {
+    var reader = new FileReader();
+
+    $('#dragFileName').text(file.name);
+
+    reader.readAsText(file);
+    reader.onload = function () {
+        editor.setValue('');
+        editor.insert(reader.result);
+
+        let bpmnXML = editor.getValue();
+
+        defineXMLNamespace(bpmnXML);
+
+        $('#bpmnLink').val('');
+    };
+}
+
 function dropHandler(ev) {
     ev.preventDefault();
 
@@ -488,21 +506,7 @@ function dropHandler(ev) {
         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
             if (ev.dataTransfer.items[i].kind === 'file') {
                 var file = ev.dataTransfer.items[i].getAsFile();
-                var reader = new FileReader();
-
-                $('#dragFileName').text(file.name);
-
-                reader.readAsText(file);
-                reader.onload = function() {
-                    editor.setValue('');
-                    editor.insert(reader.result);
-
-                    let bpmnXML = editor.getValue();
-
-                    defineXMLNamespace(bpmnXML);
-
-                    $('#bpmnLink').val('');
-                };
+                readFile(file);
             }
         }
     }
@@ -512,6 +516,18 @@ function dragOverHandler(ev) {
     ev.preventDefault();
 }
 
-window.onbeforeunload = function(e) {
+function selectFile() {
+    var input = document.createElement('input');
+    input.type = 'file';
+
+    input.onchange = e => {
+        var file = e.target.files[0];
+        readFile(file);
+    }
+
+    input.click();
+}
+
+window.onbeforeunload = function (e) {
     return 'Are you sure you want to leave this page? The changes you made will be lost.';
 };
