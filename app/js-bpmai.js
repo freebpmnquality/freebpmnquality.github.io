@@ -612,10 +612,12 @@ function dropHandler(ev) {
 function dragOverHandler(ev) {
     ev.preventDefault();
     $('#drop_zone').addClass('highlight-dropzone');
+    $('#dragFileName').text('Drag & drop or click to upload the BPMN 2.0 file');
 }
 
 function highlightDropzone(ev) {
     $('#drop_zone').addClass('highlight-dropzone');
+    $('#dragFileName').text('Drag & drop or click to upload the BPMN 2.0 file');
 }
 
 function selectFile() {
