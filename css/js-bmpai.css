@@ -45,6 +45,7 @@ body {
     position: absolute;
     top: -5px;
     left: 105%;
+    z-index: 1;
 }
 
 .highlight-overlay:hover .tiptext {
