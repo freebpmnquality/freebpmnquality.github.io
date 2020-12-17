@@ -178,7 +178,13 @@ function resizeCanvas(change) {
     }
 }
 
+var coloredNodes = [];
+
 function colorNode(elementId, overlays, elementRegistry, tip) {
+    if (coloredNodes.includes(elementId)) {
+        return;
+    }
+
     var shape = elementRegistry.get(elementId);
 
     var $overlayHtml =
@@ -196,6 +202,8 @@ function colorNode(elementId, overlays, elementRegistry, tip) {
         },
         html: $overlayHtml
     });
+
+    coloredNodes.push(elementId);
 }
 
 function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
