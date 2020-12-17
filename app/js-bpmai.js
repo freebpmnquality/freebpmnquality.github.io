@@ -394,25 +394,31 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
                 if (incoming === 1 && outgoing > 1) {
                     if (splits[process[i].nodeName] === undefined) {
-                        splits[process[i].nodeName] = 1;
+                        splits[process[i].nodeName] = { 'nodes': 1, 'arcs': outgoing };
                     } else {
-                        let old = splits[process[i].nodeName];
-                        splits[process[i].nodeName] = old + 1;
+                        let oldNodes = splits[process[i].nodeName]['nodes'];
+                        let oldArcs = splits[process[i].nodeName]['arcs'];
+
+                        splits[process[i].nodeName]['nodes'] = oldNodes + 1;
+                        splits[process[i].nodeName]['arcs'] = oldArcs + outgoing;
                     }
 
                     if (joins[process[i].nodeName] === undefined) {
-                        joins[process[i].nodeName] = 0;
+                        joins[process[i].nodeName] = { 'nodes': 0, 'arcs': 0 };
                     }
                 } else if (incoming > 1 && outgoing === 1) {
                     if (joins[process[i].nodeName] === undefined) {
-                        joins[process[i].nodeName] = 1;
+                        joins[process[i].nodeName] = { 'nodes': 1, 'arcs': incoming };
                     } else {
-                        let old = joins[process[i].nodeName];
-                        joins[process[i].nodeName] = old + 1;
+                        let oldNodes = joins[process[i].nodeName]['nodes'];
+                        let oldArcs = joins[process[i].nodeName]['arcs'];
+
+                        joins[process[i].nodeName]['nodes'] = oldNodes + 1;
+                        joins[process[i].nodeName]['arcs'] = oldArcs + incoming;
                     }
 
                     if (splits[process[i].nodeName] === undefined) {
-                        splits[process[i].nodeName] = 0;
+                        splits[process[i].nodeName] = { 'nodes': 0, 'arcs': 0 };
                     }
                 } else {
                     warnings.uncertainGateways++;
@@ -445,11 +451,12 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
         for (var key in splits) {
             if (splits.hasOwnProperty(key) && joins.hasOwnProperty(key)) {
-                let gatewaysMismatch = splits[key] - joins[key];
+                let gatewaysMismatch = Math.max(Math.abs(splits[key]['nodes'] - joins[key]['nodes']),
+                    Math.abs(splits[key]['arcs'] - joins[key]['arcs']));
 
-                warnings.gatewaysMismatch += Math.abs(gatewaysMismatch);
+                warnings.gatewaysMismatch += gatewaysMismatch;
 
-                if (Math.abs(gatewaysMismatch) > 0) {
+                if (gatewaysMismatch > 0) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
                         'Gateways mismatch of <b>' + key.replace('bpmn:', '')
                         .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
@@ -489,6 +496,11 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             $('#recommendations').append('<div class="alert alert-info">' +
                 'No mistakes detected</div>');
         }
+
+        // LOG calculated metrics
+        console.log(splits);
+        console.log(joins);
+        console.log(warnings);
     }
 }
 
