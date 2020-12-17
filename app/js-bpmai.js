@@ -245,9 +245,13 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             totalGateways: 0,
 
             validate: function() {
-                return this.invalidTasks === 0 && this.invalidEvents === 0 && this.gatewaysMismatch === 0 &&
-                    this.startEvents === 1 && this.endEvents === 1 && this.inclusiveGateways === 0 &&
-                    this.uncertainGateways === 0;
+                let r1 = this.totalNodes <= 31 ? 1 : 0;
+                let r2 = (this.invalidTasks + this.invalidEvents + this.uncertainGateways) === 0 ? 1 : 0;
+                let r3 = Math.min(this.startEvents === 1 ? 1 : 0, this.endEvents === 1 ? 1 : 0);
+                let r4 = this.gatewaysMismatch === 0 ? 1 : 0;
+                let r5 = this.inclusiveGateways === 0 ? 1 : 0;
+
+                return Math.min(r1, r2, r3, r4, r5);
             }
         }
 
@@ -331,18 +335,62 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                 if (process[i].nodeName.toLowerCase().includes('startEvent'.toLowerCase())) {
                     warnings.startEvents++;
 
-                    if (warnings.startEvents > 1) {
+                    if (outgoing !== 1) {
+                        // color invalid start events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'Start events should have one outgoing flow');
+                    }
+
+                    if (outgoing < 1) {
+                        $('#recommendations').append('<div class="alert alert-danger">' +
+                            'Event <b>"' + name + '"</b> does not have outgoing flows' + '</div>');
+                    }
+
+                    if (outgoing > 1) {
+                        $('#recommendations').append('<div class="alert alert-danger">' +
+                            'Event <b>"' + name + '"</b> has several outgoing flows' + '</div>');
+                    }
+
+                    if (warnings.startEvents > 1 && outgoing === 1) {
                         // color extra start events
                         colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
                             'There should be one start event');
                     }
+
+                    if (warnings.startEvents > 1 && outgoing === 1) {
+                        // color fault extra start events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'There should be one start event; start events should have one outgoing flow');
+                    }
                 } else if (process[i].nodeName.toLowerCase().includes('endEvent'.toLowerCase())) {
                     warnings.endEvents++;
 
-                    if (warnings.endEvents > 1) {
+                    if (incoming !== 1) {
+                        // color invalid end events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'End events should have one incoming flow');
+                    }
+
+                    if (incoming < 1) {
+                        $('#recommendations').append('<div class="alert alert-danger">' +
+                            'Event <b>"' + name + '"</b> does not have incoming flows' + '</div>');
+                    }
+
+                    if (incoming > 1) {
+                        $('#recommendations').append('<div class="alert alert-danger">' +
+                            'Event <b>"' + name + '"</b> has several incoming flows' + '</div>');
+                    }
+
+                    if (warnings.endEvents > 1 && incoming === 1) {
                         // color extra end events
                         colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
                             'There should be one end event');
+                    }
+
+                    if (warnings.endEvents > 1 && incoming !== 1) {
+                        // color fault extra end events
+                        colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
+                            'There should be one end event; start events should have one outgoing flow');
                     }
                 } else {
                     if (incoming !== 1 || outgoing !== 1) {
