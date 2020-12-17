@@ -207,6 +207,7 @@ function colorNode(elementId, overlays, elementRegistry, tip) {
 }
 
 function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
+    coloredNodes = [];
     let processList = xmlDoc.getElementsByTagName(prefix + 'process');
 
     for (let k = 0; k < processList.length; k++) {
