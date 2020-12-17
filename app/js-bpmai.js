@@ -241,6 +241,8 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             endEvents: 0,
             inclusiveGateways: 0,
             uncertainGateways: 0,
+            totalNodes: 0,
+            totalGateways: 0,
 
             validate: function() {
                 return this.invalidTasks === 0 && this.invalidEvents === 0 && this.gatewaysMismatch === 0 &&
@@ -301,6 +303,8 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     $('#recommendations').append('<div class="alert alert-danger">' +
                         'Task <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                 }
+
+                warnings.totalNodes++;
             }
             // [end] Tasks analysis
 
@@ -369,6 +373,8 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                             'Event <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                     }
                 }
+
+                warnings.totalNodes++;
             }
             // [end] Events analysis
 
@@ -435,6 +441,9 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
                         'It is better to avoid inclusive gateways');
                 }
+
+                warnings.totalNodes++;
+                warnings.totalGateways++;
             }
             // [end] Gateways analysis
         }
