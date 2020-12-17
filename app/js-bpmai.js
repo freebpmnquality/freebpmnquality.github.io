@@ -529,6 +529,11 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             }
         }
 
+        if (warnings.totalNodes > 31) {
+            $('#recommendations').append('<div class="alert alert-danger">' +
+                'Process is too large: it can be decomposed or split into several processes</b></div>');
+        }
+
         if (warnings.startEvents < 1) {
             $('#recommendations').append('<div class="alert alert-danger">' +
                 'Process does not have <b>start events</b></div>');
