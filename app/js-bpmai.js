@@ -448,13 +448,13 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
                 if (incoming === 1 && outgoing > 1) {
                     if (splits[process[i].nodeName] === undefined) {
-                        splits[process[i].nodeName] = { 'nodes': 1, 'arcs': outgoing };
+                        splits[process[i].nodeName] = { 'nodes': 1, 'arcs': incoming + outgoing };
                     } else {
                         let oldNodes = splits[process[i].nodeName]['nodes'];
                         let oldArcs = splits[process[i].nodeName]['arcs'];
 
                         splits[process[i].nodeName]['nodes'] = oldNodes + 1;
-                        splits[process[i].nodeName]['arcs'] = oldArcs + outgoing;
+                        splits[process[i].nodeName]['arcs'] = oldArcs + incoming + outgoing;
                     }
 
                     if (joins[process[i].nodeName] === undefined) {
@@ -462,13 +462,13 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     }
                 } else if (incoming > 1 && outgoing === 1) {
                     if (joins[process[i].nodeName] === undefined) {
-                        joins[process[i].nodeName] = { 'nodes': 1, 'arcs': incoming };
+                        joins[process[i].nodeName] = { 'nodes': 1, 'arcs': incoming + outgoing };
                     } else {
                         let oldNodes = joins[process[i].nodeName]['nodes'];
                         let oldArcs = joins[process[i].nodeName]['arcs'];
 
                         joins[process[i].nodeName]['nodes'] = oldNodes + 1;
-                        joins[process[i].nodeName]['arcs'] = oldArcs + incoming;
+                        joins[process[i].nodeName]['arcs'] = oldArcs + incoming + outgoing;
                     }
 
                     if (splits[process[i].nodeName] === undefined) {
