@@ -51,3 +51,11 @@ body {
 .highlight-overlay:hover .tiptext {
     visibility: visible;
 }
+
+#samplesForm {
+    margin-top: 1%;
+}
+
+#samplesTip {
+    margin-top: 1%;
+}
