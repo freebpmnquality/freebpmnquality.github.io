@@ -137,7 +137,8 @@ function loadSample(sample) {
     editor.setValue('');
     editor.insert(data);
 
-    $('#dragFileName').text(sampleFileMapping[sample]);
+    $('#dragFileName').html(sampleFileMapping[sample] +
+        '<br>Drag & drop or click to upload the BPMN 2.0 file');
 
     defineXMLNamespace(data);
 
@@ -596,7 +597,8 @@ function getParameterByName(name, url) {
 function readFile(file) {
     var reader = new FileReader();
 
-    $('#dragFileName').text(file.name);
+    $('#dragFileName').html(file.name +
+        '<br>Drag & drop or click to upload the BPMN 2.0 file');
 
     reader.readAsText(file);
     reader.onload = function() {
