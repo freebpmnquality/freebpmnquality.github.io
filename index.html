@@ -14,12 +14,28 @@
 
 <body ondragover="highlightDropzone(event)">
     <div class="jumbotron" id="header">
-        <h1 class="display-4"><b>freebpmnquality</b> — Estimate Correctness of BPMN Models</h1>
+        <h1 class="display-4 text-center"><b>freebpmnquality</b> — Estimate Correctness of BPMN Models</h1>
         <img class="rounded mx-auto d-block" alt="logo" height="300" src="logo_transparent.png" />
-        <p itemprop="description">Estimate BPMN business process model correctness.</p>
-        <hr class="my-4">
-        <p>This online service helps to find modeling mistakes in BPMN diagrams.</p>
+        <p itemprop="description" class="text-center">
+            Estimate BPMN business process model correctness. This online service helps to find modeling mistakes in BPMN diagrams.
+            <br> Rendering toolkit <a href="https://github.com/bpmn-io">bpmn.io</a> is used to display business process diagrams.
+        </p>
     </div>
+
+    <br>
+    <h1 class="display-4 text-center">Motivation</h1>
+    <p class="text-center text-muted">Who needs this service and why?</p>
+    <blockquote class="blockquote text-right">
+        <p class="mb-0">If you automate a mess, you get an automated mess.</p>
+        <footer class="blockquote-footer">Rod Michael — <cite title="Source Title">Directory of Customer E-Business, Rockwell Automation</cite></footer>
+    </blockquote>
+    <blockquote class="blockquote text-center text-muted" style="margin-left: 5%; margin-right: 5%;">
+        <p class="mb-0">Business process modeling helps organizations to represent scenarios of their activities in graphical way in order to find possible drawbacks, identify potential improvements, or just to instruct employees with detailed descriptions of workflows
+            they should follow.</p>
+        <p class="mb-0">Business process modeling require certain training, but even experienced analysts that know literally everything about workflows under description may commit some mistakes: models could be redundant and workflow paths could be inconsistent, which
+            lead to poor quality models that are not understandable enough and barely modifiable.</p>
+        <p class="mb-0">Business process models of high quality are expected to be deployed and executed without errors that may lead to extra expenses and delays.</p>
+    </blockquote>
 
     <br>
     <h1 class="display-4 text-center">How to Use?</h1>
@@ -119,6 +135,14 @@
     <p>
         <div id="recommendations"></div>
     </p>
+
+    <br>
+    <h1 class="display-4 text-center">Roadmap</h1>
+    <p class="text-center text-muted">What is already done and what should be done in future</p>
+
+    <br>
+    <h1 class="display-4 text-center">About Us</h1>
+    <p class="text-center text-muted">Who we are</p>
 
     <div class="card text-center" id="footer">
         <div class="card-body">
