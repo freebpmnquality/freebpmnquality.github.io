@@ -31,15 +31,23 @@ body {
 .highlight-dropzone {
     border-color: #007bff;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
+    color: #fff !important;
+    background-color: #007bff;
 }
 
 #drop_zone {
     height: 200px;
+    border-color: #007bff;
 }
 
 #dragFileName {
     margin-top: 70px;
+    color: #007bff !important;
+}
+
+.highlight-dropzone-text {
+    color: #fff !important;
 }
 
 #zoombuttons {
@@ -52,7 +60,7 @@ body {
     background-color: white;
     color: #dc3545;
     border: 1px solid #dc3545;
-    border-radius: 3px;
+    border-radius: .25rem;
     text-align: center;
     padding: 5px;
     position: absolute;

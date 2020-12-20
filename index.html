@@ -50,7 +50,7 @@
         <p class="mb-0">Zoom-in and zoom-out buttons with the help message are displayed</p>
         <p class="mb-0">Uploaded model is displayed with already highlighted faults</p>
         <p class="mb-0">Highlighted weak spots can be hovered to get tooltips</p>
-        <p class="mb-0">Detected faults are explained in detail below the diagram</p>
+        <p class="mb-0">Detected faults are explained in detail below the BPMN diagram</p>
     </blockquote>
 
     <br>
@@ -168,6 +168,12 @@
     <script src="js/ace/ace.js"></script>
     <script src="samples/bpmai-samples.js"></script>
     <script src="app/js-bpmai.js"></script>
+
+    <script>
+        window.onbeforeunload = function(e) {
+            return 'Are you sure you want to leave this page? The changes you made will be lost.';
+        };
+    </script>
 </body>
 
 </html>
