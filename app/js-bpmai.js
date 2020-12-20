@@ -131,16 +131,15 @@ function analyzeDoc_Click() {
     });
 }
 
-function loadSample(sampleFile) {
-    let samplesPath = './samples/';
-    let filePath = samplesPath + sampleFile;
+function loadSample(sample) {
+    let data = samples[sample];
 
-    $.get(filePath, function(data) {
-        editor.setValue('');
-        editor.insert(data);
+    editor.setValue('');
+    editor.insert(data);
 
-        defineXMLNamespace(data);
-    });
+    $('#dragFileName').text(sampleFileMapping[sample]);
+
+    defineXMLNamespace(data);
 
     analyzeDoc_Click();
 }
