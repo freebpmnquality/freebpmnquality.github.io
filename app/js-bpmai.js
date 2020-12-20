@@ -83,6 +83,8 @@ $(document).ready(function() {
     $('#analyzeDoc').click(function() {
         analyzeDoc_Click();
     });
+
+    loadSample('dispatch');
 });
 
 function analyzeDoc_Click() {
