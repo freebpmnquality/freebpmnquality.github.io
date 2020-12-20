@@ -131,6 +131,20 @@ function analyzeDoc_Click() {
     });
 }
 
+function loadSample(sampleFile) {
+    let samplesPath = './samples/';
+    let filePath = samplesPath + sampleFile;
+
+    $.get(filePath, function(data) {
+        editor.setValue('');
+        editor.insert(data);
+
+        defineXMLNamespace(data);
+    });
+
+    analyzeDoc_Click();
+}
+
 function loadDocumentByLink() {
     let bpmnLink = $('#bpmnLink').val();
 
