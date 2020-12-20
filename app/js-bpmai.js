@@ -620,7 +620,7 @@ function readFile(file) {
 function dropHandler(ev) {
     ev.preventDefault();
     $('#drop_zone').removeClass('highlight-dropzone');
-    $('#dragFileName').removeClass('highlight-dropzone-text');
+    $('#dragFileName').attr('style', '');
 
     if (ev.dataTransfer.items) {
         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
@@ -635,13 +635,13 @@ function dropHandler(ev) {
 function dragOverHandler(ev) {
     ev.preventDefault();
     $('#drop_zone').addClass('highlight-dropzone');
-    $('#dragFileName').addClass('highlight-dropzone-text');
+    $('#dragFileName').attr('style', 'color: #fff !important;');
     $('#dragFileName').text('Drag & drop or click to upload the BPMN 2.0 file');
 }
 
 function highlightDropzone(ev) {
     $('#drop_zone').addClass('highlight-dropzone');
-    $('#dragFileName').addClass('highlight-dropzone-text');
+    $('#dragFileName').attr('style', 'color: #fff !important;');
     $('#dragFileName').text('Drag & drop or click to upload the BPMN 2.0 file');
 }
 
