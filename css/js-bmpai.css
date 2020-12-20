@@ -1,6 +1,19 @@
 body {
-    margin: 2%;
+    margin: 1%;
     margin-top: 1%;
+}
+
+#header {
+    margin: -1%;
+    margin-top: -1%;
+    margin-bottom: 1%;
+    border-radius: 0px;
+}
+
+#footer {
+    margin: -1%;
+    margin-top: 1%;
+    border-radius: 0px;
 }
 
 #canvas {

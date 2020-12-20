@@ -13,7 +13,7 @@
 </head>
 
 <body ondragover="highlightDropzone(event)">
-    <div class="jumbotron">
+    <div class="jumbotron" id="header">
         <h1 class="display-4"><b>freebpmnquality</b> — Analyze BPMN Models</h1>
         <img class="rounded mx-auto d-block" alt="logo" height="300" src="logo_transparent.png" />
         <p itemprop="description">Analyze BPMN business process model correctness.</p>
@@ -40,16 +40,16 @@
         </div>
         <div class="form-row" id="samplesForm">
             <div class="col-3">
-                <button type="button" class="btn btn-light" style="width: 100%;" onclick="loadSample('dispatch');">Dispatch of Goods</button>
+                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('dispatch');">Dispatch of Goods</button>
             </div>
             <div class="col-3">
-                <button type="button" class="btn btn-light" style="width: 100%;" onclick="loadSample('recourse');">Insurance Recourse</button>
+                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('recourse');">Insurance Recourse</button>
             </div>
             <div class="col-3">
-                <button type="button" class="btn btn-light" style="width: 100%;" onclick="loadSample('credit');">Credit Scoring</button>
+                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('credit');">Credit Scoring</button>
             </div>
             <div class="col-3">
-                <button type="button" class="btn btn-light" style="width: 100%;" onclick="loadSample('restaurant');">Self-service Restaurant</button>
+                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('restaurant');">Self-service Restaurant</button>
             </div>
         </div>
 
@@ -101,7 +101,7 @@
         <div id="recommendations"></div>
     </p>
 
-    <div class="card text-center">
+    <div class="card text-center" id="footer">
         <div class="card-body">
             <small class="card-text"><a href="mailto:7960954@gmail.com" target="_blank">Contact us</a></small> |
             <small class="card-text">Project on <a
