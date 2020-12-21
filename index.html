@@ -43,7 +43,7 @@
     <h1 class="display-4 text-center">How to Use?</h1>
     <p class="text-center text-muted">Check out the demo recording and steps outlined below</p>
     <p class="text-center">
-        <img src="images/demo.gif" alt="demo" style="width: 70%; border: 1px solid #007bff; border-radius: .25em;">
+        <img src="images/demo.gif" alt="demo" style="width: 70%; border: 1px solid #007bff; border-radius: .25em; padding: 10px;">
     </p>
     <blockquote class="blockquote text-center text-muted">
         <p class="mb-0">Drag & drop BPMN 2.0 file directly to the web page</p>
@@ -58,7 +58,7 @@
     <br>
     <h1 class="display-4 text-center">Get Started</h1>
     <p class="text-center text-muted">Sample BPMN model is already loaded for demonstration purposes</p>
-    <div id="workzone">
+    <div id="workzone" style="margin-left: 10%; margin-right: 10%;">
         <!-- [disable tip]
         <small>Drag & drop or click the area below to upload the BPMN 2.0 file, or paste its content to the code editor
             below, or use the link to file
@@ -126,17 +126,19 @@
         <input type="hidden" class="form-control" id="bpmnPrefix" />
         <!-- [/required hidden elements] -->
     </div>
-    <div class="btn-group" id="zoombuttons">
-        <button type="button" class="btn btn-default btn-sm" id="zoomin">Zoom-In</button>
-        <button type="button" class="btn btn-default btn-sm" id="zoomout">Zoom-Out</button>
+    <div style="margin-left: 10%; margin-right: 10%;">
+        <div class="btn-group" id="zoombuttons">
+            <button type="button" class="btn btn-default btn-sm" id="zoomin">Zoom-In</button>
+            <button type="button" class="btn btn-default btn-sm" id="zoomout">Zoom-Out</button>
+        </div>
+        <div id="extra-tip"><small>Hover highlighted elements (weak spots) to see tooltips</small></div>
+        <p>
+            <div id="canvas"></div>
+        </p>
+        <p>
+            <div id="recommendations"></div>
+        </p>
     </div>
-    <div id="extra-tip"><small>Hover highlighted elements (weak spots) to see tooltips</small></div>
-    <p>
-        <div id="canvas"></div>
-    </p>
-    <p>
-        <div id="recommendations"></div>
-    </p>
 
     <br>
     <h1 class="display-4 text-center">Roadmap</h1>
