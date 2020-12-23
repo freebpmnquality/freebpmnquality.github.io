@@ -13,6 +13,38 @@
 </head>
 
 <body ondragover="highlightDropzone(event)" style="cursor: pointer;">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="margin: -1%; margin-top: -1%; margin-bottom: 1%;">
+        <a class="navbar-brand" href="#">Sticky top</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#header">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#motivation">Motivation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#howtouse">How to Use?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#roadmap">Roadmap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#aboutus">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#getstarted">Get Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#poweredby">Powered By</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="jumbotron" id="header">
         <h1 class="display-4 text-center"><b>freebpmnquality</b> — Estimate Correctness of BPMN Models</h1>
         <img class="rounded mx-auto d-block" alt="logo" height="300" src="logo_transparent.png" />
@@ -23,6 +55,7 @@
         </p>
     </div>
 
+    <span id="motivation"></span>
     <br>
     <br>
     <br>
@@ -42,6 +75,7 @@
         </ul>
     </blockquote>
 
+    <span id="howtouse"></span>
     <br>
     <br>
     <br>
@@ -60,6 +94,7 @@
         <p class="mb-0">Detected faults are explained in detail below the BPMN diagram</p>
     </blockquote>
 
+    <span id="roadmap"></span>
     <br>
     <br>
     <br>
@@ -154,6 +189,7 @@
         </div>
     </div>
 
+    <span id="aboutus"></span>
     <br>
     <br>
     <br>
@@ -185,6 +221,7 @@
         </div>
     </div>
 
+    <span id="getstarted"></span>
     <br>
     <br>
     <br>
@@ -272,6 +309,7 @@
         </p>
     </div>
 
+    <span id="poweredby"></span>
     <br>
     <br>
     <br>
@@ -329,8 +367,10 @@
         </div>
     </div>
 
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/bpmn-viewer.development.js"></script>
-    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/ace/ace.js"></script>
     <script src="samples/bpmai-samples.js"></script>
     <script src="app/js-bpmai.js"></script>
