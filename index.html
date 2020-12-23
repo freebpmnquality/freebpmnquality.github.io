@@ -12,16 +12,16 @@
     <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
-<body ondragover="highlightDropzone(event)" style="cursor: pointer;">
+<body ondragover="highlightDropzone(event)" style="cursor: pointer;" id="home">
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="margin: -1%; margin-top: -1%; margin-bottom: 1%;">
-        <a class="navbar-brand" href="#">Sticky top</a>
+        <a class="navbar-brand" href="javascript:void(0);">freebpmnquality</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#header">Home</a>
+                    <a class="nav-link" href="#home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#motivation">Motivation</a>
@@ -376,6 +376,16 @@
     <script src="app/js-bpmai.js"></script>
 
     <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
         window.onbeforeunload = function(e) {
             return 'Are you sure you want to leave this page? The changes you made will be lost.';
         };
