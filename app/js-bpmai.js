@@ -619,6 +619,7 @@ function readFile(file) {
 
 function dropHandler(ev) {
     ev.preventDefault();
+
     $('#drop_zone').removeClass('highlight-dropzone');
     $('#dragFileName').attr('style', '');
 
@@ -636,13 +637,21 @@ function dragOverHandler(ev) {
     ev.preventDefault();
     $('#drop_zone').addClass('highlight-dropzone');
     $('#dragFileName').attr('style', 'color: #fff !important;');
-    $('#dragFileName').text('Drag & drop or click to upload the BPMN 2.0 file');
 }
 
 function highlightDropzone(ev) {
     $('#drop_zone').addClass('highlight-dropzone');
     $('#dragFileName').attr('style', 'color: #fff !important;');
-    $('#dragFileName').text('Drag & drop or click to upload the BPMN 2.0 file');
+}
+
+function dropMouseOver(ev) {
+    $('#drop_zone').addClass('highlight-dropzone');
+    $('#dragFileName').attr('style', 'color: #fff !important;');
+}
+
+function dropMouseLeave(ev) {
+    $('#drop_zone').removeClass('highlight-dropzone');
+    $('#dragFileName').attr('style', '');
 }
 
 function selectFile() {
