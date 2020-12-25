@@ -639,17 +639,20 @@ function dragOverHandler(ev) {
     $('#dragFileName').attr('style', 'color: #fff !important;');
 }
 
-function highlightDropzone(ev) {
-    $('#drop_zone').addClass('highlight-dropzone');
-    $('#dragFileName').attr('style', 'color: #fff !important;');
+function dragOverLeave(ev) {
+    ev.preventDefault();
+    $('#drop_zone').removeClass('highlight-dropzone');
+    $('#dragFileName').attr('style', '');
 }
 
 function dropMouseOver(ev) {
+    ev.preventDefault();
     $('#drop_zone').addClass('highlight-dropzone');
     $('#dragFileName').attr('style', 'color: #fff !important;');
 }
 
 function dropMouseLeave(ev) {
+    ev.preventDefault();
     $('#drop_zone').removeClass('highlight-dropzone');
     $('#dragFileName').attr('style', '');
 }

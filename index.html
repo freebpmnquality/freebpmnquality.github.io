@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
-<body ondragover="highlightDropzone(event)" style="cursor: pointer;" id="home">
+<body style="cursor: pointer;" id="home">
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="margin: -1%; margin-top: -1%; margin-bottom: 1%;">
         <a class="navbar-brand" href="javascript:void(0);">freebpmnquality</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -234,7 +234,7 @@
         </small>
         [/disable tip] -->
 
-        <div class="card" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" onclick="selectFile();" onmouseover="dropMouseOver(event);" onmouseleave="dropMouseLeave(event);">
+        <div class="card" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" onclick="selectFile();" onmouseover="dropMouseOver(event);" onmouseleave="dropMouseLeave(event);" ondragleave="dragOverLeave(event);">
             <div class="card-body">
                 <p class="text-center text-muted" id="dragFileName">Drag & drop or click to upload the BPMN 2.0 file</p>
             </div>
