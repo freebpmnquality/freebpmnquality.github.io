@@ -574,11 +574,6 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             $('#recommendations').append('<div class="alert alert-info" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
                 'No mistakes detected</div>');
         }
-
-        // LOG calculated metrics
-        console.log(splits);
-        console.log(joins);
-        console.log(warnings);
     }
 }
 
@@ -614,6 +609,10 @@ function readFile(file) {
         $('#bpmnLink').val('');
 
         analyzeDoc_Click();
+
+        window.onbeforeunload = function(e) {
+            return 'Are you sure you want to leave this page? The changes you made will be lost.';
+        };
     };
 }
 
