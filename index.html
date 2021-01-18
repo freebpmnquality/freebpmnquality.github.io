@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <title>freebpmnquality — Estimate Correctness of BPMN Models</title>
@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
-<body style="cursor: pointer;" id="home">
+<body style="cursor: pointer; word-wrap: break-word;" id="home">
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="margin: -1%; margin-top: -1%; margin-bottom: 1%;">
         <a class="navbar-brand" href="javascript:void(0);">freebpmnquality</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
     </nav>
 
     <div class="jumbotron" id="header">
-        <h1 class="display-4 text-center"><b>freebpmnquality</b> — Estimate Correctness of BPMN Models</h1>
+        <h1 class="display-4 text-center">Estimate Correctness of BPMN Models</h1>
         <img class="rounded mx-auto d-block" alt="logo" height="300" src="logo_transparent.png" />
         <p itemprop="description" class="text-center">
             Estimate BPMN business process model correctness.
@@ -236,12 +236,6 @@
     <h1 class="display-4 text-center">Get Started</h1>
     <p class="text-center text-muted">Try a fully functioning prototype of our product right now!<br> Sample BPMN model is already loaded for demonstration purposes</p>
     <div id="workzone" style="margin-left: 10%; margin-right: 10%;">
-        <!-- [disable tip]
-        <small>Drag & drop or click the area below to upload the BPMN 2.0 file, or paste its content to the code editor
-            below, or use the link to file
-        </small>
-        [/disable tip] -->
-
         <div class="card" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" onclick="selectFile();" onmouseover="dropMouseOver(event);" onmouseleave="dropMouseLeave(event);" ondragleave="dragOverLeave(event);">
             <div class="card-body">
                 <p class="text-center text-muted" id="dragFileName">Drag & drop or click to upload the BPMN 2.0 file</p>
@@ -249,54 +243,27 @@
         </div>
 
         <div id="samplesTip">
-            <span>or try to use sample BPMN models taken from Camunda research
-                <a href="https://github.com/camunda/bpmn-for-research" target="_blank">repository</a></span>
+            <small>or try to use sample BPMN models taken from Camunda research
+                <a href="https://github.com/camunda/bpmn-for-research" target="_blank">repository</a></small>
         </div>
-        <div class="form-row" id="samplesForm">
-            <div class="col-3">
-                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('dispatch');">Dispatch of Goods</button>
+        <div id="samplesForm">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="loadSample('dispatch');" checked>
+                <label class="form-check-label" for="inlineRadio1">Dispatch of Goods</label>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('recourse');">Insurance Recourse</button>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="loadSample('recourse');">
+                <label class="form-check-label" for="inlineRadio2">Insurance Recourse</label>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('credit');">Credit Scoring</button>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="loadSample('credit');">
+                <label class="form-check-label" for="inlineRadio3">Credit Scoring</label>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="loadSample('restaurant');">Self-service Restaurant</button>
-            </div>
-        </div>
-
-        <!-- [disable code editor and link access]
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" id="bpmnLink" placeholder="Link to the BPMN 2.0 model file" />
-            <div class="input-group-append">
-                <button type="button" class="btn btn-outline-info" id="reload">Upload</button>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" onclick="loadSample('restaurant');">
+                <label class="form-check-label" for="inlineRadio4">Self-service Restaurant</label>
             </div>
         </div>
-
-        <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" id="expand">Expand</button>
-            <button type="button" class="btn btn-default btn-sm" id="collapse">Collapse</button>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-link btn-sm" id="copy">Copy</button>
-            <button type="button" class="btn btn-link btn-sm" id="paste">Paste</button>
-            <button type="button" class="btn btn-link btn-sm" id="clear">Clear</button>
-        </div>
-        <p>
-        <div id="editor"></div>
-        </p>
-
-        <small>XMLNS-prefix used in BPMN model elements</small>
-
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" id="bpmnPrefix" />
-            <div class="input-group-append">
-                <button class="btn btn-outline-info" id="analyzeDoc">Analyze</button>
-            </div>
-        </div>
-        [/disable code editor and link access] -->
 
         <!-- [required hidden elements] -->
         <div id="editor" hidden></div>
