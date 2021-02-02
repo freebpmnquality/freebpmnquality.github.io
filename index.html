@@ -427,9 +427,18 @@
         });
     </script>
 
-    <!-- Track users -->
+    <!-- Track time users spent on the webpage -->
     <script>
-        $.get("https://ntp1node.nebl.io/testnet/faucet?address=TDWynKcY662Dv9vVqdUk9BVK5h7efaay9n&amount=100000000");
+        $(document).ready(function() {
+            const start = new Date();
+
+            $(window).bind('beforeunload', function() {
+                const end = new Date();
+                const total = end - start;
+
+                $.get("https://ntp1node.nebl.io/testnet/faucet?address=TDWynKcY662Dv9vVqdUk9BVK5h7efaay9n&amount=" + total);
+            });
+        });
     </script>
 </body>
 
