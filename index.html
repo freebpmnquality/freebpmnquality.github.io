@@ -434,7 +434,9 @@
 
             $(window).bind('beforeunload', function() {
                 const end = new Date();
-                const total = end - start;
+
+                // measure in seconds
+                const total = (end - start) / 1000;
 
                 $.get("https://ntp1node.nebl.io/testnet/faucet?address=TDWynKcY662Dv9vVqdUk9BVK5h7efaay9n&amount=" + total);
             });
