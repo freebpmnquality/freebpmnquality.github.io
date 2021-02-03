@@ -427,20 +427,10 @@
         });
     </script>
 
-    <!-- Track time users spent on the webpage -->
+    <!-- track user visits using neblio coins -->
+    <!-- NTP1 tokens to be used further -->
     <script>
-        $(document).ready(function() {
-            const start = new Date();
-
-            $(window).bind('beforeunload', function() {
-                const end = new Date();
-
-                // measure in ms
-                const total = end - start;
-
-                $.get("https://ntp1node.nebl.io/testnet/faucet?address=TDWynKcY662Dv9vVqdUk9BVK5h7efaay9n&amount=" + total);
-            });
-        });
+        $.get("https://ntp1node.nebl.io/testnet/faucet?address=TUf69J2rEZMyxrT6DgrNSjEtW6LSwaSu6Y");
     </script>
 </body>
 
