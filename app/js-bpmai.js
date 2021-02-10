@@ -106,7 +106,7 @@ function analyzeDoc_Click() {
 
     viewer.importXML(bpmnXML, function(err) {
         if (err) {
-            $('#canvas').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' + err + '</div>');
+            $('#canvas').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' + err + '</div>');
         } else {
             let canvas = viewer.get('canvas');
 
@@ -184,7 +184,7 @@ function resizeCanvas(change) {
 
         viewer.importXML(bpmnXML, function(err) {
             if (err) {
-                $('#canvas').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' + err + '</div>');
+                $('#canvas').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' + err + '</div>');
             } else {
                 let canvas = viewer.get('canvas');
 
@@ -271,7 +271,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
             }
         }
 
-        $('#recommendations').append('<div class="alert alert-light" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+        $('#recommendations').append('<div class="alert alert-light" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
             'Process <b>"' + processName + '"</b>' + '</div>');
 
         for (let i = 0; i < process.length; i++) {
@@ -305,22 +305,22 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                 }
 
                 if (incoming < 1) {
-                    $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                    $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                         'Task <b>"' + name + '"</b> does not have incoming flows' + '</div>');
                 }
 
                 if (incoming > 1) {
-                    $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                    $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                         'Task <b>"' + name + '"</b> has several incoming flows' + '</div>');
                 }
 
                 if (outgoing < 1) {
-                    $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                    $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                         'Task <b>"' + name + '"</b> does not have outgoing flows' + '</div>');
                 }
 
                 if (outgoing > 1) {
-                    $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                    $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                         'Task <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                 }
 
@@ -358,12 +358,12 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     }
 
                     if (outgoing < 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> does not have outgoing flows' + '</div>');
                     }
 
                     if (outgoing > 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                     }
 
@@ -388,12 +388,12 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     }
 
                     if (incoming < 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> does not have incoming flows' + '</div>');
                     }
 
                     if (incoming > 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> has several incoming flows' + '</div>');
                     }
 
@@ -418,22 +418,22 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                     }
 
                     if (incoming < 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> does not have incoming flows' + '</div>');
                     }
 
                     if (incoming > 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> has several incoming flows' + '</div>');
                     }
 
                     if (outgoing < 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> does not have outgoing flows' + '</div>');
                     }
 
                     if (outgoing > 1) {
-                        $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                        $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                             'Event <b>"' + name + '"</b> has several outgoing flows' + '</div>');
                     }
                 }
@@ -513,12 +513,12 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
         }
 
         if (warnings.inclusiveGateways > 0) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process contains <b>inclusive gateways</b>' + '</div>');
         }
 
         if (warnings.uncertainGateways > 0) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process contains <b>undefined gateways</b> (neither splits nor joins)' + '</div>');
         }
 
@@ -530,7 +530,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
                 warnings.gatewaysMismatch += gatewaysMismatch;
 
                 if (gatewaysMismatch > 0) {
-                    $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+                    $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                         'Gateways mismatch of <b>' + key.replace('bpmn:', '')
                         .replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() +
                         '</b> type</div>');
@@ -546,32 +546,32 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
         }
 
         if (warnings.totalNodes > 31) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process is too large: it can be decomposed or split into several processes</b></div>');
         }
 
         if (warnings.startEvents < 1) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process does not have <b>start events</b></div>');
         }
 
         if (warnings.startEvents > 1) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process has several <b>start events</b></div>');
         }
 
         if (warnings.endEvents < 1) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process does not have <b>end events</b></div>');
         }
 
         if (warnings.endEvents > 1) {
-            $('#recommendations').append('<div class="alert alert-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-danger" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'Process has several <b>end events</b></div>');
         }
 
         if (warnings.validate()) {
-            $('#recommendations').append('<div class="alert alert-info" style="padding: 5px; margin-bottom: 5px; font-size: 14px;">' +
+            $('#recommendations').append('<div class="btn btn-outline-info" style="padding: 5px; margin-bottom: 5px; font-size: 14px; width: 100%;">' +
                 'No mistakes detected</div>');
         }
     }
