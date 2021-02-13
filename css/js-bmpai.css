@@ -1,19 +1,42 @@
 body {
-    margin: 1%;
-    margin-top: 1%;
+    font-family: 'Kanit', sans-serif;
 }
 
 #header {
-    margin: -1%;
-    margin-top: -1%;
-    margin-bottom: 1%;
     border-radius: 0px;
 }
 
 #footer {
-    margin: -1%;
-    margin-top: 1%;
     border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+.roadmap-card {
+    border-width: 0px;
+}
+
+.tech-card {
+    height: 50%;
+}
+
+.download-card {
+    border-width: 0px;
+}
+
+.platform-icon {
+    width: 20%;
+}
+
+.instructions-card {
+    border-width: 0px;
+}
+
+.bpmn-warning {
+    padding: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
 }
 
 #canvas {
