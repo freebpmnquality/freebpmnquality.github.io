@@ -4,7 +4,7 @@ body {
 
 #header {
     border-radius: 0px;
-    background-image: url("file:///C:/Users/kopp9/Documents/GitHub/freebpmnquality.github.io/images/bg-1.png");
+    background-image: url("/images/bg-1.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,22 +12,29 @@ body {
 }
 
 #doc-buttons {
-    background-image: url("file:///C:/Users/kopp9/Documents/GitHub/freebpmnquality.github.io/images/bg-2.png");
+    background-image: url("/images/bg-2.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    padding-top: 75px;
     height: 200px;
 }
 
 #how-to-banner {
-    background-image: url("file:///C:/Users/kopp9/Documents/GitHub/freebpmnquality.github.io/images/bg-3.png");
+    background-image: url("/images/bg-3.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    padding-top: 75px;
+    height: 200px;
+}
+
+#automation-banner {
+    background-image: url("/images/bg-4.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
     height: 200px;
 }
 
