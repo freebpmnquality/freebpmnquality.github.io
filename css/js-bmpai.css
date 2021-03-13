@@ -21,6 +21,16 @@ body {
     height: 400px;
 }
 
+#howtobanner {
+    background-image: url("/images/bg-3.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding-top: 110px;
+    height: 250px;
+}
+
 #footer {
     border-radius: 0px;
     margin-bottom: 0px;
