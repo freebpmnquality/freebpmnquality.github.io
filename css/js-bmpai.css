@@ -11,6 +11,16 @@ body {
     position: relative;
 }
 
+#doc-buttons {
+    background-image: url("/images/bg-2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding-top: 260px;
+    height: 400px;
+}
+
 #footer {
     border-radius: 0px;
     margin-bottom: 0px;
