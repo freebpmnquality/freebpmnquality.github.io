@@ -16,6 +16,10 @@ body {
     max-width: 100%;
 }
 
+#donate {
+    padding-top: 200px;
+}
+
 #doc-buttons {
     background-image: url("/images/bg-2.png");
     background-position: center;
