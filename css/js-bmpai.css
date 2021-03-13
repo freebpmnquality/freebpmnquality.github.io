@@ -11,6 +11,11 @@ body {
     position: relative;
 }
 
+#demo {
+    margin: 0px;
+    max-width: 100%;
+}
+
 #doc-buttons {
     background-image: url("/images/bg-2.png");
     background-position: center;
@@ -107,6 +112,10 @@ body {
 
 #zoombuttons {
     margin-top: 1%;
+}
+
+#workzone {
+    margin-top: 4%;
 }
 
 .highlight-overlay .tiptext {
