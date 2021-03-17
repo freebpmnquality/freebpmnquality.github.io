@@ -40,7 +40,7 @@ body {
 }
 
 #donate-banner {
-    background-image: url("file:///C:/Users/kopp9/Documents/GitHub/freebpmnquality.github.io/images/bg-3.png");
+    background-image: url("/images/bg-3.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
