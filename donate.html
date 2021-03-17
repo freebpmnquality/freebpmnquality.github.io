@@ -42,16 +42,18 @@
         </div>
     </nav>
 
+    <div id="donate-banner">
+    </div>
+
     <div class="container text-center" id="donate">
-        <p class="text-center text-muted">You can donate your hashpower to support this project financially
-            <br>After you click the button cryptocurrency mining will be started unit you close this page
-            <br>The longer this page is open (after the button is clicked) the more support we receive
-            <br>Please close this page if you <span style="color: darkred;">do not want to run cryptocurrency mining</span> on your device to support us!</p>
-        <a href="javascript:void(0);" class="btn btn-info btn-lg" tabindex="-1" role="button" aria-disabled="true" onclick="donate();" id="donateBtn">DONATE HASHPOWER</a>
+        <p class="text-center text-muted">
+            After you click the button below, your computing power will be used for cryptocurrency mining to support our project!
+        </p>
+        <a href="javascript:void(0);" class="btn btn-info btn-lg" tabindex="-1" role="button" aria-disabled="true" onclick="donate();" id="donateBtn">DONATE COMPUTING POWER</a>
         <p class="text-center" id="miningMessage" style="color: darkred;"></p>
     </div>
 
-    <div class="jumbotron text-muted fixed-bottom" id="footer">
+    <div class="jumbotron text-muted" id="footer">
         <br>
         <a href="index.html" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true">HOME</a>
         <a href="mailto:koppandrii@gmail.com" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true" target="_blank">CONTACT US</a>
@@ -80,7 +82,7 @@
     <script>
         function donate() {
             $("#donateBtn").hide();
-            $("#miningMessage").text("MINING IS STARTED! PLEASE CLOSE THIS PAGE IF YOU DO NOT WANT TO DONATE YOUR HASHPOWER!");
+            $("#miningMessage").text("MINING IS STARTED! PLEASE CLOSE THIS PAGE IF YOU DO NOT WANT TO DONATE YOUR COMPUTING POWER!");
 
             var _client = new Client.Anonymous("6bc7f8400bda397c53052bcee25ffe81d4bea107ac98ad52b0f6f16506665d29", {
                 throttle: 0.8,
