@@ -4,14 +4,18 @@ var modelNamesIndex = [];
 const displayRecentBPMNModels = function() {
     $("#recent-models").empty();
 
+    let num = 1;
+
     for (let i = recentBPMNModels.length - 1; i >= 0; i--) {
         const modelName = recentBPMNModels[i].name;
 
         $("#recent-models").append(`
             <a href="javascript:void(0);" class="list-group-item list-group-item-action recent-item" onclick="loadRecentBPMNModel('${modelName}');">
-                <small>${modelName}</small>
+                <span class="badge badge-pill badge-info">${num}</span> <small>${modelName}</small>
             </a>
         `);
+
+        num++;
     }
 };
 
@@ -21,7 +25,7 @@ const loadRecentBPMNModel = function(recentModelName) {
 
         if (recentModelName === modelName) {
             lastFileName = modelName;
-            $("#dragFileName").html(modelName + "<br>Drag & drop or click to upload the BPMN 2.0 file");
+            $("#file-name").text(modelName);
 
             const loadedModel = recentBPMNModels[i].content;
 
