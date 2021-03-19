@@ -59,6 +59,15 @@ body {
     height: 200px;
 }
 
+#kb-banner {
+    background-image: url("/images/bg-5.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 200px;
+}
+
 #footer {
     border-radius: 0px;
     margin-bottom: 0px;
