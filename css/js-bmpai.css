@@ -14,6 +14,8 @@ body {
 #demo {
     margin: 0px;
     max-width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #donate {
@@ -125,11 +127,11 @@ body {
 }
 
 #zoombuttons {
-    margin-top: 1%;
+    margin-top: 0px;
 }
 
 #workzone {
-    margin-top: 4%;
+    margin-top: 0px;
 }
 
 .highlight-overlay .tiptext {
@@ -160,5 +162,5 @@ body {
 }
 
 #extra-tip {
-    margin-top: 1%;
+    margin-top: 0px;
 }
