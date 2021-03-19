@@ -177,3 +177,17 @@ body {
 .hbtn {
     margin-top: 3px;
 }
+
+.recent-item {
+    word-wrap: break-word;
+}
+
+#recent-models {
+    margin-bottom: 10px;
+    overflow: scroll;
+    height: 350px;
+}
+
+#recent-header {
+    margin-top: 5px;
+}

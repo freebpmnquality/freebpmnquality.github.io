@@ -591,6 +591,9 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+var readFileEvent = new CustomEvent("eReadFile");
+var lastFileName = null;
+
 function readFile(file) {
     var reader = new FileReader();
 
@@ -598,6 +601,9 @@ function readFile(file) {
         '<br>Drag & drop or click to upload the BPMN 2.0 file');
 
     reader.readAsText(file);
+
+    lastFileName = file.name;
+
     reader.onload = function() {
         editor.setValue('');
         editor.insert(reader.result);
@@ -605,10 +611,11 @@ function readFile(file) {
         let bpmnXML = editor.getValue();
 
         defineXMLNamespace(bpmnXML);
-
         $('#bpmnLink').val('');
 
         analyzeDoc_Click();
+
+        document.dispatchEvent(readFileEvent);
 
         window.onbeforeunload = function(e) {
             return 'Are you sure you want to leave this page? The changes you made will be lost.';
