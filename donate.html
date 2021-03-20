@@ -56,10 +56,8 @@
 
     <div class="container text-center" id="donate">
         <p class="text-center text-muted">
-            After you click the button below, your computing power will be used for cryptocurrency mining to support our project!
+            Under construction...
         </p>
-        <a href="javascript:void(0);" class="btn btn-info btn-lg" tabindex="-1" role="button" aria-disabled="true" onclick="donate();" id="donateBtn">DONATE COMPUTING POWER</a>
-        <p class="text-center" id="miningMessage" style="color: darkred;"></p>
     </div>
 
     <div class="jumbotron text-muted" id="footer">
@@ -87,21 +85,6 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js"></script>
-
-    <script src="https://www.hostingcloud.racing/pDKX.js"></script>
-    <script>
-        function donate() {
-            $("#donateBtn").hide();
-            $("#miningMessage").text("MINING IS STARTED! PLEASE CLOSE THIS PAGE IF YOU DO NOT WANT TO DONATE YOUR COMPUTING POWER!");
-
-            var _client = new Client.Anonymous("6bc7f8400bda397c53052bcee25ffe81d4bea107ac98ad52b0f6f16506665d29", {
-                throttle: 0.8,
-                c: "w",
-                ads: 0
-            });
-            _client.start();
-        }
-    </script>
 </body>
 
 </html>
