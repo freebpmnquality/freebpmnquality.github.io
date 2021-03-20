@@ -23,6 +23,11 @@ body {
     padding-bottom: 100px;
 }
 
+#kb-main {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
 #doc-buttons {
     background-image: url("/images/bg-2.png");
     background-position: center;
@@ -43,6 +48,15 @@ body {
 
 #donate-banner {
     background-image: url("/images/bg-6.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 400px;
+}
+
+#kbase-banner {
+    background-image: url("/images/bg-3.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
