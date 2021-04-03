@@ -18,11 +18,6 @@ body {
     margin-bottom: 1%;
 }
 
-#donate {
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-
 #kb-main {
     padding-top: 50px;
     padding-bottom: 10px;
@@ -46,13 +41,13 @@ body {
     height: 200px;
 }
 
-#donate-banner {
+#research-banner {
     background-image: url("/images/bg-6.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 400px;
+    height: 200px;
 }
 
 #kbase-banner {
