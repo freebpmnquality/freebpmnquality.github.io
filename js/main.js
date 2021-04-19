@@ -365,7 +365,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
                         // color invalid end events
                         colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
-                            '❌ End events should have one incoming flow');
+                            'End events should have one incoming flow');
                     }
 
                     if (incoming < 1) {
@@ -383,7 +383,7 @@ function bpmnValidation(xmlDoc, prefix, overlays, elementRegistry) {
 
                         // color invalid events
                         colorNode(process[i].attributes['id'].nodeValue, overlays, elementRegistry,
-                            '❌ Intermediate events should have one incoming and one outgoing flow');
+                            'Intermediate events should have one incoming and one outgoing flow');
                     }
 
                     if (incoming === 0 && outgoing === 0) {
