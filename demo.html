@@ -65,9 +65,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
-                        <span class="badge badge-pill badge-danger">new</span> Unnecessary tasks and events detection (19.04.2021)
+                        <span class="badge badge-pill badge-success">new</span> List of recently uploaded models modified (19.04.2021)
                         <br>
-                        <span class="badge badge-pill badge-danger">new</span> Incorrect gateways usage detection (19.04.2021)
+                        <span class="badge badge-pill badge-success">new</span> Unnecessary tasks and events detection (19.04.2021)
+                        <br>
+                        <span class="badge badge-pill badge-success">new</span> Incorrect gateways usage detection (19.04.2021)
                     </li>
                 </ol>
             </nav>
@@ -81,32 +83,10 @@
                         </div>
                     </div>
                     <div id="samplesTip">
-                        <small>or try to use sample BPMN models taken from Camunda research <a href="https://github.com/camunda/bpmn-for-research" target="_blank">repository</a></small>
+                        <small>or try to use already uploaded BPMN models from Camunda <a href="https://github.com/camunda/bpmn-for-research" target="_blank">repository</a></small> 👇
                     </div>
-                    <div id="samplesForm">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onclick="loadSample('dispatch');" checked>
-                            <label class="form-check-label" for="inlineRadio1">Dispatch of Goods</label>
-                        </div>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="loadSample('recourse');">
-                            <label class="form-check-label" for="inlineRadio2">Insurance Recourse</label>
-                        </div>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="loadSample('credit');">
-                            <label class="form-check-label" for="inlineRadio3">Credit Scoring</label>
-                        </div>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" onclick="loadSample('restaurant');">
-                            <label class="form-check-label" for="inlineRadio4">Self-service Restaurant</label>
-                        </div>
-                    </div>
-
                     <div id="recent-header">
-                        <small>Recently uploaded BPMN models</small>
+                        Recently uploaded BPMN models
                     </div>
                     <div id="recent-models" class="list-group"></div>
                 </div>

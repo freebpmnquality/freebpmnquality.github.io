@@ -25,7 +25,7 @@ const loadRecentBPMNModel = function(recentModelName) {
 
         if (recentModelName === modelName) {
             lastFileName = modelName;
-            $("#file-name").text(modelName);
+            $("#file-name").text("🔷 " + modelName);
 
             const loadedModel = recentBPMNModels[i].content;
 
@@ -66,3 +66,29 @@ document.addEventListener("eReadFile", function(e) {
 
     displayRecentBPMNModels();
 });
+
+{
+    recentBPMNModels.push({
+        "name": "dispatch.bpmn",
+        "content": samples["dispatch"]
+    });
+    recentBPMNModels.push({
+        "name": "recourse.bpmn",
+        "content": samples["recourse"]
+    });
+    recentBPMNModels.push({
+        "name": "credit.bpmn",
+        "content": samples["credit"]
+    });
+    recentBPMNModels.push({
+        "name": "restaurant.bpmn",
+        "content": samples["restaurant"]
+    });
+
+    modelNamesIndex.push("dispatch.bpmn");
+    modelNamesIndex.push("recourse.bpmn");
+    modelNamesIndex.push("credit.bpmn");
+    modelNamesIndex.push("restaurant.bpmn");
+
+    displayRecentBPMNModels();
+}

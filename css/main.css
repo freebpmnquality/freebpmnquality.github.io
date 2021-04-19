@@ -201,10 +201,11 @@ body {
 
 #recent-models {
     margin-bottom: 10px;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 350px;
 }
 
 #recent-header {
     margin-top: 5px;
+    margin-bottom: 5px;
 }
