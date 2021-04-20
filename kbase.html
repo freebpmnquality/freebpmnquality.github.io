@@ -43,6 +43,9 @@
                     <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="whitepaper.pdf" target="_blank">White Paper</a>
                 </li>
                 <li class="nav-item">
@@ -61,9 +64,47 @@
     <div id="kbase-banner">
     </div>
 
+    <span id="menu"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <br>
+                <br>
+                <br>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a class="nav-link" href="#papers">📄 Research Papers</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="nav-link" href="#">📊 Presentations</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="nav-link" href="#">🎞️ Videos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-8">
+                <br>
+                <div class="container text-center" id="kb-main">
+                    <h1 class="display-4 text-center">Knowledge Base</h1>
+                    <p class="text-center text-muted">Results of our research studies</p>
+                </div>
+                <blockquote class="blockquote text-muted">
+                    <ul>
+                        <li class="mb-0">The idea of this service have grown from the PhD project of Andrii Kopp supervised by Dmytro Orlovskyi. After the dissertation was finished and defended, focus has shifted from theoretical issues to practical implementation.</li>
+                        <li class="mb-0">First results were published in CEUR-WS Proceedings of ICTERI 2019 PhD Symposium. Refined research paper on this topic were published in Springer CCIS Volume. Research is stil in progress, however certain novel results have been
+                            already obtained.</li>
+                    </ul>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <span id="papers"></span>
+    <br>
     <div class="container text-center" id="kb-main">
-        <h1 class="display-4 text-center">Knowledge Base</h1>
-        <p class="text-center text-muted">Results of our research studies</p>
+        <h1 class="display-4 text-center">Research Papers</h1>
+        <p class="text-center text-muted">Peer-reviewed studies</p>
     </div>
 
     <div class="container">
@@ -184,6 +225,9 @@
         <br>
     </div>
 
+    <br>
+    <br>
+    <br>
     <div class="jumbotron text-muted" id="footer">
         <br>
         <a href="index.html" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true">HOME</a>
@@ -207,6 +251,18 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js"></script>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
