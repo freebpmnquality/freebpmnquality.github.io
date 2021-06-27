@@ -97,9 +97,6 @@ const processBPMNFile = (bpmn, overlays) => {
 
     for (const process in processes) {
         const flat = QualiBPMNUtil.getFlatProcessElements(processes[process]);
-
-        console.log(processes[process]);
-
         const evaluated = QualiBPMNUtil.evaluateProcess(flat);
 
         for (const i in evaluated.elements) {
