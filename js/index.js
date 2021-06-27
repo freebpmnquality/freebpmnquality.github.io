@@ -107,8 +107,8 @@ const processBPMNFile = (bpmn, overlays) => {
                 '✔️';
 
             const message = element.evaluation.length > 0 ?
-                symbol + ' ' + element.evaluation[0].image.description :
-                symbol + ' No changes required.';
+                element.evaluation[0].image.description :
+                'No changes required.';
 
             overlays.add(element.id, {
                 position: {
@@ -116,7 +116,9 @@ const processBPMNFile = (bpmn, overlays) => {
                     left: -10
                 },
                 html: $('<div class="highlight-overlay">')
-                    .html(`<span style="cursor: pointer;" onclick="$('#messageModalLabel').text('💡 ${element.name === '' ? element.id : element.name}'); $('#messageText').text('${message}'); $('#messageModal').modal('show');">${symbol}</span>`)
+                    .html(`<span style="cursor: pointer;" onclick="$('#messageModalLabel')
+                        .text('${symbol} ${element.name === '' ? element.id : element.name}'); 
+                        $('#messageText').text('${message}'); $('#messageModal').modal('show');">${symbol}</span>`)
             });
 
             $('#elements').append(`<tr>
@@ -139,9 +141,15 @@ const processBPMNFile = (bpmn, overlays) => {
 
         $('#quality').append(`<tr>
             <th scope="row">${evaluated.name}</th>
-            <th scope="row">${measured.validity.crisp.toFixed(2)} <span class="badge badge-pill badge-${colors[measured.validity.linguistic]}">${measured.validity.linguistic}</span></th>
-            <th scope="row">${measured.completeness.crisp.toFixed(2)} <span class="badge badge-pill badge-${colors[measured.completeness.linguistic]}">${measured.completeness.linguistic}</span></th>
-            <th scope="row">${measured.redundancy.crisp.toFixed(2)} <span class="badge badge-pill badge-${colors[measured.redundancy.linguistic]}">${measured.redundancy.linguistic}</span></th>
+            <th scope="row">${measured.validity.crisp.toFixed(2)} 
+                <span class="badge badge-pill badge-${colors[measured.validity.linguistic]}">
+                    ${measured.validity.linguistic}</span></th>
+            <th scope="row">${measured.completeness.crisp.toFixed(2)} 
+                <span class="badge badge-pill badge-${colors[measured.completeness.linguistic]}">
+                    ${measured.completeness.linguistic}</span></th>
+            <th scope="row">${measured.redundancy.crisp.toFixed(2)} 
+                <span class="badge badge-pill badge-${colors[measured.redundancy.linguistic]}">
+                    ${measured.redundancy.linguistic}</span></th>
         </tr>`);
     }
 };
@@ -150,7 +158,8 @@ const processBPMNFile = (bpmn, overlays) => {
  * Load sample diagram.
  */
 $(document).ready(() => {
-    const url = 'https://raw.githubusercontent.com/freebpmnquality/cloud-services/main/analytics/samples/02-start-events.bpmn';
+    const url =
+        'https://raw.githubusercontent.com/freebpmnquality/cloud-services/main/analytics/samples/02-start-events.bpmn';
 
     bpmn = QualiBPMNUtil.getBPMNByURL(url);
 
