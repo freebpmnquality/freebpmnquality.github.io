@@ -86,6 +86,13 @@ const resizeCanvas = () => {
 };
 
 /**
+ * Removes special symbols.
+ */
+const removeSpecialChars = (text) => {
+    return text.replace(/[^a-zA-Z ]/g, '');
+}
+
+/**
  * Process BPMN file content.
  */
 const processBPMNFile = (bpmn, overlays) => {
@@ -99,8 +106,12 @@ const processBPMNFile = (bpmn, overlays) => {
         const flat = QualiBPMNUtil.getFlatProcessElements(processes[process]);
         const evaluated = QualiBPMNUtil.evaluateProcess(flat);
 
+        evaluated.name = removeSpecialChars(evaluated.name);
+
         for (const i in evaluated.elements) {
             const element = evaluated.elements[i];
+
+            element.name = removeSpecialChars(element.name);
 
             const color = element.evaluation.length > 0 ? 'danger' : 'success';
             const symbol = element.evaluation.length > 0 ? 'fault' : 'ok';
