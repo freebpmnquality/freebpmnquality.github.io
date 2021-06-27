@@ -130,7 +130,7 @@ const processBPMNFile = (bpmn, overlays) => {
                 <td>${element.type}</td>
                 <td>${element.incoming}</td>
                 <td>${element.outgoing}</td>
-                <td>${color}</td>
+                <td><span class="badge badge-pill badge-${color}">${symbol}</span></td>
                 <td>${message}</td>
             </tr>`);
         }
