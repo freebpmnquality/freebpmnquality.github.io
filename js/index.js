@@ -102,9 +102,8 @@ const processBPMNFile = (bpmn, overlays) => {
         for (const i in evaluated.elements) {
             const element = evaluated.elements[i];
 
-            const symbol = element.evaluation.length > 0 ?
-                '❌' :
-                '✔️';
+            const color = element.evaluation.length > 0 ? 'danger' : 'success';
+            const symbol = element.evaluation.length > 0 ? '&#10006;' : '&#10004;';
 
             const message = element.evaluation.length > 0 ?
                 element.evaluation[0].image.description :
@@ -116,9 +115,14 @@ const processBPMNFile = (bpmn, overlays) => {
                     left: -10
                 },
                 html: $('<div class="highlight-overlay">')
-                    .html(`<span style="cursor: pointer;" onclick="$('#messageModalLabel')
-                        .text('${symbol} ${element.name === '' ? element.id : element.name}'); 
-                        $('#messageText').text('${message}'); $('#messageModal').modal('show');">${symbol}</span>`)
+                    .html(`<span style="cursor: pointer;" 
+                            onclick="$('#messageTitle').text('${element.name === '' ? element.id : element.name}'); 
+                                $('#messageBadge').text('${symbol}'); 
+                                $('#messageBadge').attr('class', 'badge badge-pill badge-${color}'); 
+                                $('#messageText').text('${message}'); 
+                                $('#messageModal').modal('show');">
+                            <span class="badge badge-pill badge-${color}">${symbol}</span>
+                        </span>`)
             });
 
             $('#elements').append(`<tr>
@@ -126,7 +130,7 @@ const processBPMNFile = (bpmn, overlays) => {
                 <td>${element.type}</td>
                 <td>${element.incoming}</td>
                 <td>${element.outgoing}</td>
-                <td>${symbol}</td>
+                <td>${color}</td>
                 <td>${message}</td>
             </tr>`);
         }
@@ -142,13 +146,13 @@ const processBPMNFile = (bpmn, overlays) => {
         $('#quality').append(`<tr>
             <th scope="row">${evaluated.name}</th>
             <th scope="row">${measured.validity.crisp.toFixed(2)} 
-                <span class="badge badge-pill badge-${colors[measured.validity.linguistic]}">
+                <span class="badge badge-pill badge-${colors[measured.validity.linguistic]}" style="font-size: 1rem;">
                     ${measured.validity.linguistic}</span></th>
             <th scope="row">${measured.completeness.crisp.toFixed(2)} 
-                <span class="badge badge-pill badge-${colors[measured.completeness.linguistic]}">
+                <span class="badge badge-pill badge-${colors[measured.completeness.linguistic]}" style="font-size: 1rem;">
                     ${measured.completeness.linguistic}</span></th>
             <th scope="row">${measured.redundancy.crisp.toFixed(2)} 
-                <span class="badge badge-pill badge-${colors[measured.redundancy.linguistic]}">
+                <span class="badge badge-pill badge-${colors[measured.redundancy.linguistic]}" style="font-size: 1rem;">
                     ${measured.redundancy.linguistic}</span></th>
         </tr>`);
     }
