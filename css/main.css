@@ -127,7 +127,7 @@ body {
 }
 
 .highlight-overlay {
-    background-color: rgba(220, 53, 69, 0.5);
+    background-color: transparent;
 }
 
 .highlight-dropzone {
@@ -176,6 +176,25 @@ body {
 }
 
 .highlight-overlay:hover .tiptext {
+    visibility: visible;
+}
+
+.highlight-overlay .finetext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: .25rem;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: -5px;
+    left: 105%;
+    z-index: 1;
+}
+
+.highlight-overlay:hover .finetext {
     visibility: visible;
 }
 
