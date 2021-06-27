@@ -97,13 +97,16 @@ const processBPMNFile = (bpmn, overlays) => {
 
     for (const process in processes) {
         const flat = QualiBPMNUtil.getFlatProcessElements(processes[process]);
+
+        console.log(processes[process]);
+
         const evaluated = QualiBPMNUtil.evaluateProcess(flat);
 
         for (const i in evaluated.elements) {
             const element = evaluated.elements[i];
 
             const color = element.evaluation.length > 0 ? 'danger' : 'success';
-            const symbol = element.evaluation.length > 0 ? '&#10006;' : '&#10004;';
+            const symbol = element.evaluation.length > 0 ? 'fault' : 'ok';
 
             const message = element.evaluation.length > 0 ?
                 element.evaluation[0].image.description :
