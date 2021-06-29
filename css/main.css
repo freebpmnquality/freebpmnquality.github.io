@@ -29,7 +29,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 #how-to-banner {
@@ -38,7 +39,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 #research-banner {
@@ -47,7 +49,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 #kbase-banner {
@@ -56,7 +59,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 .kb-figure {
@@ -73,7 +77,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 #kb-banner {
@@ -82,7 +87,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 200px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 #footer {
@@ -208,10 +214,6 @@ body {
 
 #extra-tip {
     margin-top: 0px;
-}
-
-.hbtn {
-    margin-top: 3px;
 }
 
 .recent-item {
