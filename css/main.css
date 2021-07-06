@@ -4,7 +4,7 @@ body {
 
 #header {
     border-radius: 0px;
-    background-image: url("/images/bg-1.png");
+    background-image: url("../images/bg-1.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,7 +24,7 @@ body {
 }
 
 #doc-buttons {
-    background-image: url("/images/bg-2.png");
+    background-image: url("../images/bg-2.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -34,7 +34,7 @@ body {
 }
 
 #how-to-banner {
-    background-image: url("/images/bg-3.png");
+    background-image: url("../images/bg-3.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,7 +44,7 @@ body {
 }
 
 #research-banner {
-    background-image: url("/images/bg-6.png");
+    background-image: url("../images/bg-6.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -54,7 +54,7 @@ body {
 }
 
 #kbase-banner {
-    background-image: url("/images/bg-3.png");
+    background-image: url("../images/bg-3.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -72,7 +72,7 @@ body {
 }
 
 #automation-banner {
-    background-image: url("/images/bg-4.png");
+    background-image: url("../images/bg-4.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -82,7 +82,7 @@ body {
 }
 
 #kb-banner {
-    background-image: url("/images/bg-5.png");
+    background-image: url("../images/bg-5.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
