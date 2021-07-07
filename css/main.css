@@ -11,6 +11,15 @@ body {
     position: relative;
 }
 
+#header-kb {
+    border-radius: 0px;
+    background-image: url("../images/bg-3.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
 #demo {
     margin: 0px;
     max-width: 100%;
