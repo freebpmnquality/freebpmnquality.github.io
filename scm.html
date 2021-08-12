@@ -92,10 +92,10 @@
         <div class="col-sm-2 mt-4">
             <!-- Menu -->
             <div class="list-group" id="myList" role="tablist">
-                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab" onclick="showHome();">Home</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#source" role="tab" onclick="showSourceModel();">Source</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#deliver" role="tab" onclick="showDeliverModel();">Deliver</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#return" role="tab" onclick="showReturnModel();">Return</a>
+                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab" onclick="showHome();" id="homeTab">Home</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#source" role="tab" onclick="showSourceModel();" id="sourceTab">Source</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#deliver" role="tab" onclick="showDeliverModel();" id="deliverTab">Deliver</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#return" role="tab" onclick="showReturnModel();" id="returnTab">Return</a>
             </div>
         </div>
         <div class="col-sm-10 mt-4">
@@ -366,6 +366,8 @@
             $('#sourceWarningMessage').hide();
             $('#deliverWarningMessage').hide();
             $('#returnWarningMessage').hide();
+
+            history.pushState({}, null, '#home');
         }
 
         function showSourceModel() {
@@ -377,6 +379,8 @@
 
                 canvas.addMarker(events.order, 'highlight-red');
             });
+
+            history.pushState({}, null, '#source');
         }
 
         function showDeliverModel() {
@@ -388,6 +392,8 @@
 
                 canvas.addMarker(events.shipping, 'highlight-red');
             });
+
+            history.pushState({}, null, '#deliver');
         }
 
         function showReturnModel() {
@@ -399,6 +405,8 @@
 
                 canvas.addMarker(events.return, 'highlight-red');
             });
+
+            history.pushState({}, null, '#return');
         }
 
         function displayChart(label, color, frequency, annual, quantity, id) {
@@ -519,11 +527,21 @@
         }
 
         $(document).ready(function() {
-            showHome();
-
             planSource();
             planDeliver();
             planReturn();
+
+            if (window.location.href.includes('#home')) {
+                $('#homeTab').click();
+            } else if (window.location.href.includes('#source')) {
+                $('#sourceTab').click();
+            } else if (window.location.href.includes('#deliver')) {
+                $('#deliverTab').click();
+            } else if (window.location.href.includes('#return')) {
+                $('#returnTab').click();
+            } else {
+                $('#homeTab').click();
+            }
         });
     </script>
 </body>
