@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBMHN6E6BC"></script>
+    <script>
+        var _0xfece = ["\x64\x61\x74\x61\x4C\x61\x79\x65\x72", "\x70\x75\x73\x68", "\x6A\x73", "\x63\x6F\x6E\x66\x69\x67", "\x47\x2D\x48\x42\x4D\x48\x4E\x36\x45\x36\x42\x43", "\x65\x76\x65\x6E\x74", "\x70\x75\x72\x63\x68\x61\x73\x65", "\x32\x34\x2E\x30\x33\x31\x36\x30\x38\x35\x32\x33\x39\x35\x34\x31\x36\x32", "\x66\x72\x65\x65\x62\x70\x6D\x6E\x71\x75\x61\x6C\x69\x74\x79", "\x55\x53\x44", "\x50\x30\x30\x31", "\x56\x69\x73\x69\x74"];
+        window[_0xfece[0]] = window[_0xfece[0]] || [];
+
+        function gtag() {
+            dataLayer[_0xfece[1]](arguments)
+        }
+        gtag(_0xfece[2], new Date());
+        gtag(_0xfece[3], _0xfece[4]);
+        gtag(_0xfece[5], _0xfece[6], {
+            "\x74\x72\x61\x6E\x73\x61\x63\x74\x69\x6F\x6E\x5F\x69\x64": _0xfece[7],
+            "\x61\x66\x66\x69\x6C\x69\x61\x74\x69\x6F\x6E": _0xfece[8],
+            "\x76\x61\x6C\x75\x65": 0.12,
+            "\x63\x75\x72\x72\x65\x6E\x63\x79": _0xfece[9],
+            "\x74\x61\x78": 0,
+            "\x73\x68\x69\x70\x70\x69\x6E\x67": 0,
+            "\x69\x74\x65\x6D\x73": [{
+                "\x69\x64": _0xfece[10],
+                "\x6E\x61\x6D\x65": _0xfece[11]
+            }]
+        })
+    </script>
+
+    <title>{{TITLE}}</title>
+    <meta name="title" content="{{TITLE}">
+    <meta name="description" content="{{DESCRIPTION}}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{TITLE}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="{{TITLE}">
+    <meta property="twitter:description" content="{{DESCRIPTION}}">
+
+    <meta name="keywords" content="{{KEYWORDS}}">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+    <script data-ad-client="ca-pub-8990058470889069" async src="https://pagead2.googlesyndication.com/pagead/..js/adsbygoogle.js"></script>
+
+    <!-- Custom styles -->
+    <style>
+        .highlight-blue:not(.djs-connection) .djs-visual> :nth-child(1) {
+            fill: #cce5ff !important;
+        }
+        
+        .highlight-green:not(.djs-connection) .djs-visual> :nth-child(1) {
+            fill: #d4edda !important;
+        }
+        
+        .highlight-red:not(.djs-connection) .djs-visual> :nth-child(1) {
+            fill: #f8d7da !important;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f8f9fa;">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="javascript:void(0);" style="font-weight: bold;">freebpmnquality</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/kbase.html">Knowledge Base</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row mb-4 ml-2 mr-2">
+        <div class="col-sm-2 mt-4">
+            <!-- Menu -->
+            <div class="list-group" id="myList" role="tablist">
+                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab" onclick="showHome();">Home</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#source" role="tab" onclick="showSourceModel();">Source</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#deliver" role="tab" onclick="showDeliverModel();">Deliver</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#return" role="tab" onclick="showReturnModel();">Return</a>
+            </div>
+        </div>
+        <div class="col-sm-10 mt-4">
+            <div class="tab-content">
+                <!-- Home tab -->
+                <div class="tab-pane active text-center" id="home" role="tabpanel">
+                    <h1>SCOR SCM Calculator</h1>
+                    <h5>Business Process Centric with the Reference BPMN Framework</h5>
+                    <p class="text-muted ml-4 mr-4">Supply Chain Management (SCM) planning calculator designed in accordance with the Supply Chain Operations Reference (SCOR) model, which is a process reference model designed for effective communication among supply chain partners.</p>
+
+                    <button class="btn btn-outline-info mt-1" data-toggle="modal" data-target="#bpmnFrameworkModal">BPMN Framework</button>
+                    <a class="btn btn-outline-info mt-1" href="/kbase.html#models" role="button" target="_blank">Referece Models</a>
+
+                    <br>
+                    <img src="/images/scm.png" class="img-fluid mt-4" alt="SCM" style="width: 70%;">
+
+                    <div class="modal fade" id="bpmnFrameworkModal" tabindex="-1" role="dialog" aria-labelledby="bpmnFrameworkModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="bpmnFrameworkModalLabel">SCOR SCM Calculator — BPMN Framework</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="/images/models/bpmn/Supply chain management.png" class="img-fluid mt-2" alt="Figure">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Source tab -->
+                <div class="tab-pane" id="source" role="tabpanel">
+                    <div class="img-thumbnail">
+                        <div id="source-canvas"></div>
+                    </div>
+
+                    <form class="needs-validation mt-4" onsubmit="planSource(); return false;">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="demandValue">Demand (D)</label>
+                                <input type="number" min="1" step="1" class="form-control" id="demandValue" value="12000" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="orderCostValue">Order Cost (CO)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="orderCostValue" value="43.00" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stockCostValue">Stock Ownership Cost (StC)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="stockCostValue" value="2.85" required>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-success" type="submit">Plan Source</button>
+                    </form>
+
+                    <div class="alert alert-danger mt-4" role="alert" id="sourceWarningMessage">
+                        Invalid source planning parameters!
+                    </div>
+
+                    <div class="form-row mt-4" id="sourceResults">
+                        <div class="col-md-4 mb-3">
+                            <label for="orderQuantity">Economic Order Quantity (EOQ)</label>
+                            <input type="text" class="form-control" id="orderQuantity" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="annualOrderNumber">Annual Order Number (N)</label>
+                            <input type="text" class="form-control" id="annualOrderNumber" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="orderFrequency">Order Frequency (F)</label>
+                            <input type="text" class="form-control" id="orderFrequency" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deliver tab -->
+                <div class="tab-pane" id="deliver" role="tabpanel">
+                    <div class="img-thumbnail">
+                        <div id="deliver-canvas"></div>
+                    </div>
+
+                    <form class="needs-validation mt-4" onsubmit="planDeliver(); return false;">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="demand2Value">Demand (D)</label>
+                                <input type="number" min="1" step="1" class="form-control" id="demand2Value" value="9000" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="shipmentCostValue">Shipment Cost (ShC)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="shipmentCostValue" value="27.00" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stockCost2Value">Stock Ownership Cost (StC)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="stockCost2Value" value="2.85" required>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-success" type="submit">Plan Deliver</button>
+                    </form>
+
+                    <div class="alert alert-danger mt-4" role="alert" id="deliverWarningMessage">
+                        Invalid deliver planning parameters!
+                    </div>
+
+                    <div class="form-row mt-4" id="deliverResults">
+                        <div class="col-md-4 mb-3">
+                            <label for="shipmentQuantity">Economic Shipment Quantity (EOQ)</label>
+                            <input type="text" class="form-control" id="shipmentQuantity" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="annualShipmentNumber">Annual Shipment Number (N)</label>
+                            <input type="text" class="form-control" id="annualShipmentNumber" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="shipmentFrequency">Shipment Frequency (F)</label>
+                            <input type="text" class="form-control" id="shipmentFrequency" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Return tab -->
+                <div class="tab-pane" id="return" role="tabpanel">
+                    <div class="img-thumbnail">
+                        <div id="return-canvas"></div>
+                    </div>
+
+                    <form class="needs-validation mt-4" onsubmit="planReturn(); return false;">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="refundValue">Refund (R)</label>
+                                <input type="number" min="1" step="1" class="form-control" id="refundValue" value="300" required>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="refundCostValue">Refund Cost (RfC)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="refundCostValue" value="27.00" required>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="returnCostValue">Return Cost (RtC)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="returnCostValue" value="43.00" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stockCost3Value">Stock Ownership Cost (StC)</label>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="stockCost3Value" value="2.85" required>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-success" type="submit">Plan Return</button>
+                    </form>
+
+                    <div class="alert alert-danger mt-4" role="alert" id="returnWarningMessage">
+                        Invalid return planning parameters!
+                    </div>
+
+                    <div class="form-row mt-4" id="returnResults">
+                        <div class="col-md-4 mb-3">
+                            <label for="returnQuantity">Economic Return Quantity (EOQ)</label>
+                            <input type="text" class="form-control" id="returnQuantity" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="annualReturnNumber">Annual Return Number (N)</label>
+                            <input type="text" class="form-control" id="annualReturnNumber" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="returnFrequency">Return Frequency (F)</label>
+                            <input type="text" class="form-control" id="returnFrequency" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <div class="jumbotron text-muted" id="footer">
+        <br>
+        <a href="/index.html" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true" style="font-weight: bold;">HOME</a>
+        <a href="/kbase.html" class="btn btn-link" tabindex="-1" role="button" aria-disabled="true" style="font-weight: bold;">KNOWLEDGE BASE</a>
+        <br>
+        <br>
+        <b>freebpmnquality</b> — Free Online BPMN Quality Analysis Service, 2020 -
+        <script>
+            document.write(new Date().getFullYear())
+        </script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">(CC BY-ND)</a>
+    </div>
+
+    <!-- Imports -->
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+
+    <!-- CDN -->
+    <script src="https://unpkg.com/bpmn-js@8.7.1/dist/bpmn-viewer.development.js"></script>
+
+    <!-- App -->
+    <script>
+        const modelURL = 'https://freebpmnquality.github.io/lib/bpmn/SCM.bpmn';
+
+        const activities = {
+            plan: 'Activity_1p7t48r',
+            order: 'Activity_1322mx1',
+            receive: 'Activity_1sn6om8',
+            ship: 'Activity_1hqdp4c',
+            refund: 'Activity_0o2vsuw',
+            return: 'Activity_1oznqsu'
+        };
+
+        const events = {
+            order: 'Event_17mynd8',
+            shipping: 'Event_0n31ekk',
+            return: 'Event_0293csj'
+        };
+
+        const canvasHeight = $(window).height() / 2;
+
+        const sourceViewer = new BpmnJS({
+            container: $('#source-canvas'),
+            height: canvasHeight
+        });
+
+        const deliverViewer = new BpmnJS({
+            container: $('#deliver-canvas'),
+            height: canvasHeight
+        });
+
+        const returnViewer = new BpmnJS({
+            container: $('#return-canvas'),
+            height: canvasHeight
+        });
+
+        function openFromUrl(viewer, url, callback) {
+            $.ajax(url, {
+                dataType: 'text'
+            }).done(async function(xml) {
+                try {
+                    await viewer.importXML(xml);
+
+                    const canvas = viewer.get('canvas');
+
+                    callback(canvas);
+
+                    canvas.zoom('fit-viewport');
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+        }
+
+        function showHome() {
+            $('#sourceWarningMessage').hide();
+            $('#deliverWarningMessage').hide();
+            $('#returnWarningMessage').hide();
+
+            $('#planResults').hide();
+            $('#deliverResults').hide();
+            $('#returnResults').hide();
+        }
+
+        function showSourceModel() {
+            openFromUrl(sourceViewer, modelURL, function(canvas) {
+                canvas.addMarker(activities.plan, 'highlight-blue');
+
+                canvas.addMarker(activities.order, 'highlight-green');
+                canvas.addMarker(activities.receive, 'highlight-green');
+
+                canvas.addMarker(events.order, 'highlight-red');
+
+                $('#planResults').show();
+
+                planSource();
+            });
+        }
+
+        function showDeliverModel() {
+            openFromUrl(deliverViewer, modelURL, function(canvas) {
+                canvas.addMarker(activities.plan, 'highlight-blue');
+
+                canvas.addMarker(activities.receive, 'highlight-green');
+                canvas.addMarker(activities.ship, 'highlight-green');
+
+                canvas.addMarker(events.shipping, 'highlight-red');
+
+                $('#deliverResults').show();
+
+                planDeliver();
+            });
+        }
+
+        function showReturnModel() {
+            openFromUrl(returnViewer, modelURL, function(canvas) {
+                canvas.addMarker(activities.plan, 'highlight-blue');
+
+                canvas.addMarker(activities.refund, 'highlight-green');
+                canvas.addMarker(activities.return, 'highlight-green');
+
+                canvas.addMarker(events.return, 'highlight-red');
+
+                $('#returnResults').show();
+
+                planReturn();
+            });
+        }
+
+        function planSource() {
+            try {
+                const demandValue = Number.parseFloat($('#demandValue').val());
+                const orderCostValue = Number.parseFloat($('#orderCostValue').val());
+                const stockCostValue = Number.parseFloat($('#stockCostValue').val());
+
+                let orderQuantity = Math.round(Math.sqrt((2 * demandValue * orderCostValue) / stockCostValue));
+                let annualOrderNumber = Math.round(demandValue / orderQuantity);
+                let orderFrequency = Math.round(365 / annualOrderNumber);
+
+                orderQuantity = Math.round(demandValue / annualOrderNumber);
+
+                $('#orderQuantity').val(orderQuantity);
+                $('#annualOrderNumber').val(annualOrderNumber);
+                $('#orderFrequency').val(orderFrequency);
+            } catch (err) {
+                $('#sourceWarningMessage').show();
+
+                console.error(err);
+            }
+        }
+
+        function planDeliver() {
+            try {
+                const demandValue = Number.parseFloat($('#demand2Value').val());
+                const shipmentCostValue = Number.parseFloat($('#shipmentCostValue').val());
+                const stockCostValue = Number.parseFloat($('#stockCost2Value').val());
+
+                let shipmentQuantity = Math.round(Math.sqrt((2 * demandValue * shipmentCostValue) / stockCostValue));
+                let annualShipmentNumber = Math.round(demandValue / shipmentQuantity);
+                let shipmentFrequency = Math.round(365 / annualShipmentNumber);
+
+                shipmentQuantity = Math.round(demandValue / annualShipmentNumber);
+
+                $('#shipmentQuantity').val(shipmentQuantity);
+                $('#annualShipmentNumber').val(annualShipmentNumber);
+                $('#shipmentFrequency').val(shipmentFrequency);
+            } catch (err) {
+                $('#deliverWarningMessage').show();
+
+                console.error(err);
+            }
+        }
+
+        function planReturn() {
+            try {
+                const refundValue = Number.parseFloat($('#refundValue').val());
+                const refundCostValue = Number.parseFloat($('#refundCostValue').val());
+                const returnCostValue = Number.parseFloat($('#returnCostValue').val());
+                const stockCostValue = Number.parseFloat($('#stockCost3Value').val());
+
+                let returnQuantity = Math.round(Math.sqrt((2 * refundValue * (refundCostValue + returnCostValue)) / stockCostValue));
+                let annualReturnNumber = Math.round(refundValue / returnQuantity);
+                let returnFrequency = Math.round(365 / annualReturnNumber);
+
+                returnQuantity = Math.round(refundValue / annualReturnNumber);
+
+                $('#returnQuantity').val(returnQuantity);
+                $('#annualReturnNumber').val(annualReturnNumber);
+                $('#returnFrequency').val(returnFrequency);
+            } catch (err) {
+                $('#returnWarningMessage').show();
+
+                console.error(err);
+            }
+        }
+
+        $(document).ready(function() {
+            showHome();
+
+            planSource();
+            planDeliver();
+            planReturn();
+        });
+    </script>
+</body>
+
+</html>
