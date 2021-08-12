@@ -437,6 +437,23 @@
             $(id).html(`<img class="img-thumbnail" alt="${id}" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(chart))}">`);
         }
 
+        function calculateWilsonModel(D, CO, SC, P) {
+            let EOQ = Math.sqrt((2 * D * CO) / SC);
+
+            let N = Math.round(D / EOQ);
+
+            N = N < 1 ? 1 : N;
+            EOQ = Math.round(D / N);
+
+            let F = Math.round(P / N);
+
+            return {
+                EOQ: EOQ,
+                N: N,
+                F: F
+            };
+        }
+
         function planSource() {
             try {
                 const demandValue = Number.parseFloat($('#demandValue').val());
@@ -444,17 +461,13 @@
                 const orderCostValue = Number.parseFloat($('#orderCostValue').val());
                 const stockCostValue = Number.parseFloat($('#stockCostValue').val());
 
-                let orderQuantity = Math.round(Math.sqrt((2 * demandValue * orderCostValue) / stockCostValue));
-                let annualOrderNumber = Math.round(demandValue / orderQuantity);
-                let orderFrequency = Math.round(daysValue / annualOrderNumber);
+                const result = calculateWilsonModel(demandValue, orderCostValue, stockCostValue, daysValue);
 
-                orderQuantity = Math.round(demandValue / annualOrderNumber);
+                $('#orderQuantity').val(result.EOQ);
+                $('#annualOrderNumber').val(result.N);
+                $('#orderFrequency').val(result.F);
 
-                $('#orderQuantity').val(orderQuantity);
-                $('#annualOrderNumber').val(annualOrderNumber);
-                $('#orderFrequency').val(orderFrequency);
-
-                displayChart('Source', 'blue', orderFrequency, annualOrderNumber, orderQuantity, '#sourceResultsChart');
+                displayChart('Source', 'blue', result.F, result.N, result.EOQ, '#sourceResultsChart');
             } catch (err) {
                 $('#sourceWarningMessage').show();
 
@@ -469,17 +482,13 @@
                 const shipmentCostValue = Number.parseFloat($('#shipmentCostValue').val());
                 const stockCostValue = Number.parseFloat($('#stockCost2Value').val());
 
-                let shipmentQuantity = Math.round(Math.sqrt((2 * demandValue * shipmentCostValue) / stockCostValue));
-                let annualShipmentNumber = Math.round(demandValue / shipmentQuantity);
-                let shipmentFrequency = Math.round(daysValue / annualShipmentNumber);
+                const result = calculateWilsonModel(demandValue, shipmentCostValue, stockCostValue, daysValue);
 
-                shipmentQuantity = Math.round(demandValue / annualShipmentNumber);
+                $('#shipmentQuantity').val(result.EOQ);
+                $('#annualShipmentNumber').val(result.N);
+                $('#shipmentFrequency').val(result.F);
 
-                $('#shipmentQuantity').val(shipmentQuantity);
-                $('#annualShipmentNumber').val(annualShipmentNumber);
-                $('#shipmentFrequency').val(shipmentFrequency);
-
-                displayChart('Deliver', 'green', shipmentFrequency, annualShipmentNumber, shipmentQuantity, '#deliverResultsChart');
+                displayChart('Deliver', 'green', result.F, result.N, result.EOQ, '#deliverResultsChart');
             } catch (err) {
                 $('#deliverWarningMessage').show();
 
@@ -495,17 +504,13 @@
                 const returnCostValue = Number.parseFloat($('#returnCostValue').val());
                 const stockCostValue = Number.parseFloat($('#stockCost3Value').val());
 
-                let returnQuantity = Math.round(Math.sqrt((2 * refundValue * (refundCostValue + returnCostValue)) / stockCostValue));
-                let annualReturnNumber = Math.round(refundValue / returnQuantity);
-                let returnFrequency = Math.round(daysValue / annualReturnNumber);
+                const result = calculateWilsonModel(refundValue, (refundCostValue + returnCostValue), stockCostValue, daysValue);
 
-                returnQuantity = Math.round(refundValue / annualReturnNumber);
+                $('#returnQuantity').val(result.EOQ);
+                $('#annualReturnNumber').val(result.N);
+                $('#returnFrequency').val(result.F);
 
-                $('#returnQuantity').val(returnQuantity);
-                $('#annualReturnNumber').val(annualReturnNumber);
-                $('#returnFrequency').val(returnFrequency);
-
-                displayChart('Return', 'red', returnFrequency, annualReturnNumber, returnQuantity, '#returnResultsChart');
+                displayChart('Return', 'red', result.F, result.N, result.EOQ, '#returnResultsChart');
             } catch (err) {
                 $('#returnWarningMessage').show();
 
