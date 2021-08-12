@@ -331,7 +331,8 @@
             return: 'Event_0293csj'
         };
 
-        const canvasHeight = $(window).height() / 2;
+        const canvasHeight = Math.floor($(window).height() / 2);
+        const chartHeight = Math.floor($(window).height() / 2);
 
         const sourceViewer = new BpmnJS({
             container: $('#source-canvas'),
@@ -442,7 +443,7 @@
                 currentDay += frequency;
             }
 
-            $(id).html(`<img class="img-thumbnail" alt="${id}" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(chart))}">`);
+            $(id).html(`<img class="img-thumbnail" alt="${id}" style="height: ${chartHeight}px;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(chart))}">`);
         }
 
         function calculateWilsonModel(D, CO, SC, P) {
