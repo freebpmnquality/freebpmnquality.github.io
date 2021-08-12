@@ -136,15 +136,19 @@
 
                     <form class="needs-validation mt-4" onsubmit="planSource(); return false;">
                         <div class="form-row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="demandValue">Demand (D)</label>
                                 <input type="number" min="1" step="1" class="form-control" id="demandValue" value="12000" required>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
+                                <label for="daysValue">Period (Days)</label>
+                                <input type="number" min="1" step="1" class="form-control" id="daysValue" value="365" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
                                 <label for="orderCostValue">Order Cost (CO)</label>
                                 <input type="number" min="0.01" step="0.01" class="form-control" id="orderCostValue" value="43.00" required>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="stockCostValue">Stock Ownership Cost (StC)</label>
                                 <input type="number" min="0.01" step="0.01" class="form-control" id="stockCostValue" value="2.85" required>
                             </div>
@@ -170,6 +174,8 @@
                             <input type="text" class="form-control" id="orderFrequency" readonly>
                         </div>
                     </div>
+
+                    <div class="mt-4 text-center" id="sourceResultsChart"></div>
                 </div>
 
                 <!-- Deliver tab -->
@@ -180,15 +186,19 @@
 
                     <form class="needs-validation mt-4" onsubmit="planDeliver(); return false;">
                         <div class="form-row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="demand2Value">Demand (D)</label>
                                 <input type="number" min="1" step="1" class="form-control" id="demand2Value" value="9000" required>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
+                                <label for="days2Value">Period (Days)</label>
+                                <input type="number" min="1" step="1" class="form-control" id="days2Value" value="365" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
                                 <label for="shipmentCostValue">Shipment Cost (ShC)</label>
                                 <input type="number" min="0.01" step="0.01" class="form-control" id="shipmentCostValue" value="27.00" required>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="stockCost2Value">Stock Ownership Cost (StC)</label>
                                 <input type="number" min="0.01" step="0.01" class="form-control" id="stockCost2Value" value="2.85" required>
                             </div>
@@ -214,6 +224,8 @@
                             <input type="text" class="form-control" id="shipmentFrequency" readonly>
                         </div>
                     </div>
+
+                    <div class="mt-4 text-center" id="deliverResultsChart"></div>
                 </div>
 
                 <!-- Return tab -->
@@ -224,9 +236,13 @@
 
                     <form class="needs-validation mt-4" onsubmit="planReturn(); return false;">
                         <div class="form-row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="refundValue">Refund (R)</label>
                                 <input type="number" min="1" step="1" class="form-control" id="refundValue" value="300" required>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="days3Value">Period (Days)</label>
+                                <input type="number" min="1" step="1" class="form-control" id="days3Value" value="365" required>
                             </div>
                             <div class="col-md-2 mb-3">
                                 <label for="refundCostValue">Refund Cost (RfC)</label>
@@ -262,6 +278,8 @@
                             <input type="text" class="form-control" id="returnFrequency" readonly>
                         </div>
                     </div>
+
+                    <div class="mt-4 text-center" id="returnResultsChart"></div>
                 </div>
             </div>
         </div>
@@ -348,10 +366,6 @@
             $('#sourceWarningMessage').hide();
             $('#deliverWarningMessage').hide();
             $('#returnWarningMessage').hide();
-
-            $('#planResults').hide();
-            $('#deliverResults').hide();
-            $('#returnResults').hide();
         }
 
         function showSourceModel() {
@@ -362,10 +376,6 @@
                 canvas.addMarker(activities.receive, 'highlight-green');
 
                 canvas.addMarker(events.order, 'highlight-red');
-
-                $('#planResults').show();
-
-                planSource();
             });
         }
 
@@ -377,10 +387,6 @@
                 canvas.addMarker(activities.ship, 'highlight-green');
 
                 canvas.addMarker(events.shipping, 'highlight-red');
-
-                $('#deliverResults').show();
-
-                planDeliver();
             });
         }
 
@@ -392,28 +398,63 @@
                 canvas.addMarker(activities.return, 'highlight-green');
 
                 canvas.addMarker(events.return, 'highlight-red');
-
-                $('#returnResults').show();
-
-                planReturn();
             });
+        }
+
+        function displayChart(label, color, frequency, annual, quantity, id) {
+            const chart = {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: label,
+                        data: [],
+                        fill: false,
+                        borderColor: color
+                    }]
+                }
+            };
+
+            let currentDay = 0;
+
+            for (let i = 0; i < annual; i++) {
+                chart.data.labels.push(currentDay);
+                chart.data.labels.push(currentDay + frequency);
+
+                chart.data.datasets[0].data.push({
+                    x: currentDay,
+                    y: quantity
+                });
+
+                chart.data.datasets[0].data.push({
+                    x: currentDay + frequency,
+                    y: 0
+                });
+
+                currentDay += frequency;
+            }
+
+            $(id).html(`<img class="img-thumbnail" alt="${id}" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(chart))}">`);
         }
 
         function planSource() {
             try {
                 const demandValue = Number.parseFloat($('#demandValue').val());
+                const daysValue = Number.parseFloat($('#daysValue').val());
                 const orderCostValue = Number.parseFloat($('#orderCostValue').val());
                 const stockCostValue = Number.parseFloat($('#stockCostValue').val());
 
                 let orderQuantity = Math.round(Math.sqrt((2 * demandValue * orderCostValue) / stockCostValue));
                 let annualOrderNumber = Math.round(demandValue / orderQuantity);
-                let orderFrequency = Math.round(365 / annualOrderNumber);
+                let orderFrequency = Math.round(daysValue / annualOrderNumber);
 
                 orderQuantity = Math.round(demandValue / annualOrderNumber);
 
                 $('#orderQuantity').val(orderQuantity);
                 $('#annualOrderNumber').val(annualOrderNumber);
                 $('#orderFrequency').val(orderFrequency);
+
+                displayChart('Source', 'blue', orderFrequency, annualOrderNumber, orderQuantity, '#sourceResultsChart');
             } catch (err) {
                 $('#sourceWarningMessage').show();
 
@@ -424,18 +465,21 @@
         function planDeliver() {
             try {
                 const demandValue = Number.parseFloat($('#demand2Value').val());
+                const daysValue = Number.parseFloat($('#days2Value').val());
                 const shipmentCostValue = Number.parseFloat($('#shipmentCostValue').val());
                 const stockCostValue = Number.parseFloat($('#stockCost2Value').val());
 
                 let shipmentQuantity = Math.round(Math.sqrt((2 * demandValue * shipmentCostValue) / stockCostValue));
                 let annualShipmentNumber = Math.round(demandValue / shipmentQuantity);
-                let shipmentFrequency = Math.round(365 / annualShipmentNumber);
+                let shipmentFrequency = Math.round(daysValue / annualShipmentNumber);
 
                 shipmentQuantity = Math.round(demandValue / annualShipmentNumber);
 
                 $('#shipmentQuantity').val(shipmentQuantity);
                 $('#annualShipmentNumber').val(annualShipmentNumber);
                 $('#shipmentFrequency').val(shipmentFrequency);
+
+                displayChart('Deliver', 'green', shipmentFrequency, annualShipmentNumber, shipmentQuantity, '#deliverResultsChart');
             } catch (err) {
                 $('#deliverWarningMessage').show();
 
@@ -446,19 +490,22 @@
         function planReturn() {
             try {
                 const refundValue = Number.parseFloat($('#refundValue').val());
+                const daysValue = Number.parseFloat($('#days3Value').val());
                 const refundCostValue = Number.parseFloat($('#refundCostValue').val());
                 const returnCostValue = Number.parseFloat($('#returnCostValue').val());
                 const stockCostValue = Number.parseFloat($('#stockCost3Value').val());
 
                 let returnQuantity = Math.round(Math.sqrt((2 * refundValue * (refundCostValue + returnCostValue)) / stockCostValue));
                 let annualReturnNumber = Math.round(refundValue / returnQuantity);
-                let returnFrequency = Math.round(365 / annualReturnNumber);
+                let returnFrequency = Math.round(daysValue / annualReturnNumber);
 
                 returnQuantity = Math.round(refundValue / annualReturnNumber);
 
                 $('#returnQuantity').val(returnQuantity);
                 $('#annualReturnNumber').val(annualReturnNumber);
                 $('#returnFrequency').val(returnFrequency);
+
+                displayChart('Return', 'red', returnFrequency, annualReturnNumber, returnQuantity, '#returnResultsChart');
             } catch (err) {
                 $('#returnWarningMessage').show();
 
