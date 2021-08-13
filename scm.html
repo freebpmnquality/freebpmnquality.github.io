@@ -100,6 +100,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/kbase.html">Knowledge Base</a>
                 </li>
+                <li class="nav-item">
+                    <div class="ml-2" id="google_translate_element"></div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -742,6 +745,16 @@
             }
         });
     </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>
