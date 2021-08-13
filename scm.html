@@ -510,7 +510,6 @@
         };
 
         const canvasHeight = Math.floor($(window).height() / 2);
-        const chartHeight = Math.floor($(window).height() / 2);
 
         const sourceViewer = new BpmnJS({
             container: $('#source-canvas'),
@@ -588,13 +587,13 @@
             history.pushState({}, null, '#return');
         }
 
-        function displayChart(label, color, frequency, annual, quantity, id) {
-            const chart = {
+        function displayChart(label, color, frequency, annual, quantity, cost, id) {
+            const planChart = {
                 type: 'line',
                 data: {
                     labels: [],
                     datasets: [{
-                        label: label,
+                        label: label + ' schedule',
                         data: [],
                         fill: false,
                         borderColor: color
@@ -605,15 +604,15 @@
             let currentDay = 0;
 
             for (let i = 0; i < annual; i++) {
-                chart.data.labels.push(currentDay);
-                chart.data.labels.push(currentDay + frequency);
+                planChart.data.labels.push(currentDay);
+                planChart.data.labels.push(currentDay + frequency);
 
-                chart.data.datasets[0].data.push({
+                planChart.data.datasets[0].data.push({
                     x: currentDay,
                     y: quantity
                 });
 
-                chart.data.datasets[0].data.push({
+                planChart.data.datasets[0].data.push({
                     x: currentDay + frequency,
                     y: 0
                 });
@@ -621,7 +620,36 @@
                 currentDay += frequency;
             }
 
-            $(id).html(`<img class="img-thumbnail" alt="${id}" style="height: ${chartHeight}px;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(chart))}">`);
+            const costChart = {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: label + ' cost',
+                        data: [],
+                        fill: false,
+                        borderColor: color
+                    }]
+                }
+            };
+
+            currentDay = 0;
+            let currentCost = 0;
+
+            for (let i = 0; i < annual + 1; i++) {
+                costChart.data.labels.push(currentDay);
+
+                costChart.data.datasets[0].data.push({
+                    x: currentDay,
+                    y: currentCost
+                });
+
+                currentDay += frequency;
+                currentCost += cost;
+            }
+
+            $(id).html(`<img class="img-thumbnail" alt="${id}" style="width: 45%;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(planChart))}">
+                <img class="img-thumbnail" alt="${id}" style="width: 45%;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(costChart))}">`);
         }
 
         function calculateWilsonModel(D, CO, SC, P) {
@@ -660,7 +688,7 @@
 
                 $('#sourceResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${productName}</b> should be ordered in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days. The total cost will be <b>$${totalCost.toFixed(2)}</b> or <b>${result.N}</b> orders of <b>$${orderCostValue.toFixed(2)}</b> each every <b>${result.F}</b> days.`);
 
-                displayChart('Source', 'blue', result.F, result.N, result.EOQ, '#sourceResultsChart');
+                displayChart('Source', 'blue', result.F, result.N, result.EOQ, orderCostValue, '#sourceResultsChart');
             } catch (err) {
                 $('#sourceWarningMessage').show();
 
@@ -687,7 +715,7 @@
 
                 $('#deliverResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${productName}</b> should be shipped in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days. The total cost will be <b>$${totalCost.toFixed(2)}</b> or <b>${result.N}</b> shipments of <b>$${shipmentCostValue.toFixed(2)}</b> each every <b>${result.F}</b> days.`);
 
-                displayChart('Deliver', 'green', result.F, result.N, result.EOQ, '#deliverResultsChart');
+                displayChart('Deliver', 'green', result.F, result.N, result.EOQ, shipmentCostValue, '#deliverResultsChart');
             } catch (err) {
                 $('#deliverWarningMessage').show();
 
@@ -715,7 +743,7 @@
 
                 $('#returnResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${productName}</b> should be returned in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days. The total cost will be <b>$${totalCost.toFixed(2)}</b> or <b>${result.N}</b> returns of <b>$${(refundCostValue + returnCostValue).toFixed(2)}</b> each every <b>${result.F}</b> days.`);
 
-                displayChart('Return', 'red', result.F, result.N, result.EOQ, '#returnResultsChart');
+                displayChart('Return', 'red', result.F, result.N, result.EOQ, (refundCostValue + returnCostValue), '#returnResultsChart');
             } catch (err) {
                 $('#returnWarningMessage').show();
 
