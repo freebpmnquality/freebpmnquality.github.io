@@ -71,6 +71,12 @@
         .highlight-red:not(.djs-connection) .djs-visual> :nth-child(1) {
             fill: #f8d7da !important;
         }
+        
+        .example-img {
+            border: 1px solid transparent;
+            border-color: #ffc107;
+            border-radius: .25rem;
+        }
     </style>
 </head>
 
@@ -111,29 +117,16 @@
                     <p class="text-muted ml-4 mr-4">Supply Chain Management (SCM) planning calculator designed in accordance with the Supply Chain Operations Reference (SCOR) model, which is given as the Business Process Model and Notation (BPMN) process reference model designed for
                         effective communication among supply chain parties.</p>
 
-                    <button class="btn btn-outline-info mt-1" data-toggle="modal" data-target="#bpmnFrameworkModal">BPMN Framework</button>
-                    <a class="btn btn-outline-info mt-1" href="/kbase.html#models" role="button" target="_blank">Referece Models</a>
-
+                    <button class="btn btn-outline-info mt-1 btn-lg" onclick="$('#sourceTab').click();">Get Started</button>
                     <br>
-                    <img src="/images/scm.png" class="img-fluid mt-4" alt="SCM" style="width: 70%;">
 
-                    <div class="modal fade" id="bpmnFrameworkModal" tabindex="-1" role="dialog" aria-labelledby="bpmnFrameworkModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="bpmnFrameworkModalLabel">SCOR SCM Calculator — BPMN Framework</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="/images/models/bpmn/Supply chain management.png" class="img-fluid mt-2" alt="Figure">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <img src="/images/scm.png" class="img-fluid mt-4" alt="SCM" style="width: 70%;">
                 </div>
 
                 <!-- Source tab -->
                 <div class="tab-pane" id="source" role="tabpanel">
+                    <h5>Source Busines Process Planning</h5>
+
                     <div class="img-thumbnail">
                         <div id="source-canvas"></div>
                     </div>
@@ -146,9 +139,16 @@
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="col-md-12 mb-3 text-center">
+                                <div class="alert alert-warning" role="alert">Find a product that interests your customers on one of the online wholesale trading platforms</div>
+                                <img src="/images/scm/product-name.PNG" class="img-fluid example-img" alt="product-name">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label for="demandValue">Demand (D)</label>
-                                <input type="number" min="1" step="1" class="form-control" id="demandValue" value="12000" required>
+                                <input type="number" min="1" step="1" class="form-control" id="demandValue" value="66" required>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="daysValue">Period (Days)</label>
@@ -156,14 +156,32 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="orderCostValue">Order Cost (CO)</label>
-                                <input type="number" min="0.01" step="0.01" class="form-control" id="orderCostValue" value="43.00" required>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="orderCostValue" value="37.98" required>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="stockCostValue">Stock Ownership Cost (StC)</label>
-                                <input type="number" min="0.01" step="0.01" class="form-control" id="stockCostValue" value="2.85" required>
+                                <input type="number" min="0.01" step="0.01" class="form-control" id="stockCostValue" value="9.36" required>
                             </div>
                         </div>
-                        <button class="btn btn-outline-primary" type="submit">Plan Source</button>
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3 text-center">
+                                <div class="alert alert-warning" role="alert">Determine the demand for this product</div>
+                                <img src="/images/scm/product-demand.PNG" class="img-fluid example-img" alt="product-demand">
+                            </div>
+                            <div class="col-md-3 mb-3 text-center">
+                                <div class="alert alert-warning" role="alert">Determine the period during which the demand for this product is expected</div>
+                                <img src="/images/scm/product-period.PNG" class="img-fluid example-img" alt="product-period">
+                            </div>
+                            <div class="col-md-3 mb-3 text-center">
+                                <div class="alert alert-warning" role="alert">Determine the cost of the order</div>
+                                <img src="/images/scm/product-order-cost.PNG" class="img-fluid example-img" alt="product-order-cost">
+                            </div>
+                            <div class="col-md-3 mb-3 text-center">
+                                <div class="alert alert-warning" role="alert">Determine the cost of storing the ordered batch of goods</div>
+                                <img src="/images/scm/product-store-cost.PNG" class="img-fluid example-img" alt="product-store-cost">
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-primary btn-block" type="submit">Plan Source</button>
                     </form>
 
                     <div class="alert alert-danger mt-4" role="alert" id="sourceWarningMessage">
