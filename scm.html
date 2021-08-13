@@ -140,6 +140,12 @@
 
                     <form class="needs-validation mt-4" onsubmit="planSource(); return false;">
                         <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label for="productName">Product Name</label>
+                                <input type="text" class="form-control" id="productName" value="New Women Summer Sneakers Ladies Platform Vulcanized Shoes Walking Lace-Up Comforable Casual Sheos Tenis Feminino Zapatos Mujer" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label for="demandValue">Demand (D)</label>
                                 <input type="number" min="1" step="1" class="form-control" id="demandValue" value="12000" required>
@@ -155,12 +161,6 @@
                             <div class="col-md-3 mb-3">
                                 <label for="stockCostValue">Stock Ownership Cost (StC)</label>
                                 <input type="number" min="0.01" step="0.01" class="form-control" id="stockCostValue" value="2.85" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-12 mb-3">
-                                <label for="productURL">Product URL in the Wholesale Marketplace</label>
-                                <input type="text" class="form-control" id="productURL" value="https://www.alibaba.com/product-detail/Universal-QI-wireless-charger-New-Ultra_50044247171.html?spm=a27aq.20578312.9521666320.14.4a821462rXqZh8" required>
                             </div>
                         </div>
                         <button class="btn btn-outline-primary" type="submit">Plan Source</button>
@@ -484,13 +484,9 @@
                 $('#annualOrderNumber').val(result.N);
                 $('#orderFrequency').val(result.F);
 
-                const productURL = $('#productURL').val().trim();
+                const productName = $('#productName').val().trim();
 
-                $.get('http://url-metadata.herokuapp.com/api/metadata?url=' + productURL, function(metadata) {
-                    const product = metadata.data.description;
-
-                    $('#sourceResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${product}</b> should be ordered in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days.`);
-                });
+                $('#sourceResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${productName}</b> should be ordered in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days.`);
 
                 displayChart('Source', 'blue', result.F, result.N, result.EOQ, '#sourceResultsChart');
             } catch (err) {
