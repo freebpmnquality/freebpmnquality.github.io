@@ -504,7 +504,9 @@
 
                 const productName = $('#productName').val().trim();
 
-                $('#sourceResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${productName}</b> should be ordered in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days.`);
+                const totalCost = (orderCostValue * result.N).toFixed(2);
+
+                $('#sourceResultsText').html(`In order to achieve the Economic Order Quantity, item <b>${productName}</b> should be ordered in batches of <b>${result.EOQ}</b> units <b>${result.N}</b> times within <b>${daysValue}</b> days, i.e. <b>${result.EOQ}</b> units every <b>${result.F}</b> days. The total cost will be <b>$${totalCost}</b> or <b>${result.N}</b> orders of <b>$${orderCostValue}</b> each every <b>${result.F}</b> days.`);
 
                 displayChart('Source', 'blue', result.F, result.N, result.EOQ, '#sourceResultsChart');
             } catch (err) {
