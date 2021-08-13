@@ -83,6 +83,10 @@
             border-color: #cce5ff;
             width: 100%;
         }
+        
+        .chart-img {
+            border-color: #f8d7da;
+        }
     </style>
 </head>
 
@@ -648,8 +652,8 @@
                 currentCost += cost;
             }
 
-            $(id).html(`<img class="img-thumbnail" alt="${id}" style="width: 45%;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(planChart))}">
-                <img class="img-thumbnail" alt="${id}" style="width: 45%;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(costChart))}">`);
+            $(id).html(`<img class="img-thumbnail chart-img" alt="${id}" style="width: 45%;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(planChart))}">
+                <img class="img-thumbnail chart-img" alt="${id}" style="width: 45%;" src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(costChart))}">`);
         }
 
         function calculateWilsonModel(D, CO, SC, P) {
