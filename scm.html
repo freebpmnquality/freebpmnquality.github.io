@@ -77,6 +77,12 @@
             border-color: #ffc107;
             border-radius: .25rem;
         }
+        
+        .wholesale-img {
+            height: 128px;
+            border-color: #cce5ff;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -127,11 +133,35 @@
                 <div class="tab-pane" id="source" role="tabpanel">
                     <h5>Source Busines Process Planning</h5>
 
+                    <h6 class="text-muted">Step 1. Check out the proposed workflow</h6>
+
                     <div class="img-thumbnail">
                         <div id="source-canvas"></div>
                     </div>
 
                     <form class="needs-validation mt-4" onsubmit="planSource(); return false;">
+                        <h6 class="text-muted">Step 2. Choose the comfortable dropshipping platform</h6>
+
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3 text-center">
+                                <a href="https://www.alibaba.com/" target="_blank"><img src="/images/scm/Alibaba-logo.png" class="img-fluid img-thumbnail wholesale-img" alt="Alibaba-logo"></a>
+                            </div>
+
+                            <div class="col-md-3 mb-3 text-center">
+                                <a href="https://aliexpress.com/" target="_blank"><img src="/images/scm/Aliexpress-logo.png" class="img-fluid img-thumbnail wholesale-img" alt="Aliexpress-logo"></a>
+                            </div>
+
+                            <div class="col-md-3 mb-3 text-center">
+                                <a href="https://world.taobao.com/" target="_blank"><img src="/images/scm/Taobao-logo.png" class="img-fluid img-thumbnail wholesale-img" alt="Taobao-logo"></a>
+                            </div>
+
+                            <div class="col-md-3 mb-3 text-center">
+                                <a href="https://global.jd.com/" target="_blank"><img src="/images/scm/JD-logo.png" class="img-fluid img-thumbnail wholesale-img" alt="JD-logo"></a>
+                            </div>
+                        </div>
+
+                        <h6 class="text-muted">Step 3. Find the most suitable offers</h6>
+
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
                                 <label for="productName">Product Name</label>
@@ -144,6 +174,8 @@
                                 <img src="/images/scm/product-name.PNG" class="img-fluid example-img" alt="product-name">
                             </div>
                         </div>
+
+                        <h6 class="text-muted">Step 4. Analyze demand, delivery terms, and storage terms</h6>
 
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
@@ -181,6 +213,9 @@
                                 <img src="/images/scm/product-store-cost.PNG" class="img-fluid example-img" alt="product-store-cost">
                             </div>
                         </div>
+
+                        <h6 class="text-muted">Step 5. Make a decision based on the recommendations received</h6>
+
                         <button class="btn btn-outline-primary btn-block" type="submit">Plan Source</button>
                     </form>
 
@@ -203,9 +238,12 @@
                         </div>
                     </div>
 
-                    <div class="mt-4 text-center" id="sourceResultsText"></div>
-
-                    <div class="mt-4 text-center" id="sourceResultsChart"></div>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <div class="text-center" id="sourceResultsText"></div>
+                            <div class="mt-4 text-center" id="sourceResultsChart"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Deliver tab -->
