@@ -119,27 +119,36 @@
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="xAxis">X Axis</label>
+                <label for="xAxis">Category</label>
                 <select class="custom-select" id="xAxis" required onchange="displayData();">
-                  <option selected disabled value="">Choose...</option>
+                    <option selected disabled value="">Choose...</option>
                 </select>
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="yAxis">Y Axis</label>
+                <label for="yAxis">Value</label>
                 <select class="custom-select" id="yAxis" required onchange="displayData();">
-                  <option selected disabled value="">Choose...</option>
+                    <option selected disabled value="">Choose...</option>
+                </select>
+
+                <div class="form-group form-check mt-2">
+                    <input type="checkbox" class="form-check-input" id="y2Check" onchange="displayData();">
+                    <label class="form-check-label" for="y2Check">Use secondary value</label>
+                </div>
+
+                <select class="custom-select" id="yAxis2" required onchange="displayData();">
+                    <option selected disabled value="">Choose...</option>
                 </select>
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="vizType">Visualization Type</label>
+                <label for="vizType">Chart</label>
                 <select class="custom-select" id="vizType" required onchange="displayData();">
-                  <option selected value="auto">Auto</option>
-                  <option value="bar">Bar</option>
-                  <option value="column">Column</option>
-                  <option value="line">Line</option>
-                  <option value="pie">Pie</option>
+                    <option selected value="auto">Auto</option>
+                    <option value="bar">Bar</option>
+                    <option value="column">Column</option>
+                    <option value="line">Line</option>
+                    <option value="pie">Pie</option>
                 </select>
             </div>
         </div>
@@ -192,9 +201,11 @@
                             if (xlRows.length > 0) {
                                 $('#xAxis').empty();
                                 $('#yAxis').empty();
+                                $('#yAxis2').empty();
 
                                 $('#xAxis').append(`<option selected disabled value="">Choose...</option>`);
                                 $('#yAxis').append(`<option selected disabled value="">Choose...</option>`);
+                                $('#yAxis2').append(`<option selected disabled value="">Choose...</option>`);
 
                                 for (var col in xlRows[0]) {
                                     var numVal = Number.parseFloat(xlRows[0][col]);
@@ -203,6 +214,7 @@
                                         $('#xAxis').append(`<option value="${col}">${col}</option>`);
                                     } else {
                                         $('#yAxis').append(`<option value="${col}">${col}</option>`);
+                                        $('#yAxis2').append(`<option value="${col}">${col}</option>`);
                                     }
                                 }
                             }
@@ -234,52 +246,67 @@
                 var xAxis = $('#xAxis').val();
                 var yAxis = $('#yAxis').val();
 
-                var grouppedData = {};
+                var yAxis2 = $('#yAxis2').val();
+                var yAxis2Checked = $('#y2Check').is(":checked")
 
-                for (var row in xlRows) {
-                    var xVal = xlRows[row][xAxis];
+                if (xAxis !== null && yAxis !== null) {
+                    var grouppedData = {};
+                    var grouppedData2 = {};
 
-                    grouppedData[xVal] = 0;
-                }
+                    for (var row in xlRows) {
+                        var xVal = xlRows[row][xAxis];
 
-                for (var row in xlRows) {
-                    var xVal = xlRows[row][xAxis];
-                    var yVal = Number.parseFloat(xlRows[row][yAxis]);
-
-                    if (!Number.isNaN(yVal)) {
-                        grouppedData[xVal] += yVal;
+                        grouppedData[xVal] = 0;
+                        grouppedData2[xVal] = 0;
                     }
-                }
 
-                var array = [
-                    [xAxis, yAxis]
-                ];
+                    for (var row in xlRows) {
+                        var xVal = xlRows[row][xAxis];
+                        var yVal = Number.parseFloat(xlRows[row][yAxis]);
 
-                for (var category in grouppedData) {
-                    array.push([category, grouppedData[category]]);
-                }
+                        if (!Number.isNaN(yVal)) {
+                            grouppedData[xVal] += yVal;
+                        }
 
-                var data = google.visualization.arrayToDataTable(array);
-                var type = $('#vizType').val();
+                        if (yAxis2 !== null && yAxis2Checked) {
+                            var yVal2 = Number.parseFloat(xlRows[row][yAxis2]);
 
-                if (type === 'auto') {
-                    if ((array.length - 1) <= 5) {
-                        type = 'pie';
-                    } else if ((array.length - 1) <= 12) {
-                        type = 'bar';
-                    } else {
-                        type = 'line';
+                            if (!Number.isNaN(yVal2)) {
+                                grouppedData2[xVal] += yVal2;
+                            }
+                        }
                     }
+
+                    var array = [
+                        (yAxis2 === null || !yAxis2Checked) ? [xAxis, yAxis] : [xAxis, yAxis, yAxis2]
+                    ];
+
+                    for (var category in grouppedData) {
+                        array.push((yAxis2 === null || !yAxis2Checked) ? [category, grouppedData[category]] : [category, grouppedData[category], grouppedData2[category]]);
+                    }
+
+                    var data = google.visualization.arrayToDataTable(array);
+                    var type = $('#vizType').val();
+
+                    if (type === 'auto') {
+                        if ((array.length - 1) <= 5) {
+                            type = 'pie';
+                        } else if ((array.length - 1) <= 12) {
+                            type = 'bar';
+                        } else {
+                            type = 'line';
+                        }
+                    }
+
+                    var vizObject = {
+                        'bar': new google.visualization.BarChart(document.getElementById('chartarea')),
+                        'column': new google.visualization.ColumnChart(document.getElementById('chartarea')),
+                        'line': new google.visualization.LineChart(document.getElementById('chartarea')),
+                        'pie': new google.visualization.PieChart(document.getElementById('chartarea'))
+                    };
+
+                    vizObject[type].draw(data);
                 }
-
-                var vizObject = {
-                    'bar': new google.visualization.BarChart(document.getElementById('chartarea')),
-                    'column': new google.visualization.ColumnChart(document.getElementById('chartarea')),
-                    'line': new google.visualization.LineChart(document.getElementById('chartarea')),
-                    'pie': new google.visualization.PieChart(document.getElementById('chartarea'))
-                };
-
-                vizObject[type].draw(data);
             } catch (err) {
                 console.error(err);
             }
