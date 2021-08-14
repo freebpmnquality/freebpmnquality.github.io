@@ -260,8 +260,11 @@
                 var xAxis = $('#xAxis').val();
                 var yAxis = $('#yAxis').val();
 
+                var xAxis2 = $('#xAxis2').val();
+                var xAxis2Checked = $('#xCheck').is(":checked");
+
                 var yAxis2 = $('#yAxis2').val();
-                var yAxis2Checked = $('#y2Check').is(":checked")
+                var yAxis2Checked = $('#y2Check').is(":checked");
 
                 if (xAxis !== null && yAxis !== null) {
                     var grouppedData = {};
@@ -270,12 +273,21 @@
                     for (var row in xlRows) {
                         var xVal = xlRows[row][xAxis];
 
+                        if (xAxis2Checked) {
+                            xVal += ' ' + xlRows[row][xAxis2];
+                        }
+
                         grouppedData[xVal] = 0;
                         grouppedData2[xVal] = 0;
                     }
 
                     for (var row in xlRows) {
                         var xVal = xlRows[row][xAxis];
+
+                        if (xAxis2Checked) {
+                            xVal += ' ' + xlRows[row][xAxis2];
+                        }
+
                         var yVal = Number.parseFloat(xlRows[row][yAxis]);
 
                         if (!Number.isNaN(yVal)) {
