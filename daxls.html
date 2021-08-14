@@ -123,6 +123,15 @@
                 <select class="custom-select" id="xAxis" required onchange="displayData();">
                     <option selected disabled value="">Choose...</option>
                 </select>
+
+                <div class="form-group form-check mt-2">
+                    <input type="checkbox" class="form-check-input" id="xCheck" onchange="displayData();">
+                    <label class="form-check-label" for="xCheck">Use secondary category</label>
+                </div>
+
+                <select class="custom-select" id="xAxis2" required onchange="displayData();">
+                    <option selected disabled value="">Choose...</option>
+                </select>
             </div>
 
             <div class="col-md-4 mb-3">
@@ -201,10 +210,14 @@
                             if (xlRows.length > 0) {
                                 $('#xAxis').empty();
                                 $('#yAxis').empty();
+
+                                $('#xAxis2').empty();
                                 $('#yAxis2').empty();
 
                                 $('#xAxis').append(`<option selected disabled value="">Choose...</option>`);
                                 $('#yAxis').append(`<option selected disabled value="">Choose...</option>`);
+
+                                $('#xAxis2').append(`<option selected disabled value="">Choose...</option>`);
                                 $('#yAxis2').append(`<option selected disabled value="">Choose...</option>`);
 
                                 for (var col in xlRows[0]) {
@@ -212,6 +225,7 @@
 
                                     if (Number.isNaN(numVal)) {
                                         $('#xAxis').append(`<option value="${col}">${col}</option>`);
+                                        $('#xAxis2').append(`<option value="${col}">${col}</option>`);
                                     } else {
                                         $('#yAxis').append(`<option value="${col}">${col}</option>`);
                                         $('#yAxis2').append(`<option value="${col}">${col}</option>`);
