@@ -140,7 +140,7 @@
             <div class="col-md-4 mb-3">
                 <label for="vizType">Visualization Type</label>
                 <select class="custom-select" id="vizType" required onchange="displayData();">
-                  <option selected disabled value="">Choose...</option>
+                  <option selected value="auto">Auto</option>
                   <option value="bar">Bar</option>
                   <option value="column">Column</option>
                   <option value="line">Line</option>
@@ -263,6 +263,16 @@
 
                 var data = google.visualization.arrayToDataTable(array);
                 var type = $('#vizType').val();
+
+                if (type === 'auto') {
+                    if ((array.length - 1) <= 5) {
+                        type = 'pie';
+                    } else if ((array.length - 1) <= 12) {
+                        type = 'bar';
+                    } else {
+                        type = 'line';
+                    }
+                }
 
                 var vizObject = {
                     'bar': new google.visualization.BarChart(document.getElementById('chartarea')),
