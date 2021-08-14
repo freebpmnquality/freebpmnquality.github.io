@@ -122,24 +122,24 @@
             </div>
         </div>
 
-        <div class="form-row mt-4">
+        <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="xAxis">X Axis</label>
-                <select class="custom-select" id="xAxis" required>
+                <select class="custom-select" id="xAxis" required onchange="displayData();">
                   <option selected disabled value="">Choose...</option>
                 </select>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="yAxis">Y Axis</label>
-                <select class="custom-select" id="yAxis" required>
+                <select class="custom-select" id="yAxis" required onchange="displayData();">
                   <option selected disabled value="">Choose...</option>
                 </select>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="vizType">Visualization Type</label>
-                <select class="custom-select" id="vizType" required>
+                <select class="custom-select" id="vizType" required onchange="displayData();">
                   <option selected disabled value="">Choose...</option>
                   <option value="bar">Bar</option>
                   <option value="column">Column</option>
@@ -149,9 +149,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary btn-block" onclick="displayData();">Display</button>
-
-        <div id="chartarea" class="img-thumbnail mt-4"></div>
+        <div id="chartarea" class="img-thumbnail mt-1"></div>
     </div>
 
     <div class="jumbotron text-muted" id="footer">
@@ -234,45 +232,49 @@
         }
 
         function displayData() {
-            var xAxis = $('#xAxis').val();
-            var yAxis = $('#yAxis').val();
+            try {
+                var xAxis = $('#xAxis').val();
+                var yAxis = $('#yAxis').val();
 
-            var grouppedData = {};
+                var grouppedData = {};
 
-            for (var row in xlRows) {
-                var xVal = xlRows[row][xAxis];
+                for (var row in xlRows) {
+                    var xVal = xlRows[row][xAxis];
 
-                grouppedData[xVal] = 0;
-            }
-
-            for (var row in xlRows) {
-                var xVal = xlRows[row][xAxis];
-                var yVal = Number.parseFloat(xlRows[row][yAxis]);
-
-                if (!Number.isNaN(yVal)) {
-                    grouppedData[xVal] += yVal;
+                    grouppedData[xVal] = 0;
                 }
+
+                for (var row in xlRows) {
+                    var xVal = xlRows[row][xAxis];
+                    var yVal = Number.parseFloat(xlRows[row][yAxis]);
+
+                    if (!Number.isNaN(yVal)) {
+                        grouppedData[xVal] += yVal;
+                    }
+                }
+
+                var array = [
+                    [xAxis, yAxis]
+                ];
+
+                for (var category in grouppedData) {
+                    array.push([category, grouppedData[category]]);
+                }
+
+                var data = google.visualization.arrayToDataTable(array);
+                var type = $('#vizType').val();
+
+                var vizObject = {
+                    'bar': new google.visualization.BarChart(document.getElementById('chartarea')),
+                    'column': new google.visualization.ColumnChart(document.getElementById('chartarea')),
+                    'line': new google.visualization.LineChart(document.getElementById('chartarea')),
+                    'pie': new google.visualization.PieChart(document.getElementById('chartarea'))
+                };
+
+                vizObject[type].draw(data);
+            } catch (err) {
+                console.error(err);
             }
-
-            var array = [
-                [xAxis, yAxis]
-            ];
-
-            for (var category in grouppedData) {
-                array.push([category, grouppedData[category]]);
-            }
-
-            var data = google.visualization.arrayToDataTable(array);
-            var type = $('#vizType').val();
-
-            var vizObject = {
-                'bar': new google.visualization.BarChart(document.getElementById('chartarea')),
-                'column': new google.visualization.ColumnChart(document.getElementById('chartarea')),
-                'line': new google.visualization.LineChart(document.getElementById('chartarea')),
-                'pie': new google.visualization.PieChart(document.getElementById('chartarea'))
-            };
-
-            vizObject[type].draw(data);
         }
 
         function googleTranslateElementInit() {
