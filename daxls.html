@@ -82,6 +82,10 @@
         #chartarea {
             height: 480px;
         }
+        
+        .dash-viz {
+            height: 240px;
+        }
     </style>
 </head>
 
@@ -153,16 +157,24 @@
             <div class="col-md-4 mb-3">
                 <label for="vizType">Chart</label>
                 <select class="custom-select" id="vizType" required onchange="displayData();">
-                    <option selected value="auto">Auto</option>
-                    <option value="bar">Bar</option>
+                    <option selected value="bar">Bar</option>
                     <option value="column">Column</option>
                     <option value="line">Line</option>
                     <option value="pie">Pie</option>
                 </select>
+
+                <div class="form-group form-check mt-2">
+                    <input type="checkbox" class="form-check-input" id="autoChart" checked onchange="displayData();">
+                    <label class="form-check-label" for="autoChart">Suggest chart automatically</label>
+                </div>
+
+                <button class="btn btn-primary btn-block" onclick="addChart();">Add chart</button>
             </div>
         </div>
 
         <div id="chartarea" class="img-thumbnail mt-1"></div>
+
+        <div id="dashboard" class="card-columns mt-4"></div>
     </div>
 
     <div class="jumbotron text-muted" id="footer">
@@ -231,6 +243,9 @@
                                         $('#yAxis2').append(`<option value="${col}">${col}</option>`);
                                     }
                                 }
+
+                                $('#chartarea').empty();
+                                $('#dashboard').empty();
                             }
                         })
                     };
@@ -255,6 +270,8 @@
             $('#inputGroupFileName').text(files[0].name);
         }
 
+        var array = null;
+
         function displayData() {
             try {
                 var xAxis = $('#xAxis').val();
@@ -265,6 +282,8 @@
 
                 var yAxis2 = $('#yAxis2').val();
                 var yAxis2Checked = $('#y2Check').is(":checked");
+
+                var isAutoChart = $('#autoChart').is(":checked");
 
                 if (xAxis !== null && yAxis !== null) {
                     var grouppedData = {};
@@ -303,7 +322,7 @@
                         }
                     }
 
-                    var array = [
+                    array = [
                         (yAxis2 === null || !yAxis2Checked) ? [xAxis, yAxis] : [xAxis, yAxis, yAxis2]
                     ];
 
@@ -314,7 +333,7 @@
                     var data = google.visualization.arrayToDataTable(array);
                     var type = $('#vizType').val();
 
-                    if (type === 'auto') {
+                    if (isAutoChart) {
                         if ((array.length - 1) <= 5) {
                             type = 'pie';
                         } else if ((array.length - 1) <= 12) {
@@ -336,6 +355,40 @@
             } catch (err) {
                 console.error(err);
             }
+        }
+
+        function addChart() {
+            var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
+
+            $('#dashboard').append(`<div class="card">
+                <div class="card-body">
+                    <div class="dash-viz" id="${id}"></div>
+                </div>
+            </div>`);
+
+            var isAutoChart = $('#autoChart').is(":checked");
+
+            var data = google.visualization.arrayToDataTable(array);
+            var type = $('#vizType').val();
+
+            if (isAutoChart) {
+                if ((array.length - 1) <= 5) {
+                    type = 'pie';
+                } else if ((array.length - 1) <= 12) {
+                    type = 'bar';
+                } else {
+                    type = 'line';
+                }
+            }
+
+            var vizObject = {
+                'bar': new google.visualization.BarChart(document.getElementById(id)),
+                'column': new google.visualization.ColumnChart(document.getElementById(id)),
+                'line': new google.visualization.LineChart(document.getElementById(id)),
+                'pie': new google.visualization.PieChart(document.getElementById(id))
+            };
+
+            vizObject[type].draw(data);
         }
 
         function googleTranslateElementInit() {
