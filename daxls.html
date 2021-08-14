@@ -190,17 +190,20 @@
                             xlRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
                             if (xlRows.length > 0) {
-                                var colNames = Object.keys(xlRows[0]);
-
                                 $('#xAxis').empty();
                                 $('#yAxis').empty();
 
                                 $('#xAxis').append(`<option selected disabled value="">Choose...</option>`);
                                 $('#yAxis').append(`<option selected disabled value="">Choose...</option>`);
 
-                                for (var col in colNames) {
-                                    $('#xAxis').append(`<option value="${colNames[col]}">${colNames[col]}</option>`);
-                                    $('#yAxis').append(`<option value="${colNames[col]}">${colNames[col]}</option>`);
+                                for (var col in xlRows[0]) {
+                                    var numVal = Number.parseFloat(xlRows[0][col]);
+
+                                    if (Number.isNaN(numVal)) {
+                                        $('#xAxis').append(`<option value="${col}">${col}</option>`);
+                                    } else {
+                                        $('#yAxis').append(`<option value="${col}">${col}</option>`);
+                                    }
                                 }
                             }
                         })
