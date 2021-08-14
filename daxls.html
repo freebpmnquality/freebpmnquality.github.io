@@ -334,13 +334,7 @@
                     var type = $('#vizType').val();
 
                     if (isAutoChart) {
-                        if ((array.length - 1) <= 5) {
-                            type = 'pie';
-                        } else if ((array.length - 1) <= 12) {
-                            type = 'bar';
-                        } else {
-                            type = 'line';
-                        }
+                        type = getChartType(array);
                     }
 
                     var vizObject = {
@@ -355,6 +349,16 @@
             } catch (err) {
                 console.error(err);
             }
+        }
+
+        function getChartType(array) {
+            if ((array.length - 1) <= 5) {
+                return 'pie';
+            } else if ((array.length - 1) <= 12) {
+                return 'bar';
+            }
+
+            return 'line';
         }
 
         function addChart() {
@@ -372,13 +376,7 @@
             var type = $('#vizType').val();
 
             if (isAutoChart) {
-                if ((array.length - 1) <= 5) {
-                    type = 'pie';
-                } else if ((array.length - 1) <= 12) {
-                    type = 'bar';
-                } else {
-                    type = 'line';
-                }
+                type = getChartType(array);
             }
 
             var vizObject = {
