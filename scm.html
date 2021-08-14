@@ -60,7 +60,7 @@
     <meta name="language" content="English">
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
 
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
@@ -844,6 +844,8 @@
         }
 
         $(document).ready(function() {
+            $('#viewport-meta').attr('content', 'width=1024');
+
             $('#sourceWarningMessage').hide();
             $('#deliverWarningMessage').hide();
             $('#returnWarningMessage').hide();
