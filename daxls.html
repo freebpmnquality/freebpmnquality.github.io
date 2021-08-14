@@ -60,7 +60,7 @@
     <meta name="language" content="English">
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
@@ -289,6 +289,10 @@
         }
 
         $('#inputGroupFile').change(handleFileSelect);
+
+        $(document).ready(function() {
+            $('#viewport-meta').attr('content', 'width=1024');
+        });
     </script>
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
