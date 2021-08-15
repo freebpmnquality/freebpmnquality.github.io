@@ -63,7 +63,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Font -->
-    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -75,7 +75,7 @@
     <!-- Styles -->
     <style>
         body {
-            font-family: 'Kanit', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: #f8f9fa;
         }
         
@@ -154,7 +154,7 @@
                 </select>
             </div>
 
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4">
                 <label for="vizType">Chart</label>
                 <select class="custom-select" id="vizType" required onchange="displayData();">
                     <option selected value="bar">Bar</option>
@@ -366,7 +366,13 @@
         function addChart() {
             var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-            $('#dashboard').append(`<div class="col mb-4 dash-viz img-thumbnail" id="${id}"></div>`);
+            $('#dashboard').append(`<div class="col mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="dash-viz" id="${id}"></div>
+                    </div>
+                </div>
+            </div>`);
 
             var isAutoChart = $('#autoChart').is(":checked");
 
