@@ -163,6 +163,11 @@
                 <select class="custom-select" id="yAxis2" required onchange="displayData();">
                     <option selected disabled value="">Choose...</option>
                 </select>
+
+                <div class="form-group form-check mt-2">
+                    <input type="checkbox" class="form-check-input" id="topGainers" onchange="displayData();">
+                    <label class="form-check-label" for="topGainers">Top gainers only</label>
+                </div>
             </div>
 
             <div class="col-md-4">
@@ -300,6 +305,8 @@
 
                 var isAutoChart = $('#autoChart').is(":checked");
 
+                var topGainers = $('#topGainers').is(":checked");
+
                 if (xAxis !== null && yAxis !== null) {
                     var grouppedData = {};
                     var grouppedData2 = {};
@@ -343,6 +350,22 @@
 
                     for (var category in grouppedData) {
                         array.push((yAxis2 === null || !yAxis2Checked) ? [category, grouppedData[category]] : [category, grouppedData[category], grouppedData2[category]]);
+                    }
+
+                    if (topGainers) {
+                        var array = array.sort(function(a, b) {
+                            return b[1] - a[1];
+                        });
+
+                        var top = 5;
+                        var topNumber = array.length < top ? array.length : top;
+                        var newArray = [array[0]];
+
+                        for (var i = 1; i <= topNumber; i++) {
+                            newArray.push(array[i]);
+                        }
+
+                        array = newArray;
                     }
 
                     var data = google.visualization.arrayToDataTable(array);
