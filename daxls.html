@@ -168,15 +168,15 @@
                     <label class="form-check-label" for="autoChart">Suggest chart automatically</label>
                 </div>
 
-                <button class="btn btn-primary btn-block" onclick="addChart();">Add chart</button>
+                <button class="btn btn-primary btn-block" onclick="addChart();">Capture chart</button>
             </div>
         </div>
 
         <p class="text-muted">Preview</p>
         <div id="chartarea" class="img-thumbnail mb-4"></div>
 
-        <p class="text-muted">Dashboard</p>
-        <div id="dashboard" class="card-columns"></div>
+        <p class="text-muted">Captured</p>
+        <div id="dashboard" class="row row-cols-1 row-cols-md-2"></div>
     </div>
 
     <div class="jumbotron text-muted" id="footer">
@@ -366,11 +366,7 @@
         function addChart() {
             var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-            $('#dashboard').append(`<div class="card">
-                <div class="card-body">
-                    <div class="dash-viz" id="${id}"></div>
-                </div>
-            </div>`);
+            $('#dashboard').append(`<div class="col mb-4 dash-viz img-thumbnail" id="${id}"></div>`);
 
             var isAutoChart = $('#autoChart').is(":checked");
 
