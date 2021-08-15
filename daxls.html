@@ -367,9 +367,12 @@
         }
 
         function getChartType(array) {
-            if ((array.length - 1) <= 5) {
+            var pieTreshold = 5;
+            var barTreshold = 5;
+
+            if ((array.length - 1) <= pieTreshold) {
                 return 'pie';
-            } else if ((array.length - 1) <= 12) {
+            } else if ((array.length - 1) <= barTreshold) {
                 return 'bar';
             }
 
