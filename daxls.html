@@ -364,17 +364,29 @@
         }
 
         function addChart() {
+            var xAxis = $('#xAxis').val();
+            var yAxis = $('#yAxis').val();
+
+            var xAxis2 = $('#xAxis2').val();
+            var xAxis2Checked = $('#xCheck').is(":checked");
+
+            var yAxis2 = $('#yAxis2').val();
+            var yAxis2Checked = $('#y2Check').is(":checked");
+
+            var isAutoChart = $('#autoChart').is(":checked");
+
             var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
+
+            var chartTitle = yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' by ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
 
             $('#dashboard').append(`<div class="col mb-4">
                 <div class="card">
                     <div class="card-body">
+                        <span class="text-muted">${chartTitle}</span>
                         <div class="dash-viz" id="${id}"></div>
                     </div>
                 </div>
             </div>`);
-
-            var isAutoChart = $('#autoChart').is(":checked");
 
             var data = google.visualization.arrayToDataTable(array);
             var type = $('#vizType').val();
