@@ -364,48 +364,54 @@
         }
 
         function addChart() {
-            var xAxis = $('#xAxis').val();
-            var yAxis = $('#yAxis').val();
+            try {
+                var xAxis = $('#xAxis').val();
+                var yAxis = $('#yAxis').val();
 
-            var xAxis2 = $('#xAxis2').val();
-            var xAxis2Checked = $('#xCheck').is(":checked");
+                var xAxis2 = $('#xAxis2').val();
+                var xAxis2Checked = $('#xCheck').is(":checked");
 
-            var yAxis2 = $('#yAxis2').val();
-            var yAxis2Checked = $('#y2Check').is(":checked");
+                var yAxis2 = $('#yAxis2').val();
+                var yAxis2Checked = $('#y2Check').is(":checked");
 
-            var isAutoChart = $('#autoChart').is(":checked");
+                var isAutoChart = $('#autoChart').is(":checked");
 
-            var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
+                if (xAxis !== null && yAxis !== null) {
+                    var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-            var chartTitle = yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' by ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
+                    var chartTitle = yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' by ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
 
-            $('#dashboard').append(`<div class="col mb-4" id="col-${id}">
-                <div class="card">
-                    <div class="card-body">
-                        <span class="text-muted">${chartTitle}</span>
-                        <br>
-                        <small class="text-muted">${new Date().toLocaleString()}</small>
-                        <div class="dash-viz" id="${id}"></div>
-                        <button class="btn btn-danger btn-sm mt-2" onclick="$('#col-${id}').remove();">Remove</button>
+                    $('#dashboard').append(`<div class="col mb-4" id="col-${id}">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="text-muted">${chartTitle}</span>
+                            <br>
+                            <small class="text-muted">${new Date().toLocaleString()}</small>
+                            <div class="dash-viz" id="${id}"></div>
+                            <button class="btn btn-danger btn-sm mt-2" onclick="$('#col-${id}').remove();">Remove</button>
+                        </div>
                     </div>
-                </div>
-            </div>`);
+                </div>`);
 
-            var data = google.visualization.arrayToDataTable(array);
-            var type = $('#vizType').val();
+                    var data = google.visualization.arrayToDataTable(array);
+                    var type = $('#vizType').val();
 
-            if (isAutoChart) {
-                type = getChartType(array);
+                    if (isAutoChart) {
+                        type = getChartType(array);
+                    }
+
+                    var vizObject = {
+                        'bar': new google.visualization.BarChart(document.getElementById(id)),
+                        'column': new google.visualization.ColumnChart(document.getElementById(id)),
+                        'line': new google.visualization.LineChart(document.getElementById(id)),
+                        'pie': new google.visualization.PieChart(document.getElementById(id))
+                    };
+
+                    vizObject[type].draw(data);
+                }
+            } catch (err) {
+                console.error(err);
             }
-
-            var vizObject = {
-                'bar': new google.visualization.BarChart(document.getElementById(id)),
-                'column': new google.visualization.ColumnChart(document.getElementById(id)),
-                'line': new google.visualization.LineChart(document.getElementById(id)),
-                'pie': new google.visualization.PieChart(document.getElementById(id))
-            };
-
-            vizObject[type].draw(data);
         }
 
         function googleTranslateElementInit() {
