@@ -509,23 +509,27 @@
         }
 
         function downloadCaptured() {
-            var structure = `<!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-                    <style>
-                        .dash-viz {
-                            height: 240px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div id="dashboard" class="row row-cols-1 row-cols-md-2 mt-4 mb-4 ml-4 mr-4">${$('#dashboard').html()}</div>
-                </body>
-            </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
+            if (fileName !== null) {
+                var structure = `<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+                        <style>
+                            .dash-viz {
+                                height: 240px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h3 class="text-center mt-4">${fileName}</h3>
+                        <p class="text-center text-muted">${new Date().toLocaleString()}</p>
+                        <div id="dashboard" class="row row-cols-1 row-cols-md-2 mt-4 mb-4 ml-4 mr-4">${$('#dashboard').html()}</div>
+                    </body>
+                </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
 
-            download(fileName + ' ' + new Date().toLocaleString() + '.html', structure);
+                download(fileName + ' ' + new Date().toLocaleString() + '.html', structure);
+            }
         }
 
         function googleTranslateElementInit() {
