@@ -99,6 +99,15 @@
         #uploadArea {
             padding-top: 10%;
         }
+        
+        #captured {
+            padding-top: 10%;
+        }
+        
+        .btn {
+            background-color: #FF81AE;
+            border-color: #FF81AE;
+        }
     </style>
 </head>
 
@@ -124,7 +133,7 @@
         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-        <a href="#uploadArea" class="btn btn-primary btn-lg" role="button" aria-pressed="true">TRY FOR FREE</a>
+        <a href="#uploadArea" class="btn btn-lg" role="button">TRY FOR FREE</a>
         <br>
 
         <img src="/images/viz/data-pana.png" class="img-fluid banner-img" alt="data-pana.png">
@@ -204,14 +213,14 @@
                     <label class="form-check-label" for="autoChart">Suggest chart automatically</label>
                 </div>
 
-                <button class="btn btn-primary btn-block" onclick="addChart();">Capture chart</button>
+                <a href="#captured" class="btn btn-block" role="button" onclick="addChart();">Capture chart</a>
             </div>
         </div>
 
         <p class="text-muted mt-4">Preview</p>
         <div id="chartarea" class="img-thumbnail mb-4"></div>
 
-        <p class="text-muted">Captured</p>
+        <p class="text-muted" id="captured">Captured</p>
         <div id="dashboard" class="row row-cols-1 row-cols-md-2"></div>
 
         <img src="/images/viz/data-amico.png" class="img-fluid banner-img" alt="data-amico.png">
