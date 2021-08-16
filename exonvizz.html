@@ -100,10 +100,6 @@
             padding-top: 100px;
         }
         
-        #captured {
-            padding-top: 100px;
-        }
-        
         .btn {
             background-color: #FF81AE;
             border-color: #FF81AE;
@@ -135,7 +131,7 @@
 
         <a href="#uploadArea" class="btn btn-lg mt-4" role="button">ПОПРОБОВАТЬ БЕСПЛАТНО</a>
         <br>
-        <img src="/images/viz/data-pana.png" class="img-fluid banner-img" alt="data-pana.png">
+        <img src="/images/viz/data-pana.png" class="img-fluid banner-img mt-4" alt="data-pana.png">
 
         <p class="text-muted">При помощи данного средства пользователи могут бесплатно в режиме онлайн осуществлять визуализацию отчетных данных из файлов Microsoft Excel, которые были сгенерированы в 1С или другой корпоративной учетной системе. Наиболее подходящие под конкретные
             наборы данных графики могут быть подобраны системой автоматически или выбраны пользователями в ручном режиме. Допускается использование дополнительных шкал категорий и значений, сортировка и ограничение количества отображаемых значений. Построенные
@@ -232,7 +228,19 @@
         <button class="btn" onclick="downloadCaptured();">Загрузить отчет</button>
         <br>
 
-        <img src="/images/viz/data-amico.png" class="img-fluid banner-img" alt="data-amico.png">
+        <img src="/images/viz/data-amico.png" class="img-fluid banner-img mt-4" alt="data-amico.png">
+    </div>
+
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel"><b>Сообщение</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="message-text"></div>
+            </div>
+        </div>
     </div>
 
     <div class="jumbotron text-muted" id="footer">
@@ -445,6 +453,9 @@
                 }
             } catch (err) {
                 console.error(err);
+
+                $('#message-text').text(err.message);
+                $('#messageModal').modal('show');
             }
         }
 
@@ -514,14 +525,23 @@
                     };
 
                     vizObject[type].draw(data);
+
+                    $('#message-text').text(`Построенный график "${chartTitle}" успешно добавлен в отчет!`);
+                    $('#messageModal').modal('show');
+                } else {
+                    $('#message-text').text(`Сначала постройте график!`);
+                    $('#messageModal').modal('show');
                 }
             } catch (err) {
                 console.error(err);
+
+                $('#message-text').text(err.message);
+                $('#messageModal').modal('show');
             }
         }
 
         function downloadCaptured() {
-            if (fileName !== null) {
+            if (fileName !== null || array !== null) {
                 var structure = `<!DOCTYPE html>
                     <html lang="en">
                     <head>
@@ -541,6 +561,9 @@
                 </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
 
                 download(fileName + ' ' + new Date().toLocaleString() + '.html', structure);
+            } else {
+                $('#message-text').text(`Сначала загрузите документ Excel и постройте график!`);
+                $('#messageModal').modal('show');
             }
         }
 
