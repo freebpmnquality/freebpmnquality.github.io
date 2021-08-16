@@ -384,10 +384,9 @@
 
                     if (limitSet) {
                         var limit = Number.parseInt(limitVal);
-                        var limitNumber = array.length < limit ? array.length : limit;
                         var newArray = [array[0]];
 
-                        for (var i = 1; i <= limitNumber; i++) {
+                        for (var i = 1; i < Math.min(limit + 1, array.length); i++) {
                             newArray.push(array[i]);
                         }
 
