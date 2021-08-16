@@ -128,12 +128,12 @@
             </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile" aria-describedby="inputGroupFileAddon">
-                <label class="custom-file-label" for="inputGroupFile" id="inputGroupFileName">Choose Excel spreadsheet file</label>
+                <label class="custom-file-label" for="inputGroupFile" id="inputGroupFileName">Choose Excel file</label>
             </div>
         </div>
 
         <div class="form-row">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4">
                 <label for="xAxis">Category</label>
                 <select class="custom-select" id="xAxis" required onchange="displayData();">
                     <option selected disabled value="">Choose...</option>
@@ -149,7 +149,7 @@
                 </select>
             </div>
 
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4">
                 <label for="yAxis">Value</label>
                 <select class="custom-select" id="yAxis" required onchange="displayData();">
                     <option selected disabled value="">Choose...</option>
@@ -201,7 +201,7 @@
             </div>
         </div>
 
-        <p class="text-muted">Preview</p>
+        <p class="text-muted mt-4">Preview</p>
         <div id="chartarea" class="img-thumbnail mb-4"></div>
 
         <p class="text-muted">Captured</p>
