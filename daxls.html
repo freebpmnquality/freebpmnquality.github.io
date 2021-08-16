@@ -395,7 +395,7 @@
                     ];
 
                     for (var category in grouppedData) {
-                        array.push((yAxis2 === null || !yAxis2Checked) ? [category, grouppedData[category], grouppedData[category] + ''] : [category, grouppedData[category], grouppedData[category] + '', grouppedData2[category], grouppedData2[category] + '']);
+                        array.push((yAxis2 === null || !yAxis2Checked) ? [category, grouppedData[category], grouppedData[category].toFixed(2) + ''] : [category, grouppedData[category], grouppedData[category].toFixed(2) + '', grouppedData2[category], grouppedData2[category].toFixed(2) + '']);
                     }
 
                     if (!sortNo) {
