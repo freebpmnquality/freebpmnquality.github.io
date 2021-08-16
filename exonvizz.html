@@ -223,10 +223,8 @@
         <div id="chartarea" class="img-thumbnail mb-4"></div>
 
         <p class="text-muted" id="captured">Отчет</p>
+        <button class="btn mb-4" onclick="printReport();">НАПЕЧАТАТЬ ИЛИ СОХРАНИТЬ В PDF</button>
         <div id="dashboard" class="row row-cols-1 row-cols-md-1"></div>
-
-        <button class="btn" onclick="downloadCaptured();">Загрузить отчет</button>
-        <br>
 
         <img src="/images/viz/data-amico.png" class="img-fluid banner-img mt-4" alt="data-amico.png">
     </div>
@@ -540,9 +538,9 @@
             }
         }
 
-        function downloadCaptured() {
+        function printReport() {
             if (fileName !== null || array !== null) {
-                var structure = `<!DOCTYPE html>
+                var printContents = `<!DOCTYPE html>
                     <html lang="en">
                     <head>
                         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
@@ -560,7 +558,10 @@
                     </body>
                 </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
 
-                download(fileName + ' ' + new Date().toLocaleString() + '.html', structure);
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
             } else {
                 $('#message-text').text(`Сначала загрузите документ Excel и постройте график!`);
                 $('#messageModal').modal('show');
@@ -585,16 +586,6 @@
                 });
             });
         });
-
-        function download(filename, text) {
-            var element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-            element.setAttribute('download', filename);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        }
     </script>
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
