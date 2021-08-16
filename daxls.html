@@ -385,11 +385,17 @@
                     }
 
                     array = [
-                        (yAxis2 === null || !yAxis2Checked) ? [xAxis, yAxis] : [xAxis, yAxis, yAxis2]
+                        (yAxis2 === null || !yAxis2Checked) ? [xAxis, yAxis, {
+                            role: 'annotation'
+                        }] : [xAxis, yAxis, {
+                            role: 'annotation'
+                        }, yAxis2, {
+                            role: 'annotation'
+                        }]
                     ];
 
                     for (var category in grouppedData) {
-                        array.push((yAxis2 === null || !yAxis2Checked) ? [category, grouppedData[category]] : [category, grouppedData[category], grouppedData2[category]]);
+                        array.push((yAxis2 === null || !yAxis2Checked) ? [category, grouppedData[category], grouppedData[category] + ''] : [category, grouppedData[category], grouppedData[category] + '', grouppedData2[category], grouppedData2[category] + '']);
                     }
 
                     if (!sortNo) {
