@@ -315,7 +315,7 @@
                         var xVal = xlRows[row][xAxis];
 
                         if (xAxis2Checked) {
-                            xVal += ' ' + xlRows[row][xAxis2];
+                            xVal += ', ' + xlRows[row][xAxis2];
                         }
 
                         grouppedData[xVal] = 0;
@@ -326,7 +326,7 @@
                         var xVal = xlRows[row][xAxis];
 
                         if (xAxis2Checked) {
-                            xVal += ' ' + xlRows[row][xAxis2];
+                            xVal += ', ' + xlRows[row][xAxis2];
                         }
 
                         var yVal = Number.parseFloat(xlRows[row][yAxis]);
@@ -421,16 +421,16 @@
                     var chartTitle = yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' by ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
 
                     $('#dashboard').append(`<div class="col mb-4" id="col-${id}">
-                    <div class="card">
-                        <div class="card-body">
-                            <span class="text-muted">${chartTitle}</span>
-                            <br>
-                            <small class="text-muted">${new Date().toLocaleString()}</small>
-                            <div class="dash-viz" id="${id}"></div>
-                            <button class="btn btn-danger btn-sm mt-2" onclick="$('#col-${id}').remove();">Remove</button>
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="text-muted">${chartTitle}</span>
+                                <br>
+                                <small class="text-muted">${new Date().toLocaleString()}</small>
+                                <div class="dash-viz" id="${id}"></div>
+                                <button class="btn btn-danger btn-sm mt-2" onclick="$('#col-${id}').remove();">Remove</button>
+                            </div>
                         </div>
-                    </div>
-                </div>`);
+                    </div>`);
 
                     var data = google.visualization.arrayToDataTable(array);
                     var type = $('#vizType').val();
