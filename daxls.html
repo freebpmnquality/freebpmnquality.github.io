@@ -440,10 +440,18 @@
 
                 var isAutoChart = $('#autoChart').is(":checked");
 
+                var sortNo = $('#sortNo').is(":checked");
+                var sortAsc = $('#sortAsc').is(":checked");
+                var sortDesc = $('#sortDesc').is(":checked");
+
+                var limitVal = $('#limitVal').val();
+                var limitSet = $('#limitSet').is(":checked");
+
                 if (xAxis !== null && yAxis !== null) {
                     var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
 
                     var chartTitle = yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' by ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
+                    chartTitle += (sortNo ? '' : sortAsc ? '; asc. order' : '; desc. order') + (limitSet ? '; limit ' + limitVal : '');
 
                     $('#dashboard').append(`<div class="col mb-4" id="col-${id}">
                         <div class="card">
