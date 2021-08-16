@@ -224,7 +224,7 @@
         <div id="chartarea" class="img-thumbnail mb-4"></div>
 
         <p class="text-muted" id="captured">Отчет</p>
-        <div id="dashboard" class="row row-cols-1 row-cols-md-2"></div>
+        <div id="dashboard" class="row row-cols-1 row-cols-md-1"></div>
 
         <button class="btn" onclick="downloadCaptured();">Загрузить отчет</button>
         <br>
@@ -533,7 +533,7 @@
                     <body>
                         <h3 class="text-center mt-4">Отчет по ${fileName}</h3>
                         <p class="text-center text-muted">${new Date().toLocaleString()}</p>
-                        <div id="dashboard" class="row row-cols-1 row-cols-md-2 mt-4 mb-4 ml-4 mr-4">${$('#dashboard').html()}</div>
+                        <div id="dashboard" class="row row-cols-1 row-cols-md-1 mt-4 mb-4 ml-4 mr-4">${$('#dashboard').html()}</div>
                     </body>
                 </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
 
