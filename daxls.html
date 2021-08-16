@@ -254,6 +254,7 @@
             'packages': ['corechart']
         });
 
+        var fileName = null;
         var xlRows = null;
 
         var ExcelToJSON = function() {
@@ -320,6 +321,8 @@
             xl2json.parseExcel(files[0]);
 
             $('#inputGroupFileName').text(files[0].name);
+
+            fileName = files[0].name;
         }
 
         var array = null;
@@ -522,7 +525,7 @@
                 </body>
             </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
 
-            download(new Date().toLocaleString() + '.html', structure);
+            download(fileName + ' ' + new Date().toLocaleString() + '.html', structure);
         }
 
         function googleTranslateElementInit() {
