@@ -95,6 +95,10 @@
         .banner-img {
             width: 70%;
         }
+        
+        #uploadArea {
+            padding-top: 10%;
+        }
     </style>
 </head>
 
@@ -120,9 +124,12 @@
         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+        <a href="#uploadArea" class="btn btn-primary btn-lg" role="button" aria-pressed="true">TRY FOR FREE</a>
+        <br>
+
         <img src="/images/viz/data-pana.png" class="img-fluid banner-img" alt="data-pana.png">
 
-        <div class="input-group mb-4 mt-4">
+        <div class="input-group mb-4 mt-4" id="uploadArea">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon">Upload</span>
             </div>
@@ -497,6 +504,17 @@
         window.onbeforeunload = function() {
             return 'Are you sure you want to leave?';
         };
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    block: 'start',
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
