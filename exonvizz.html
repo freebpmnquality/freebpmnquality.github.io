@@ -141,7 +141,10 @@
             наборы данных графики могут быть подобраны системой автоматически или выбраны пользователями в ручном режиме. Допускается использование дополнительных шкал категорий и значений, сортировка и ограничение количества отображаемых значений. Построенные
             графики могут быть добавлены в отчет, который затем может быть загружен в виде HTML-страницы с возможностью ее дальнейшей публикации в корпоративном портале, распечатки, вставки в презентацию.</p>
 
-        <div class="input-group mb-4 mt-4" id="uploadArea">
+        <span id="uploadArea"></span>
+        <a href="/resources/viz/supermarket_sales.xls" class="btn mt-4" role="button">ПРИМЕР EXCEL ОТЧЕТА</a>
+
+        <div class="input-group mb-4 mt-4">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon">Загрузить</span>
             </div>
@@ -548,10 +551,6 @@
         }
 
         $('#inputGroupFile').change(handleFileSelect);
-
-        window.onbeforeunload = function() {
-            return 'Are you sure you want to leave?';
-        };
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
