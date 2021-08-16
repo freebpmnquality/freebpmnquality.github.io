@@ -166,7 +166,10 @@
 
                 <div class="form-group form-check mt-2">
                     <input type="checkbox" class="form-check-input" id="topGainers" onchange="displayData();">
-                    <label class="form-check-label" for="topGainers">Top gainers only</label>
+                    <label class="form-check-label" for="topGainers">Top 5</label>
+
+                    <input type="checkbox" class="form-check-input ml-1" id="lastLosers" onchange="displayData();">
+                    <label class="form-check-label ml-4" for="lastLosers">Last 5</label>
                 </div>
             </div>
 
@@ -306,6 +309,7 @@
                 var isAutoChart = $('#autoChart').is(":checked");
 
                 var topGainers = $('#topGainers').is(":checked");
+                var lastLosers = $('#lastLosers').is(":checked");
 
                 if (xAxis !== null && yAxis !== null) {
                     var grouppedData = {};
@@ -362,6 +366,20 @@
                         var newArray = [array[0]];
 
                         for (var i = 1; i <= topNumber; i++) {
+                            newArray.push(array[i]);
+                        }
+
+                        array = newArray;
+                    } else if (lastLosers) {
+                        var array = array.sort(function(a, b) {
+                            return a[1] - b[1];
+                        });
+
+                        var last = 5;
+                        var lastNumber = array.length < last ? array.length : last;
+                        var newArray = [array[0]];
+
+                        for (var i = 1; i <= lastNumber; i++) {
                             newArray.push(array[i]);
                         }
 
