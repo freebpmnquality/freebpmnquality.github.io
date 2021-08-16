@@ -223,6 +223,9 @@
         <p class="text-muted" id="captured">Captured</p>
         <div id="dashboard" class="row row-cols-1 row-cols-md-2"></div>
 
+        <button class="btn" onclick="downloadCaptured();">Download</button>
+        <br>
+
         <img src="/images/viz/data-amico.png" class="img-fluid banner-img" alt="data-amico.png">
     </div>
 
@@ -502,6 +505,26 @@
             }
         }
 
+        function downloadCaptured() {
+            var structure = `<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+                    <style>
+                        .dash-viz {
+                            height: 240px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div id="dashboard" class="row row-cols-1 row-cols-md-2 mt-4 mb-4 ml-4 mr-4">${$('#dashboard').html()}</div>
+                </body>
+            </html>`.replaceAll(/<button.*>.*<\/button>/ig, '');
+
+            download(new Date().toLocaleString() + '.html', structure);
+        }
+
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en'
@@ -524,6 +547,16 @@
                 });
             });
         });
+
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
     </script>
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
