@@ -166,6 +166,15 @@
                 <select class="custom-select" id="xAxis2" required onchange="displayData();">
                     <option selected disabled value="">Выбрать...</option>
                 </select>
+
+                <div class="form-group form-check mt-2">
+                    <input type="radio" class="form-check-input" name="groupRadios" id="groupSum" onchange="displayData();" checked>
+                    <label class="form-check-label" for="groupSum">суммировать в группе</label>
+                    <br>
+
+                    <input type="radio" class="form-check-input" name="groupRadios" id="groupCount" onchange="displayData();">
+                    <label class="form-check-label" for="groupCount">подсчитывать в группе</label>
+                </div>
             </div>
 
             <div class="col-md-4">
@@ -353,6 +362,9 @@
 
                 var isAutoChart = $('#autoChart').is(":checked");
 
+                var groupSum = $('#groupSum').is(":checked");
+                var groupCount = $('#groupCount').is(":checked");
+
                 var sortNo = $('#sortNo').is(":checked");
                 var sortAsc = $('#sortAsc').is(":checked");
                 var sortDesc = $('#sortDesc').is(":checked");
@@ -385,14 +397,22 @@
                         var yVal = Number.parseFloat(xlRows[row][yAxis]);
 
                         if (!Number.isNaN(yVal)) {
-                            grouppedData[xVal] += yVal;
+                            if (groupSum) {
+                                grouppedData[xVal] += yVal;
+                            } else if (true || groupCount) {
+                                grouppedData[xVal] += 1;
+                            }
                         }
 
                         if (yAxis2 !== null && yAxis2Checked) {
                             var yVal2 = Number.parseFloat(xlRows[row][yAxis2]);
 
                             if (!Number.isNaN(yVal2)) {
-                                grouppedData2[xVal] += yVal2;
+                                if (groupSum) {
+                                    grouppedData2[xVal] += yVal2;
+                                } else if (true || groupCount) {
+                                    grouppedData2[xVal] += 1;
+                                }
                             }
                         }
                     }
@@ -484,6 +504,9 @@
 
                 var isAutoChart = $('#autoChart').is(":checked");
 
+                var groupSum = $('#groupSum').is(":checked");
+                var groupCount = $('#groupCount').is(":checked");
+
                 var sortNo = $('#sortNo').is(":checked");
                 var sortAsc = $('#sortAsc').is(":checked");
                 var sortDesc = $('#sortDesc').is(":checked");
@@ -494,7 +517,7 @@
                 if (xAxis !== null && yAxis !== null) {
                     var id = Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-                    var chartTitle = yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' по ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
+                    var chartTitle = (groupSum ? 'Сумма ' : (true || groupCount) ? 'Кол-во ' : '') + yAxis + (yAxis2Checked ? ', ' + yAxis2 : '') + ' по ' + xAxis + (xAxis2Checked ? ', ' + xAxis2 : '');
                     chartTitle += (sortNo ? '' : sortAsc ? '; по возрастанию' : '; по убыванию') + (limitSet ? '; ' + limitVal + ' значений' : '');
 
                     $('#dashboard').append(`<div class="col mb-4" id="col-${id}">
