@@ -88,7 +88,8 @@
             width: 40%;
         }
         
-        #tryArea {
+        #tryArea,
+        #useArea {
             padding-top: 100px;
         }
         
@@ -156,7 +157,8 @@
             <label class="form-check-label" for="create-db">Include CREATE DATABASE Scripts</label>
         </div>
 
-        <button class="btn mt-2" onclick="translateIntoSQL();">TRANSLATE INTO SQL</button>
+        <span id="useArea"></span>
+        <a href="#useArea" class="btn mt-2" onclick="translateIntoSQL();" role="button">TRANSLATE INTO SQL</a>
 
         <div class="form-group mt-4">
             <label for="sql-output" class="text-muted">SQL Output (copy, paste, adjust, and deploy to the MySQL/MariaDB database server)</label>
