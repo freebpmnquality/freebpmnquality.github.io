@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1dq18m3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.7.1">
+  <bpmn:collaboration id="Collaboration_0eq6glp">
+    <bpmn:participant id="Participant_1pv22jc" name="APQC PCF (Cross Industry Process Classification Framework)" processRef="Process_0hwxeoo" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0hwxeoo" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_0urvj2s">
+      <bpmn:lane id="Lane_1l9r1bn" name="Operating Processes">
+        <bpmn:flowNodeRef>Activity_0dcoyii</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_115b7zs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0c6p4vm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_036bpj6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0kt1uq2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1nt5n2f" name="Management and Support Processes">
+        <bpmn:flowNodeRef>Activity_0lzvwnk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1llnh0e</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_143fb3f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_16h2zfz</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1nefag4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1k8s293</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0weorgg</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:task id="Activity_0dcoyii" name="1. Develop Vision and Strategy">
+      <bpmn:outgoing>Flow_06823ew</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_115b7zs" name="2. Develop and Manage Products and Services">
+      <bpmn:incoming>Flow_06823ew</bpmn:incoming>
+      <bpmn:outgoing>Flow_0734hjl</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0c6p4vm" name="3. Market and Sell Products and Services">
+      <bpmn:incoming>Flow_0734hjl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i3ky4q</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_036bpj6" name="4. Deliver Products and Services">
+      <bpmn:incoming>Flow_1i3ky4q</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uwwfvp</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0kt1uq2" name="5. Manage Customer Service">
+      <bpmn:incoming>Flow_0uwwfvp</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="Activity_0lzvwnk" name="12. Develop and Manage Business Capabilities" />
+    <bpmn:task id="Activity_1llnh0e" name="9. Acquire, Construct, and Manage Assets" />
+    <bpmn:task id="Activity_143fb3f" name="8. Manage Financial Resources" />
+    <bpmn:task id="Activity_16h2zfz" name="7. Manage Information Technology" />
+    <bpmn:task id="Activity_1nefag4" name="6. Develop and Manage Human Capital" />
+    <bpmn:task id="Activity_1k8s293" name="10. Manage Enterprise Risk, Compliance, and Resiliency" />
+    <bpmn:task id="Activity_0weorgg" name="11. Manage External Relationships" />
+    <bpmn:sequenceFlow id="Flow_06823ew" sourceRef="Activity_0dcoyii" targetRef="Activity_115b7zs" />
+    <bpmn:sequenceFlow id="Flow_0734hjl" sourceRef="Activity_115b7zs" targetRef="Activity_0c6p4vm" />
+    <bpmn:sequenceFlow id="Flow_1i3ky4q" sourceRef="Activity_0c6p4vm" targetRef="Activity_036bpj6" />
+    <bpmn:sequenceFlow id="Flow_0uwwfvp" sourceRef="Activity_036bpj6" targetRef="Activity_0kt1uq2" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0eq6glp">
+      <bpmndi:BPMNShape id="Participant_1pv22jc_di" bpmnElement="Participant_1pv22jc" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="810" height="560" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1l9r1bn_di" bpmnElement="Lane_1l9r1bn" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="780" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1nt5n2f_di" bpmnElement="Lane_1nt5n2f" isHorizontal="true">
+        <dc:Bounds x="190" y="260" width="780" height="380" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_06823ew_di" bpmnElement="Flow_06823ew">
+        <di:waypoint x="340" y="170" />
+        <di:waypoint x="390" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0734hjl_di" bpmnElement="Flow_0734hjl">
+        <di:waypoint x="490" y="170" />
+        <di:waypoint x="540" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i3ky4q_di" bpmnElement="Flow_1i3ky4q">
+        <di:waypoint x="640" y="170" />
+        <di:waypoint x="690" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uwwfvp_di" bpmnElement="Flow_0uwwfvp">
+        <di:waypoint x="790" y="170" />
+        <di:waypoint x="840" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0dcoyii_di" bpmnElement="Activity_0dcoyii">
+        <dc:Bounds x="240" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_115b7zs_di" bpmnElement="Activity_115b7zs">
+        <dc:Bounds x="390" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0c6p4vm_di" bpmnElement="Activity_0c6p4vm">
+        <dc:Bounds x="540" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_036bpj6_di" bpmnElement="Activity_036bpj6">
+        <dc:Bounds x="690" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kt1uq2_di" bpmnElement="Activity_0kt1uq2">
+        <dc:Bounds x="840" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0lzvwnk_di" bpmnElement="Activity_0lzvwnk">
+        <dc:Bounds x="540" y="530" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1llnh0e_di" bpmnElement="Activity_1llnh0e">
+        <dc:Bounds x="390" y="410" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_143fb3f_di" bpmnElement="Activity_143fb3f">
+        <dc:Bounds x="690" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16h2zfz_di" bpmnElement="Activity_16h2zfz">
+        <dc:Bounds x="540" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nefag4_di" bpmnElement="Activity_1nefag4">
+        <dc:Bounds x="390" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1k8s293_di" bpmnElement="Activity_1k8s293">
+        <dc:Bounds x="540" y="410" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0weorgg_di" bpmnElement="Activity_0weorgg">
+        <dc:Bounds x="690" y="410" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
