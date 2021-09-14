@@ -12,18 +12,14 @@ const attributeDomainsClassifier = {
 
         if (this.vocabulary['DateTime'].includes(attributeTitle)) {
             domains[0]++;
-        }
-
-        if (this.vocabulary['Number'].includes(attributeTitle)) {
+        } else if (this.vocabulary['Number'].includes(attributeTitle)) {
             domains[1]++;
-        }
-
-        if (this.vocabulary['Text'].includes(attributeTitle)) {
+        } else if (this.vocabulary['Text'].includes(attributeTitle)) {
             domains[2]++;
-        }
-
-        if (this.vocabulary['Boolean'].includes(attributeTitle)) {
+        } else if (this.vocabulary['Boolean'].includes(attributeTitle)) {
             domains[3]++;
+        } else {
+            domains[2]++;
         }
 
         return dataTypes[domains.map((x, i) => [x, i]).reduce((r, a) => (a[0] > r[0] ? a : r))[1]];
