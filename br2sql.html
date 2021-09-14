@@ -212,6 +212,11 @@
     <!-- App -->
     <script src="/js/br2sql.js"></script>
     <script type="text/javascript">
+        function displayMessage(messageText) {
+            $('#message-text').html(messageText);
+            $('#messageModal').modal('show');
+        }
+
         function displayExample() {
             $('#db-name').val('Students');
             $('#rules-input').val(`Each student has full name, student card id, birth date, enrollment date. Each student is given by many score. Each course has title, semester, approval date. Each course is evaluated by many score. Each score has value, completion date.`);
@@ -221,11 +226,17 @@
             brToSQLTranslator.dbName = $('#db-name').val();
             brToSQLTranslator.businessRulesText = $('#rules-input').val();
 
-            brToSQLTranslator.extractBusinessRules();
-            brToSQLTranslator.businessRulesToTables();
-            brToSQLTranslator.tablesToSQL($('#drop-db').is(':checked'), $('#create-db').is(':checked'));
+            if (brToSQLTranslator.dbName.length < 1) {
+                displayMessage('Database name is missing!');
+            } else if (brToSQLTranslator.businessRulesText < 1) {
+                displayMessage('Business rules are missing!');
+            } else {
+                brToSQLTranslator.extractBusinessRules();
+                brToSQLTranslator.businessRulesToTables();
+                brToSQLTranslator.tablesToSQL($('#drop-db').is(':checked'), $('#create-db').is(':checked'));
 
-            $('#sql-output').text(brToSQLTranslator.script);
+                $('#sql-output').text(brToSQLTranslator.script);
+            }
         }
 
         function googleTranslateElementInit() {
