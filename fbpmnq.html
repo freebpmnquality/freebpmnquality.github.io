@@ -148,9 +148,15 @@
         <a href="#tryArea" class="btn mt-4" onclick="displayExample();" role="button">BPMN MODEL EXAMPLE</a>
 
         <div class="form-group mt-4">
-            <label for="rules-input" class="text-muted mb-0">BPMN 2.0 code</label>
-            <small class="form-text text-muted mb-2">Open your BPMN 2.0 model as a text file, copy its content, and paste it to the text area below</small>
-            <textarea class="form-control" id="bpmn-input" rows="10" placeholder="BPMN 2.0 code"></textarea>
+            <label for="file-input" class="text-muted mb-0">BPMN 2.0 file input</label>
+            <small class="form-text text-muted mb-2">Open your BPMN 2.0 file from a disk</small>
+            <input type="file" class="form-control" id="file-input">
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="rules-input" class="text-muted mb-0">BPMN 2.0 code input</label>
+            <small class="form-text text-muted mb-2">OR copy the content of your BPMN 2.0 file and paste it to the text area below</small>
+            <textarea class="form-control" id="bpmn-input" rows="10" placeholder="BPMN 2.0 code..."></textarea>
         </div>
 
         <div class="form-check mt-2">
@@ -561,6 +567,26 @@
                 displayMessage(err.message);
             }
         }
+
+        function readSingleFile(e) {
+            var file = e.target.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var contents = e.target.result;
+
+                $('#bpmn-input').val(contents);
+            };
+
+            reader.readAsText(file);
+        }
+
+        $('#file-input').change(readSingleFile);
 
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
