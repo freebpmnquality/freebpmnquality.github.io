@@ -98,6 +98,18 @@
             border-color: #90CAF9;
             font-weight: bold;
         }
+        
+        .highlight-green:not(.djs-connection) .djs-visual> :nth-child(1) {
+            fill: #d4edda !important;
+        }
+        
+        .highlight-red:not(.djs-connection) .djs-visual> :nth-child(1) {
+            fill: #f8d7da !important;
+        }
+        
+        .highlight-yellow:not(.djs-connection) .djs-visual> :nth-child(1) {
+            fill: #fff3cd !important;
+        }
     </style>
 </head>
 
@@ -181,6 +193,7 @@
             </ul>
         </div>
 
+        <small class="form-text text-muted mb-2">Detected mistakes are also highlighted in the BPMN diagram below</small>
         <div class="img-fluid mr-2 ml-2 mb-2">
             <div id="js-canvas"></div>
         </div>
@@ -248,6 +261,18 @@
                 if (bpmnInput.length < 1) {
                     displayMessage('BPMN 2.0 code is missing!');
                 } else {
+                    $('#js-canvas').empty();
+
+                    var viewer = new BpmnJS({
+                        container: $('#js-canvas'),
+                        height: 400
+                    });
+
+                    await viewer.importXML(bpmnInput);
+
+                    var canvas = viewer.get('canvas');
+                    canvas.zoom('fit-viewport');
+
                     var json = QualiBPMNUtil.translateBPMNToJSON(bpmnInput);
                     var processes = QualiBPMNUtil.getProcesses(json);
 
@@ -258,49 +283,64 @@
                         var evaluated = QualiBPMNUtil.evaluateProcess(flat);
 
                         for (var i in evaluated.elements) {
+                            var id = evaluated.elements[i].id;
                             var type = evaluated.elements[i].type;
                             var name = evaluated.elements[i].name;
                             var incoming = evaluated.elements[i].incoming;
                             var outgoing = evaluated.elements[i].outgoing;
 
                             if (type === 'activity') {
+                                canvas.addMarker(id, 'highlight-green');
+
                                 if ($('#bpmn-errors').is(':checked')) {
                                     if (incoming < 1) {
                                         messages.push({
+                                            id: id,
                                             type: 'Task',
                                             name: name,
                                             text: 'does not have any incoming sequence flows',
                                             message: 'error'
                                         });
+
+                                        canvas.addMarker(id, 'highlight-red');
                                     }
 
                                     if (outgoing < 1) {
                                         messages.push({
+                                            id: id,
                                             type: 'Task',
                                             name: name,
                                             text: 'does not have any outgoing sequence flows',
                                             message: 'error'
                                         });
+
+                                        canvas.addMarker(id, 'highlight-red');
                                     }
                                 }
 
                                 if ($('#bpmn-warnings').is(':checked')) {
                                     if (incoming > 1) {
                                         messages.push({
+                                            id: id,
                                             type: 'Task',
                                             name: name,
                                             text: 'has multiple incoming sequence flows',
                                             message: 'warning'
                                         });
+
+                                        canvas.addMarker(id, 'highlight-yellow');
                                     }
 
                                     if (outgoing > 1) {
                                         messages.push({
+                                            id: id,
                                             type: 'Task',
                                             name: name,
                                             text: 'has multiple outgoing sequence flows',
                                             message: 'warning'
                                         });
+
+                                        canvas.addMarker(id, 'highlight-yellow');
                                     }
                                 }
                             }
@@ -326,17 +366,6 @@
                     if (messages.length < 1) {
                         $('#detected-mistakes').append(`<li class="list-group-item"><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</li>`);
                     }
-
-                    $('#js-canvas').empty();
-
-                    var viewer = new BpmnJS({
-                        container: $('#js-canvas'),
-                        height: 400
-                    });
-
-                    await viewer.importXML(bpmnInput);
-
-                    viewer.get('canvas').zoom('fit-viewport');
                 }
             } catch (err) {
                 displayMessage(err.message);
@@ -378,6 +407,11 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        $(document).ready(function() {
+            displayExample();
+            checkTowardRules();
         });
     </script>
 
