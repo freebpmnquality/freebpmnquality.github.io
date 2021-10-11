@@ -181,6 +181,10 @@
             </ul>
         </div>
 
+        <div class="img-fluid mr-2 ml-2 mb-2">
+            <div id="js-canvas"></div>
+        </div>
+
         <img src="/images/fbpmnq/iteration-rafiki.png" class="img-fluid banner-img mt-4" alt="iteration-rafiki">
     </div>
 
@@ -214,6 +218,8 @@
 
     <script type="text/javascript" src="https://ghcdn.rawgit.org/freebpmnquality/qualibpmn/main/qualibpmn.js"></script>
 
+    <script src="https://unpkg.com/bpmn-js@8.7.3/dist/bpmn-viewer.development.js"></script>
+
     <!-- App -->
     <script type="text/javascript">
         function displayMessage(messageText) {
@@ -235,7 +241,7 @@
             $('#bpmn-input').val(bpmnCode);
         }
 
-        function checkTowardRules() {
+        async function checkTowardRules() {
             try {
                 var bpmnInput = $('#bpmn-input').val();
 
@@ -320,6 +326,17 @@
                     if (messages.length < 1) {
                         $('#detected-mistakes').append(`<li class="list-group-item"><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</li>`);
                     }
+
+                    $('#js-canvas').empty();
+
+                    var viewer = new BpmnJS({
+                        container: $('#js-canvas'),
+                        height: 400
+                    });
+
+                    await viewer.importXML(bpmnInput);
+
+                    viewer.get('canvas').zoom('fit-viewport');
                 }
             } catch (err) {
                 displayMessage(err.message);
