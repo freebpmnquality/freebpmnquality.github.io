@@ -110,7 +110,14 @@
         .highlight-yellow:not(.djs-connection) .djs-visual> :nth-child(1) {
             fill: #fff3cd !important;
         }
+        
+        #bpmn-input {
+            max-height: 400px;
+            text-align: left;
+        }
     </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
 </head>
 
 <body>
@@ -160,15 +167,14 @@
         <a href="#tryArea" class="btn mt-4" onclick="displayExample();" role="button">BPMN MODEL EXAMPLE</a>
 
         <div class="form-group mt-4">
-            <label for="file-input" class="text-muted mb-0">BPMN 2.0 file input</label>
+            <label for="file-input" class="text-muted mb-0">BPMN 2.0 file</label>
             <small class="form-text text-muted mb-2">Open your BPMN 2.0 file from a disk</small>
             <input type="file" class="form-control" id="file-input">
         </div>
 
         <div class="form-group mt-2">
-            <label for="rules-input" class="text-muted mb-0">BPMN 2.0 code input</label>
-            <small class="form-text text-muted mb-2">OR copy the content of your BPMN 2.0 file and paste it to the text area below</small>
-            <textarea class="form-control" id="bpmn-input" rows="10" placeholder="BPMN 2.0 code..."></textarea>
+            <label for="rules-input" class="text-muted mb-2">BPMN 2.0 code</label>
+            <pre id="code-area"><code class="language-xml" id="bpmn-input"></code></pre>
         </div>
 
         <div class="form-check mt-2">
@@ -233,6 +239,9 @@
 
     <script src="https://unpkg.com/bpmn-js@8.7.3/dist/bpmn-viewer.development.js"></script>
 
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/languages/go.min.js"></script>
+
     <!-- App -->
     <script type="text/javascript">
         function displayMessage(messageText) {
@@ -251,12 +260,14 @@
                 async: false
             }).responseText;
 
-            $('#bpmn-input').val(bpmnCode);
+            $('#bpmn-input').text(bpmnCode);
+
+            hljs.highlightAll();
         }
 
         async function checkTowardRules() {
             try {
-                var bpmnInput = $('#bpmn-input').val();
+                var bpmnInput = $('#bpmn-input').text();
 
                 if (bpmnInput.length < 1) {
                     displayMessage('BPMN 2.0 code is missing!');
@@ -384,7 +395,9 @@
             reader.onload = function(e) {
                 var contents = e.target.result;
 
-                $('#bpmn-input').val(contents);
+                $('#bpmn-input').text(contents);
+
+                hljs.highlightAll();
             };
 
             reader.readAsText(file);
