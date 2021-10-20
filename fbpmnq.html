@@ -313,7 +313,8 @@
 
                             var outgoing = tasks[i].outgoing === undefined ? 0 : (Array.isArray(tasks[i].outgoing) ? tasks[i].outgoing.length : 1);
 
-                            canvas.addMarker(id, 'highlight-green');
+                            var isError = false;
+                            var isWarning = false;
 
                             if ($('#bpmn-errors').is(':checked')) {
                                 if (incoming < 1) {
@@ -325,7 +326,7 @@
                                         message: 'error'
                                     });
 
-                                    canvas.addMarker(id, 'highlight-red');
+                                    isError = true;
                                 }
 
                                 if (outgoing < 1) {
@@ -337,7 +338,7 @@
                                         message: 'error'
                                     });
 
-                                    canvas.addMarker(id, 'highlight-red');
+                                    isError = true;
                                 }
                             }
 
@@ -351,7 +352,7 @@
                                         message: 'warning'
                                     });
 
-                                    canvas.addMarker(id, 'highlight-yellow');
+                                    isWarning = true;
                                 }
 
                                 if (outgoing > 1) {
@@ -363,8 +364,16 @@
                                         message: 'warning'
                                     });
 
-                                    canvas.addMarker(id, 'highlight-yellow');
+                                    isWarning = true;
                                 }
+                            }
+
+                            if (isError) {
+                                canvas.addMarker(id, 'highlight-red');
+                            } else if (isWarning) {
+                                canvas.addMarker(id, 'highlight-yellow');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
                             }
                         }
                     }
