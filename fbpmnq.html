@@ -194,9 +194,7 @@
             <label for="detected-mistakes" class="text-muted mb-0">Detected mistakes in checked BPMN 2.0 model</label>
             <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
 
-            <ul class="list-group" id="detected-mistakes">
-                <li class="list-group-item"><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</li>
-            </ul>
+            <ul class="list-group" id="detected-mistakes"></ul>
         </div>
 
         <small class="form-text text-muted mb-2">Detected mistakes are also highlighted in the BPMN diagram below</small>
@@ -235,8 +233,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.1.3/xml2json.min.js" integrity="sha512-xl6hrpp8+qe3CwgDhhcLAMSMC/8To5kwYDgLUcA95R9xcbxiTChpd1Egu24Xk5axY1Del9opQg8S9WyEYSGNZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script type="text/javascript" src="https://ghcdn.rawgit.org/freebpmnquality/qualibpmn/main/qualibpmn.js"></script>
-
     <script src="https://unpkg.com/bpmn-js@8.7.3/dist/bpmn-viewer.development.js"></script>
 
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
@@ -249,7 +245,7 @@
             $('#messageModal').modal('show');
         }
 
-        function displayExample() {
+        async function displayExample() {
             $('#file-input').val('');
 
             var url = 'https://raw.githubusercontent.com/freebpmnquality/cloud-services/main/analytics/samples/01-tasks.bpmn';
@@ -263,6 +259,20 @@
             $('#bpmn-input').text(bpmnCode);
 
             hljs.highlightAll();
+
+            $('#js-canvas').empty();
+
+            var viewer = new BpmnJS({
+                container: $('#js-canvas'),
+                height: 400
+            });
+
+            await viewer.importXML(bpmnCode);
+
+            var canvas = viewer.get('canvas');
+            canvas.zoom('fit-viewport');
+
+            $('#detected-mistakes').html(`<li class="list-group-item"><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</li>`);
         }
 
         async function checkTowardRules() {
@@ -284,75 +294,76 @@
                     var canvas = viewer.get('canvas');
                     canvas.zoom('fit-viewport');
 
-                    var json = QualiBPMNUtil.translateBPMNToJSON(bpmnInput);
-                    var processes = QualiBPMNUtil.getProcesses(json);
+                    var converter = new X2JS();
+
+                    var json = converter.xml_str2json(bpmnInput);
+                    var processes = Array.isArray(json.definitions.process) ? json.definitions.process : [json.definitions.process];
 
                     var messages = [];
 
-                    for (const process in processes) {
-                        var flat = QualiBPMNUtil.getFlatProcessElements(processes[process]);
-                        var evaluated = QualiBPMNUtil.evaluateProcess(flat);
+                    for (var j in processes) {
+                        var tasks = processes[j]['task'] === undefined ? [] : (Array.isArray(processes[j]['task']) ? processes[j]['task'] : [processes[j]['task']]);
 
-                        for (var i in evaluated.elements) {
-                            var id = evaluated.elements[i].id;
-                            var type = evaluated.elements[i].type;
-                            var name = evaluated.elements[i].name;
-                            var incoming = evaluated.elements[i].incoming;
-                            var outgoing = evaluated.elements[i].outgoing;
+                        for (var i in tasks) {
+                            var id = tasks[i]._id;
 
-                            if (type === 'activity') {
-                                canvas.addMarker(id, 'highlight-green');
+                            var name = tasks[i]._name === undefined ? id : tasks[i]._name;
 
-                                if ($('#bpmn-errors').is(':checked')) {
-                                    if (incoming < 1) {
-                                        messages.push({
-                                            id: id,
-                                            type: 'Task',
-                                            name: name,
-                                            text: 'does not have any incoming sequence flows',
-                                            message: 'error'
-                                        });
+                            var incoming = tasks[i].incoming === undefined ? 0 : (Array.isArray(tasks[i].incoming) ? tasks[i].incoming.length : 1);
 
-                                        canvas.addMarker(id, 'highlight-red');
-                                    }
+                            var outgoing = tasks[i].outgoing === undefined ? 0 : (Array.isArray(tasks[i].outgoing) ? tasks[i].outgoing.length : 1);
 
-                                    if (outgoing < 1) {
-                                        messages.push({
-                                            id: id,
-                                            type: 'Task',
-                                            name: name,
-                                            text: 'does not have any outgoing sequence flows',
-                                            message: 'error'
-                                        });
+                            canvas.addMarker(id, 'highlight-green');
 
-                                        canvas.addMarker(id, 'highlight-red');
-                                    }
+                            if ($('#bpmn-errors').is(':checked')) {
+                                if (incoming < 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Task',
+                                        name: name,
+                                        text: 'does not have any incoming sequence flows',
+                                        message: 'error'
+                                    });
+
+                                    canvas.addMarker(id, 'highlight-red');
                                 }
 
-                                if ($('#bpmn-warnings').is(':checked')) {
-                                    if (incoming > 1) {
-                                        messages.push({
-                                            id: id,
-                                            type: 'Task',
-                                            name: name,
-                                            text: 'has multiple incoming sequence flows',
-                                            message: 'warning'
-                                        });
+                                if (outgoing < 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Task',
+                                        name: name,
+                                        text: 'does not have any outgoing sequence flows',
+                                        message: 'error'
+                                    });
 
-                                        canvas.addMarker(id, 'highlight-yellow');
-                                    }
+                                    canvas.addMarker(id, 'highlight-red');
+                                }
+                            }
 
-                                    if (outgoing > 1) {
-                                        messages.push({
-                                            id: id,
-                                            type: 'Task',
-                                            name: name,
-                                            text: 'has multiple outgoing sequence flows',
-                                            message: 'warning'
-                                        });
+                            if ($('#bpmn-warnings').is(':checked')) {
+                                if (incoming > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Task',
+                                        name: name,
+                                        text: 'has multiple incoming sequence flows',
+                                        message: 'warning'
+                                    });
 
-                                        canvas.addMarker(id, 'highlight-yellow');
-                                    }
+                                    canvas.addMarker(id, 'highlight-yellow');
+                                }
+
+                                if (outgoing > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Task',
+                                        name: name,
+                                        text: 'has multiple outgoing sequence flows',
+                                        message: 'warning'
+                                    });
+
+                                    canvas.addMarker(id, 'highlight-yellow');
                                 }
                             }
                         }
@@ -380,6 +391,8 @@
                 }
             } catch (err) {
                 displayMessage(err.message);
+
+                console.error(err);
             }
         }
 
@@ -392,12 +405,26 @@
 
             var reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = async function(e) {
                 var contents = e.target.result;
 
                 $('#bpmn-input').text(contents);
 
                 hljs.highlightAll();
+
+                $('#js-canvas').empty();
+
+                var viewer = new BpmnJS({
+                    container: $('#js-canvas'),
+                    height: 400
+                });
+
+                await viewer.importXML(contents);
+
+                var canvas = viewer.get('canvas');
+                canvas.zoom('fit-viewport');
+
+                $('#detected-mistakes').html(`<li class="list-group-item"><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</li>`);
             };
 
             reader.readAsText(file);
@@ -424,7 +451,6 @@
 
         $(document).ready(function() {
             displayExample();
-            checkTowardRules();
         });
     </script>
 
