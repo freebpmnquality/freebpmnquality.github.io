@@ -830,11 +830,14 @@
             <div class="col-sm-6">
                 <div class="card mb-4" style="border-radius: 1rem;">
                     <div class="card-body media">
-                        <img src="images/do.jpg" width="200" class="mr-3" alt="Dmytro Orlovskyi">
+                        <img src="images/ak.jpg" width="100" class="mr-3" alt="Andrii Kopp">
                         <div class="media-body">
-                            <h5 class="mt-0" style="font-weight: bold;">Dmytro Orlovskyi</h5>
-                            <p class="text-muted">Co-founder</p>
-                            <p class="text-muted">PhD in Information Technology,<br> Associate Professor,<br> Department of Software Engineering & Management Information Technology,<br> NTU "KhPI"</p>
+                            <h5 class="mt-0" style="font-weight: bold;">Andrii Kopp</h5>
+                            <p class="text-muted">
+                                Co-founder
+                                <br> PhD in Information Technology
+                                <br> Research & Development
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -842,11 +845,14 @@
             <div class="col-sm-6">
                 <div class="card" style="border-radius: 1rem;">
                     <div class="card-body media">
-                        <img src="images/ak.jpg" width="200" class="mr-3" alt="Andrii Kopp">
+                        <img src="images/do.jpg" width="100" class="mr-3" alt="Dmytro Orlovskyi">
                         <div class="media-body">
-                            <h5 class="mt-0" style="font-weight: bold;">Andrii Kopp</h5>
-                            <p class="text-muted">Co-founder</p>
-                            <p class="text-muted">PhD in Information Technology,<br> Senior Lecturer,<br> Department of Software Engineering & Management Information Technology,<br> NTU "KhPI"</p>
+                            <h5 class="mt-0" style="font-weight: bold;">Dmytro Orlovskyi</h5>
+                            <p class="text-muted">
+                                Co-founder
+                                <br> PhD in Information Technology
+                                <br> Advisory and Mentorship
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -862,9 +868,6 @@
         <h1 class="display-4 text-center">Contacts</h1>
         <p class="text-center text-muted">Stay in touch</p>
     </div>
-
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.6943000439005!2d36.24562901559844!3d49.99834057941552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4127a0e98e8e2a0d%3A0xfa916cfdbe03ae0a!2z0KPRh9C10LHQvdGL0Lkg0LouIOKEliAyINCd0KLQoyAi0KXQn9CYIiwg0YPQuy4g0JrQuNGA0L_QuNGH0L7QstCwLCAyLCDQpdCw0YDRjNC60L7Qsiwg0KXQsNGA0YzQutC-0LLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjEwMDA!5e0!3m2!1sru!2sua!4v1617443699769!5m2!1sru!2sua"
-        style="border:0; width: 100%; height: 350px;" allowfullscreen="" loading="lazy"></iframe>
 
     <div class="ml-4 mr-4">
         <br>
@@ -919,6 +922,51 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/index.js"></script>
+
+    <!-- BM Patch -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 1rem; background-color: #f8f9fa;">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 text-center" style="border-radius: 1rem; background-image: url('../images/bg-1.png');">
+                                <img width="200" src="images/logo_transparent.png" alt="logo" style="padding-top: 15%;">
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="mt-2">
+                                    <span class="badge badge-primary badge-pill">&#10003;</span> Drag & drop BPMN 2.0 file or use file selection dialog
+                                    <br>
+                                    <span class="badge badge-primary badge-pill">&#10003;</span> Uploaded model is displayed with highlighted faults
+                                    <br>
+                                    <span class="badge badge-primary badge-pill">&#10003;</span> Highlighted weak spots can be hovered to get tooltips
+                                    <br>
+                                    <span class="badge badge-primary badge-pill">&#10003;</span> Detected faults are explained in detail below canvas
+                                </div>
+                                <a type="button" class="btn btn-info mb-1 mt-1" style="border-radius: 1rem; font-weight: bold;" href="fbpmnq.html" target="_blank">DEMO</a>
+                                <a type="button" class="btn btn-success mb-1 mt-1" style="border-radius: 1rem; font-weight: bold;" href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">FREE TRIAL</a>
+                                <br>
+                                <small>Please support us — disable your adblock extension and click on the advertisement below</small>
+
+                                <!-- Media Block #22 -->
+                                <div class="google-auto-placed mt-2 mb-2" style="width: 100%; height: auto; clear: both; text-align: center;">
+                                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8990058470889069" data-ad-slot="5453966729" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                    <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#bmModal').modal('show');
+    </script>
+    <!-- /BM Patch -->
 </body>
 
 </html>
