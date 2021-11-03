@@ -1010,7 +1010,7 @@
                                 </div>
                                 <a type="button" class="btn btn-info mb-1 mt-1" style="border-radius: 1rem; font-weight: bold;" href="fbpmnq.html" target="_blank">DEMO</a>
                                 <a type="button" class="btn btn-success mb-1 mt-1" style="border-radius: 1rem; font-weight: bold;" href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">FREE TRIAL</a>
-                                <br>
+                                <div class="mt-2"><span style="font-weight: bold; color: #ff5507;">PROMO CODE:</span> <span id="promoCode">FREEQUALIBPMN</span></div>
                                 <small>Please support us — <span style="color: #dc3545; font-weight: bold;">disable your adblock extension</span> and click on the advertisement below</small>
                             </div>
                         </div>
@@ -1042,26 +1042,34 @@
             if (month >= 8 && month <= 9) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-warning">HALLOWEEN</span> <span class="badge badge-danger">PROMO</span>`);
+                $('#promoCode').text('HALLOQUALIBPMN');
             } else if (month == 10) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/bf.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-dark">BLACK FRIDAY</span> <span class="badge badge-danger">PROMO</span>`);
+                $('#promoCode').text('QUALIBPMNBLACKFR');
             } else if (month == 11) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/ny.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-success">NEW YEAR</span> <span class="badge badge-danger">PROMO</span>`);
+                $('#promoCode').text('WINTERQUALIBPMN');
             } else if (month == 0) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/ln.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-primary">LUNAR NEW YEAR</span> <span class="badge badge-danger">PROMO</span>`);
+                $('#promoCode').text('QUALIBPMNLUNAR');
             } else if (month == 1) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/vd.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-danger">VALENTINES DAY</span> <span class="badge badge-dark">PROMO</span>`);
+                $('#promoCode').text('ILOVEQUALIBPMN');
             } else if (month >= 2 || month <= 4) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/ed.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-info">SPRING HOLIDAYS</span> <span class="badge badge-danger">PROMO</span>`);
+                $('#promoCode').text('SPRINGQUALIBPMN');
             } else if (month >= 5 || month <= 7) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/id.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-light">SUMMER HOLIDAYS</span> <span class="badge badge-danger">PROMO</span>`);
+                $('#promoCode').text('QUALIBPMNSUMMER');
             } else {
                 $('#season-banner').attr('style', `border-radius: 1rem; background-image: url('../images/bg-1.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#promoCode').text('FREEQUALIBPMN');
             }
         });
     </script>
