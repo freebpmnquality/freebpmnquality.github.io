@@ -11,6 +11,13 @@ body {
     position: relative;
 }
 
+.card-bg {
+    background: url('../images/bg-2.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #header-kb {
     border-radius: 0px;
     background-image: url("../images/bg-3.png");
