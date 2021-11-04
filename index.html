@@ -4,7 +4,6 @@
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBMHN6E6BC"></script>
-    <script src="https://cloudfreebpmnquality.herokuapp.com/analytics/js/payment.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -15,7 +14,18 @@
 
         gtag('config', 'G-HBMHN6E6BC');
 
-        var actualPromoCode = Payment.orderPromoCode(true);
+        gtag('event', 'purchase', {
+            "transaction_id": '24.031608523954162',
+            "affiliation": 'freebpmnquality',
+            "value": 139.99,
+            "currency": 'USD',
+            "tax": 0,
+            "shipping": 0,
+            "items": [{
+                "id": 'P002',
+                "name": 'Order'
+            }]
+        })
     </script>
 
     <title>freebpmnquality — Free Online BPMN Quality Analysis Service</title>
@@ -1054,6 +1064,8 @@
     <script src="js/popper.min.js"></script>
     <script src="js/index.js"></script>
 
+    <script src="https://cloudfreebpmnquality.herokuapp.com/analytics/js/payment.js"></script>
+
     <!-- BM Patch -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1107,6 +1119,7 @@
             const date = new Date();
             const month = date.getMonth();
             const opacity = `linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4))`;
+            const actualPromoCode = Payment.orderPromoCode();
 
             if (month >= 8 && month <= 9) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
