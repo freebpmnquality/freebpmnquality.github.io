@@ -122,6 +122,7 @@
                     <img src="/images/etherbpmn.png" class="card-img-top" alt="etherbpmn" style="width: 240px;">
                     <p class="card-text"><a role="button" class="btn btn-primary" style="border-radius: 1rem;" href="https://cloudfreebpmnquality.herokuapp.com/storage/" target="_blank">Get started</a></p>
                     <p class="card-text">Free online software to exchange BPMN models in a distributed blockchain-driven collection.</p>
+                    <a href="#detail-etherbpmn" class="card-link text-muted">About</a>
                 </div>
             </div>
             <div class="card" style="border-radius: 1rem; border-color: #ffc107; border-width: 0.25rem;">
@@ -129,6 +130,7 @@
                     <img src="/images/qualibpmn.png" class="card-img-top" alt="qualibpmn" style="width: 240px;">
                     <p class="card-text"><a role="button" class="btn btn-primary" style="border-radius: 1rem;" href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">Get started</a></p>
                     <p class="card-text">Free online software to validate BPMN business process diagrams and find modeling mistakes.</p>
+                    <a href="#detail-qualibpmn" class="card-link text-muted">About</a>
                 </div>
             </div>
             <div class="card" style="border-radius: 1rem;">
@@ -136,6 +138,7 @@
                     <img src="/images/finbpmn.png" class="card-img-top" alt="finbpmn" style="width: 240px;">
                     <p class="card-text"><a role="button" class="btn btn-primary" style="border-radius: 1rem;" href="https://cloudfreebpmnquality.herokuapp.com/finance/" target="_blank">Get started</a></p>
                     <p class="card-text">Free online software to estimate design efforts and cost of BPMN business process diagrams.</p>
+                    <a href="#detail-finbpmn" class="card-link text-muted">About</a>
                 </div>
             </div>
         </div>
@@ -385,42 +388,53 @@
 
         <a href="#service-plans" class="btn btn-info btn-lg mt-4" tabindex="-1" role="button" aria-disabled="true" style="border-radius: 1rem; font-weight: bold;">SEE PLANS</a>
     </div>
-    <div class="row row-cols-1 row-cols-md-1 ml-2 mr-2 mt-4">
+
+    <div class="row row-cols-1 row-cols-md-1 ml-2 mr-2">
+        <span id="detail-etherbpmn"></span>
+        <br>
+        <br>
+        <br>
         <div class="col mb-4">
             <div class="card card-bg" style="border-radius: 1rem;">
                 <div class="card-body text-center">
                     <img src="images/etherbpmn.png" class="card-img-top" alt="How EtherBPMN" style="width: 240px; border-radius: 1rem;">
                     <h5 class="card-title mt-2">How to share models?</h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">1</span> Go to the <a href="https://cloudfreebpmnquality.herokuapp.com/storage" target="_blank">homepage</a>.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">2</span> Click &quot;Create collection&quot; button.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">3</span> Use a form in the left side of a modal window to add pending models (&quot;Link to a BPMN 2.0 file...&quot; input).</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">4</span> If necessary, edit properties of pending models using &quot;Model name&quot;, &quot;Model annotation&quot;, and &quot;Model industry&quot; fields of each pending model.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">5</span> Use &quot;Remove&quot; button if necessary to remove certain pending model or use &quot;Clear pending models&quot; button to erase all pending models.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">6</span> If necessary, input the ULR of another EtherBPMN collection file to extend existing collection (&quot;Link to the parent EtherBPMN collection file&quot; input).</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">7</span> Use &quot;Download collection file&quot; to create and download EtherBPMN collection file of currently pending models.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">8</span> Push the collection file to your GitHub repository.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">9</span> Use the URL of a raw collection file in order to open it (&quot;Link to the EtherBPMN collection file&quot; input).</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">10</span> &quot;Parent collection&quot; link is shown for each collection that extends another collection.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">11</span> Use &quot;Share&quot; button to exchange collections with others.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">12</span> Inside the collection, models could be filtered using &quot;Search...&quot; input field by several properties.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">13</span> Each collection item can be clicked to see model information, download a BPMN 2.0 file, analyze model using <a href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">QualiBPMN</a>                            service, and estimate model implementation and fixing cost using <a href="https://cloudfreebpmnquality.herokuapp.com/finance/" target="_blank">FinBPMN</a> service.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">1</span> Go to the <a href="https://cloudfreebpmnquality.herokuapp.com/storage" target="_blank">homepage</a>.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">2</span> Click &quot;Create collection&quot; button.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">3</span> Use a form in the left side of a modal window to add pending models (&quot;Link to a BPMN 2.0 file...&quot; input).</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">4</span> If necessary, edit properties of pending models using &quot;Model name&quot;, &quot;Model annotation&quot;, and &quot;Model industry&quot; fields of each pending model.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">5</span> Use &quot;Remove&quot; button if necessary to remove certain pending model or use &quot;Clear pending models&quot; button to erase all pending models.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">6</span> If necessary, input the ULR of another EtherBPMN collection file to extend existing collection (&quot;Link to the parent EtherBPMN collection file&quot; input).</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">7</span> Use &quot;Download collection file&quot; to create and download EtherBPMN collection file of currently pending models.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">8</span> Push the collection file to your GitHub repository.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">9</span> Use the URL of a raw collection file in order to open it (&quot;Link to the EtherBPMN collection file&quot; input).</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">10</span> &quot;Parent collection&quot; link is shown for each collection that extends another collection.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">11</span> Use &quot;Share&quot; button to exchange collections with others.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">12</span> Inside the collection, models could be filtered using &quot;Search...&quot; input field by several properties.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">13</span> Each collection item can be clicked to see model information, download a BPMN 2.0 file, analyze model using <a href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">QualiBPMN</a>                            service, and estimate model implementation and fixing cost using <a href="https://cloudfreebpmnquality.herokuapp.com/finance/" target="_blank">FinBPMN</a> service.</li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <span id="detail-qualibpmn"></span>
+        <br>
+        <br>
+        <br>
         <div class="col mb-4">
             <div class="card card-bg" style="border-radius: 1rem;">
                 <div class="card-body text-center">
-                    <img src="images/qualibpmn.png" class="card-img-top" alt="How EtherBPMN" style="width: 240px; border-radius: 1rem;">
+                    <img src="images/qualibpmn.png" class="card-img-top" alt="How QualiBPMN" style="width: 240px; border-radius: 1rem;">
                     <h5 class="card-title mt-2">How to analyze models?</h5>
+                    <p><a href="#service-plans" class="card-link text-muted">See plans</a></p>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">1</span> Go to the <a href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">homepage</a>.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">2</span> Clik &quot;Drag &amp; drop or click to upload the BPMN 2.0 file&quot; and choose BPMN 2.0 file from your device.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">3</span> Move the slider to adjust model size.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">4</span> Hover element labels &quot;Fault&quot; to get tooltips that explain detected modeling mistakes.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">5</span> Click element labels &quot;Fault&quot; to get suggestions on defect fixing.</li>
-                        <li class="list-group-item"><span class="badge badge-pill badge-info">6</span> Scroll down to see quality measures and recommendations below the diagram.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">1</span> Go to the <a href="https://cloudfreebpmnquality.herokuapp.com/analytics/" target="_blank">homepage</a>.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">2</span> Clik &quot;Drag &amp; drop or click to upload the BPMN 2.0 file&quot; and choose BPMN 2.0 file from your device.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">3</span> Move the slider to adjust model size.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;" <span class="badge badge-pill badge-info">4</span> Hover element labels &quot;Fault&quot; to get tooltips that explain detected modeling mistakes.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">5</span> Click element labels &quot;Fault&quot; to get suggestions on defect fixing.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">6</span> Scroll down to see quality measures and recommendations below the diagram.</li>
                     </ul>
 
                     <span id="service-plans"></span>
@@ -487,21 +501,24 @@
                 </div>
             </div>
         </div>
+
+        <span id="detail-finbpmn"></span>
+        <br>
+        <br>
+        <br>
         <div class="col mb-4">
             <div class="card card-bg" style="border-radius: 1rem;">
                 <div class="card-body text-center">
-                    <img src="images/finbpmn.png" class="card-img-top" alt="How EtherBPMN" style="width: 240px; border-radius: 1rem;">
+                    <img src="images/finbpmn.png" class="card-img-top" alt="How finBPMN" style="width: 240px; border-radius: 1rem;">
                     <h5 class="card-title mt-2">How to estimate models?</h5>
-                    <small>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span class="badge badge-pill badge-info">1</span> Go to the <a href="https://cloudfreebpmnquality.herokuapp.com/finance/" target="_blank">homepage</a>.</li>
-                            <li class="list-group-item"><span class="badge badge-pill badge-info">2</span> Clik &quot;Open BPMN 2.0 File&quot; and choose BPMN 2.0 file from your device.</li>
-                            <li class="list-group-item"><span class="badge badge-pill badge-info">3</span> Enter the hourly wage and click &quot;Recalculate&quot; button if necessary.</li>
-                            <li class="list-group-item"><span class="badge badge-pill badge-info">4</span> Scroll down to see general estimation results.</li>
-                            <li class="list-group-item"><span class="badge badge-pill badge-info">5</span> Check out cost drivers depicted in BPMN diagram (move the slider to adjust model size). When hover &quot;$$$&quot; cost drivers tooltips are displayed.</li>
-                            <li class="list-group-item"><span class="badge badge-pill badge-info">6</span> Scroll down to see estimation results by business processes.</li>
-                        </ul>
-                    </small>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">1</span> Go to the <a href="https://cloudfreebpmnquality.herokuapp.com/finance/" target="_blank">homepage</a>.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">2</span> Clik &quot;Open BPMN 2.0 File&quot; and choose BPMN 2.0 file from your device.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">3</span> Enter the hourly wage and click &quot;Recalculate&quot; button if necessary.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">4</span> Scroll down to see general estimation results.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">5</span> Check out cost drivers depicted in BPMN diagram (move the slider to adjust model size). When hover &quot;$$$&quot; cost drivers tooltips are displayed.</li>
+                        <li class="list-group-item list-group-item-action mb-1" style="border-radius: 1rem;"><span class="badge badge-pill badge-info">6</span> Scroll down to see estimation results by business processes.</li>
+                    </ul>
                 </div>
             </div>
         </div>
