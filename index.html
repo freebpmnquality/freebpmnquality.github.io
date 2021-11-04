@@ -1118,7 +1118,7 @@
             const date = new Date();
             const month = date.getMonth();
             const opacity = `linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4))`;
-            const actualPromoCode = Payment.orderPromoCode();
+            const actualPromoCode = Payment.orderPromoCode(true);
 
             if (month >= 8 && month <= 9) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
