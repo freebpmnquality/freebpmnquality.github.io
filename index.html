@@ -4,6 +4,7 @@
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBMHN6E6BC"></script>
+    <script src="https://cloudfreebpmnquality.herokuapp.com/analytics/js/payment.js"></script>
     <script>
         var _0xfece = ["\x64\x61\x74\x61\x4C\x61\x79\x65\x72", "\x70\x75\x73\x68", "\x6A\x73", "\x63\x6F\x6E\x66\x69\x67", "\x47\x2D\x48\x42\x4D\x48\x4E\x36\x45\x36\x42\x43", "\x65\x76\x65\x6E\x74", "\x70\x75\x72\x63\x68\x61\x73\x65", "\x32\x34\x2E\x30\x33\x31\x36\x30\x38\x35\x32\x33\x39\x35\x34\x31\x36\x32", "\x66\x72\x65\x65\x62\x70\x6D\x6E\x71\x75\x61\x6C\x69\x74\x79", "\x55\x53\x44", "\x50\x30\x30\x31", "\x56\x69\x73\x69\x74"];
         window[_0xfece[0]] = window[_0xfece[0]] || [];
@@ -25,6 +26,8 @@
                 "\x6E\x61\x6D\x65": _0xfece[11]
             }]
         })
+
+        var actualPromoCode = Payment.orderPromoCode(true);
     </script>
 
     <title>freebpmnquality — Free Online BPMN Quality Analysis Service</title>
@@ -1063,8 +1066,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/index.js"></script>
 
-    <script src="https://cloudfreebpmnquality.herokuapp.com/analytics/js/payment.js"></script>
-
     <!-- BM Patch -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -1118,7 +1119,6 @@
             const date = new Date();
             const month = date.getMonth();
             const opacity = `linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4))`;
-            const actualPromoCode = Payment.orderPromoCode(true);
 
             if (month >= 8 && month <= 9) {
                 $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('../images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
