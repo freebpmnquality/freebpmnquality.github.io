@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBMHN6E6BC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-HBMHN6E6BC');
+
+        gtag('event', 'purchase', {
+            "transaction_id": 'PageView' + Date.now().toString() + Number.parseInt(Math.random() * 10E5).toString(),
+            "affiliation": 'freebpmnquality',
+            "value": 0.00764,
+            "currency": 'USD',
+            "tax": 0,
+            "shipping": 0,
+            "items": [{
+                "id": 'PageView',
+                "name": 'Page View'
+            }]
+        })
+    </script>
+
+    <title>{{TITLE}}</title>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "BPMN Scorecard Validation Tool",
+            "operatingSystem": "Any",
+            "applicationCategory": "BusinessApplication",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "ratingCount": "1"
+            },
+            "offers": {
+                "@type": "Offer",
+                "price": "0.00",
+                "priceCurrency": "USD"
+            }
+        }
+    </script>
+
+    <meta name="title" content="{{TITLE}}">
+    <meta name="description" content="{{DESCRIPTION}}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{TITLE}}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="{{TITLE}}">
+    <meta property="twitter:description" content="{{DESCRIPTION}}">
+
+    <meta name="keywords" content="{{KEYWORDS}}">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="icon" type="image/png" href="/images/scorecard/logo.png" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990058470889069" crossorigin="anonymous"></script>
+
+    <!-- Styles -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .banner-img {
+            width: 40%;
+        }
+        
+        #tryArea,
+        #useArea {
+            padding-top: 100px;
+        }
+        
+        .btn {
+            background-color: #ff980096;
+            border-color: #ff980096;
+            font-weight: bold;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="javascript:void(0);"><b>{{BRAND}}</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div class="ml-2" id="google_translate_element"></div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="text-center ml-4 mr-4 mt-4 mb-4" id="app">
+        <div style="transform: scale(1);" class="mb-4">{{SVG}}</div>
+
+        <h1>{{TITLE}}</h1>
+        <h3>{{DESCRIPTION}}</h3>
+
+        <a href="#tryArea" class="btn btn-lg mt-4" role="button">TRY FOR FREE</a>
+        <br>
+
+        <img src="/images/scorecard/banner01.png" class="img-fluid banner-img mt-4" alt="banner01">
+
+        <p class="text-muted">{{MOTIVATION-1}}</p>
+        <p class="text-muted">{{MOTIVATION-2}}</p>
+
+        <span id="tryArea"></span>
+        <label for="detected-mistakes" class="text-muted mt-4 mb-0">???</label>
+        <small class="form-text text-muted mt-0 mb-2">???</small>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Criterion</th>
+                    <th scope="col">Maximum (points)</th>
+                    <th scope="col">Evaluation (points)</th>
+                    <th scope="col">Compliance (%)</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <span id="useArea"></span>
+        <button class="btn mt-4" onclick="validateBusinessProcess();">VALIDATE BUSINESS PROCESS</button>
+
+        <div class="form-group mt-4">
+            <label for="detected-mistakes" class="text-muted mt-4 mb-0">???</label>
+            <small class="form-text text-muted mt-0 mb-2">???</small>
+
+            <ul class="list-group" id="detected-mistakes"></ul>
+        </div>
+
+        <img src="/images/scorecard/banner02.png" class="img-fluid banner-img mt-4" alt="banner02">
+    </div>
+
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel"><b>Message</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="message-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-muted" id="footer">
+        <div class="ml-4">
+            <b>{{BRAND}}</b> by <a href="/index.html" target="_blank"><b>freebpmnquality</b></a>, 2020 -
+            <script>
+                document.write(new Date().getFullYear())
+            </script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">(CC BY-ND)</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- App -->
+    <script type="text/javascript">
+        function displayMessage(messageText) {
+            $('#message-text').html(messageText);
+            $('#messageModal').modal('show');
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+
+        $(document).ready(() => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        block: 'start',
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+
+        function validateBusinessProcess() {
+            // TODO
+        }
+    </script>
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
