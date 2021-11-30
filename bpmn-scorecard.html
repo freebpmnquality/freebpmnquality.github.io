@@ -258,7 +258,6 @@
                     displayMessage('BPMN 2.0 code is missing!');
                 } else {
                     var converter = new X2JS();
-
                     var json = converter.xml_str2json(bpmnInput);
 
                     var processes = Array.isArray(json.definitions.process) ? json.definitions.process : [json.definitions.process];
@@ -272,17 +271,7 @@
                     $('#detected-problems').empty();
 
                     for (var i in messages) {
-                        var badge = null;
-
-                        if (messages[i].message === 'error') {
-                            badge = '<span class="badge badge-pill badge-danger">Error</span>';
-                        }
-
-                        if (messages[i].message === 'warning') {
-                            badge = '<span class="badge badge-pill badge-warning">Warning</span>';
-                        }
-
-                        $('#detected-problems').append(`<li class="list-group-item">${badge} ${messages[i].type} <b>${messages[i].name}</b> ${messages[i].text}</li>`);
+                        $('#detected-problems').append(`<li class="list-group-item"><span class="badge badge-pill badge-danger">Issue</span> ${messages[i]}</li>`);
                     }
 
                     if (messages.length < 1) {
