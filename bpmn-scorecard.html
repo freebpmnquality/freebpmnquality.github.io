@@ -98,6 +98,10 @@
             border-color: #FF725E;
             font-weight: bold;
         }
+        
+        #js-canvas {
+            background-color: white;
+        }
     </style>
 
     <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
@@ -145,8 +149,8 @@
 
         <pre id="code-area" hidden><code class="language-xml" id="bpmn-input"></code></pre>
 
-        <div class="img-fluid mb-2">
-            <div id="js-canvas"></div>
+        <div class="img-fluid mb-3">
+            <div id="js-canvas" class="img-thumbnail"></div>
         </div>
 
         <div class="table-responsive">
@@ -386,6 +390,8 @@
         }
 
         $(document).ready(() => {
+            $('#js-canvas').hide();
+
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -421,6 +427,8 @@
                         };
 
                         reader.readAsText(file);
+
+                        $('#js-canvas').show();
                     }
                 } catch (err) {
                     displayMessage(err.message);
