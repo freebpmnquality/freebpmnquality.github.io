@@ -89,8 +89,7 @@
             width: 40%;
         }
         
-        #tryArea,
-        #useArea {
+        #tryArea {
             padding-top: 100px;
         }
         
@@ -106,7 +105,7 @@
 
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="javascript:void(0);"><b>{{BRAND}}</b></a>
+        <a class="navbar-brand" href="javascript:void(0);"><b>BPMN Scorecard Validation Tool</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -139,65 +138,203 @@
 
         <div class="form-group mt-4">
             <label for="file-input" class="text-muted mb-0">BPMN 2.0 file</label>
-            <small class="form-text text-muted mb-2">Open a BPMN 2.0 file from disk or fill the questionnaire manually</small>
+            <small class="form-text text-muted mb-2">Open a BPMN 2.0 file from disk to fill the questionnaire (optional)</small>
             <input type="file" class="form-control" id="file-input">
         </div>
 
         <pre id="code-area" hidden><code class="language-xml" id="bpmn-input"></code></pre>
 
-        <div class="img-fluid mr-2 ml-2 mb-2">
+        <div class="img-fluid mb-2">
             <div id="js-canvas"></div>
         </div>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Criterion</th>
-                    <th scope="col">Maximum (points)</th>
-                    <th scope="col">Evaluation (points)</th>
-                    <th scope="col">Compliance (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm" id="q1Max" readonly value="0">
-                    </td>
-                    <td>
-                        <input type="number" class="form-control form-control-sm" id="q1Eval" min="0" max="1">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm" id="q1Res" readonly value="0">
-                    </td>
-                </tr>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Criterion</th>
+                        <th scope="col">Points</th>
+                        <th scope="col">Evaluation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" colspan="4">Beginning and ending</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Are the start and end events used?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q1Max" readonly value="1"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q1Eval"><label class="form-check-label" for="q1Eval">yes/no</label></td>
+                    </tr>
 
-                <!-- Total score -->
-                <tr>
-                    <th scope="row" colspan="2">Total score</th>
-                    <td>
-                        <input type="text" class="form-control form-control-sm" id="qTotalMax" readonly value="100">
-                    </td>
-                    <td>
-                        <input type="number" class="form-control form-control-sm" id="qTotalEval" min="0" max="1">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm" id="qTotalRes" readonly value="0">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <th scope="row" colspan="4">Diagramming</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Are all processes shown within their pools?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q2Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q2Eval"><label class="form-check-label" for="q2Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Are all lanes contain at least one task or intermediate event?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q3Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q3Eval"><label class="form-check-label" for="q3Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Are all lanes represent manual tasks or gateways?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q4Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q4Eval"><label class="form-check-label" for="q4Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Are all tasks, gateways, or events not placed in the middle of two lanes?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q5Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q5Eval"><label class="form-check-label" for="q5Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>Are there no multiple instances of the same task diagrammed to represent several performers?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q6Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q6Eval"><label class="form-check-label" for="q6Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>Is the consistent direction of flow followed?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q7Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q7Eval"><label class="form-check-label" for="q7Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>Is the primary scenario shown clear?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q8Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q8Eval"><label class="form-check-label" for="q8Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td>Are alternative scenarios shown clear?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q9Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q9Eval"><label class="form-check-label" for="q9Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10</th>
+                        <td>Are the success and failure end states distinguished?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q10Max" readonly value="4"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q10Eval"><label class="form-check-label" for="q10Eval">yes/no</label></td>
+                    </tr>
 
-        <span id="useArea"></span>
-        <button class="btn mt-0" onclick="validateModel();">CHECK TOWARD CRITERIA</button>
+                    <tr>
+                        <th scope="row" colspan="4">Structuredness</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">11</th>
+                        <td>Are there gateways always used to branch flows?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q11Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q11Eval"><label class="form-check-label" for="q11Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">12</th>
+                        <td>Are there no gateways used to join and split flows at the same time?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q12Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q12Eval"><label class="form-check-label" for="q12Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">13</th>
+                        <td>Are all splits joined equivalently?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q13Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q13Eval"><label class="form-check-label" for="q13Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">14</th>
+                        <td>Are gateways of the same type as for splitting always used to join the flow?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q14Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q14Eval"><label class="form-check-label" for="q14Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">15</th>
+                        <td>Are terminated events used when this is strictly necessary?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q15Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q15Eval"><label class="form-check-label" for="q15Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">16</th>
+                        <td>Are only sequence flows used to connect all the activities, events, and gateways?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q16Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q16Eval"><label class="form-check-label" for="q16Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">17</th>
+                        <td>Are no sequence flows used to connect elements of different pools?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q17Max" readonly value="6"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q17Eval"><label class="form-check-label" for="q17Eval">yes/no</label></td>
+                    </tr>
 
-        <div class="form-group mt-4">
-            <label for="detected-problems" class="text-muted mt-4 mb-0">???</label>
-            <small class="form-text text-muted mt-0 mb-2">???</small>
+                    <tr>
+                        <th scope="row" colspan="4">Labeling</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">18</th>
+                        <td>Are all activities given with labels composed of one verb and one object?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q18Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q18Eval"><label class="form-check-label" for="q18Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">19</th>
+                        <td>Are no start and end events labeled when only one instance of them is in use?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q19Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q19Eval"><label class="form-check-label" for="q19Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">20</th>
+                        <td>Is labeling provided when multiple start and end events are in use?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q20Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q20Eval"><label class="form-check-label" for="q20Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">21</th>
+                        <td>Are all divergence gateways have a clear name indicating the decision or condition evaluated when it applies?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q21Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q21Eval"><label class="form-check-label" for="q21Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">22</th>
+                        <td>Are all gateways, to which names do not apply, have abbreviations or numbers to differentiate them?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q22Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q22Eval"><label class="form-check-label" for="q22Eval">yes/no</label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">23</th>
+                        <td>Are all transitions have names that indicate conditions related?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q23Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q23Eval"><label class="form-check-label" for="q23Eval">yes/no</label></td>
+                    </tr>
 
-            <ul class="list-group" id="detected-problems"></ul>
+                    <tr>
+                        <th scope="row" colspan="4">Redundancy</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">24</th>
+                        <td>Is the diagram size comfortable to read and communicate the purpose of the process?</td>
+                        <td><input type="text" class="form-control form-control-sm" id="q24Max" readonly value="3"></td>
+                        <td><input type="checkbox" class="form-check-input" id="q24Eval"><label class="form-check-label" for="q24Eval">yes/no</label></td>
+                    </tr>
+
+                    <!-- Total score -->
+                    <tr>
+                        <th scope="row" colspan="2">Total score</th>
+                        <td>
+                            <input type="text" class="form-control form-control-sm" id="qTotalMax" readonly value="100">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control form-control-sm" id="qTotalRes" readonly value="0">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <img src="/images/scorecard/banner02.png" class="img-fluid banner-img mt-0" alt="banner02">
@@ -218,7 +355,7 @@
 
     <div class="jumbotron jumbotron-fluid text-muted" id="footer">
         <div class="ml-4">
-            <b>{{BRAND}}</b> by <a href="/index.html" target="_blank"><b>freebpmnquality</b></a>, 2020 -
+            <b>BPMN Scorecard Validation Tool</b> by <a href="/index.html" target="_blank"><b>freebpmnquality</b></a>, 2020 -
             <script>
                 document.write(new Date().getFullYear())
             </script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">(CC BY-ND)</a>
@@ -258,68 +395,59 @@
                     });
                 });
             });
-        });
 
-        $('#file-input').change((e) => {
-            var file = e.target.files[0];
+            $('#file-input').change((e) => {
+                try {
+                    var file = e.target.files[0];
 
-            if (file) {
-                var reader = new FileReader();
+                    if (file) {
+                        var reader = new FileReader();
 
-                reader.onload = async function(e) {
-                    var contents = e.target.result;
+                        reader.onload = async function(e) {
+                            var contents = e.target.result;
 
-                    $('#bpmn-input').text(contents);
-                    $('#js-canvas').empty();
+                            $('#bpmn-input').text(contents);
+                            $('#js-canvas').empty();
 
-                    var viewer = new BpmnJS({
-                        container: $('#js-canvas'),
-                        height: 400
-                    });
+                            var viewer = new BpmnJS({
+                                container: $('#js-canvas'),
+                                height: 400
+                            });
 
-                    await viewer.importXML(contents);
-                    var canvas = viewer.get('canvas');
-                    canvas.zoom('fit-viewport');
-                };
+                            await viewer.importXML(contents);
+                            var canvas = viewer.get('canvas');
+                            canvas.zoom('fit-viewport');
+                        };
 
-                reader.readAsText(file);
-            }
-        });
-
-        function validateModel() {
-            try {
-                var bpmnInput = $('#bpmn-input').text();
-
-                if (bpmnInput.length < 1) {
-                    displayMessage('BPMN 2.0 code is missing!');
-                } else {
-                    var converter = new X2JS();
-                    var json = converter.xml_str2json(bpmnInput);
-
-                    var processes = Array.isArray(json.definitions.process) ? json.definitions.process : [json.definitions.process];
-
-                    var messages = [];
-
-                    for (var j in processes) {
-                        var tasks = processes[j]['task'] === undefined ? [] : (Array.isArray(processes[j]['task']) ? processes[j]['task'] : [processes[j]['task']]);
+                        reader.readAsText(file);
                     }
-
-                    $('#detected-problems').empty();
-
-                    for (var i in messages) {
-                        $('#detected-problems').append(`<li class="list-group-item"><span class="badge badge-pill badge-danger">Issue</span> ${messages[i]}</li>`);
-                    }
-
-                    if (messages.length < 1) {
-                        $('#detected-problems').append(`<li class="list-group-item"><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</li>`);
-                    }
+                } catch (err) {
+                    displayMessage(err.message);
+                    console.error(err);
                 }
-            } catch (err) {
-                displayMessage(err.message);
+            });
 
-                console.error(err);
+            var questionsNumber = 24;
+
+            for (var i = 1; i <= questionsNumber; i++) {
+                $('#q' + i + 'Eval').change(() => {
+                    try {
+                        var totalScore = 0;
+
+                        for (var j = 1; j <= questionsNumber; j++) {
+                            if ($('#q' + j + 'Eval').is(':checked')) {
+                                totalScore += Number.parseInt($('#q' + j + 'Max').val());
+                            }
+                        }
+
+                        $('#qTotalRes').val(totalScore);
+                    } catch (err) {
+                        displayMessage(err.message);
+                        console.error(err);
+                    }
+                });
             }
-        }
+        });
     </script>
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
