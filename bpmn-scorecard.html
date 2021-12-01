@@ -438,24 +438,39 @@
 
             var questionsNumber = 24;
 
-            for (var i = 1; i <= questionsNumber; i++) {
-                $('#q' + i + 'Eval').change(() => {
-                    try {
-                        var totalScore = 0;
+            var validateModel = () => {
+                try {
+                    var maxScore = Number.parseInt($('#qTotalMax').val());
+                    var totalScore = 0;
 
-                        for (var j = 1; j <= questionsNumber; j++) {
-                            if ($('#q' + j + 'Eval').is(':checked')) {
-                                totalScore += Number.parseInt($('#q' + j + 'Max').val());
-                            }
+                    for (var j = 1; j <= questionsNumber; j++) {
+                        if ($('#q' + j + 'Eval').is(':checked')) {
+                            totalScore += Number.parseInt($('#q' + j + 'Max').val());
+
+                            $('#q' + j + 'Max').attr('class', 'form-control form-control-sm is-valid');
+                        } else {
+                            $('#q' + j + 'Max').attr('class', 'form-control form-control-sm is-invalid');
                         }
-
-                        $('#qTotalRes').val(totalScore);
-                    } catch (err) {
-                        displayMessage(err.message);
-                        console.error(err);
                     }
-                });
+
+                    $('#qTotalRes').val(totalScore + '/' + maxScore);
+
+                    if (totalScore < maxScore) {
+                        $('#qTotalRes').attr('class', 'form-control form-control-sm is-invalid');
+                    } else {
+                        $('#qTotalRes').attr('class', 'form-control form-control-sm is-valid');
+                    }
+                } catch (err) {
+                    displayMessage(err.message);
+                    console.error(err);
+                }
+            };
+
+            for (var i = 1; i <= questionsNumber; i++) {
+                $('#q' + i + 'Eval').change(validateModel);
             }
+
+            validateModel();
         });
     </script>
 
