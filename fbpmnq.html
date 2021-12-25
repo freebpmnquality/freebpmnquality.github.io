@@ -116,6 +116,10 @@
             max-height: 360px;
             text-align: left;
         }
+        
+        #js-canvas {
+            background-color: #fff;
+        }
     </style>
 
     <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
@@ -190,8 +194,12 @@
         </div>
 
         <small class="form-text text-muted mb-2">Detected mistakes are also highlighted in the BPMN diagram below</small>
-        <div class="img-fluid mr-2 ml-2 mb-2">
-            <div id="js-canvas"></div>
+        <div class="mt-1 mb-1 text-left">
+            <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
+            <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
+        </div>
+        <div class="img-fluid mr-0 ml-0 mb-2">
+            <div id="js-canvas" class="img-thumbnail"></div>
         </div>
 
         <img src="/images/fbpmnq/iteration-rafiki.png" class="img-fluid banner-img mt-4" alt="iteration-rafiki">
@@ -237,6 +245,14 @@
             $('#messageModal').modal('show');
         }
 
+        var isChecked = false;
+
+        $('#slider').change(function() {
+            displayExample();
+
+            if (isChecked) checkTowardRules();
+        });
+
         async function displayExample() {
             $('#file-input').val('');
 
@@ -254,9 +270,11 @@
 
             $('#js-canvas').empty();
 
+            var _height = Number.parseInt($('#slider').val());
+
             var viewer = new BpmnJS({
                 container: $('#js-canvas'),
-                height: 400
+                height: _height
             });
 
             await viewer.importXML(bpmnCode);
@@ -276,12 +294,16 @@
                 } else {
                     $('#js-canvas').empty();
 
+                    var _height = Number.parseInt($('#slider').val());
+
                     var viewer = new BpmnJS({
                         container: $('#js-canvas'),
-                        height: 400
+                        height: _height
                     });
 
                     await viewer.importXML(bpmnInput);
+
+                    isChecked = true;
 
                     var canvas = viewer.get('canvas');
                     canvas.zoom('fit-viewport');
@@ -421,6 +443,8 @@
                 });
 
                 await viewer.importXML(contents);
+
+                isChecked = false;
 
                 var canvas = viewer.get('canvas');
                 canvas.zoom('fit-viewport');
