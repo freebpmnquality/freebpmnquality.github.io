@@ -191,12 +191,12 @@
                     <small class="form-check-label" for="bpmn-warnings">Consider implicit splits/merges as warnings</small>
                 </div>
 
-                <div class="form-check mt-1 mb-1">
+                <div class="form-check mt-1 mb-2">
                     <input class="form-check-input" type="checkbox" id="bpmn-errors" checked>
                     <small class="form-check-label" for="bpmn-errors">Consider missing incoming/outgoing flows as errors</small>
                 </div>
 
-                <button class="btn btn-sm mb-2" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
+                <button class="btn btn-sm mb-3" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
 
                 <ul class="list-group mb-2" id="detected-mistakes"></ul>
             </div>
@@ -437,9 +437,11 @@
 
                 $('#js-canvas').empty();
 
+                var _height = Number.parseInt($('#slider').val());
+
                 var viewer = new BpmnJS({
                     container: $('#js-canvas'),
-                    height: 400
+                    height: _height
                 });
 
                 await viewer.importXML(contents);
@@ -449,7 +451,7 @@
                 var canvas = viewer.get('canvas');
                 canvas.zoom('fit-viewport');
 
-                $('#detected-mistakes').html(`<li class="list-group-item"><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</li>`);
+                $('#detected-mistakes').html(`<li class="list-group-item"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
             };
 
             reader.readAsText(file);
