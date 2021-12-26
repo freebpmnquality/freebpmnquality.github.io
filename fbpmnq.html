@@ -247,10 +247,24 @@
 
         var isChecked = false;
 
-        $('#slider').change(function() {
-            displayExample();
+        $('#slider').change(async function() {
+            var bpmnCode = $('#bpmn-input').text();
 
-            if (isChecked) checkTowardRules();
+            $('#js-canvas').empty();
+
+            var _height = Number.parseInt($('#slider').val());
+
+            var viewer = new BpmnJS({
+                container: $('#js-canvas'),
+                height: _height
+            });
+
+            await viewer.importXML(bpmnCode);
+
+            var canvas = viewer.get('canvas');
+            canvas.zoom('fit-viewport');
+
+            if (isChecked) await checkTowardRules();
         });
 
         async function displayExample() {
@@ -287,6 +301,8 @@
 
         async function checkTowardRules() {
             try {
+                isChecked = true;
+
                 var bpmnInput = $('#bpmn-input').text();
 
                 if (bpmnInput.length < 1) {
@@ -302,8 +318,6 @@
                     });
 
                     await viewer.importXML(bpmnInput);
-
-                    isChecked = true;
 
                     var canvas = viewer.get('canvas');
                     canvas.zoom('fit-viewport');
@@ -420,41 +434,47 @@
         }
 
         function readSingleFile(e) {
-            var file = e.target.files[0];
-
-            if (!file) {
-                return;
-            }
-
-            var reader = new FileReader();
-
-            reader.onload = async function(e) {
-                var contents = e.target.result;
-
-                $('#bpmn-input').text(contents);
-
-                hljs.highlightAll();
-
-                $('#js-canvas').empty();
-
-                var _height = Number.parseInt($('#slider').val());
-
-                var viewer = new BpmnJS({
-                    container: $('#js-canvas'),
-                    height: _height
-                });
-
-                await viewer.importXML(contents);
-
+            try {
                 isChecked = false;
 
-                var canvas = viewer.get('canvas');
-                canvas.zoom('fit-viewport');
+                var file = e.target.files[0];
 
-                $('#detected-mistakes').html(`<li class="list-group-item"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
-            };
+                if (!file) {
+                    return;
+                }
 
-            reader.readAsText(file);
+                var reader = new FileReader();
+
+                reader.onload = async function(e) {
+                    var contents = e.target.result;
+
+                    $('#bpmn-input').text(contents);
+
+                    hljs.highlightAll();
+
+                    $('#js-canvas').empty();
+
+                    var _height = Number.parseInt($('#slider').val());
+
+                    var viewer = new BpmnJS({
+                        container: $('#js-canvas'),
+                        height: _height
+                    });
+
+                    await viewer.importXML(contents);
+
+                    var canvas = viewer.get('canvas');
+                    canvas.zoom('fit-viewport');
+
+                    $('#detected-mistakes').html(`<li class="list-group-item"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
+                };
+
+                reader.readAsText(file);
+            } catch (err) {
+                displayMessage(err.message);
+
+                console.error(err);
+            }
         }
 
         $('#file-input').change(readSingleFile);
