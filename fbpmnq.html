@@ -187,19 +187,24 @@
         <a href="#useArea" class="btn mt-4" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</a>
 
         <div class="form-group mt-4">
-            <label for="detected-mistakes" class="text-muted mb-0">Detected mistakes in checked BPMN 2.0 model</label>
-            <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
 
-            <ul class="list-group" id="detected-mistakes"></ul>
         </div>
 
-        <small class="form-text text-muted mb-2">Detected mistakes are also highlighted in the BPMN diagram below</small>
+        <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram below</small>
+        <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
+
         <div class="mt-1 mb-1 text-left">
             <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
             <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
         </div>
-        <div class="img-fluid mr-0 ml-0 mb-2">
-            <div id="js-canvas" class="img-thumbnail"></div>
+
+        <div class="row">
+            <div class="col-sm-9">
+                <div id="js-canvas" class="img-thumbnail mb-2"></div>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list-group mb-2" id="detected-mistakes"></ul>
+            </div>
         </div>
 
         <img src="/images/fbpmnq/iteration-rafiki.png" class="img-fluid banner-img mt-4" alt="iteration-rafiki">
@@ -282,7 +287,7 @@
             var canvas = viewer.get('canvas');
             canvas.zoom('fit-viewport');
 
-            $('#detected-mistakes').html(`<li class="list-group-item"><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</li>`);
+            $('#detected-mistakes').html(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
         }
 
         async function checkTowardRules() {
@@ -405,11 +410,11 @@
                             badge = '<span class="badge badge-pill badge-warning">Warning</span>';
                         }
 
-                        $('#detected-mistakes').append(`<li class="list-group-item">${badge} ${messages[i].type} <b>${messages[i].name}</b> ${messages[i].text}</li>`);
+                        $('#detected-mistakes').append(`<li class="list-group-item list-group-item-action"><small>${badge} ${messages[i].type} <b>${messages[i].name}</b> ${messages[i].text}</small></li>`);
                     }
 
                     if (messages.length < 1) {
-                        $('#detected-mistakes').append(`<li class="list-group-item"><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</li>`);
+                        $('#detected-mistakes').append(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</small></li>`);
                     }
                 }
             } catch (err) {
