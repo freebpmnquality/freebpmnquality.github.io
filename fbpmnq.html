@@ -173,23 +173,6 @@
             <pre id="code-area"><code class="language-xml" id="bpmn-input"></code></pre>
         </div>
 
-        <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" id="bpmn-warnings" checked>
-            <label class="form-check-label" for="bpmn-warnings">Consider implicit splits/merges as warnings</label>
-        </div>
-
-        <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" id="bpmn-errors" checked>
-            <label class="form-check-label" for="bpmn-errors">Consider missing incoming/outgoing flows as errors</label>
-        </div>
-
-        <span id="useArea"></span>
-        <a href="#useArea" class="btn mt-4" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</a>
-
-        <div class="form-group mt-4">
-
-        </div>
-
         <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram below</small>
         <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
 
@@ -203,6 +186,18 @@
                 <div id="js-canvas" class="img-thumbnail mb-2"></div>
             </div>
             <div class="col-sm-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="bpmn-warnings" checked>
+                    <small class="form-check-label" for="bpmn-warnings">Consider implicit splits/merges as warnings</small>
+                </div>
+
+                <div class="form-check mt-1 mb-1">
+                    <input class="form-check-input" type="checkbox" id="bpmn-errors" checked>
+                    <small class="form-check-label" for="bpmn-errors">Consider missing incoming/outgoing flows as errors</small>
+                </div>
+
+                <button class="btn btn-sm mb-2" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
+
                 <ul class="list-group mb-2" id="detected-mistakes"></ul>
             </div>
         </div>
