@@ -168,11 +168,6 @@
             <input type="file" class="form-control" id="file-input">
         </div>
 
-        <div class="form-group mt-2" hidden>
-            <small class="form-text text-muted mb-2">BPMN 2.0 code</small>
-            <pre id="code-area"><code class="language-xml" id="bpmn-input"></code></pre>
-        </div>
-
         <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram below</small>
         <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
 
@@ -200,6 +195,11 @@
 
                 <ul class="list-group mb-2" id="detected-mistakes"></ul>
             </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <small class="form-text text-muted mb-2">BPMN 2.0 code</small>
+            <pre id="code-area"><code class="language-xml" id="bpmn-input"></code></pre>
         </div>
 
         <img src="/images/fbpmnq/iteration-rafiki.png" class="img-fluid banner-img mt-4" alt="iteration-rafiki">
