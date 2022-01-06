@@ -18,7 +18,7 @@
         gtag('event', 'purchase', {
             "transaction_id": 'PageView' + Date.now().toString() + Number.parseInt(Math.random() * 10E5).toString(),
             "affiliation": 'freebpmnquality',
-            "value": EffortsLib.getEstimatedEffort(),
+            "value": EffortsLib.getValue(window.location.href),
             "currency": 'USD',
             "tax": 0,
             "shipping": 0,
