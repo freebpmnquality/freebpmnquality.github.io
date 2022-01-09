@@ -16,7 +16,7 @@
         gtag('config', 'G-HBMHN6E6BC');
 
         gtag('event', 'purchase', {
-            "transaction_id": 'ID' + Date.now().toString() + Number.parseInt(Math.random() * 10E5).toString(),
+            "transaction_id": EffortsLib.getID(),
             "affiliation": 'freebpmnquality',
             "value": EffortsLib.getValue(window.location.href),
             "currency": 'USD',
