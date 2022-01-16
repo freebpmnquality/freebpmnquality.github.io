@@ -40,4 +40,8 @@
         <loc>https://freebpmnquality.github.io/br2sql.html</loc>
         <changefreq>monthly</changefreq>
     </url>
+    <url>
+        <loc>https://freebpmnquality.github.io/nft-business-models.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
 </urlset>
