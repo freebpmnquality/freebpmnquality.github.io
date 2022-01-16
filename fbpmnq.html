@@ -407,6 +407,85 @@
                                 canvas.addMarker(id, 'highlight-green');
                             }
                         }
+
+                        var intermediateCatchEvents = processes[j]['intermediateCatchEvent'] === undefined ? [] : (Array.isArray(processes[j]['intermediateCatchEvent']) ? processes[j]['intermediateCatchEvent'] : [processes[j]['intermediateCatchEvent']]);
+
+                        var intermediateThrowEvents = processes[j]['intermediateThrowEvent'] === undefined ? [] : (Array.isArray(processes[j]['intermediateThrowEvent']) ? processes[j]['intermediateThrowEvent'] : [processes[j]['intermediateThrowEvent']]);
+
+                        var intermediateEvents = intermediateCatchEvents.concat(intermediateThrowEvents);
+
+                        for (var i in intermediateEvents) {
+                            var id = intermediateEvents[i]._id;
+
+                            var name = intermediateEvents[i]._name === undefined ? id : intermediateEvents[i]._name;
+
+                            var incoming = intermediateEvents[i].incoming === undefined ? 0 : (Array.isArray(intermediateEvents[i].incoming) ? intermediateEvents[i].incoming.length : 1);
+
+                            var outgoing = intermediateEvents[i].outgoing === undefined ? 0 : (Array.isArray(intermediateEvents[i].outgoing) ? intermediateEvents[i].outgoing.length : 1);
+
+                            var isError = false;
+                            var isWarning = false;
+
+                            if ($('#bpmn-errors').is(':checked')) {
+                                if (incoming < 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Intermediate Event',
+                                        name: name,
+                                        text: 'does not have any incoming sequence flows',
+                                        message: 'error'
+                                    });
+
+                                    isError = true;
+                                }
+
+                                if (outgoing < 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Intermediate Event',
+                                        name: name,
+                                        text: 'does not have any outgoing sequence flows',
+                                        message: 'error'
+                                    });
+
+                                    isError = true;
+                                }
+                            }
+
+                            if ($('#bpmn-warnings').is(':checked')) {
+                                if (incoming > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Intermediate Event',
+                                        name: name,
+                                        text: 'has multiple incoming sequence flows',
+                                        message: 'warning'
+                                    });
+
+                                    isWarning = true;
+                                }
+
+                                if (outgoing > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Intermediate Event',
+                                        name: name,
+                                        text: 'has multiple outgoing sequence flows',
+                                        message: 'warning'
+                                    });
+
+                                    isWarning = true;
+                                }
+                            }
+
+                            if (isError) {
+                                canvas.addMarker(id, 'highlight-red');
+                            } else if (isWarning) {
+                                canvas.addMarker(id, 'highlight-yellow');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
+                            }
+                        }
                     }
 
                     $('#detected-mistakes').empty();
