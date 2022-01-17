@@ -257,83 +257,152 @@
 
         const web3 = {
             eth: {
-                Contract: class Contract {
+                Contract: class bumonft {
                     constructor(abi, address) {
+                        const timestamp = Number.parseInt(Date.now() / 1000);
+
+                        const models = [
+                            // BPMN
+                            [
+                                'Order goods',
+                                'https://freebpmnquality.github.io/images/models/bpmn/Order%20goods.png',
+                                '2b74920eb4dd446639e3a3451c2a15b221186e0875151ae94c08b3db6ba33403',
+                                'Example of a Business Process Model and Notation for a process "Order goods".',
+                                'BPMN',
+                                9,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'Receive goods',
+                                'https://freebpmnquality.github.io/images/models/bpmn/Receive%20goods.png',
+                                'b3d8a657fce8c469a2e08d3c4434c8fe172c59fb7ce34f40d63b2c921b86bceb',
+                                'Example of a Business Process Model and Notation for a process "Receive goods".',
+                                'BPMN',
+                                10,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'Sell goods',
+                                'https://freebpmnquality.github.io/images/models/bpmn/Sell%20goods.png',
+                                '008083f15e136774d5cb6c1f2c886bd51355db55f55da986c832192d79134fad',
+                                'Example of a Business Process Model and Notation for a process "Sell goods".',
+                                'BPMN',
+                                9,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+
+                            // ARIS
+                            [
+                                'Organizational chart',
+                                'https://freebpmnquality.github.io/images/models/aris/Organizational%20chart.png',
+                                'a12ad689327be9655e97090126984e22f23eea1529f8beea8c8da7bcd6e7031d',
+                                'Example of an Architecture of Integrated Information Systems for an artifact "Organizational chart".',
+                                'ARIS',
+                                4,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'Process landscape',
+                                'https://freebpmnquality.github.io/images/models/aris/Process%20landscape.png',
+                                '7874cad6fa1a88bebb40dcb132fc474713ab992374284a99056cdca7282b39ac',
+                                'Example of an Architecture of Integrated Information Systems for an artifact "Process landscape".',
+                                'ARIS',
+                                8,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'Business process',
+                                'https://freebpmnquality.github.io/images/models/aris/Business%20process.png',
+                                '121432cf98d5e321ac54f12390be21b830b1197597cd8a56aec4d1a16f3994aa',
+                                'Example of an Architecture of Integrated Information Systems for an artifact "Business process".',
+                                'ARIS',
+                                7,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'Data model',
+                                'https://freebpmnquality.github.io/images/models/aris/Data%20model.png',
+                                '205595a3b04ea6c5c423892cdf8c01ce08ae59f1eec8529bb016e86b7de674be',
+                                'Example of an Architecture of Integrated Information Systems for an artifact "Data model".',
+                                'ARIS',
+                                3,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'System landscape',
+                                'https://freebpmnquality.github.io/images/models/aris/System%20landscape.png',
+                                'b510cd54174cc4c59ad1e8859e230efc18337a91ca758d6777f168ada91e7502',
+                                'Example of an Architecture of Integrated Information Systems for an artifact "System landscape".',
+                                'ARIS',
+                                9,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ],
+                            [
+                                'IT infrastructure',
+                                'https://freebpmnquality.github.io/images/models/aris/IT%20infrastructure.png',
+                                '1c758c0041abacf5af8f09e7b76b85dc54c06f7cf0a0fc49d38ba469a777a5a4',
+                                'Example of an Architecture of Integrated Information Systems for an artifact "IT infrastructure".',
+                                'ARIS',
+                                5,
+                                0,
+                                0,
+                                0,
+                                0,
+                                timestamp
+                            ]
+                        ];
+
                         return {
                             methods: {
-                                ReadModels: () => {
+                                totalSupply: () => {
                                     return {
                                         call: () => {
                                             return {
                                                 then: (callback) => {
-                                                    callback([
-                                                        // BPMN
-                                                        [
-                                                            'Order goods',
-                                                            'https://freebpmnquality.github.io/images/models/bpmn/Order%20goods.png',
-                                                            '2b74920eb4dd446639e3a3451c2a15b221186e0875151ae94c08b3db6ba33403',
-                                                            'Example of a Business Process Model and Notation for a process "Order goods".',
-                                                            'BPMN'
-                                                        ],
-                                                        [
-                                                            'Receive goods',
-                                                            'https://freebpmnquality.github.io/images/models/bpmn/Receive%20goods.png',
-                                                            'b3d8a657fce8c469a2e08d3c4434c8fe172c59fb7ce34f40d63b2c921b86bceb',
-                                                            'Example of a Business Process Model and Notation for a process "Receive goods".',
-                                                            'BPMN'
-                                                        ],
-                                                        [
-                                                            'Sell goods',
-                                                            'https://freebpmnquality.github.io/images/models/bpmn/Sell%20goods.png',
-                                                            '008083f15e136774d5cb6c1f2c886bd51355db55f55da986c832192d79134fad',
-                                                            'Example of a Business Process Model and Notation for a process "Sell goods".',
-                                                            'BPMN'
-                                                        ],
-
-                                                        // ARIS
-                                                        [
-                                                            'Organizational chart',
-                                                            'https://freebpmnquality.github.io/images/models/aris/Organizational%20chart.png',
-                                                            'a12ad689327be9655e97090126984e22f23eea1529f8beea8c8da7bcd6e7031d',
-                                                            'Example of an Architecture of Integrated Information Systems for an artifact "Organizational chart".',
-                                                            'ARIS'
-                                                        ],
-                                                        [
-                                                            'Process landscape',
-                                                            'https://freebpmnquality.github.io/images/models/aris/Process%20landscape.png',
-                                                            '7874cad6fa1a88bebb40dcb132fc474713ab992374284a99056cdca7282b39ac',
-                                                            'Example of an Architecture of Integrated Information Systems for an artifact "Process landscape".',
-                                                            'ARIS'
-                                                        ],
-                                                        [
-                                                            'Business process',
-                                                            'https://freebpmnquality.github.io/images/models/aris/Business%20process.png',
-                                                            '121432cf98d5e321ac54f12390be21b830b1197597cd8a56aec4d1a16f3994aa',
-                                                            'Example of an Architecture of Integrated Information Systems for an artifact "Business process".',
-                                                            'ARIS'
-                                                        ],
-                                                        [
-                                                            'Data model',
-                                                            'https://freebpmnquality.github.io/images/models/aris/Data%20model.png',
-                                                            '205595a3b04ea6c5c423892cdf8c01ce08ae59f1eec8529bb016e86b7de674be',
-                                                            'Example of an Architecture of Integrated Information Systems for an artifact "Data model".',
-                                                            'ARIS'
-                                                        ],
-                                                        [
-                                                            'System landscape',
-                                                            'https://freebpmnquality.github.io/images/models/aris/System%20landscape.png',
-                                                            'b510cd54174cc4c59ad1e8859e230efc18337a91ca758d6777f168ada91e7502',
-                                                            'Example of an Architecture of Integrated Information Systems for an artifact "System landscape".',
-                                                            'ARIS'
-                                                        ],
-                                                        [
-                                                            'IT infrastructure',
-                                                            'https://freebpmnquality.github.io/images/models/aris/IT%20infrastructure.png',
-                                                            '1c758c0041abacf5af8f09e7b76b85dc54c06f7cf0a0fc49d38ba469a777a5a4',
-                                                            'Example of an Architecture of Integrated Information Systems for an artifact "IT infrastructure".',
-                                                            'ARIS'
-                                                        ]
-                                                    ]);
+                                                    callback(models.length);
+                                                }
+                                            };
+                                        }
+                                    };
+                                },
+                                models: (index) => {
+                                    return {
+                                        call: () => {
+                                            return {
+                                                then: (callback) => {
+                                                    callback(models[index]);
                                                 }
                                             };
                                         }
@@ -353,35 +422,59 @@
             try {
                 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
-                contract.methods.ReadModels().call().then(data => {
-                    for (let i = 0; i < data.length; i++) {
-                        const title = data[i][0];
-                        const link = data[i][1];
-                        const hash = data[i][2];
-                        const annotation = data[i][3];
-                        const industry = data[i][4];
+                contract.methods.totalSupply().call().then(totalSupply => {
+                    for (let i = 0; i < totalSupply; i++) {
+                        contract.methods.models(i).call().then(modelRecord => {
+                            const title = modelRecord[0];
+                            const link = modelRecord[1];
+                            const hash = modelRecord[2];
+                            const annotation = modelRecord[3];
+                            const industry = modelRecord[4];
 
-                        const actualContent = $.ajax({
-                            type: 'get',
-                            url: link,
-                            async: false
-                        }).responseText;
+                            const totalStatements = modelRecord[5];
+                            const syntInvalid = modelRecord[6];
+                            const syntIncomplete = modelRecord[7];
+                            const semInvalid = modelRecord[8];
+                            const semIncomplete = modelRecord[9];
 
-                        const actualHash = CryptoJS.SHA256(actualContent).toString();
+                            const dateTime = modelRecord[10];
 
-                        $('#gallery').append(`<div class="col mb-4">
-                            <div class="card h-100">
-                                <a href="${link}" target="_blank"><img src="${link}" class="card-img-top" alt="diagram"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text">${annotation}</p>
-                                    ${hash === actualHash ? '<span class="badge badge-pill badge-success">Authentic</span>' : '<span class="badge badge-pill badge-danger">Tampered</span>'}
+                            const actualContent = $.ajax({
+                                type: 'get',
+                                url: link,
+                                async: false
+                            }).responseText;
+
+                            const actualHash = CryptoJS.SHA256(actualContent).toString();
+
+                            const syntQuality = 1 - syntInvalid / totalStatements;
+                            const syntCompleteness = 1 - syntIncomplete / totalStatements;
+                            const semQuality = 1 - semInvalid / totalStatements;
+                            const semCompleteness = 1 - semIncomplete / totalStatements;
+
+                            $('#gallery').append(`<div class="col mb-4">
+                                <div class="card h-100">
+                                    <a href="${link}" target="_blank"><img src="${link}" class="card-img-top" alt="diagram"></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-1">${title}</h5>
+                                        <p class="card-text mb-1">${annotation}</p>
+                                        <p class="card-text mb-1"><small class="text-muted">${industry}</small></p>
+
+                                        <p class="card-text mb-1">${hash === actualHash ? '<span class="badge badge-pill badge-success">Authentic</span>' : '<span class="badge badge-pill badge-danger">Tampered</span>'}</p>
+
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><small>Syntactic quality: ${(syntQuality * 100).toFixed(2)}%</small></li>
+                                            <li class="list-group-item"><small>Syntactic completeness: ${(syntCompleteness * 100).toFixed(2)}%</small></li>
+                                            <li class="list-group-item"><small>Semantic quality: ${(semQuality * 100).toFixed(2)}%</small></li>
+                                            <li class="list-group-item"><small>Semantic completeness: ${(semCompleteness * 100).toFixed(2)}%</small></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</small>
+                                    </div>
                                 </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">${industry}</small>
-                                </div>
-                            </div>
-                        </div>`);
+                            </div>`);
+                        });
                     }
                 });
             } catch (err) {
