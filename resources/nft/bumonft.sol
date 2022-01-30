@@ -17,9 +17,9 @@ contract bumonft is ERC721 {
         string annotation;
         string industry;
         uint256 totalStatements;
-        uint256 syntInvalid;
+        uint256 syntIncorrect;
         uint256 syntIncomplete;
-        uint256 semInvalid;
+        uint256 semIncorrect;
         uint256 semIncomplete;
         uint256 dateTime;
     }
@@ -73,7 +73,7 @@ contract bumonft is ERC721 {
     }
 
     /// @notice Add a new model to the collection
-    /// @dev Total numbers of invalid and incomplete statements (for syntactic and semantic respectively)
+    /// @dev Total numbers of incorrect and incomplete statements (for syntactic and semantic respectively)
     ///  should be less than or equal to the total number of statements.
     /// @param _title The title of a business model
     /// @param _url The URL of a business model image
@@ -81,9 +81,9 @@ contract bumonft is ERC721 {
     /// @param _annotation The brief description of a business model
     /// @param _industry The industry or domain of a business model
     /// @param _totalStatements The number of total statements of a business model
-    /// @param _syntInvalid The number of syntactically invalid statements of a business model
+    /// @param _syntIncorrect The number of syntactically incorrect statements of a business model
     /// @param _syntIncomplete The number of syntactically incomplete statements of a business model
-    /// @param _semInvalid The number of semantically invalid statements of a business model
+    /// @param _semIncorrect The number of semantically incorrect statements of a business model
     /// @param _semIncomplete The number of semantically incomplete statements of a business model
     function addModel(
         string memory _title,
@@ -92,16 +92,16 @@ contract bumonft is ERC721 {
         string memory _annotation,
         string memory _industry,
         uint256 _totalStatements,
-        uint256 _syntInvalid,
+        uint256 _syntIncorrect,
         uint256 _syntIncomplete,
-        uint256 _semInvalid,
+        uint256 _semIncorrect,
         uint256 _semIncomplete
     ) public {
         require(_totalStatements > 0);
 
-        require((_syntInvalid + _syntIncomplete) <= _totalStatements);
+        require((_syntIncorrect + _syntIncomplete) <= _totalStatements);
 
-        require((_semInvalid + _semIncomplete) <= _totalStatements);
+        require((_semIncorrect + _semIncomplete) <= _totalStatements);
 
         modelRecord memory _model = modelRecord(
             _title,
@@ -110,9 +110,9 @@ contract bumonft is ERC721 {
             _annotation,
             _industry,
             _totalStatements,
-            _syntInvalid,
+            _syntIncorrect,
             _syntIncomplete,
-            _semInvalid,
+            _semIncorrect,
             _semIncomplete,
             block.timestamp
         );
