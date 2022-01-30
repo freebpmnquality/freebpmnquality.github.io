@@ -217,6 +217,54 @@
         <div class="row row-cols-1 row-cols-md-3" id="gallery">
         </div>
 
+        <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="itemModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="item-image"></div>
+
+                        <p class="mt-2">Owned by <span id="item-owner" style="word-break: break-all;"></span></p>
+
+                        <div class="row row-cols-1 row-cols-md-2 mt-2">
+                            <div class="col mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-1">Information</h5>
+
+                                        <p class="card-text mb-1" id="item-description"></p>
+                                        <p class="card-text mb-1" id="item-industry"></p>
+
+                                        <p class="card-text mb-1" id="item-authenticity"></p>
+
+                                        <p class="card-text mb-1" id="item-dateTime"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-1">Quality</h5>
+
+                                        <p class="card-text mb-1" id="item-m5"></p>
+
+                                        <p class="card-text mb-1" id="item-m1"></p>
+                                        <p class="card-text mb-1" id="item-m2"></p>
+                                        <p class="card-text mb-1" id="item-m3"></p>
+                                        <p class="card-text mb-1" id="item-m4"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <img src="/images/nft/bottom.png" class="img-fluid banner-img mt-4" alt="bottom.png">
     </div>
 
@@ -386,23 +434,38 @@
 
                         return {
                             methods: {
-                                totalSupply: () => {
-                                    return {
-                                        call: () => {
-                                            return {
-                                                then: (callback) => {
-                                                    callback(models.length);
-                                                }
-                                            };
-                                        }
-                                    };
-                                },
+                                // Custom
                                 models: (index) => {
                                     return {
                                         call: () => {
                                             return {
                                                 then: (callback) => {
                                                     callback(models[index]);
+                                                }
+                                            };
+                                        }
+                                    };
+                                },
+
+                                // ERC-721
+                                ownerOf: (_tokenId) => {
+                                    return {
+                                        call: () => {
+                                            return {
+                                                then: (callback) => {
+                                                    callback('0xC0753Fff03d88B34B9538d0A93D64831EE85d95C');
+                                                }
+                                            };
+                                        }
+                                    };
+                                },
+
+                                totalSupply: () => {
+                                    return {
+                                        call: () => {
+                                            return {
+                                                then: (callback) => {
+                                                    callback(models.length);
                                                 }
                                             };
                                         }
@@ -417,66 +480,70 @@
 
         $(document).ready(function() {
             const contractABI = null;
-            const contractAddress = null;
+            const contractAddress = '0x15af8f81200625af1a01a49912c34acfce53af8d';
 
             try {
                 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
                 contract.methods.totalSupply().call().then(totalSupply => {
-                    for (let i = 0; i < totalSupply; i++) {
-                        contract.methods.models(i).call().then(modelRecord => {
-                            const title = modelRecord[0];
-                            const link = modelRecord[1];
-                            const hash = modelRecord[2];
-                            const annotation = modelRecord[3];
-                            const industry = modelRecord[4];
+                    for (let id = 0; id < totalSupply; id++) {
+                        contract.methods.models(id).call().then(modelRecord => {
+                            contract.methods.ownerOf(id).call().then(owner => {
+                                const title = modelRecord[0];
+                                const link = modelRecord[1];
+                                const hash = modelRecord[2];
+                                const annotation = modelRecord[3];
+                                const industry = modelRecord[4];
 
-                            const totalStatements = modelRecord[5];
+                                const totalStatements = modelRecord[5];
 
-                            const syntIncorrect = modelRecord[6];
-                            const semIncorrect = modelRecord[8];
+                                const syntIncorrect = modelRecord[6];
+                                const semIncorrect = modelRecord[8];
 
-                            const syntIncomplete = modelRecord[7];
-                            const semIncomplete = modelRecord[9];
+                                const syntIncomplete = modelRecord[7];
+                                const semIncomplete = modelRecord[9];
 
-                            const dateTime = modelRecord[10];
+                                const dateTime = modelRecord[10];
 
-                            const actualContent = $.ajax({
-                                type: 'get',
-                                url: link,
-                                async: false
-                            }).responseText;
+                                const actualContent = $.ajax({
+                                    type: 'get',
+                                    url: link,
+                                    async: false
+                                }).responseText;
 
-                            const actualHash = CryptoJS.SHA256(actualContent).toString();
+                                const actualHash = CryptoJS.SHA256(actualContent).toString();
 
-                            const syntCorrectness = 1 - syntIncorrect / totalStatements;
-                            const semCorrectness = 1 - semIncorrect / totalStatements;
+                                const authenticity = hash === actualHash;
 
-                            const syntCompleteness = 1 - syntIncomplete / totalStatements;
-                            const semCompleteness = 1 - semIncomplete / totalStatements;
+                                const syntCorrectness = 1 - syntIncorrect / totalStatements;
+                                const semCorrectness = 1 - semIncorrect / totalStatements;
 
-                            const weightCorrectness = 0.35;
-                            const weightCompleteness = 0.65;
+                                const syntCompleteness = 1 - syntIncomplete / totalStatements;
+                                const semCompleteness = 1 - semIncomplete / totalStatements;
 
-                            const totalQuality = weightCorrectness * (syntCorrectness + semCorrectness) / 2 + weightCompleteness * (syntCompleteness + semCompleteness) / 2;
+                                const weightCorrectness = 0.35;
+                                const weightCompleteness = 0.65;
 
-                            $('#gallery').append(`<div class="col mb-4">
-                                <div class="card h-100">
-                                    <a href="${link}" target="_blank"><img src="${link}" class="card-img-top" alt="diagram"></a>
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-1">${title}</h5>
-                                        <p class="card-text mb-1">${annotation}</p>
-                                        <p class="card-text mb-1"><small class="text-muted">${industry}</small></p>
+                                const totalQuality = weightCorrectness * (syntCorrectness + semCorrectness) / 2 + weightCompleteness * (syntCompleteness + semCompleteness) / 2;
 
-                                        <p class="card-text mb-1">${hash === actualHash ? '<span class="badge badge-pill badge-success">Authentic</span>' : '<span class="badge badge-pill badge-danger">Tampered</span>'}</p>
+                                $('#gallery').append(`<div class="col mb-4">
+                                    <div class="card h-100">
+                                        <a href="javascript:void(0);" onclick="fillItemModal(${id}, '${encodeURI(title)}', '${encodeURI(link)}', '${encodeURI(annotation)}', '${encodeURI(industry)}', '${encodeURI(dateTime)}', ${authenticity}, ${syntCorrectness}, ${semCorrectness}, ${syntCompleteness}, ${semCompleteness}, ${totalQuality}, '${encodeURI(owner)}', '${encodeURI(contractAddress)}');$('#itemModal').modal('show');"><img src="${link}" class="card-img-top" alt="diagram"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">${title}</h5>
+                                            <p class="card-text mb-1">${annotation}</p>
+                                            <p class="card-text mb-1"><small class="text-muted">${industry}</small></p>
 
-                                        <p class="card-text mb-1"><span class="badge badge-pill badge-light">Quality: ${(totalQuality * 100).toFixed(2)}%</span></p>
+                                            <p class="card-text mb-1">${authenticity ? '<span class="badge badge-pill badge-success">Authentic</span>' : '<span class="badge badge-pill badge-danger">Tampered</span>'}</p>
+
+                                            <p class="card-text mb-1"><span class="badge badge-pill badge-light">Quality: ${(totalQuality * 100).toFixed(2)}%</span></p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</small>
+                                        </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</small>
-                                    </div>
-                                </div>
-                            </div>`);
+                                </div>`);
+                            });
                         });
                     }
                 });
@@ -484,6 +551,36 @@
                 alert(err.message);
             }
         });
+
+        function fillItemModal(id, title, link, description, industry, dateTime, authenticity, syntCorrectness, semCorrectness, syntCompleteness, semCompleteness, totalQuality, owner, contractAddress) {
+            $('#itemModalLabel').html(`<b>Item #${id}</b> — ${decodeURI(title)}`);
+
+            link = decodeURI(link);
+
+            $('#item-image').html(`<a href="${link}" target="_blank"><img src="${link}" class="img-fluid" alt="full-diagram" style="max-width: 100%; max-height: 360px;"></a>`);
+
+            $('#item-description').html(decodeURI(description));
+
+            $('#item-industry').html(`<span class="text-muted">${decodeURI(industry)}</span>`);
+
+            $('#item-authenticity').html(authenticity ? '<span class="badge badge-pill badge-success">Authentic</span>' : '<span class="badge badge-pill badge-danger">Tampered</span>');
+
+            dateTime = decodeURI(dateTime);
+
+            $('#item-dateTime').html(`<span class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</span>`);
+
+            $('#item-m1').html(`<span class="badge badge-pill badge-secondary">Syntactic correctness: ${(syntCorrectness * 100).toFixed(2)}%</span>`);
+            $('#item-m2').html(`<span class="badge badge-pill badge-secondary">Semantic correctness: ${(semCorrectness * 100).toFixed(2)}%</span>`);
+
+            $('#item-m3').html(`<span class="badge badge-pill badge-info">Syntactic completeness: ${(syntCompleteness * 100).toFixed(2)}%</span>`);
+            $('#item-m4').html(`<span class="badge badge-pill badge-info">Semantic completeness: ${(semCompleteness * 100).toFixed(2)}%</span>`);
+
+            $('#item-m5').html(`<span class="badge badge-pill badge-light">Quality: ${(totalQuality * 100).toFixed(2)}%</span>`);
+
+            owner = decodeURI(owner);
+
+            $('#item-owner').html(`<a href="https://ropsten.etherscan.io/token/${contractAddress}?a=${owner}" target="_blank">${owner}</a>`);
+        }
 
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
