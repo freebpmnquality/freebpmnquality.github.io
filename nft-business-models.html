@@ -212,8 +212,11 @@
         <br>
 
         <p class="h5 text-muted mb-1">NFT-DRIVEN COLLECTION OF BUSINESS MODELS</p>
-        <p class="text-muted mb-1">It uses the Ethereum-compatible <a href="https://github.com/freebpmnquality/freebpmnquality.github.io/blob/master/resources/nft/bumonft.sol" target="_blank">smart contract</a> deployed to the <span id="testnet-link">Ropsten testnet</span></p>
-        <p class="mt-1 mb-4"><span class="text-muted">Market Cap</span> &#9830; <span id="total-value">0</span> <span class="text-muted">|</span> &#36;<span id="total-value2">0</span></p>
+        <a href="javascript:void(0);" class="btn btn-sm mt-1 mb-1" role="button" onclick="openCollection();">OPEN MY COLLECTION</a>
+
+        <p class="text-muted mt-1 mb-1">It uses the Ethereum-compatible <a href="https://github.com/freebpmnquality/freebpmnquality.github.io/blob/master/resources/nft/bumonft.sol" target="_blank">smart contract</a> deployed to the <span id="testnet-link">Ropsten testnet</span></p>
+        <p class="mt-1 mb-1"><span class="text-muted">Market Cap</span> &#9830; <span id="total-value">0</span> <span class="text-muted">|</span> &#36;<span id="total-value2">0</span></p>
+        <p class="mt-1 mb-4"><span class="text-muted">Assets</span> <span id="total-supply">0</span></p>
 
         <div class="row row-cols-1 row-cols-md-3" id="gallery">
         </div>
@@ -309,6 +312,8 @@
             $('#message-text').html(messageText);
             $('#messageModal').modal('show');
         }
+
+        const contractAddress = '0x15af8f81200625af1a01a49912c34acfce53af8d';
 
         // for pre-testnet development purposes
         const web3Stub = {
@@ -487,10 +492,14 @@
         };
 
         $(document).ready(function() {
-            const contractAddress = '0x15af8f81200625af1a01a49912c34acfce53af8d';
-
             loadCollection(contractAddress);
         });
+
+        function openCollection() {
+            const myContractAddress = prompt('Enter the token address:', contractAddress);
+
+            loadCollection(myContractAddress);
+        }
 
         function loadCollection(contractAddress) {
             const contractABI = JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"string","name":"_title","type":"string"},{"internalType":"string","name":"_url","type":"string"},{"internalType":"string","name":"_hash","type":"string"},{"internalType":"string","name":"_annotation","type":"string"},{"internalType":"string","name":"_industry","type":"string"},{"internalType":"uint256","name":"_totalStatements","type":"uint256"},{"internalType":"uint256","name":"_syntIncorrect","type":"uint256"},{"internalType":"uint256","name":"_syntIncomplete","type":"uint256"},{"internalType":"uint256","name":"_semIncorrect","type":"uint256"},{"internalType":"uint256","name":"_semIncomplete","type":"uint256"}],"name":"addModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"models","outputs":[{"internalType":"string","name":"title","type":"string"},{"internalType":"string","name":"url","type":"string"},{"internalType":"string","name":"hash","type":"string"},{"internalType":"string","name":"annotation","type":"string"},{"internalType":"string","name":"industry","type":"string"},{"internalType":"uint256","name":"totalStatements","type":"uint256"},{"internalType":"uint256","name":"syntIncorrect","type":"uint256"},{"internalType":"uint256","name":"syntIncomplete","type":"uint256"},{"internalType":"uint256","name":"semIncorrect","type":"uint256"},{"internalType":"uint256","name":"semIncomplete","type":"uint256"},{"internalType":"uint256","name":"dateTime","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"}]`);
@@ -505,6 +514,13 @@
                 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
                 contract.methods.totalSupply().call().then(totalSupply => {
+                    $('#gallery').empty();
+
+                    $('#total-value').html(0);
+                    $('#total-value2').html(0);
+
+                    $('#total-supply').html(totalSupply);
+
                     for (let id = 0; id < totalSupply; id++) {
                         contract.methods.models(id).call().then(modelRecord => {
                             contract.methods.ownerOf(id).call().then(owner => {
