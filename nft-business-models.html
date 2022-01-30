@@ -100,6 +100,10 @@
             border-color: #ECEFF1;
             font-weight: bold;
         }
+        
+        .rnd-item {
+            border-radius: 1rem;
+        }
     </style>
 </head>
 
@@ -195,7 +199,7 @@
         <h1>bumonft — NFT collection of business models for metaverse organizations</h1>
         <h3>A blockchain-driven NFT protocol for BPMN ARIS ArchiMate and other business models that can be shared and co-designed by virtual or traditional companies.</h3>
 
-        <a href="#tryArea" class="btn btn-lg mt-4" role="button">TRY FOR FREE</a>
+        <a href="#tryArea" class="btn btn-lg mt-4 rnd-item" role="button">TRY FOR FREE</a>
         <br>
 
         <img src="/images/nft/top.png" class="img-fluid banner-img mt-4" alt="top.png">
@@ -212,7 +216,7 @@
         <br>
 
         <p class="h5 text-muted mb-1">NFT-DRIVEN COLLECTION OF BUSINESS MODELS</p>
-        <a href="javascript:void(0);" class="btn btn-sm mt-1 mb-1" role="button" onclick="openCollection();">OPEN MY COLLECTION</a>
+        <a href="javascript:void(0);" class="btn btn-sm mt-1 mb-1 rnd-item" role="button" onclick="openCollection();">OPEN MY COLLECTION</a>
 
         <p class="text-muted mt-1 mb-1">It uses the Ethereum-compatible <a href="https://github.com/freebpmnquality/freebpmnquality.github.io/blob/master/resources/nft/bumonft.sol" target="_blank">smart contract</a> deployed to the <span id="testnet-link">Ropsten testnet</span></p>
         <p class="mt-1 mb-1"><span class="text-muted">Market Cap</span> &#9830; <span id="total-value">0</span> <span class="text-muted">|</span> &#36;<span id="total-value2">0</span></p>
@@ -230,7 +234,7 @@
 
         <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
+                <div class="modal-content rnd-item">
                     <div class="modal-header">
                         <h5 class="modal-title" id="itemModalLabel"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -239,12 +243,12 @@
                     <div class="modal-body">
                         <div id="item-image"></div>
 
-                        <p class="mt-2 mb-0">Owned by <span id="item-owner" style="word-break: break-all;"></span></p>
+                        <p class="mt-4 mb-0">Owned by <span id="item-owner" style="word-break: break-all;"></span></p>
                         <p class="mt-1" id="item-value"></p>
 
                         <div class="row row-cols-1 row-cols-md-2 mt-2">
                             <div class="col mb-4">
-                                <div class="card h-100">
+                                <div class="card h-100 rnd-item">
                                     <div class="card-body">
                                         <h5 class="card-title mb-1">Information</h5>
 
@@ -258,7 +262,7 @@
                                 </div>
                             </div>
                             <div class="col mb-4">
-                                <div class="card h-100">
+                                <div class="card h-100 rnd-item">
                                     <div class="card-body">
                                         <h5 class="card-title mb-1">Quality</h5>
 
@@ -595,10 +599,11 @@
                                 $('#total-value2').html((totalCostUSD + costUSD).toFixed(2));
 
                                 $('#gallery').append(`<div class="col mb-4">
-                                    <div class="card h-100">
-                                        <a href="javascript:void(0);" onclick="fillItemModal(${id}, '${encodeURI(title)}', '${encodeURI(link)}', '${encodeURI(annotation)}', '${encodeURI(industry)}', '${encodeURI(dateTime)}', ${authenticity}, ${syntCorrectness}, ${semCorrectness}, ${syntCompleteness}, ${semCompleteness}, ${totalQuality}, '${encodeURI(owner)}', '${encodeURI(contractAddress)}', ${costETH}, ${costUSD});$('#itemModal').modal('show');"><img src="${link}" class="card-img-top" alt="diagram"></a>
+                                    <div class="card h-100 rnd-item">
                                         <div class="card-body">
-                                            <h5 class="card-title mb-1">${title}</h5>
+                                            <a href="javascript:void(0);" onclick="fillItemModal(${id}, '${encodeURI(title)}', '${encodeURI(link)}', '${encodeURI(annotation)}', '${encodeURI(industry)}', '${encodeURI(dateTime)}', ${authenticity}, ${syntCorrectness}, ${semCorrectness}, ${syntCompleteness}, ${semCompleteness}, ${totalQuality}, '${encodeURI(owner)}', '${encodeURI(contractAddress)}', ${costETH}, ${costUSD});$('#itemModal').modal('show');"><img src="${link}" class="img-fluid rnd-item" alt="diagram"></a>
+
+                                            <h5 class="card-title mt-4 mb-1">${title}</h5>
                                             <p class="card-text mb-1">${annotation}</p>
                                             <p class="card-text mb-1"><small class="text-muted">${industry}</small></p>
 
@@ -606,9 +611,8 @@
 
                                             <p class="card-text mb-1"><span class="badge badge-pill badge-light">Quality: ${(totalQuality * 100).toFixed(2)}%</span></p>
                                             <p class="card-text mb-1"><span class="text-muted">Value</span> &#9830; ${costETH.toFixed(2)} <span class="text-muted">|</span> &#36;${costUSD.toFixed(2)}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</small>
+
+                                            <p class="card-text"><small class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</small></p>
                                         </div>
                                     </div>
                                 </div>`);
@@ -626,7 +630,7 @@
 
             link = decodeURI(link);
 
-            $('#item-image').html(`<a href="${link}" target="_blank"><img src="${link}" class="img-fluid" alt="full-diagram" style="max-width: 100%; max-height: 360px;"></a>`);
+            $('#item-image').html(`<a href="${link}" target="_blank"><img src="${link}" class="img-fluid rnd-item" alt="full-diagram" style="max-width: 100%; max-height: 360px;"></a>`);
 
             $('#item-description').html(decodeURI(description));
 
