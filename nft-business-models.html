@@ -601,7 +601,7 @@
                                 $('#gallery').append(`<div class="col mb-4">
                                     <div class="card h-100 rnd-item">
                                         <div class="card-body">
-                                            <a href="javascript:void(0);" onclick="fillItemModal(${id}, '${encodeURI(title)}', '${encodeURI(link)}', '${encodeURI(annotation)}', '${encodeURI(industry)}', '${encodeURI(dateTime)}', ${authenticity}, ${syntCorrectness}, ${semCorrectness}, ${syntCompleteness}, ${semCompleteness}, ${totalQuality}, '${encodeURI(owner)}', '${encodeURI(contractAddress)}', ${costETH}, ${costUSD});$('#itemModal').modal('show');"><img src="${link}" class="img-fluid rnd-item" alt="diagram"></a>
+                                            <a href="javascript:void(0);" onclick="fillItemModal(${id}, '${encodeURI(title)}', '${encodeURI(link)}', '${encodeURI(annotation)}', '${encodeURI(industry)}', '${encodeURI(dateTime)}', ${authenticity}, ${syntCorrectness}, ${semCorrectness}, ${syntCompleteness}, ${semCompleteness}, ${totalQuality}, '${encodeURI(owner)}', '${encodeURI(contractAddress)}', ${costETH}, ${costUSD});$('#itemModal').modal('show');"><img src="${link}" class="img-fluid rnd-item img-thumbnail" alt="diagram"></a>
 
                                             <h5 class="card-title mt-4 mb-1">${title}</h5>
                                             <p class="card-text mb-1">${annotation}</p>
@@ -630,7 +630,7 @@
 
             link = decodeURI(link);
 
-            $('#item-image').html(`<a href="${link}" target="_blank"><img src="${link}" class="img-fluid rnd-item" alt="full-diagram" style="max-width: 100%; max-height: 360px;"></a>`);
+            $('#item-image').html(`<a href="${link}" target="_blank"><img src="${link}" class="img-fluid rnd-item img-thumbnail" alt="full-diagram" style="max-width: 100%; max-height: 360px;"></a>`);
 
             $('#item-description').html(decodeURI(description));
 
