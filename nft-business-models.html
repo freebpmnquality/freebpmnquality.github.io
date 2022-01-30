@@ -496,7 +496,7 @@
         });
 
         function openCollection() {
-            const myContractAddress = prompt('Enter the token address:', contractAddress);
+            const myContractAddress = prompt('Enter the smart contract address:', contractAddress);
 
             loadCollection(myContractAddress);
         }
@@ -622,7 +622,7 @@
         }
 
         function fillItemModal(id, title, link, description, industry, dateTime, authenticity, syntCorrectness, semCorrectness, syntCompleteness, semCompleteness, totalQuality, owner, contractAddress, costETH, costUSD) {
-            $('#itemModalLabel').html(`<b>Item #${id}</b> — ${decodeURI(title)}`);
+            $('#itemModalLabel').html(`<b>Token #${id}</b> — ${decodeURI(title)}`);
 
             link = decodeURI(link);
 
