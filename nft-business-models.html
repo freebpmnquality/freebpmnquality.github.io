@@ -272,10 +272,11 @@
 
                                         <p class="card-text mb-1" id="item-m5"></p>
 
+                                        <p class="card-text mb-1"><small class="text-muted">Correctness</small></p>
                                         <p class="card-text mb-1" id="item-m1"></p>
+
+                                        <p class="card-text mb-1"><small class="text-muted">Completeness</small></p>
                                         <p class="card-text mb-1" id="item-m2"></p>
-                                        <p class="card-text mb-1" id="item-m3"></p>
-                                        <p class="card-text mb-1" id="item-m4"></p>
                                     </div>
                                 </div>
                             </div>
@@ -646,11 +647,9 @@
 
             $('#item-dateTime').html(`<span class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</span>`);
 
-            $('#item-m1').html(`<span class="badge badge-pill badge-secondary">Syntactic correctness: ${(syntCorrectness * 100).toFixed(2)}%</span>`);
-            $('#item-m2').html(`<span class="badge badge-pill badge-secondary">Semantic correctness: ${(semCorrectness * 100).toFixed(2)}%</span>`);
+            $('#item-m1').html(`<span class="badge badge-pill badge-secondary">Syntactic: ${(syntCorrectness * 100).toFixed(2)}%</span> <span class="badge badge-pill badge-info">Semantic: ${(semCorrectness * 100).toFixed(2)}%</span>`);
 
-            $('#item-m3').html(`<span class="badge badge-pill badge-info">Syntactic completeness: ${(syntCompleteness * 100).toFixed(2)}%</span>`);
-            $('#item-m4').html(`<span class="badge badge-pill badge-info">Semantic completeness: ${(semCompleteness * 100).toFixed(2)}%</span>`);
+            $('#item-m2').html(`<span class="badge badge-pill badge-secondary">Syntactic: ${(syntCompleteness * 100).toFixed(2)}%</span> <span class="badge badge-pill badge-info">Semantic: ${(semCompleteness * 100).toFixed(2)}%</span>`);
 
             $('#item-m5').html(`<span class="badge badge-pill badge-light">Quality: ${(totalQuality * 100).toFixed(2)}%</span>`);
 
