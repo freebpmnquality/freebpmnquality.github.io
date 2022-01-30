@@ -432,9 +432,11 @@
                             const industry = modelRecord[4];
 
                             const totalStatements = modelRecord[5];
-                            const syntInvalid = modelRecord[6];
+
+                            const syntIncorrect = modelRecord[6];
+                            const semIncorrect = modelRecord[8];
+
                             const syntIncomplete = modelRecord[7];
-                            const semInvalid = modelRecord[8];
                             const semIncomplete = modelRecord[9];
 
                             const dateTime = modelRecord[10];
@@ -447,10 +449,16 @@
 
                             const actualHash = CryptoJS.SHA256(actualContent).toString();
 
-                            const syntQuality = 1 - syntInvalid / totalStatements;
+                            const syntCorrectness = 1 - syntIncorrect / totalStatements;
+                            const semCorrectness = 1 - semIncorrect / totalStatements;
+
                             const syntCompleteness = 1 - syntIncomplete / totalStatements;
-                            const semQuality = 1 - semInvalid / totalStatements;
                             const semCompleteness = 1 - semIncomplete / totalStatements;
+
+                            const weightCorrectness = 0.35;
+                            const weightCompleteness = 0.65;
+
+                            const totalQuality = weightCorrectness * (syntCorrectness + semCorrectness) / 2 + weightCompleteness * (syntCompleteness + semCompleteness) / 2;
 
                             $('#gallery').append(`<div class="col mb-4">
                                 <div class="card h-100">
@@ -462,12 +470,7 @@
 
                                         <p class="card-text mb-1">${hash === actualHash ? '<span class="badge badge-pill badge-success">Authentic</span>' : '<span class="badge badge-pill badge-danger">Tampered</span>'}</p>
 
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><small>Syntactic quality: ${(syntQuality * 100).toFixed(2)}%</small></li>
-                                            <li class="list-group-item"><small>Syntactic completeness: ${(syntCompleteness * 100).toFixed(2)}%</small></li>
-                                            <li class="list-group-item"><small>Semantic quality: ${(semQuality * 100).toFixed(2)}%</small></li>
-                                            <li class="list-group-item"><small>Semantic completeness: ${(semCompleteness * 100).toFixed(2)}%</small></li>
-                                        </ul>
+                                        <p class="card-text mb-1"><span class="badge badge-pill badge-light">Quality: ${(totalQuality * 100).toFixed(2)}%</span></p>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-muted">${new Date(dateTime * 1000).toLocaleString()}</small>
