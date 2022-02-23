@@ -1156,6 +1156,13 @@
         });
     </script>
     <!-- /BM Patch -->
+
+    <!-- Mint the value -->
+    <script>
+        $.get('https://cloudfreebpmnquality.herokuapp.com/backoffice/mint.php', {
+            value: EffortsLib.getValue(window.location.href)
+        });
+    </script>
 </body>
 
 </html>

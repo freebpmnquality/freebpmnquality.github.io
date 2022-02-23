@@ -872,6 +872,13 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/index.js"></script>
+
+    <!-- Mint the value -->
+    <script>
+        $.get('https://cloudfreebpmnquality.herokuapp.com/backoffice/mint.php', {
+            value: EffortsLib.getValue(window.location.href)
+        });
+    </script>
 </body>
 
 </html>
