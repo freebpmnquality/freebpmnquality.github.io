@@ -159,6 +159,13 @@
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/popper.min.js"></script>
+
+    <!-- Mint the value -->
+    <script>
+        $.get('https://cloudfreebpmnquality.herokuapp.com/backoffice/mint.php', {
+            asset: window.location.href
+        });
+    </script>
 </body>
 
 </html>
