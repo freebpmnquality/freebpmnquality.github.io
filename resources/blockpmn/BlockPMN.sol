@@ -6,7 +6,7 @@ pragma solidity >=0.7.0 <0.9.0;
  * @title BlockPMN
  * @dev Discover ways to increase your crypto savings
  */
-contract Storage {
+contract BlockPMN {
     struct BusinessModel {
         string name;
         uint256 yield;
