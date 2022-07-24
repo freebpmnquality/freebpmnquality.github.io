@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0xn4x1z" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.3.1">
+  <bpmn:process id="Process_1a599vs" isExecutable="false">
+    <bpmn:subProcess id="Activity_126hbbd" name="Liquidity pools">
+      <bpmn:endEvent id="Event_12ecnqz">
+        <bpmn:incoming>Flow_00hvuq0</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:task id="Activity_1irsq1b" name="Deposit LPTs to a staking pool">
+        <bpmn:incoming>Flow_17k5u1o</bpmn:incoming>
+        <bpmn:outgoing>Flow_1wxpcpm</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Activity_1jzjqtp" name="Receive liquidity provider tokens (LPTs)">
+        <bpmn:incoming>Flow_1qve0bo</bpmn:incoming>
+        <bpmn:outgoing>Flow_17k5u1o</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Activity_1wkev33" name="Receive tokens as a reward">
+        <bpmn:incoming>Flow_1wxpcpm</bpmn:incoming>
+        <bpmn:outgoing>Flow_00hvuq0</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Activity_0ogsqer" name="Add supported coins to a liquidity pool">
+        <bpmn:incoming>Flow_1s8unfw</bpmn:incoming>
+        <bpmn:outgoing>Flow_1qve0bo</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:startEvent id="Event_0xtdqfp">
+        <bpmn:outgoing>Flow_1s8unfw</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1s8unfw" sourceRef="Event_0xtdqfp" targetRef="Activity_0ogsqer" />
+      <bpmn:sequenceFlow id="Flow_1qve0bo" sourceRef="Activity_0ogsqer" targetRef="Activity_1jzjqtp" />
+      <bpmn:sequenceFlow id="Flow_17k5u1o" sourceRef="Activity_1jzjqtp" targetRef="Activity_1irsq1b" />
+      <bpmn:sequenceFlow id="Flow_1wxpcpm" sourceRef="Activity_1irsq1b" targetRef="Activity_1wkev33" />
+      <bpmn:sequenceFlow id="Flow_00hvuq0" sourceRef="Activity_1wkev33" targetRef="Event_12ecnqz" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1a599vs">
+      <bpmndi:BPMNShape id="Activity_0v2m1uh_di" bpmnElement="Activity_126hbbd" isExpanded="true">
+        <dc:Bounds x="160" y="80" width="710" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_00hvuq0_di" bpmnElement="Flow_00hvuq0">
+        <di:waypoint x="770" y="150" />
+        <di:waypoint x="812" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wxpcpm_di" bpmnElement="Flow_1wxpcpm">
+        <di:waypoint x="630" y="150" />
+        <di:waypoint x="670" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17k5u1o_di" bpmnElement="Flow_17k5u1o">
+        <di:waypoint x="490" y="150" />
+        <di:waypoint x="530" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qve0bo_di" bpmnElement="Flow_1qve0bo">
+        <di:waypoint x="350" y="150" />
+        <di:waypoint x="390" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s8unfw_di" bpmnElement="Flow_1s8unfw">
+        <di:waypoint x="218" y="150" />
+        <di:waypoint x="250" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0xtdqfp_di" bpmnElement="Event_0xtdqfp">
+        <dc:Bounds x="182" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ogsqer_di" bpmnElement="Activity_0ogsqer">
+        <dc:Bounds x="250" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wkev33_di" bpmnElement="Activity_1wkev33">
+        <dc:Bounds x="670" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jzjqtp_di" bpmnElement="Activity_1jzjqtp">
+        <dc:Bounds x="390" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1irsq1b_di" bpmnElement="Activity_1irsq1b">
+        <dc:Bounds x="530" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12ecnqz_di" bpmnElement="Event_12ecnqz">
+        <dc:Bounds x="812" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

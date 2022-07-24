@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0xn4x1z" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.3.1">
+  <bpmn:process id="Process_1a599vs" isExecutable="false">
+    <bpmn:subProcess id="Activity_0aimexh" name="Flexible savings">
+      <bpmn:startEvent id="Event_0dx8c5n">
+        <bpmn:outgoing>Flow_07jvi5q</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="Activity_0daeeom" name="Deposit your funds">
+        <bpmn:incoming>Flow_07jvi5q</bpmn:incoming>
+        <bpmn:outgoing>Flow_04gttl2</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_07jvi5q" sourceRef="Event_0dx8c5n" targetRef="Activity_0daeeom" />
+      <bpmn:task id="Activity_03u3i2v" name="Earn interest">
+        <bpmn:incoming>Flow_04gttl2</bpmn:incoming>
+        <bpmn:outgoing>Flow_0b75n9f</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_04gttl2" sourceRef="Activity_0daeeom" targetRef="Activity_03u3i2v" />
+      <bpmn:task id="Activity_0w6uhfj" name="Redeem your funds at any time">
+        <bpmn:incoming>Flow_0b75n9f</bpmn:incoming>
+        <bpmn:outgoing>Flow_00q96jp</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_0b75n9f" sourceRef="Activity_03u3i2v" targetRef="Activity_0w6uhfj" />
+      <bpmn:endEvent id="Event_055s0oc">
+        <bpmn:incoming>Flow_00q96jp</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_00q96jp" sourceRef="Activity_0w6uhfj" targetRef="Event_055s0oc" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1a599vs">
+      <bpmndi:BPMNShape id="Activity_0yk70bw_di" bpmnElement="Activity_0aimexh" isExpanded="true">
+        <dc:Bounds x="160" y="80" width="570" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_00q96jp_di" bpmnElement="Flow_00q96jp">
+        <di:waypoint x="630" y="150" />
+        <di:waypoint x="672" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b75n9f_di" bpmnElement="Flow_0b75n9f">
+        <di:waypoint x="490" y="150" />
+        <di:waypoint x="530" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04gttl2_di" bpmnElement="Flow_04gttl2">
+        <di:waypoint x="350" y="150" />
+        <di:waypoint x="390" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07jvi5q_di" bpmnElement="Flow_07jvi5q">
+        <di:waypoint x="218" y="150" />
+        <di:waypoint x="250" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0dx8c5n_di" bpmnElement="Event_0dx8c5n">
+        <dc:Bounds x="182" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0daeeom_di" bpmnElement="Activity_0daeeom">
+        <dc:Bounds x="250" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03u3i2v_di" bpmnElement="Activity_03u3i2v">
+        <dc:Bounds x="390" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0w6uhfj_di" bpmnElement="Activity_0w6uhfj">
+        <dc:Bounds x="530" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_055s0oc_di" bpmnElement="Event_055s0oc">
+        <dc:Bounds x="672" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

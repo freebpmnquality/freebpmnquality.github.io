@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0xn4x1z" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.3.1">
+  <bpmn:process id="Process_1a599vs" isExecutable="false">
+    <bpmn:subProcess id="Activity_0r7gpqp" name="Locked savings">
+      <bpmn:endEvent id="Event_19w0x38">
+        <bpmn:incoming>Flow_1gkfwbn</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:task id="Activity_0i79rgc" name="Earn interest">
+        <bpmn:incoming>Flow_1u3yk18</bpmn:incoming>
+        <bpmn:outgoing>Flow_1gkfwbn</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Activity_1yyzvs7" name="Deposit your funds">
+        <bpmn:incoming>Flow_0famk1f</bpmn:incoming>
+        <bpmn:outgoing>Flow_1u3yk18</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Activity_13ldbol" name="Set a predetermined duration for your deposit">
+        <bpmn:incoming>Flow_018klxl</bpmn:incoming>
+        <bpmn:outgoing>Flow_0famk1f</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:startEvent id="Event_0229ks6">
+        <bpmn:outgoing>Flow_018klxl</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_018klxl" sourceRef="Event_0229ks6" targetRef="Activity_13ldbol" />
+      <bpmn:sequenceFlow id="Flow_0famk1f" sourceRef="Activity_13ldbol" targetRef="Activity_1yyzvs7" />
+      <bpmn:sequenceFlow id="Flow_1u3yk18" sourceRef="Activity_1yyzvs7" targetRef="Activity_0i79rgc" />
+      <bpmn:sequenceFlow id="Flow_1gkfwbn" sourceRef="Activity_0i79rgc" targetRef="Event_19w0x38" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1a599vs">
+      <bpmndi:BPMNShape id="Activity_0407ep7_di" bpmnElement="Activity_0r7gpqp" isExpanded="true">
+        <dc:Bounds x="160" y="80" width="570" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1gkfwbn_di" bpmnElement="Flow_1gkfwbn">
+        <di:waypoint x="630" y="150" />
+        <di:waypoint x="672" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1u3yk18_di" bpmnElement="Flow_1u3yk18">
+        <di:waypoint x="490" y="150" />
+        <di:waypoint x="530" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0famk1f_di" bpmnElement="Flow_0famk1f">
+        <di:waypoint x="350" y="150" />
+        <di:waypoint x="390" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_018klxl_di" bpmnElement="Flow_018klxl">
+        <di:waypoint x="218" y="150" />
+        <di:waypoint x="250" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0229ks6_di" bpmnElement="Event_0229ks6">
+        <dc:Bounds x="182" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13ldbol_di" bpmnElement="Activity_13ldbol">
+        <dc:Bounds x="250" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1yyzvs7_di" bpmnElement="Activity_1yyzvs7">
+        <dc:Bounds x="390" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0i79rgc_di" bpmnElement="Activity_0i79rgc">
+        <dc:Bounds x="530" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_19w0x38_di" bpmnElement="Event_19w0x38">
+        <dc:Bounds x="672" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
