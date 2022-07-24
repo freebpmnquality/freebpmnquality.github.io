@@ -331,50 +331,13 @@
         <div class="mt-4 mb-4">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="row row-cols-1 row-cols-md-2">
-                        <div class="col mb-4">
-                            <div class="card rnd-item">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card rnd-item">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card rnd-item">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card rnd-item">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="row row-cols-1 row-cols-md-3" id="options"></div>
                 </div>
             </div>
         </div>
 
         <p class="container mt-4 mb-4">We offer crypto income platforms via the blockchain protocol. Therefore, our resource is highly resistant to modification and fraud. It means nobody can hack this platform and promote scam schemes on our behalf. To be sure of our integrity, you
-            can see the source code of our <a href="https://ropsten.etherscan.io/address/0x18274c2e2955456a281c935fbf90f948aab1ef23#code" target="_blank">smart contract</a> and verify the <a href="https://ropsten.etherscan.io/address/0x18274c2e2955456a281c935fbf90f948aab1ef23"
+            can see the source code of our <a href="https://ropsten.etherscan.io/address/0x5c53ce70beaf3a59e7150f15a045698b4425048f#code" target="_blank">smart contract</a> and verify the <a href="https://ropsten.etherscan.io/address/0x5c53ce70beaf3a59e7150f15a045698b4425048f"
                 target="_blank">transaction history</a>.</p>
 
         <div class="mt-4 mb-4">
@@ -439,6 +402,7 @@
         });
 
         class BPMNLoader {
+
             constructor(container, model) {
                 this.container = container;
                 this.model = model;
@@ -468,14 +432,76 @@
 
         class BlockchainDAO {
 
+            constructor(address, ABI, provider) {
+                this.address = address;
+                this.ABI = ABI;
+                this.provider = provider;
+            }
+
+            getContract() {
+                const web3 = new Web3(new Web3.providers.HttpProvider(this.provider));
+                const contract = new web3.eth.Contract(this.ABI, this.address);
+
+                return contract;
+            }
+
+            async getBusinessModels(from, to) {
+                const contract = this.getContract();
+
+                const businessModels = [];
+
+                for (let id = from; id <= to; id++) {
+                    businessModels.push(await contract.methods.businessModels(id).call());
+                }
+
+                return businessModels;
+            }
+
+            async getInvestmentPlatforms(from, to) {
+                const contract = this.getContract();
+
+                const investmentPlatforms = [];
+
+                for (let id = from; id <= to; id++) {
+                    investmentPlatforms.push(await contract.methods.investmentPlatforms(id).call());
+                }
+
+                return investmentPlatforms;
+            }
         }
 
-        $(document).ready(function() {
-            const options = ['flexible', 'locked', 'staking', 'liquidity', 'dual'];
+        $(document).ready(async function() {
+            try {
+                const options = ['flexible', 'locked', 'staking', 'liquidity', 'dual'];
 
-            options.forEach(function(option) {
-                new BPMNLoader(`#${option}-canvas`, `./resources/blockpmn/${option}.bpmn`).loadBPMNModel();
-            });
+                options.forEach(function(option) {
+                    new BPMNLoader(`#${option}-canvas`, `./resources/blockpmn/${option}.bpmn`).loadBPMNModel();
+                });
+
+                const blockchainDAO = new BlockchainDAO('0x5c53ce70beaf3a59e7150f15a045698b4425048f', JSON.parse(`[{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), 'https://ropsten.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba');
+
+                const SIZE = 4;
+
+                const businessModels = await blockchainDAO.getBusinessModels(0, SIZE);
+                const investmentPlatforms = await blockchainDAO.getInvestmentPlatforms(0, SIZE);
+
+                $('#options').empty();
+
+                investmentPlatforms.forEach(function(option) {
+                    $('#options').append(`<div class="col mb-4">
+                            <div class="card rnd-item h-100">
+                                <img src="${option.imageURL}" class="card-img-top rnd-item" alt="${option.name}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${option.name}</h5>
+                                    <p class="card-text">${option.description}</p>
+                                    <p class="card-text"><small class="text-muted">APY ≈ ${(option.APY / 100).toFixed(2)}%</small></p>
+                                </div>
+                            </div>
+                        </div>`);
+                });
+            } catch (err) {
+                alert(err.message);
+            }
         });
     </script>
 
