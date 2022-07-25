@@ -297,7 +297,7 @@
                             <div id="flexible-canvas"></div>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="margin-bottom: 0rem!important;">
                                     <thead>
                                         <tr>
                                             <th scope="col">Complexity</th>
@@ -312,6 +312,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <small>On-chain analysis <a href="https://goerli.etherscan.io/address/0x2ac07fe7007e8f9a8aca375d7227ff526d782fba#code" target="_blank">results</a></small>
                         </div>
                     </div>
                 </div>
@@ -375,7 +377,7 @@
                             <div id="locked-canvas"></div>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="margin-bottom: 0rem!important;">
                                     <thead>
                                         <tr>
                                             <th scope="col">Complexity</th>
@@ -390,6 +392,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <small>On-chain analysis <a href="https://goerli.etherscan.io/address/0x2ac07fe7007e8f9a8aca375d7227ff526d782fba#code" target="_blank">results</a></small>
                         </div>
                     </div>
                 </div>
@@ -454,7 +458,7 @@
                             <div id="staking-canvas"></div>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="margin-bottom: 0rem!important;">
                                     <thead>
                                         <tr>
                                             <th scope="col">Complexity</th>
@@ -469,6 +473,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <small>On-chain analysis <a href="https://goerli.etherscan.io/address/0x2ac07fe7007e8f9a8aca375d7227ff526d782fba#code" target="_blank">results</a></small>
                         </div>
                     </div>
                 </div>
@@ -533,7 +539,7 @@
                             <div id="liquidity-canvas"></div>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="margin-bottom: 0rem!important;">
                                     <thead>
                                         <tr>
                                             <th scope="col">Complexity</th>
@@ -548,6 +554,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <small>On-chain analysis <a href="https://goerli.etherscan.io/address/0x2ac07fe7007e8f9a8aca375d7227ff526d782fba#code" target="_blank">results</a></small>
                         </div>
                     </div>
                 </div>
@@ -612,7 +620,7 @@
                             <div id="dual-canvas"></div>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="margin-bottom: 0rem!important;">
                                     <thead>
                                         <tr>
                                             <th scope="col">Complexity</th>
@@ -627,6 +635,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <small>On-chain analysis <a href="https://goerli.etherscan.io/address/0x2ac07fe7007e8f9a8aca375d7227ff526d782fba#code" target="_blank">results</a></small>
                         </div>
                     </div>
                 </div>
@@ -965,7 +975,7 @@
             }
         }
 
-        class BlockchainDAO {
+        class BlockPMNContractDAO {
 
             constructor(address, ABI, provider) {
                 this.address = address;
@@ -1005,20 +1015,49 @@
             }
         }
 
+        class EtherBPMNContractDAO {
+            constructor(address, ABI, provider) {
+                this.address = address;
+                this.ABI = ABI;
+                this.provider = provider;
+            }
+
+            getContract() {
+                const web3 = new Web3(new Web3.providers.HttpProvider(this.provider));
+                const contract = new web3.eth.Contract(this.ABI, this.address);
+
+                return contract;
+            }
+
+            async getBusinessProcesses(from, to) {
+                const contract = this.getContract();
+
+                const businessProcesses = [];
+
+                for (let id = from; id <= to; id++) {
+                    businessProcesses.push(await contract.methods.businessProcesses(id).call());
+                }
+
+                return businessProcesses;
+            }
+        }
+
         $(document).ready(async function() {
             try {
                 const options = ['flexible', 'locked', 'staking', 'liquidity', 'dual'];
 
-                options.forEach(function(option) {
+                options.forEach(function(option, index) {
                     new BPMNLoader(`#${option}-canvas`, `./resources/blockpmn/${option}.bpmn`).loadBPMNModel();
                 });
 
-                const blockchainDAO = new BlockchainDAO('0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"},{"internalType":"uint256","name":"flexibility","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"platformURL","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"},{"internalType":"uint256","name":"_flexibility","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_platformURL","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), 'https://goerli.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba');
+                const blockchainProvider = 'https://goerli.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba';
+
+                const blockPMNContractDAO = new BlockPMNContractDAO('0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"},{"internalType":"uint256","name":"flexibility","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"platformURL","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"},{"internalType":"uint256","name":"_flexibility","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_platformURL","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), blockchainProvider);
 
                 const SIZE = options.length - 1;
                 const MAX_RANK = 9;
 
-                const businessModels = await blockchainDAO.getBusinessModels(0, SIZE);
+                const businessModels = await blockPMNContractDAO.getBusinessModels(0, SIZE);
 
                 businessModels.forEach(function(model, index) {
                     $(`#yield-${index}`).text((model.yield / MAX_RANK * 100).toFixed(2));
@@ -1026,7 +1065,7 @@
                     $(`#flexibility-${index}`).text((model.flexibility / MAX_RANK * 100).toFixed(2));
                 });
 
-                const investmentPlatforms = await blockchainDAO.getInvestmentPlatforms(0, SIZE);
+                const investmentPlatforms = await blockPMNContractDAO.getInvestmentPlatforms(0, SIZE);
 
                 $('#options').empty();
 
@@ -1048,6 +1087,27 @@
                 riskLevels.forEach(function(level, index) {
                     $(`#funds-${level}`).val(100);
                     $(`#funds-${level}`).trigger('keyup');
+                });
+
+                const etherBPMNContractDAO = new EtherBPMNContractDAO('0x2ac07fe7007e8f9a8aca375d7227ff526d782fba', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessProcesses","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"activities","type":"uint256"},{"internalType":"uint256","name":"flows","type":"uint256"},{"internalType":"uint256","name":"common","type":"uint256"},{"internalType":"uint256","name":"total","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_activities","type":"uint256"},{"internalType":"uint256","name":"_flows","type":"uint256"},{"internalType":"uint256","name":"_common","type":"uint256"},{"internalType":"uint256","name":"_total","type":"uint256"}],"name":"storeBusinessProcess","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), blockchainProvider);
+
+                const businessProcesses = await etherBPMNContractDAO.getBusinessProcesses(0, SIZE);
+
+                const COMPLEXITY_MIN = 0,
+                    COMPLEXITY_MAX = 1;
+
+                const CONFORMITY_MIN = 0.04,
+                    CONFORMITY_MAX = 0.23;
+
+                options.forEach(function(option, index) {
+                    let complexity = businessProcesses[index].flows - businessProcesses[index].activities + 1;
+                    let conformity = businessProcesses[index].common / businessProcesses[index].total;
+
+                    conformity = (1 + conformity - CONFORMITY_MIN) / (1 + CONFORMITY_MAX - CONFORMITY_MIN);
+                    complexity = (1 + complexity - COMPLEXITY_MIN) / (1 + COMPLEXITY_MAX - COMPLEXITY_MIN);
+
+                    $(`#${option}-complexity`).text((complexity * 100).toFixed(2));
+                    $(`#${option}-conformity`).text((conformity * 100).toFixed(2));
                 });
             } catch (err) {
                 alert(err.message);
