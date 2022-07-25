@@ -108,6 +108,80 @@
         h2 {
             font-weight: bold;
         }
+        
+        .nav-link-verylow {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #4f7814;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-low {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #6e7814;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-medium {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #785f14;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-high {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #784614;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-veryhigh {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #781914;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-verylow.active {
+            color: #000000;
+            background-color: #b3dc78;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-low.active {
+            color: #000000;
+            background-color: #d2dc78;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-medium.active {
+            color: #000000;
+            background-color: #dcc378;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-high.active {
+            color: #000000;
+            background-color: #dcaa78;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-veryhigh.active {
+            color: #000000;
+            background-color: #dc7d78;
+            border-radius: 1rem;
+        }
+        
+        .pie-img {
+            width: 240px;
+        }
     </style>
 </head>
 
@@ -173,7 +247,7 @@
         </div>
         <div class="container mt-4 mb-4">
             <div class="row mb-4">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="card rnd-item mb-2" style="color: #fff; background-color: #64ac78;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Yield — <span id="yield-0">0</span>%</span>
@@ -181,10 +255,18 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="card rnd-item" style="color: #fff; background-color: #dc6478;">
+                <div class="col-sm-4">
+                    <div class="card rnd-item mb-2" style="color: #fff; background-color: #dc6478;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Risk — <span id="risk-0">0</span>%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card rnd-item" style="color: #fff; background-color: #b496f6;">
+                        <div class="card-body">
+                            <span style="font-size: 20px;">Flexibility — <span id="flexibility-0">0</span>%</span>
                         </div>
                     </div>
                 </div>
@@ -213,7 +295,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="locked"></span>
@@ -226,7 +308,7 @@
         </div>
         <div class="container mt-4 mb-4">
             <div class="row mb-4">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="card rnd-item mb-2" style="color: #fff; background-color: #64ac78;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Yield — <span id="yield-1">0</span>%</span>
@@ -234,10 +316,18 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="card rnd-item" style="color: #fff; background-color: #dc6478;">
+                <div class="col-sm-4">
+                    <div class="card rnd-item mb-2" style="color: #fff; background-color: #dc6478;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Risk — <span id="risk-1">0</span>%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card rnd-item" style="color: #fff; background-color: #b496f6;">
+                        <div class="card-body">
+                            <span style="font-size: 20px;">Flexibility — <span id="flexibility-1">0</span>%</span>
                         </div>
                     </div>
                 </div>
@@ -266,7 +356,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="staking"></span>
@@ -279,7 +369,7 @@
         </div>
         <div class="container mt-4 mb-4">
             <div class="row mb-4">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="card rnd-item mb-2" style="color: #fff; background-color: #64ac78;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Yield — <span id="yield-2">0</span>%</span>
@@ -287,10 +377,18 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="card rnd-item" style="color: #fff; background-color: #dc6478;">
+                <div class="col-sm-4">
+                    <div class="card rnd-item mb-2" style="color: #fff; background-color: #dc6478;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Risk — <span id="risk-2">0</span>%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card rnd-item" style="color: #fff; background-color: #b496f6;">
+                        <div class="card-body">
+                            <span style="font-size: 20px;">Flexibility — <span id="flexibility-2">0</span>%</span>
                         </div>
                     </div>
                 </div>
@@ -320,7 +418,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="liquidity"></span>
@@ -333,7 +431,7 @@
         </div>
         <div class="container mt-4 mb-4">
             <div class="row mb-4">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="card rnd-item mb-2" style="color: #fff; background-color: #64ac78;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Yield — <span id="yield-3">0</span>%</span>
@@ -341,10 +439,18 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="card rnd-item" style="color: #fff; background-color: #dc6478;">
+                <div class="col-sm-4">
+                    <div class="card rnd-item mb-2" style="color: #fff; background-color: #dc6478;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Risk — <span id="risk-3">0</span>%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card rnd-item" style="color: #fff; background-color: #b496f6;">
+                        <div class="card-body">
+                            <span style="font-size: 20px;">Flexibility — <span id="flexibility-3">0</span>%</span>
                         </div>
                     </div>
                 </div>
@@ -374,7 +480,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="dual"></span>
@@ -387,7 +493,7 @@
         </div>
         <div class="container mt-4 mb-4">
             <div class="row mb-4">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="card rnd-item mb-2" style="color: #fff; background-color: #64ac78;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Yield — <span id="yield-4">0</span>%</span>
@@ -395,10 +501,18 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="card rnd-item" style="color: #fff; background-color: #dc6478;">
+                <div class="col-sm-4">
+                    <div class="card rnd-item mb-2" style="color: #fff; background-color: #dc6478;">
                         <div class="card-body">
                             <span style="font-size: 20px;">Risk — <span id="risk-4">0</span>%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card rnd-item" style="color: #fff; background-color: #b496f6;">
+                        <div class="card-body">
+                            <span style="font-size: 20px;">Flexibility — <span id="flexibility-4">0</span>%</span>
                         </div>
                     </div>
                 </div>
@@ -428,7 +542,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="earn"></span>
@@ -448,8 +562,227 @@
         </div>
 
         <p class="container mt-4 mb-4">We offer crypto income platforms via the blockchain protocol. Therefore, our resource is highly resistant to modification and fraud. It means nobody can hack this platform and promote scam schemes on our behalf. To be sure of our integrity, you
-            can see the source code of our <a href="https://goerli.etherscan.io/address/0xce984a746881766d170ace3984c038a8f02c1723#code" target="_blank">smart contract</a> and verify the <a href="https://goerli.etherscan.io/address/0xce984a746881766d170ace3984c038a8f02c1723"
+            can see the source code of our <a href="https://goerli.etherscan.io/address/0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d#code" target="_blank">smart contract</a> and verify the <a href="https://goerli.etherscan.io/address/0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d"
                 target="_blank">transaction history</a>.</p>
+
+        <div class="mt-4 mb-4">
+            <a href="#calculate" class="btn btn-lg rnd-item" role="button">BUILD A PORTFOLIO</a>
+        </div>
+
+        <span id="calculate"></span>
+        <br>
+        <br>
+        <br>
+        <div class="mt-4 mb-4">
+            <h2>INVESTMENT PORTFOLIO</h2>
+            <h3>Depends on the acceptable Risk Level</h3>
+        </div>
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link-verylow active" id="v-pills-verylow-tab" data-toggle="pill" href="#v-pills-verylow" role="tab" aria-controls="v-pills-home" aria-selected="true">Very Low</a>
+                                <a class="nav-link-low" id="v-pills-low-tab" data-toggle="pill" href="#v-pills-low" role="tab" aria-controls="v-pills-profile" aria-selected="false">Low</a>
+                                <a class="nav-link-medium" id="v-pills-medium-tab" data-toggle="pill" href="#v-pills-medium" role="tab" aria-controls="v-pills-messages" aria-selected="false">Medium</a>
+                                <a class="nav-link-high" id="v-pills-high-tab" data-toggle="pill" href="#v-pills-high" role="tab" aria-controls="v-pills-settings" aria-selected="false">High</a>
+                                <a class="nav-link-veryhigh" id="v-pills-veryhigh-tab" data-toggle="pill" href="#v-pills-veryhigh" role="tab" aria-controls="v-pills-settings" aria-selected="false">Very High</a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-verylow" role="tabpanel" aria-labelledby="v-pills-verylow-tab">
+                                    <div class="card rnd-item">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="funds-verylow" class="col-sm-4 col-form-label">I want to invest, Coins</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control rnd-item" id="funds-verylow" value="0">
+                                                </div>
+                                            </div>
+
+                                            <img src="/images/blockpmn/verylow.png" class="img-fluid pie-img mt-2 mb-2" alt="verylow.png">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Flexible savings</th>
+                                                            <th scope="col">Locked savings</th>
+                                                            <th scope="col">Locked staking</th>
+                                                            <th scope="col">Liquidity pools</th>
+                                                            <th scope="col">Dual investment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span id="flexible-verylow">0</span></td>
+                                                            <td><span id="locked-verylow">0</span></td>
+                                                            <td><span id="staking-verylow">0</span></td>
+                                                            <td><span id="liquidity-verylow">0</span></td>
+                                                            <td><span id="dual-verylow">0</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-low" role="tabpanel" aria-labelledby="v-pills-low-tab">
+                                    <div class="card rnd-item">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="funds-low" class="col-sm-4 col-form-label">I want to invest, Coins</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control rnd-item" id="funds-low" value="0">
+                                                </div>
+                                            </div>
+
+                                            <img src="/images/blockpmn/low.png" class="img-fluid pie-img mt-2 mb-2" alt="low.png">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Flexible savings</th>
+                                                            <th scope="col">Locked savings</th>
+                                                            <th scope="col">Locked staking</th>
+                                                            <th scope="col">Liquidity pools</th>
+                                                            <th scope="col">Dual investment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span id="flexible-low">0</span></td>
+                                                            <td><span id="locked-low">0</span></td>
+                                                            <td><span id="staking-low">0</span></td>
+                                                            <td><span id="liquidity-low">0</span></td>
+                                                            <td><span id="dual-low">0</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-medium" role="tabpanel" aria-labelledby="v-pills-medium-tab">
+                                    <div class="card rnd-item">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="funds-medium" class="col-sm-4 col-form-label">I want to invest, Coins</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control rnd-item" id="funds-medium" value="0">
+                                                </div>
+                                            </div>
+
+                                            <img src="/images/blockpmn/medium.png" class="img-fluid pie-img mt-2 mb-2" alt="medium.png">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Flexible savings</th>
+                                                            <th scope="col">Locked savings</th>
+                                                            <th scope="col">Locked staking</th>
+                                                            <th scope="col">Liquidity pools</th>
+                                                            <th scope="col">Dual investment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span id="flexible-medium">0</span></td>
+                                                            <td><span id="locked-medium">0</span></td>
+                                                            <td><span id="staking-medium">0</span></td>
+                                                            <td><span id="liquidity-medium">0</span></td>
+                                                            <td><span id="dual-medium">0</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-high" role="tabpanel" aria-labelledby="v-pills-high-tab">
+                                    <div class="card rnd-item">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="funds-high" class="col-sm-4 col-form-label">I want to invest, Coins</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control rnd-item" id="funds-high" value="0">
+                                                </div>
+                                            </div>
+
+                                            <img src="/images/blockpmn/high.png" class="img-fluid pie-img mt-2 mb-2" alt="high.png">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Flexible savings</th>
+                                                            <th scope="col">Locked savings</th>
+                                                            <th scope="col">Locked staking</th>
+                                                            <th scope="col">Liquidity pools</th>
+                                                            <th scope="col">Dual investment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span id="flexible-high">0</span></td>
+                                                            <td><span id="locked-high">0</span></td>
+                                                            <td><span id="staking-high">0</span></td>
+                                                            <td><span id="liquidity-high">0</span></td>
+                                                            <td><span id="dual-high">0</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-veryhigh" role="tabpanel" aria-labelledby="v-pills-veryhigh-tab">
+                                    <div class="card rnd-item">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="funds-veryhigh" class="col-sm-4 col-form-label">I want to invest, Coins</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control rnd-item" id="funds-veryhigh" value="0">
+                                                </div>
+                                            </div>
+
+                                            <img src="/images/blockpmn/veryhigh.png" class="img-fluid pie-img mt-2 mb-2" alt="veryhigh.png">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Flexible savings</th>
+                                                            <th scope="col">Locked savings</th>
+                                                            <th scope="col">Locked staking</th>
+                                                            <th scope="col">Liquidity pools</th>
+                                                            <th scope="col">Dual investment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span id="flexible-veryhigh">0</span></td>
+                                                            <td><span id="locked-veryhigh">0</span></td>
+                                                            <td><span id="staking-veryhigh">0</span></td>
+                                                            <td><span id="liquidity-veryhigh">0</span></td>
+                                                            <td><span id="dual-veryhigh">0</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="mt-4 mb-4">
             <img src="/images/blockpmn/bottom.png" class="img-fluid banner-img mt-4" alt="bottom.png">
@@ -589,9 +922,9 @@
                     new BPMNLoader(`#${option}-canvas`, `./resources/blockpmn/${option}.bpmn`).loadBPMNModel();
                 });
 
-                const blockchainDAO = new BlockchainDAO('0xce984a746881766d170ace3984c038a8f02c1723', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"platformURL","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_platformURL","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), 'https://goerli.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba');
+                const blockchainDAO = new BlockchainDAO('0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"},{"internalType":"uint256","name":"flexibility","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"platformURL","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"},{"internalType":"uint256","name":"_flexibility","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_platformURL","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), 'https://goerli.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba');
 
-                const SIZE = 4;
+                const SIZE = options.length - 1;
                 const MAX_RANK = 9;
 
                 const businessModels = await blockchainDAO.getBusinessModels(0, SIZE);
@@ -599,6 +932,7 @@
                 businessModels.forEach(function(model, index) {
                     $(`#yield-${index}`).text((model.yield / MAX_RANK * 100).toFixed(2));
                     $(`#risk-${index}`).text((model.risk / MAX_RANK * 100).toFixed(2));
+                    $(`#flexibility-${index}`).text((model.flexibility / MAX_RANK * 100).toFixed(2));
                 });
 
                 const investmentPlatforms = await blockchainDAO.getInvestmentPlatforms(0, SIZE);
@@ -617,6 +951,113 @@
                             </div>
                         </div>`);
                 });
+
+                const riskLevels = ['verylow', 'low', 'medium', 'high', 'veryhigh'];
+
+                riskLevels.forEach(function(level, index) {
+                    $(`#funds-${level}`).val(100);
+                    $(`#funds-${level}`).trigger('keyup');
+                });
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+
+        $('#funds-verylow').keyup(function() {
+            try {
+                const input = Number.parseFloat($('#funds-verylow').val().trim());
+
+                const shares = {
+                    'flexible': 0.09,
+                    'locked': 0.09,
+                    'staking': 0,
+                    'liquidity': 0.09,
+                    'dual': 0.73
+                };
+
+                for (const type in shares) {
+                    $(`#${type}-verylow`).text((shares[type] * input).toFixed(2));
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+
+        $('#funds-low').keyup(function() {
+            try {
+                const input = Number.parseFloat($('#funds-low').val().trim());
+
+                const shares = {
+                    'flexible': 0.1,
+                    'locked': 0.1,
+                    'staking': 0.06,
+                    'liquidity': 0.1,
+                    'dual': 0.64
+                };
+
+                for (const type in shares) {
+                    $(`#${type}-low`).text((shares[type] * input).toFixed(2));
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+
+        $('#funds-medium').keyup(function() {
+            try {
+                const input = Number.parseFloat($('#funds-medium').val().trim());
+
+                const shares = {
+                    'flexible': 0.1,
+                    'locked': 0.1,
+                    'staking': 0.26,
+                    'liquidity': 0.1,
+                    'dual': 0.44
+                };
+
+                for (const type in shares) {
+                    $(`#${type}-medium`).text((shares[type] * input).toFixed(2));
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+
+        $('#funds-high').keyup(function() {
+            try {
+                const input = Number.parseFloat($('#funds-high').val().trim());
+
+                const shares = {
+                    'flexible': 0.1,
+                    'locked': 0.1,
+                    'staking': 0.58,
+                    'liquidity': 0.1,
+                    'dual': 0.12
+                };
+
+                for (const type in shares) {
+                    $(`#${type}-high`).text((shares[type] * input).toFixed(2));
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+
+        $('#funds-veryhigh').keyup(function() {
+            try {
+                const input = Number.parseFloat($('#funds-veryhigh').val().trim());
+
+                const shares = {
+                    'flexible': 0.1,
+                    'locked': 0.1,
+                    'staking': 0.6,
+                    'liquidity': 0.1,
+                    'dual': 0.1
+                };
+
+                for (const type in shares) {
+                    $(`#${type}-veryhigh`).text((shares[type] * input).toFixed(2));
+                }
             } catch (err) {
                 alert(err.message);
             }

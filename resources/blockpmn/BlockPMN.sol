@@ -11,6 +11,7 @@ contract BlockPMN {
         string name;
         uint256 yield;
         uint256 risk;
+        uint256 flexibility;
     }
 
     mapping(uint256 => BusinessModel) public businessModels;
@@ -27,11 +28,11 @@ contract BlockPMN {
 
     constructor() {
         // Define business models
-        storeBusinessModel(0, "Flexible savings", 3, 3);
-        storeBusinessModel(1, "Locked savings", 7, 5);
-        storeBusinessModel(2, "Locked staking", 7, 5);
-        storeBusinessModel(3, "Liquidity pools", 9, 7);
-        storeBusinessModel(4, "Dual investment", 5, 1);
+        storeBusinessModel(0, "Flexible savings", 3, 3, 9);
+        storeBusinessModel(1, "Locked savings", 7, 5, 5);
+        storeBusinessModel(2, "Locked staking", 7, 5, 7);
+        storeBusinessModel(3, "Liquidity pools", 9, 7, 3);
+        storeBusinessModel(4, "Dual investment", 5, 1, 1);
 
         // Define investment options
         storeInvestmentPlatform(
@@ -83,9 +84,10 @@ contract BlockPMN {
         uint256 _id,
         string memory _name,
         uint256 _yield,
-        uint256 _risk
+        uint256 _risk,
+        uint256 _flexibility
     ) public {
-        businessModels[_id] = BusinessModel(_name, _yield, _risk);
+        businessModels[_id] = BusinessModel(_name, _yield, _risk, _flexibility);
     }
 
     /**
