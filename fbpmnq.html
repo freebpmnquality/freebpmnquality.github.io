@@ -216,6 +216,38 @@
         </div>
     </div>
 
+    <!-- Welcome pop-up -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="welcomeModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 1rem; background-color: #f8f9fa;">
+                <div class="modal-header">
+                    <h5 class="modal-title">Welcome!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 text-center" id="season-banner">
+                                <div class="mt-4 mb-4">
+                                    <img src="images/blockpmn/logo.png" alt="logo" style="width: 100%;">
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="mt-4 mb-4">
+                                    <p>Discover five BPMN-driven models to increase your crypto savings. We offer business processes that work on a blockchain for earning income while you are asleep.</p>
+                                    <a type="button" class="btn btn-warning" style="border-radius: 1rem; font-weight: bold; color: #212529; background-color: #ffc107; border-color: #ffc107;" href="blockpmn.html" target="_blank">SEE MODELS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Welcome pop-up -->
+
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -566,6 +598,9 @@
         });
 
         $(document).ready(function() {
+            // welcome pop-up
+            $('#welcomeModal').modal('show');
+
             displayExample();
         });
     </script>
