@@ -448,7 +448,7 @@
         </div>
 
         <p class="container mt-4 mb-4">We offer crypto income platforms via the blockchain protocol. Therefore, our resource is highly resistant to modification and fraud. It means nobody can hack this platform and promote scam schemes on our behalf. To be sure of our integrity, you
-            can see the source code of our <a href="https://ropsten.etherscan.io/address/0x5c53ce70beaf3a59e7150f15a045698b4425048f#code" target="_blank">smart contract</a> and verify the <a href="https://ropsten.etherscan.io/address/0x5c53ce70beaf3a59e7150f15a045698b4425048f"
+            can see the source code of our <a href="https://goerli.etherscan.io/address/0xce984a746881766d170ace3984c038a8f02c1723#code" target="_blank">smart contract</a> and verify the <a href="https://goerli.etherscan.io/address/0xce984a746881766d170ace3984c038a8f02c1723"
                 target="_blank">transaction history</a>.</p>
 
         <div class="mt-4 mb-4">
@@ -589,7 +589,7 @@
                     new BPMNLoader(`#${option}-canvas`, `./resources/blockpmn/${option}.bpmn`).loadBPMNModel();
                 });
 
-                const blockchainDAO = new BlockchainDAO('0x5c53ce70beaf3a59e7150f15a045698b4425048f', JSON.parse(`[{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), 'https://ropsten.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba');
+                const blockchainDAO = new BlockchainDAO('0xce984a746881766d170ace3984c038a8f02c1723', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"platformURL","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_platformURL","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), 'https://goerli.infura.io/v3/f9079a1b198f42369bf79d33e70a5eba');
 
                 const SIZE = 4;
                 const MAX_RANK = 9;
@@ -611,7 +611,7 @@
                                 <img src="${option.imageURL}" class="card-img-top rnd-item" alt="${option.name}">
                                 <div class="card-body">
                                     <h5 class="card-title">${option.name}</h5>
-                                    <p class="card-text">${option.description}</p>
+                                    <p class="card-text">${option.description}<br><small><a href="${option.platformURL}" target="_blank">Learn more</a></small></p>
                                     <p class="card-text"><small class="text-muted">APY ≈ ${(option.APY / 100).toFixed(2)}%</small></p>
                                 </div>
                             </div>
