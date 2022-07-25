@@ -108,6 +108,76 @@
         h2 {
             font-weight: bold;
         }
+        
+        .nav-link-verylow {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #4f7814;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-low {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #6e7814;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-medium {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #785f14;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-high {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #784614;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-veryhigh {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #781914;
+            text-decoration: none!important;
+            background-color: transparent;
+        }
+        
+        .nav-link-verylow.active {
+            color: #000000;
+            background-color: #b3dc78;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-low.active {
+            color: #000000;
+            background-color: #d2dc78;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-medium.active {
+            color: #000000;
+            background-color: #dcc378;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-high.active {
+            color: #000000;
+            background-color: #dcaa78;
+            border-radius: 1rem;
+        }
+        
+        .nav-link-veryhigh.active {
+            color: #000000;
+            background-color: #dc7d78;
+            border-radius: 1rem;
+        }
     </style>
 </head>
 
@@ -221,7 +291,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="locked"></span>
@@ -282,7 +352,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="staking"></span>
@@ -344,7 +414,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="liquidity"></span>
@@ -406,7 +476,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="dual"></span>
@@ -468,7 +538,7 @@
             </div>
         </div>
         <div class="mt-4 mb-4">
-            <a href="#earn" class="btn btn-lg rnd-item" role="button">START EARNING</a>
+            <a href="#earn" class="btn btn-lg rnd-item" role="button">SEE OPTIONS</a>
         </div>
 
         <span id="earn"></span>
@@ -490,6 +560,45 @@
         <p class="container mt-4 mb-4">We offer crypto income platforms via the blockchain protocol. Therefore, our resource is highly resistant to modification and fraud. It means nobody can hack this platform and promote scam schemes on our behalf. To be sure of our integrity, you
             can see the source code of our <a href="https://goerli.etherscan.io/address/0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d#code" target="_blank">smart contract</a> and verify the <a href="https://goerli.etherscan.io/address/0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d"
                 target="_blank">transaction history</a>.</p>
+
+        <div class="mt-4 mb-4">
+            <a href="#calculate" class="btn btn-lg rnd-item" role="button">BUILD A PORTFOLIO</a>
+        </div>
+
+        <span id="calculate"></span>
+        <br>
+        <br>
+        <br>
+        <div class="mt-4 mb-4">
+            <h2>INVESTMENT PORTFOLIO</h2>
+            <h3>Depends on the acceptable risk level</h3>
+        </div>
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link-verylow active" id="v-pills-verylow-tab" data-toggle="pill" href="#v-pills-verylow" role="tab" aria-controls="v-pills-home" aria-selected="true">Very Low Risk</a>
+                                <a class="nav-link-low" id="v-pills-low-tab" data-toggle="pill" href="#v-pills-low" role="tab" aria-controls="v-pills-profile" aria-selected="false">Low Risk</a>
+                                <a class="nav-link-medium" id="v-pills-medium-tab" data-toggle="pill" href="#v-pills-medium" role="tab" aria-controls="v-pills-messages" aria-selected="false">Medium Risk</a>
+                                <a class="nav-link-high" id="v-pills-high-tab" data-toggle="pill" href="#v-pills-high" role="tab" aria-controls="v-pills-settings" aria-selected="false">High Risk</a>
+                                <a class="nav-link-veryhigh" id="v-pills-veryhigh-tab" data-toggle="pill" href="#v-pills-veryhigh" role="tab" aria-controls="v-pills-settings" aria-selected="false">Very High Risk</a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-verylow" role="tabpanel" aria-labelledby="v-pills-verylow-tab">...</div>
+                                <div class="tab-pane fade" id="v-pills-low" role="tabpanel" aria-labelledby="v-pills-low-tab">...</div>
+                                <div class="tab-pane fade" id="v-pills-medium" role="tabpanel" aria-labelledby="v-pills-medium-tab">...</div>
+                                <div class="tab-pane fade" id="v-pills-high" role="tabpanel" aria-labelledby="v-pills-high-tab">...</div>
+                                <div class="tab-pane fade" id="v-pills-veryhigh" role="tabpanel" aria-labelledby="v-pills-veryhigh-tab">...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="mt-4 mb-4">
             <img src="/images/blockpmn/bottom.png" class="img-fluid banner-img mt-4" alt="bottom.png">
