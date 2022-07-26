@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,13 +47,13 @@
             background: rgb(253, 197, 29);
             background: radial-gradient(circle, rgba(253, 197, 29, 0.2) 50%, rgba(252, 102, 69, 0.2) 100%);
         }
-
+        
         .canvas {
             background-color: white;
             border-radius: 0.25rem;
             border: 1px solid rgba(0, 0, 0, .125);
         }
-
+        
         #footer {
             background-color: transparent;
         }
@@ -167,6 +166,38 @@
         </script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">(CC BY-ND)</a>
     </div>
 
+    <!-- Welcome pop-up -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="welcomeModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 1rem; background-color: #f8f9fa;">
+                <div class="modal-header">
+                    <h5 class="modal-title">Welcome!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 text-center" id="season-banner">
+                                <div class="mt-4 mb-4">
+                                    <img src="../images/blockpmn/logo.png" alt="logo" style="width: 100%;">
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="mt-4 mb-4">
+                                    <p>Discover five BPMN-driven models to increase your crypto savings. We offer business processes that work on a blockchain for earning income while you are asleep.</p>
+                                    <a type="button" class="btn btn-warning" style="border-radius: 1rem; font-weight: bold;" href="blockpmn.html" target="_blank">SEE MODELS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Welcome pop-up -->
+
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -180,7 +211,12 @@
         });
 
         $(document).ready(function() {
-            $.ajax('https://raw.githubusercontent.com/freebpmnquality/apqc-pcf-bpmn-collection/main/models/12. Manage External Relationships.bpmn', { dataType : 'text' }).done(async function(xml) {
+            // welcome pop-up
+            $('#welcomeModal').modal('show');
+
+            $.ajax('https://raw.githubusercontent.com/freebpmnquality/apqc-pcf-bpmn-collection/main/models/12. Manage External Relationships.bpmn', {
+                dataType: 'text'
+            }).done(async function(xml) {
                 try {
                     await viewer.importXML(xml);
                     viewer.get('canvas').zoom('fit-viewport');
