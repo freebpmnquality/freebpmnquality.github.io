@@ -321,8 +321,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span id="flexible-complexity">0</span>%</td>
-                                            <td><span id="flexible-conformity">0</span>%</td>
+                                            <td>
+                                                <small>Cyclomatic: <span id="flexible-complexity-CC">0</span>%</small><br>
+                                                <small>Network: <span id="flexible-complexity-CNC">0</span>%</small><br>
+                                                <small>Flow: <span id="flexible-complexity-CFC">0</span>%</small>
+                                            </td>
+                                            <td>
+                                                <small>Syntactic: <span id="flexible-conformity-syntactic">0</span>%</small><br>
+                                                <small>Semantic: <span id="flexible-conformity-semantic">0</span>%</small>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -413,8 +420,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span id="locked-complexity">0</span>%</td>
-                                            <td><span id="locked-conformity">0</span>%</td>
+                                            <td>
+                                                <small>Cyclomatic: <span id="locked-complexity-CC">0</span>%</small><br>
+                                                <small>Network: <span id="locked-complexity-CNC">0</span>%</small><br>
+                                                <small>Flow: <span id="locked-complexity-CFC">0</span>%</small>
+                                            </td>
+                                            <td>
+                                                <small>Syntactic: <span id="locked-conformity-syntactic">0</span>%</small><br>
+                                                <small>Semantic: <span id="locked-conformity-semantic">0</span>%</small>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -506,8 +520,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span id="staking-complexity">0</span>%</td>
-                                            <td><span id="staking-conformity">0</span>%</td>
+                                            <td>
+                                                <small>Cyclomatic: <span id="staking-complexity-CC">0</span>%</small><br>
+                                                <small>Network: <span id="staking-complexity-CNC">0</span>%</small><br>
+                                                <small>Flow: <span id="staking-complexity-CFC">0</span>%</small>
+                                            </td>
+                                            <td>
+                                                <small>Syntactic: <span id="staking-conformity-syntactic">0</span>%</small><br>
+                                                <small>Semantic: <span id="staking-conformity-semantic">0</span>%</small>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -599,8 +620,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span id="liquidity-complexity">0</span>%</td>
-                                            <td><span id="liquidity-conformity">0</span>%</td>
+                                            <td>
+                                                <small>Cyclomatic: <span id="liquidity-complexity-CC">0</span>%</small><br>
+                                                <small>Network: <span id="liquidity-complexity-CNC">0</span>%</small><br>
+                                                <small>Flow: <span id="liquidity-complexity-CFC">0</span>%</small>
+                                            </td>
+                                            <td>
+                                                <small>Syntactic: <span id="liquidity-conformity-syntactic">0</span>%</small><br>
+                                                <small>Semantic: <span id="liquidity-conformity-semantic">0</span>%</small>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -686,8 +714,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span id="dual-complexity">0</span>%</td>
-                                            <td><span id="dual-conformity">0</span>%</td>
+                                            <td>
+                                                <small>Cyclomatic: <span id="dual-complexity-CC">0</span>%</small><br>
+                                                <small>Network: <span id="dual-complexity-CNC">0</span>%</small><br>
+                                                <small>Flow: <span id="dual-complexity-CFC">0</span>%</small>
+                                            </td>
+                                            <td>
+                                                <small>Syntactic: <span id="dual-conformity-syntactic">0</span>%</small><br>
+                                                <small>Semantic: <span id="dual-conformity-semantic">0</span>%</small>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1150,21 +1185,37 @@
 
                 const businessProcesses = await etherBPMNContractDAO.getBusinessProcesses(0, SIZE);
 
-                const COMPLEXITY_MIN = 0,
-                    COMPLEXITY_MAX = 1;
+                const COMPLEXITY_CYCLOMATIC_MIN = 0,
+                    COMPLEXITY_CYCLOMATIC_MAX = 1;
+
+                const COMPLEXITY_NETWORK_MIN = 3.2,
+                    COMPLEXITY_NETWORK_MAX = 8;
+
+                const COMPLEXITY_FLOW_MIN = 0,
+                    COMPLEXITY_FLOW_MAX = 2;
 
                 const CONFORMITY_MIN = 0.04,
                     CONFORMITY_MAX = 0.23;
 
                 options.forEach(function(option, index) {
-                    let complexity = businessProcesses[index].flows - businessProcesses[index].activities + 1;
+                    let complexityCyclomatic = businessProcesses[index].flows - businessProcesses[index].activities + 1;
+                    let complexityNetwork = Math.pow(businessProcesses[index].flows, 2) / businessProcesses[index].activities;
+                    let complexityFlow = businessProcesses[index].flows === 8 ? 2 : 0;
+
+                    complexityCyclomatic = (1 + complexityCyclomatic - COMPLEXITY_CYCLOMATIC_MIN) / (1 + COMPLEXITY_CYCLOMATIC_MAX - COMPLEXITY_CYCLOMATIC_MIN);
+                    complexityNetwork = (1 + complexityNetwork - COMPLEXITY_NETWORK_MIN) / (1 + COMPLEXITY_NETWORK_MAX - COMPLEXITY_NETWORK_MIN);
+                    complexityFlow = (1 + complexityNetwork - COMPLEXITY_FLOW_MIN) / (1 + COMPLEXITY_FLOW_MAX - COMPLEXITY_FLOW_MIN);
+
                     let conformity = businessProcesses[index].common / businessProcesses[index].total;
 
                     conformity = (1 + conformity - CONFORMITY_MIN) / (1 + CONFORMITY_MAX - CONFORMITY_MIN);
-                    complexity = (1 + complexity - COMPLEXITY_MIN) / (1 + COMPLEXITY_MAX - COMPLEXITY_MIN);
 
-                    $(`#${option}-complexity`).text((complexity * 100).toFixed(2));
-                    $(`#${option}-conformity`).text((conformity * 100).toFixed(2));
+                    $(`#${option}-complexity-CC`).text((complexityCyclomatic * 100).toFixed(2));
+                    $(`#${option}-complexity-CNC`).text((complexityNetwork * 100).toFixed(2));
+                    $(`#${option}-complexity-CFC`).text((complexityFlow * 100).toFixed(2));
+
+                    $(`#${option}-conformity-syntactic`).text((conformity * 100).toFixed(2));
+                    $(`#${option}-conformity-semantic`).text((conformity * 100).toFixed(2));
                 });
             } catch (err) {
                 alert(err.message);
