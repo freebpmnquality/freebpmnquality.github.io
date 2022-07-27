@@ -1204,7 +1204,7 @@
 
                     complexityCyclomatic = (1 + complexityCyclomatic - COMPLEXITY_CYCLOMATIC_MIN) / (1 + COMPLEXITY_CYCLOMATIC_MAX - COMPLEXITY_CYCLOMATIC_MIN);
                     complexityNetwork = (1 + complexityNetwork - COMPLEXITY_NETWORK_MIN) / (1 + COMPLEXITY_NETWORK_MAX - COMPLEXITY_NETWORK_MIN);
-                    complexityFlow = (1 + complexityNetwork - COMPLEXITY_FLOW_MIN) / (1 + COMPLEXITY_FLOW_MAX - COMPLEXITY_FLOW_MIN);
+                    complexityFlow = (1 + complexityFlow - COMPLEXITY_FLOW_MIN) / (1 + COMPLEXITY_FLOW_MAX - COMPLEXITY_FLOW_MIN);
 
                     let conformity = businessProcesses[index].common / businessProcesses[index].total;
 
