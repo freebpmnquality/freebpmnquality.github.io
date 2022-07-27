@@ -1013,6 +1013,7 @@
     <script src="https://unpkg.com/bpmn-js@8.7.1/dist/bpmn-viewer.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0-rc.0/web3.min.js" integrity="sha512-/PTXSvaFzmO4So7Ghyq+DEZOz0sNLU4v1DP4gMOfY3kFu9L/IKoqSHZ6lNl3ZoZ7wT20io3vu/U4IchGcGIhfw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.1.3/xml2json.min.js" integrity="sha512-xl6hrpp8+qe3CwgDhhcLAMSMC/8To5kwYDgLUcA95R9xcbxiTChpd1Egu24Xk5axY1Del9opQg8S9WyEYSGNZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- App -->
     <script type="text/javascript">
@@ -1134,11 +1135,68 @@
             }
         }
 
+        class BPMNCollectionDAO {
+            constructor(collection) {
+                this.collection = collection;
+            }
+
+            getModelCodeByIndex(index) {
+                const modelIdentifier = this.collection[index];
+                const modelPath = `./resources/blockpmn/${modelIdentifier}.bpmn`;
+
+                const modelCode = $.ajax({
+                    type: 'GET',
+                    url: modelPath,
+                    async: false
+                }).responseText;
+
+                return modelCode;
+            }
+
+            getModelActivitiesByIndex(index) {
+                const modelCode = this.getModelCodeByIndex(index);
+
+                const converter = new X2JS();
+                const json = converter.xml_str2json(modelCode);
+                const processes = Array.isArray(json.definitions.process) ? json.definitions.process : [json.definitions.process];
+
+                const activities = [];
+
+                for (const j in processes) {
+                    const subProcesses = Array.isArray(processes[j].subProcess) ? processes[j].subProcess : [processes[j].subProcess];
+
+                    let tasks = [];
+
+                    for (const k in subProcesses) {
+                        tasks = tasks.concat(subProcesses[k]['task'] === undefined ? [] : (Array.isArray(subProcesses[k]['task']) ? subProcesses[k]['task'] : [subProcesses[k]['task']]));
+                    }
+
+                    tasks = tasks.concat(processes[j]['task'] === undefined ? [] : (Array.isArray(processes[j]['task']) ? processes[j]['task'] : [processes[j]['task']]));
+
+                    for (const i in tasks) {
+                        const _id = tasks[i]._id;
+                        const _name = tasks[i]._name === undefined ? id : tasks[i]._name;
+                        const _incoming = tasks[i].incoming === undefined ? 0 : (Array.isArray(tasks[i].incoming) ? tasks[i].incoming.length : 1);
+                        const _outgoing = tasks[i].outgoing === undefined ? 0 : (Array.isArray(tasks[i].outgoing) ? tasks[i].outgoing.length : 1);
+
+                        activities.push({
+                            id: _id,
+                            name: _name,
+                            incoming: _incoming,
+                            outgoing: _outgoing
+                        });
+                    }
+                }
+
+                return activities;
+            }
+        }
+
         $(document).ready(async function() {
             try {
-                const options = ['flexible', 'locked', 'staking', 'liquidity', 'dual'];
+                const bpmnModels = ['flexible', 'locked', 'staking', 'liquidity', 'dual'];
 
-                options.forEach(function(option, index) {
+                bpmnModels.forEach(function(option, index) {
                     new BPMNLoader(`#${option}-canvas`, `./resources/blockpmn/${option}.bpmn`).loadBPMNModel();
                 });
 
@@ -1146,7 +1204,7 @@
 
                 const blockPMNContractDAO = new BlockPMNContractDAO('0xbaade0e64af2a7da7c9173b52bef6308f0ab5f7d', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessModels","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"yield","type":"uint256"},{"internalType":"uint256","name":"risk","type":"uint256"},{"internalType":"uint256","name":"flexibility","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"investmentPlatforms","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"platformURL","type":"string"},{"internalType":"uint256","name":"APY","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_yield","type":"uint256"},{"internalType":"uint256","name":"_risk","type":"uint256"},{"internalType":"uint256","name":"_flexibility","type":"uint256"}],"name":"storeBusinessModel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_platformURL","type":"string"},{"internalType":"uint256","name":"_APY","type":"uint256"}],"name":"storeInvestmentPlatform","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), blockchainProvider);
 
-                const SIZE = options.length - 1;
+                const SIZE = bpmnModels.length - 1;
                 const MAX_RANK = 9;
 
                 const businessModels = await blockPMNContractDAO.getBusinessModels(0, SIZE);
@@ -1188,34 +1246,47 @@
                 const COMPLEXITY_CYCLOMATIC_MIN = 0,
                     COMPLEXITY_CYCLOMATIC_MAX = 1;
 
-                const COMPLEXITY_NETWORK_MIN = 3.2,
-                    COMPLEXITY_NETWORK_MAX = 8;
+                const COMPLEXITY_NETWORK_MIN = 0.8,
+                    COMPLEXITY_NETWORK_MAX = 1;
 
                 const COMPLEXITY_FLOW_MIN = 0,
                     COMPLEXITY_FLOW_MAX = 2;
 
-                const CONFORMITY_MIN = 0.04,
-                    CONFORMITY_MAX = 0.23;
+                const CONFORMITY_SYNTACTIC_MIN = 0,
+                    CONFORMITY_SYNTACTIC_MAX = 1024.04;
 
-                options.forEach(function(option, index) {
+                const CONFORMITY_SEMANTIC_MIN = 0.04,
+                    CONFORMITY_SEMANTIC_MAX = 0.23;
+
+                const bpmnCollectionDAO = new BPMNCollectionDAO(bpmnModels);
+
+                bpmnModels.forEach(function(bpmnModel, index) {
                     let complexityCyclomatic = businessProcesses[index].flows - businessProcesses[index].activities + 1;
-                    let complexityNetwork = Math.pow(businessProcesses[index].flows, 2) / businessProcesses[index].activities;
-                    let complexityFlow = businessProcesses[index].flows === 8 ? 2 : 0;
+                    let complexityNetwork = businessProcesses[index].flows / businessProcesses[index].activities;
+                    let complexityFlow = 0.1667 * Math.pow(businessProcesses[index].flows, 2) - 1.5 * businessProcesses[index].flows + 3.3333;
+
+                    complexityFlow = complexityFlow < COMPLEXITY_FLOW_MIN ? COMPLEXITY_FLOW_MIN : complexityFlow;
+                    complexityFlow = complexityFlow > COMPLEXITY_FLOW_MAX ? COMPLEXITY_FLOW_MAX : complexityFlow;
 
                     complexityCyclomatic = (1 + complexityCyclomatic - COMPLEXITY_CYCLOMATIC_MIN) / (1 + COMPLEXITY_CYCLOMATIC_MAX - COMPLEXITY_CYCLOMATIC_MIN);
                     complexityNetwork = (1 + complexityNetwork - COMPLEXITY_NETWORK_MIN) / (1 + COMPLEXITY_NETWORK_MAX - COMPLEXITY_NETWORK_MIN);
                     complexityFlow = (1 + complexityFlow - COMPLEXITY_FLOW_MIN) / (1 + COMPLEXITY_FLOW_MAX - COMPLEXITY_FLOW_MIN);
 
-                    let conformity = businessProcesses[index].common / businessProcesses[index].total;
+                    let conformitySyntactic = Math.pow(37 - businessProcesses[index].activities, 2) + Math.pow(0.6 - complexityNetwork, 2);
+                    let conformitySemantic = businessProcesses[index].common / businessProcesses[index].total;
 
-                    conformity = (1 + conformity - CONFORMITY_MIN) / (1 + CONFORMITY_MAX - CONFORMITY_MIN);
+                    conformitySyntactic = conformitySyntactic < CONFORMITY_SYNTACTIC_MIN ? CONFORMITY_SYNTACTIC_MIN : conformitySyntactic;
+                    conformitySyntactic = conformitySyntactic > CONFORMITY_SYNTACTIC_MAX ? CONFORMITY_SYNTACTIC_MAX : conformitySyntactic;
 
-                    $(`#${option}-complexity-CC`).text((complexityCyclomatic * 100).toFixed(2));
-                    $(`#${option}-complexity-CNC`).text((complexityNetwork * 100).toFixed(2));
-                    $(`#${option}-complexity-CFC`).text((complexityFlow * 100).toFixed(2));
+                    conformitySyntactic = (1 + conformitySyntactic - CONFORMITY_SYNTACTIC_MIN) / (1 + CONFORMITY_SYNTACTIC_MAX - CONFORMITY_SYNTACTIC_MIN);
+                    conformitySemantic = (1 + conformitySemantic - CONFORMITY_SEMANTIC_MIN) / (1 + CONFORMITY_SEMANTIC_MAX - CONFORMITY_SEMANTIC_MIN);
 
-                    $(`#${option}-conformity-syntactic`).text((conformity * 100).toFixed(2));
-                    $(`#${option}-conformity-semantic`).text((conformity * 100).toFixed(2));
+                    $(`#${bpmnModel}-complexity-CC`).text((complexityCyclomatic * 100).toFixed(2));
+                    $(`#${bpmnModel}-complexity-CNC`).text((complexityNetwork * 100).toFixed(2));
+                    $(`#${bpmnModel}-complexity-CFC`).text((complexityFlow * 100).toFixed(2));
+
+                    $(`#${bpmnModel}-conformity-syntactic`).text((conformitySyntactic * 100).toFixed(2));
+                    $(`#${bpmnModel}-conformity-semantic`).text((conformitySemantic * 100).toFixed(2));
                 });
             } catch (err) {
                 alert(err.message);
