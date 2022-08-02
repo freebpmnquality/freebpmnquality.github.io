@@ -80,13 +80,13 @@
     <div id="langBox">
         <ul class="nav justify-content-center mb-0 mt-0">
             <li class="nav-item">
-                <a class="nav-link" href="javascript:window.open(`https://freebpmnquality-github-io.translate.goog/mobile/?_x_tr_sl=auto&_x_tr_tl=zh-CN`);">🇨🇳</a>
+                <a class="nav-link" href="javascript:void(0);" onclick="openLocalVersion('zh-CN');">🇨🇳</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:window.open(`https://freebpmnquality-github-io.translate.goog/mobile/?_x_tr_sl=auto&_x_tr_tl=de`);">🇩🇪</a>
+                <a class="nav-link" href="javascript:void(0);" onclick="openLocalVersion('de');">🇩🇪</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:window.open(`https://freebpmnquality-github-io.translate.goog/mobile/?_x_tr_sl=auto&_x_tr_tl=hi`);">🇮🇳</a>
+                <a class="nav-link" href="javascript:void(0);" onclick="openLocalVersion('hi');">🇮🇳</a>
             </li>
         </ul>
     </div>
@@ -249,6 +249,10 @@
 
             return false;
         });
+
+        function openLocalVersion(lang) {
+            window.open(`https://freebpmnquality-github-io.translate.goog/mobile/?_x_tr_sl=auto&_x_tr_tl=${lang}`, '_blank');
+        }
     </script>
 </body>
 
