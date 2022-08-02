@@ -9,6 +9,14 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+        <loc>https://freebpmnquality.github.io/mobile/</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc>https://freebpmnquality.github.io/mobile/index.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
         <loc>https://freebpmnquality.github.io/fbpmnq.html</loc>
         <changefreq>monthly</changefreq>
     </url>
