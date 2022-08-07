@@ -149,25 +149,29 @@
 
         <span id="tryArea"></span>
 
-        <a href="#tryArea" class="btn mt-4" onclick="displayExample();" role="button">BPMN MODEL EXAMPLE</a>
-
-        <div class="form-group mt-4">
-            <label for="file-input" class="text-muted mb-0">BPMN 2.0 file</label>
-            <small class="form-text text-muted mb-2">Open your BPMN 2.0 file from a disk</small>
-            <input type="file" class="form-control" id="file-input">
-        </div>
-
-        <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram below</small>
-
-        <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
-
-        <div class="mt-1 mb-1 text-left">
-            <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
-            <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
-        </div>
+        <a href="#tryArea" class="btn mt-4 mb-2" onclick="displayExample();" role="button">BPMN MODEL EXAMPLE</a>
 
         <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-2">
+                <div class="form-group mt-4 mb-0">
+                    <label for="file-input" class="text-muted mb-0">BPMN 2.0 file</label>
+                    <small class="form-text text-muted mb-2">Open your BPMN 2.0 file from a disk</small>
+
+                    <label class="btn btn-default btn-sm btn-file">
+                        BROWSE <input type="file" class="form-control" style="display: none;" id="file-input">
+                    </label>
+                </div>
+
+                <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
+
+                <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
+            </div>
+            <div class="col-sm-7">
+                <div class="mt-1 mb-1 text-left">
+                    <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
+                    <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
+                </div>
+
                 <div id="js-canvas" class="img-thumbnail mb-2"></div>
             </div>
             <div class="col-sm-3">
