@@ -525,6 +525,53 @@
 
                         var startEvents = processes[j]['startEvent'] === undefined ? [] : (Array.isArray(processes[j]['startEvent']) ? processes[j]['startEvent'] : [processes[j]['startEvent']]);
 
+                        for (var i in startEvents) {
+                            var id = startEvents[i]._id;
+
+                            var name = startEvents[i]._name === undefined ? id : startEvents[i]._name;
+
+                            var outgoing = startEvents[i].outgoing === undefined ? 0 : (Array.isArray(startEvents[i].outgoing) ? startEvents[i].outgoing.length : 1);
+
+                            var isError = false;
+                            var isWarning = false;
+
+                            if ($('#bpmn-errors').is(':checked')) {
+                                if (outgoing < 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Start Event',
+                                        name: name,
+                                        text: 'does not have any outgoing sequence flows',
+                                        message: 'error'
+                                    });
+
+                                    isError = true;
+                                }
+                            }
+
+                            if ($('#bpmn-warnings').is(':checked')) {
+                                if (outgoing > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Start Event',
+                                        name: name,
+                                        text: 'has multiple outgoing sequence flows',
+                                        message: 'warning'
+                                    });
+
+                                    isWarning = true;
+                                }
+                            }
+
+                            if (isError) {
+                                canvas.addMarker(id, 'highlight-red');
+                            } else if (isWarning) {
+                                canvas.addMarker(id, 'highlight-yellow');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
+                            }
+                        }
+
                         var isStartEventsError = false;
 
                         if ($('#event-errors').is(':checked')) {
@@ -552,6 +599,53 @@
                         }
 
                         var endEvents = processes[j]['endEvent'] === undefined ? [] : (Array.isArray(processes[j]['endEvent']) ? processes[j]['endEvent'] : [processes[j]['endEvent']]);
+
+                        for (var i in endEvents) {
+                            var id = endEvents[i]._id;
+
+                            var name = endEvents[i]._name === undefined ? id : endEvents[i]._name;
+
+                            var incoming = endEvents[i].incoming === undefined ? 0 : (Array.isArray(endEvents[i].incoming) ? endEvents[i].incoming.length : 1);
+
+                            var isError = false;
+                            var isWarning = false;
+
+                            if ($('#bpmn-errors').is(':checked')) {
+                                if (incoming < 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'End Event',
+                                        name: name,
+                                        text: 'does not have any incoming sequence flows',
+                                        message: 'error'
+                                    });
+
+                                    isError = true;
+                                }
+                            }
+
+                            if ($('#bpmn-warnings').is(':checked')) {
+                                if (incoming > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'End Event',
+                                        name: name,
+                                        text: 'has multiple incoming sequence flows',
+                                        message: 'warning'
+                                    });
+
+                                    isWarning = true;
+                                }
+                            }
+
+                            if (isError) {
+                                canvas.addMarker(id, 'highlight-red');
+                            } else if (isWarning) {
+                                canvas.addMarker(id, 'highlight-yellow');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
+                            }
+                        }
 
                         var isEndEventsWarning = false;
 
