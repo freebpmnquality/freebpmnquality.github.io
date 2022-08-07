@@ -160,6 +160,8 @@
                     <label class="btn btn-default btn-sm btn-file">
                         BROWSE <input type="file" class="form-control" style="display: none;" id="file-input">
                     </label>
+
+                    <small class="form-text" id="file-name" style="overflow-wrap: break-word; font-weight: bold;"></small>
                 </div>
 
                 <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
@@ -295,6 +297,7 @@
 
         async function displayExample() {
             $('#file-input').val('');
+            $('#file-name').text('01-tasks.bpmn');
 
             var url = 'https://raw.githubusercontent.com/freebpmnquality/freebpmnquality.github.io/master/samples/01-tasks.bpmn';
 
@@ -551,6 +554,8 @@
                 var reader = new FileReader();
 
                 reader.onload = async function(e) {
+                    $('#file-name').text(file.name);
+
                     var contents = e.target.result;
 
                     $('#bpmn-input').text(contents);
