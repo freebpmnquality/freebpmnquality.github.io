@@ -152,7 +152,7 @@
         <a href="#tryArea" class="btn mt-4 mb-2" onclick="displayExample();" role="button">BPMN MODEL EXAMPLE</a>
 
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-group mt-0 mb-0">
                     <label for="file-input" class="text-muted mb-0">BPMN 2.0 file</label>
                     <small class="form-text text-muted mb-2">Open your BPMN 2.0 file from a disk</small>
@@ -164,30 +164,38 @@
                     <small class="form-text" id="file-name" style="overflow-wrap: break-word; font-weight: bold;"></small>
                 </div>
 
-                <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" id="bpmn-warnings" checked>
+                    <small class="form-check-label" for="bpmn-warnings">Consider implicit splits/merges as warnings</small>
+                </div>
 
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" id="bpmn-errors" checked>
+                    <small class="form-check-label" for="bpmn-errors">Consider missing incoming/outgoing flows as errors</small>
+                </div>
+
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" id="event-warnings" checked>
+                    <small class="form-check-label" for="event-warnings">Consider multiple end events as warnings</small>
+                </div>
+
+                <div class="form-check mt-1 mb-2">
+                    <input class="form-check-input" type="checkbox" id="event-errors" checked>
+                    <small class="form-check-label" for="event-errors">Consider multiple start events as errors</small>
+                </div>
+
+                <button class="btn btn-sm mb-3" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
+
+                <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
                 <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
                 <div class="mt-0 mb-1 text-left">
                     <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
                     <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
                 </div>
 
                 <div id="js-canvas" class="img-thumbnail mb-2"></div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="bpmn-warnings" checked>
-                    <small class="form-check-label" for="bpmn-warnings">Consider implicit splits/merges as warnings</small>
-                </div>
-
-                <div class="form-check mt-1 mb-2">
-                    <input class="form-check-input" type="checkbox" id="bpmn-errors" checked>
-                    <small class="form-check-label" for="bpmn-errors">Consider missing incoming/outgoing flows as errors</small>
-                </div>
-
-                <button class="btn btn-sm mb-3" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
 
                 <ul class="list-group mb-2" id="detected-mistakes"></ul>
             </div>
@@ -510,6 +518,40 @@
                                 canvas.addMarker(id, 'highlight-yellow');
                             } else {
                                 canvas.addMarker(id, 'highlight-green');
+                            }
+                        }
+
+                        var startEvents = processes[j]['startEvent'] === undefined ? [] : (Array.isArray(processes[j]['startEvent']) ? processes[j]['startEvent'] : [processes[j]['startEvent']]);
+
+                        var endEvents = processes[j]['endEvent'] === undefined ? [] : (Array.isArray(processes[j]['endEvent']) ? processes[j]['endEvent'] : [processes[j]['endEvent']]);
+
+                        var processName = processes[j]._name === undefined ? id : processes[j]._name;
+
+                        if ($('#event-errors').is(':checked')) {
+                            if (startEvents.length > 1) {
+                                messages.push({
+                                    id: id,
+                                    type: 'Process',
+                                    name: processName,
+                                    text: 'has multiple start events',
+                                    message: 'error'
+                                });
+
+                                isError = true;
+                            }
+                        }
+
+                        if ($('#event-warnings').is(':checked')) {
+                            if (endEvents.length > 1) {
+                                messages.push({
+                                    id: id,
+                                    type: 'Process',
+                                    name: processName,
+                                    text: 'has multiple end events',
+                                    message: 'warning'
+                                });
+
+                                isWarning = true;
                             }
                         }
                     }
