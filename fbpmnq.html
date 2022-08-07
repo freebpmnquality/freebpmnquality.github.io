@@ -367,6 +367,8 @@
                     var messages = [];
 
                     for (var j in processes) {
+                        var processName = processes[j]._name === undefined ? id : processes[j]._name;
+
                         var tasks = processes[j]['task'] === undefined ? [] : (Array.isArray(processes[j]['task']) ? processes[j]['task'] : [processes[j]['task']]);
 
                         for (var i in tasks) {
@@ -523,9 +525,7 @@
 
                         var startEvents = processes[j]['startEvent'] === undefined ? [] : (Array.isArray(processes[j]['startEvent']) ? processes[j]['startEvent'] : [processes[j]['startEvent']]);
 
-                        var endEvents = processes[j]['endEvent'] === undefined ? [] : (Array.isArray(processes[j]['endEvent']) ? processes[j]['endEvent'] : [processes[j]['endEvent']]);
-
-                        var processName = processes[j]._name === undefined ? id : processes[j]._name;
+                        var isStartEventsError = false;
 
                         if ($('#event-errors').is(':checked')) {
                             if (startEvents.length > 1) {
@@ -537,9 +537,23 @@
                                     message: 'error'
                                 });
 
-                                isError = true;
+                                isStartEventsError = true;
                             }
                         }
+
+                        for (var i in startEvents) {
+                            var id = startEvents[i]._id;
+
+                            if (isStartEventsError) {
+                                canvas.addMarker(id, 'highlight-red');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
+                            }
+                        }
+
+                        var endEvents = processes[j]['endEvent'] === undefined ? [] : (Array.isArray(processes[j]['endEvent']) ? processes[j]['endEvent'] : [processes[j]['endEvent']]);
+
+                        var isEndEventsWarning = false;
 
                         if ($('#event-warnings').is(':checked')) {
                             if (endEvents.length > 1) {
@@ -551,7 +565,17 @@
                                     message: 'warning'
                                 });
 
-                                isWarning = true;
+                                isEndEventsWarning = true;
+                            }
+                        }
+
+                        for (var i in endEvents) {
+                            var id = endEvents[i]._id;
+
+                            if (isEndEventsWarning) {
+                                canvas.addMarker(id, 'highlight-yellow');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
                             }
                         }
                     }
