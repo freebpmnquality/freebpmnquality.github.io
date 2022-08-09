@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: freebpmnquality.github.io
+Token: 95e694b493f9cac5053f19ca4328a80181c6432759b698221db4b944180cee80
