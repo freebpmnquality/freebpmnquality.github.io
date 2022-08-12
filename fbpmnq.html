@@ -210,10 +210,22 @@
                     </div>
                 </div>
 
-                <button class="btn btn-sm mb-3 mt-2" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
+                <button class="btn btn-sm mb-2 mt-2" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
 
                 <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
                 <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
+
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <label class="text-muted mb-0">Support us</label>
+
+                        <div class="mt-1 mb-1" id="donations"></div>
+
+                        <img src="images/fbpmnq/qr-code.png" width="144" alt="qr-code" class="img-thumbnail">
+
+                        <small class="form-text text-muted mb-0">We accept donations in any network that is compatible with the Ethereum network</small>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-9">
                 <div class="mt-0 mb-1 text-left">
@@ -838,6 +850,45 @@
 
         $('#file-input').change(readSingleFile);
 
+        async function showDonations(address, ticker, tag) {
+            $(function() {
+                $('[data-toggle="popover"]').popover()
+            });
+
+            var priceResponse = await fetch('https://api.coingecko.com/api/v3/coins/' + tag, {
+                method: 'GET'
+            });
+
+            var priceResult = await priceResponse.json();
+            var coinPrice = priceResult.market_data.ath.usd;
+
+            var balanceResponse = await fetch('https://node1.mintme.com/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    'jsonrpc': '2.0',
+                    'method': 'eth_getBalance',
+                    'params': [
+                        address,
+                        'latest'
+                    ],
+                    'id': 1
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            var balanceResult = await balanceResponse.json();
+            var balanceHex = balanceResult.result;
+            var balance = Number.parseInt(balanceHex, 16) / 1e18;
+
+            var balancePrice = balance * coinPrice;
+
+            $('#donations').html(`<small class="form-check-label"><b>ETH</b> ${address}</small><br>
+                <small class="text-muted">Statistics</small><br>
+                <small class="form-check-label">${balance.toFixed(4)} ${ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
+        }
+
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en'
@@ -855,7 +906,7 @@
             });
         });
 
-        $(document).ready(function() {
+        $(document).ready(async function() {
             // welcome pop-up
             $('#welcomeModal').modal('show');
 
@@ -863,6 +914,8 @@
 
             $('#slider').val(800);
             $('#slider').trigger('change');
+
+            await showDonations('0x272B70999A9aFbF471Ce697D7610AC091C0be962', 'ETH', 'ethereum');
         });
     </script>
 
