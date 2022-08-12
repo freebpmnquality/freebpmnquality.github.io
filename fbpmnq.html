@@ -194,6 +194,11 @@
                     <small class="form-check-label" for="gateway-errors">Consider gateways that are neither splits nor joins as errors</small>
                 </div>
 
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" id="inclusive-warnings" checked>
+                    <small class="form-check-label" for="inclusive-warnings">Consider inclusive (OR) gateways as warnings</small>
+                </div>
+
                 <button class="btn btn-sm mb-3 mt-2" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
 
                 <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
@@ -713,6 +718,18 @@
                                 canvas.addMarker(id, 'highlight-yellow');
                             } else {
                                 canvas.addMarker(id, 'highlight-green');
+                            }
+                        }
+
+                        if ($('#inclusive-warnings').is(':checked')) {
+                            if (inclusiveGateways.length > 1) {
+                                messages.push({
+                                    id: id,
+                                    type: 'Process',
+                                    name: processName,
+                                    text: 'contains inclusive (OR) gateways',
+                                    message: 'warning'
+                                });
                             }
                         }
                     }
