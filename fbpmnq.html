@@ -179,12 +179,22 @@
                     <small class="form-check-label" for="event-warnings">Consider multiple end events as warnings</small>
                 </div>
 
-                <div class="form-check mt-1 mb-2">
+                <div class="form-check mt-1">
                     <input class="form-check-input" type="checkbox" id="event-errors" checked>
                     <small class="form-check-label" for="event-errors">Consider multiple start events as errors</small>
                 </div>
 
-                <button class="btn btn-sm mb-3" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" id="gateway-warnings" checked>
+                    <small class="form-check-label" for="gateway-warnings">Consider gateways with mixed behavior as warnings</small>
+                </div>
+
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" id="gateway-errors" checked>
+                    <small class="form-check-label" for="gateway-errors">Consider gateways that are neither splits nor joins as errors</small>
+                </div>
+
+                <button class="btn btn-sm mb-3 mt-2" onclick="checkTowardRules();" role="button">CHECK TOWARD RULES</button>
 
                 <small class="form-text text-muted mb-0">Detected mistakes are highlighted in the BPMN diagram</small>
                 <small class="form-text text-muted mb-2">Open your model in a BPMN diagram editor and try to fix detected mistakes</small>
@@ -642,6 +652,67 @@
                                     text: 'has multiple end events',
                                     message: 'warning'
                                 });
+                            }
+                        }
+
+                        var parallelGateways = processes[j]['parallelGateway'] === undefined ? [] : (Array.isArray(processes[j]['parallelGateway']) ? processes[j]['parallelGateway'] : [processes[j]['parallelGateway']]);
+
+                        var exclusiveGateways = processes[j]['exclusiveGateway'] === undefined ? [] : (Array.isArray(processes[j]['exclusiveGateway']) ? processes[j]['exclusiveGateway'] : [processes[j]['exclusiveGateway']]);
+
+                        var inclusiveGateways = processes[j]['inclusiveGateway'] === undefined ? [] : (Array.isArray(processes[j]['inclusiveGateway']) ? processes[j]['inclusiveGateway'] : [processes[j]['inclusiveGateway']]);
+
+                        var eventBasedGateways = processes[j]['eventBasedGateway'] === undefined ? [] : (Array.isArray(processes[j]['eventBasedGateway']) ? processes[j]['eventBasedGateway'] : [processes[j]['eventBasedGateway']]);
+
+                        var complexGateways = processes[j]['complexGateway'] === undefined ? [] : (Array.isArray(processes[j]['complexGateway']) ? processes[j]['complexGateway'] : [processes[j]['complexGateway']]);
+
+                        var gateways = parallelGateways.concat(exclusiveGateways).concat(inclusiveGateways).concat(eventBasedGateways).concat(complexGateways);
+
+                        for (var i in gateways) {
+                            var id = gateways[i]._id;
+
+                            var name = gateways[i]._name === undefined ? id : gateways[i]._name;
+
+                            var incoming = gateways[i].incoming === undefined ? 0 : (Array.isArray(gateways[i].incoming) ? gateways[i].incoming.length : 1);
+
+                            var outgoing = gateways[i].outgoing === undefined ? 0 : (Array.isArray(gateways[i].outgoing) ? gateways[i].outgoing.length : 1);
+
+                            var isError = false;
+                            var isWarning = false;
+
+                            if ($('#gateway-warnings').is(':checked')) {
+                                if (incoming > 1 && outgoing > 1) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Gateway',
+                                        name: name,
+                                        text: 'is mixing the split and join behavior',
+                                        message: 'warning'
+                                    });
+
+                                    isWarning = true;
+                                }
+                            }
+
+                            if ($('#gateway-errors').is(':checked')) {
+                                if ((incoming === 1 && outgoing === 1) || (incoming < 1 || outgoing < 1)) {
+                                    messages.push({
+                                        id: id,
+                                        type: 'Gateway',
+                                        name: name,
+                                        text: 'is neither split nor join',
+                                        message: 'error'
+                                    });
+
+                                    isError = true;
+                                }
+                            }
+
+                            if (isError) {
+                                canvas.addMarker(id, 'highlight-red');
+                            } else if (isWarning) {
+                                canvas.addMarker(id, 'highlight-yellow');
+                            } else {
+                                canvas.addMarker(id, 'highlight-green');
                             }
                         }
                     }
