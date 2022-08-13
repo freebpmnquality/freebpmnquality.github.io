@@ -228,14 +228,58 @@
                 </div>
             </div>
             <div class="col-sm-9">
-                <div class="mt-0 mb-1 text-left">
-                    <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
-                    <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mt-0 mb-1 text-left">
+                            <small class="form-text text-muted mb-1 mt-0">Move the slider to adjust the BPMN diagram size</small>
+                            <input type="range" min="400" max="1200" value="400" step="200" id="slider" class="mt-0 mb-0">
+                        </div>
+                    </div>
                 </div>
 
-                <div id="js-canvas" class="img-thumbnail mb-2"></div>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div id="js-canvas" class="img-thumbnail mb-2"></div>
+                    </div>
 
-                <ul class="list-group mb-2" id="detected-mistakes"></ul>
+                    <div class="col-sm-2">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <label class="text-muted mb-0">Quality</label>
+
+                                <small class="form-text text-muted mb-0">Evaluation of business process model quality and correctness</small>
+
+                                <p class="h4 mb-0 mt-1"><span id="model-quality">0</span>%</p>
+                            </div>
+                        </div>
+
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <label class="text-muted mb-0">Cost</label>
+
+                                <small class="form-text text-muted mb-0">Business process modeling effort and cost estimation</small>
+
+                                <p class="h4 mb-0 mt-1">$<span id="model-cost">0</span></p>
+                            </div>
+                        </div>
+
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <label class="text-muted mb-0">Tokenization</label>
+
+                                <small class="form-text text-muted mb-0">Business process model tokenization for decentralized exchange</small>
+
+                                <button class="btn btn-sm mb-0 mt-2" onclick="tokenizeModel();" role="button">CREATE NFT</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="list-group mb-2" id="detected-mistakes"></ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -405,6 +449,19 @@
                     var processes = Array.isArray(json.definitions.process) ? json.definitions.process : [json.definitions.process];
 
                     var messages = [];
+
+                    var possibleErrors = 0;
+
+                    var taskChecks = 5,
+                        intermediateEventChecks = 4,
+                        startEventChecks = 2,
+                        startEventNumberChecks = 1,
+                        endEventChecks = 2,
+                        endEventNumberChecks = 1,
+                        gatewayChecks = 2,
+                        inclusiveGatewayChecks = 1;
+
+                    var modelSize = 0;
 
                     for (var j in processes) {
                         var processName = processes[j]._name === undefined ? id : processes[j]._name;
@@ -773,23 +830,43 @@
                                 });
                             }
                         }
+
+                        possibleErrors += taskChecks * tasks.length + intermediateEventChecks * intermediateEvents.length + startEventChecks * startEvents.length + startEventNumberChecks + endEventChecks * endEvents.length + endEventNumberChecks + gatewayChecks * gateways.length + inclusiveGatewayChecks;
+
+                        modelSize += tasks.length + intermediateEvents.length + startEvents.length + endEvents.length + gateways.length;
                     }
 
                     $('#detected-mistakes').empty();
+
+                    var errorsCount = 0,
+                        warningsCount = 0;
 
                     for (var i in messages) {
                         var badge = null;
 
                         if (messages[i].message === 'error') {
                             badge = '<span class="badge badge-pill badge-danger">Error</span>';
+
+                            errorsCount++;
                         }
 
                         if (messages[i].message === 'warning') {
                             badge = '<span class="badge badge-pill badge-warning">Warning</span>';
+
+                            warningsCount++;
                         }
 
                         $('#detected-mistakes').append(`<li class="list-group-item list-group-item-action"><small>${badge} ${messages[i].type} <b>${messages[i].name}</b> ${messages[i].text}</small></li>`);
                     }
+
+                    var modelQuality = calculateQuality(errorsCount, warningsCount, possibleErrors);
+                    var modelQualityPercent = modelQuality * 100;
+
+                    $('#model-quality').text(modelQualityPercent.toFixed(2));
+
+                    var modelCost = calculateCost(modelQuality, modelSize);
+
+                    $('#model-cost').text(modelCost.toFixed(2));
 
                     if (messages.length < 1) {
                         $('#detected-mistakes').append(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</small></li>`);
@@ -797,9 +874,23 @@
                 }
             } catch (err) {
                 displayMessage(err.message);
-
-                console.error(err);
             }
+        }
+
+        function calculateQuality(errorsCount, warningsCount, possibleErrors) {
+            return 1 - (errorsCount + warningsCount) / possibleErrors;
+        }
+
+        function calculateCost(modelQuality, modelSize) {
+            var taskLOC = 6,
+                monthHours = 152;
+
+            var coefficient = 2.4,
+                exponent = 1.05;
+
+            var KLOC = (modelSize * modelQuality * taskLOC) / 1000;
+
+            return coefficient * Math.pow(KLOC, exponent) * monthHours;
         }
 
         function readSingleFile(e) {
@@ -843,8 +934,6 @@
                 reader.readAsText(file);
             } catch (err) {
                 displayMessage(err.message);
-
-                console.error(err);
             }
         }
 
@@ -874,6 +963,10 @@
             $('#donations').html(`<small class="form-check-label"><b>${ticker}</b> ${address}</small><br>
                 <small class="text-muted">Statistics</small><br>
                 <small class="form-check-label">${balance.toFixed(4)} ${ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
+        }
+
+        function tokenizeModel() {
+            displayMessage('To be appeared later!');
         }
 
         function googleTranslateElementInit() {
