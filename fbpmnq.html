@@ -221,9 +221,9 @@
 
                         <div class="mt-1 mb-1" id="donations"></div>
 
-                        <img src="images/fbpmnq/qr-code.png" width="144" alt="qr-code" class="img-thumbnail">
+                        <img src="images/fbpmnq/qr-code.png" width="64" alt="qr-code" class="img-thumbnail">
 
-                        <small class="form-text text-muted mb-0">We accept donations in any network that is compatible with the Ethereum network</small>
+                        <small class="form-text text-muted mb-0">We accept donations in MicroBitcoin</small>
                     </div>
                 </div>
             </div>
@@ -862,29 +862,16 @@
             var priceResult = await priceResponse.json();
             var coinPrice = priceResult.market_data.ath.usd;
 
-            var balanceResponse = await fetch('https://node1.mintme.com/', {
-                method: 'POST',
-                body: JSON.stringify({
-                    'jsonrpc': '2.0',
-                    'method': 'eth_getBalance',
-                    'params': [
-                        address,
-                        'latest'
-                    ],
-                    'id': 1
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+            var balanceResponse = await fetch('http://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + tag + '&wallet=' + address, {
+                method: 'GET'
             });
 
             var balanceResult = await balanceResponse.json();
-            var balanceHex = balanceResult.result;
-            var balance = Number.parseInt(balanceHex, 16) / 1e18;
+            var balance = balanceResult.total;
 
             var balancePrice = balance * coinPrice;
 
-            $('#donations').html(`<small class="form-check-label"><b>ETH</b> ${address}</small><br>
+            $('#donations').html(`<small class="form-check-label"><b>${ticker}</b> ${address}</small><br>
                 <small class="text-muted">Statistics (since March 2021)</small><br>
                 <small class="form-check-label">${balance.toFixed(4)} ${ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
         }
@@ -915,7 +902,7 @@
             $('#slider').val(800);
             $('#slider').trigger('change');
 
-            await showDonations('0x272B70999A9aFbF471Ce697D7610AC091C0be962', 'ETH', 'ethereum');
+            await showDonations('MaJtwSDFCa15nthiCm8LpqzzmkZGteo2Li', 'MBC', 'microbitcoin');
         });
     </script>
 
