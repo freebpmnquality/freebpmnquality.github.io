@@ -855,19 +855,19 @@
                 $('[data-toggle="popover"]').popover()
             });
 
-            var priceResponse = await fetch('https://api.coingecko.com/api/v3/coins/' + tag, {
+            var priceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + tag, {
                 method: 'GET'
             });
 
             var priceResult = await priceResponse.json();
-            var coinPrice = priceResult.market_data.ath.usd;
+            var coinPrice = priceResult.value;
 
             var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + tag + '&wallet=' + address, {
                 method: 'GET'
             });
 
             var balanceResult = await balanceResponse.json();
-            var balance = balanceResult.total;
+            var balance = balanceResult.value;
 
             var balancePrice = balance * coinPrice;
 
