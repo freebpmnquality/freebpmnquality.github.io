@@ -862,7 +862,7 @@
             var priceResult = await priceResponse.json();
             var coinPrice = priceResult.market_data.ath.usd;
 
-            var balanceResponse = await fetch('http://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + tag + '&wallet=' + address, {
+            var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + tag + '&wallet=' + address, {
                 method: 'GET'
             });
 
