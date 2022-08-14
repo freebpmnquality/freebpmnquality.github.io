@@ -221,9 +221,7 @@
 
                         <div class="mt-1 mb-1" id="donations"></div>
 
-                        <img src="images/fbpmnq/qr-code.png" width="64" alt="qr-code" class="img-thumbnail">
-
-                        <small class="form-text text-muted mb-0">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
+                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail mb-0">
                     </div>
                 </div>
             </div>
@@ -246,9 +244,7 @@
                         <div class="card mb-2">
                             <div class="card-body">
                                 <label class="text-muted mb-0">Quality</label>
-
                                 <small class="form-text text-muted mb-0">Evaluation of business process model quality and correctness</small>
-
                                 <p class="h4 mb-0 mt-1"><span id="model-quality">0</span>%</p>
                             </div>
                         </div>
@@ -256,9 +252,7 @@
                         <div class="card mb-2">
                             <div class="card-body">
                                 <label class="text-muted mb-0">Cost</label>
-
                                 <small class="form-text text-muted mb-0">Business process modeling effort and cost estimation</small>
-
                                 <p class="h4 mb-0 mt-1">$<span id="model-cost">0</span></p>
                             </div>
                         </div>
@@ -266,7 +260,6 @@
                         <div class="card mb-2">
                             <div class="card-body">
                                 <label class="text-muted mb-0">Tokenization</label>
-
                                 <small class="form-text text-muted mb-0">Business process model tokenization for decentralized exchange</small>
 
                                 <button class="btn btn-sm mb-0 mt-2" onclick="tokenizeModel();" role="button">CREATE NFT</button>
@@ -295,9 +288,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="messageModalLabel"><b>Message</b></h5>
+                    <h5 class="modal-title" id="messageModalLabel"><b><span id="message-title">Message</span></b></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
+
                 <div class="modal-body" id="message-text"></div>
             </div>
         </div>
@@ -358,7 +352,8 @@
 
     <!-- App -->
     <script type="text/javascript">
-        function displayMessage(messageText) {
+        function displayMessage(messageText, messageTitle = 'Message') {
+            $('#message-title').html(messageTitle);
             $('#message-text').html(messageText);
             $('#messageModal').modal('show');
         }
@@ -385,9 +380,21 @@
             if (isChecked) await checkTowardRules();
         });
 
+        var modelInWork = '01-tasks.bpmn';
+
+        var endowment = {
+            address: 'MaJtwSDFCa15nthiCm8LpqzzmkZGteo2Li',
+            ticker: 'MBC',
+            tickerBTC: 'BTC',
+            tag: 'microbitcoin',
+            tagBTC: 'bitcoin'
+        };
+
         async function displayExample() {
             $('#file-input').val('');
             $('#file-name').text('01-tasks.bpmn');
+
+            modelInWork = '01-tasks.bpmn';
 
             var url = 'https://raw.githubusercontent.com/freebpmnquality/freebpmnquality.github.io/master/samples/01-tasks.bpmn';
 
@@ -422,6 +429,15 @@
 
         async function checkTowardRules() {
             try {
+                if (modelInWork !== '01-tasks.bpmn') {
+                    displayMessage(`<div class="text-center">
+                        <div class="mt-1 mb-1"><b>${endowment.tickerBTC}</b> ${endowment.address}</div>
+                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail mb-2">
+                        
+                        <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
+                    </div>`, 'Support us');
+                }
+
                 isChecked = true;
 
                 var bpmnInput = $('#bpmn-input').text();
@@ -908,6 +924,8 @@
                 reader.onload = async function(e) {
                     $('#file-name').text(file.name);
 
+                    modelInWork = file.name;
+
                     var contents = e.target.result;
 
                     $('#bpmn-input').text(contents);
@@ -939,30 +957,38 @@
 
         $('#file-input').change(readSingleFile);
 
-        async function showDonations(address, ticker, tag) {
+        async function showDonations() {
             $(function() {
                 $('[data-toggle="popover"]').popover()
             });
 
-            var priceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + tag, {
+            var priceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + endowment.tag, {
                 method: 'GET'
             });
 
             var priceResult = await priceResponse.json();
             var coinPrice = priceResult.value;
 
-            var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + tag + '&wallet=' + address, {
+            var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + endowment.tag + '&wallet=' + endowment.address, {
                 method: 'GET'
             });
 
             var balanceResult = await balanceResponse.json();
             var balance = balanceResult.value;
 
-            var balancePrice = balance * coinPrice;
+            var priceBTCResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + endowment.tagBTC, {
+                method: 'GET'
+            });
 
-            $('#donations').html(`<small class="form-check-label"><b>${ticker}</b> ${address}</small><br>
+            var priceBTCResult = await priceBTCResponse.json();
+            var coinBTCPrice = priceBTCResult.value;
+
+            var balancePrice = balance * coinPrice;
+            var balanceBTC = balancePrice / coinBTCPrice;
+
+            $('#donations').html(`<small class="form-check-label"><b>${endowment.tickerBTC}</b> ${endowment.address}</small><br>
                 <small class="text-muted">Statistics</small><br>
-                <small class="form-check-label">${balance.toFixed(4)} ${ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
+                <small class="form-check-label">${balanceBTC.toFixed(8)} ${endowment.tickerBTC} &asymp; $${balancePrice.toFixed(2)}</small>`);
         }
 
         function tokenizeModel() {
@@ -995,7 +1021,7 @@
             $('#slider').val(800);
             $('#slider').trigger('change');
 
-            await showDonations('MaJtwSDFCa15nthiCm8LpqzzmkZGteo2Li', 'MBC', 'microbitcoin');
+            await showDonations();
         });
     </script>
 
