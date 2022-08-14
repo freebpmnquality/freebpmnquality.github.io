@@ -221,7 +221,9 @@
 
                         <div class="mt-1 mb-1" id="donations"></div>
 
-                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail mb-0">
+                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail">
+
+                        <small class="form-text text-muted mb-0">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
                     </div>
                 </div>
             </div>
@@ -431,9 +433,11 @@
             try {
                 if (modelInWork !== '01-tasks.bpmn') {
                     displayMessage(`<div class="text-center">
-                        <div class="mt-1 mb-1"><b>${endowment.tickerBTC}</b> ${endowment.address}</div>
-                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail mb-2">
+                        <div class="mt-1 mb-1"><b>Wallet</b> ${endowment.address}</div>
                         
+                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail">
+                        <small class="form-text text-muted mb-2">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
+
                         <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
                     </div>`, 'Support us');
                 }
@@ -986,7 +990,7 @@
             var balancePrice = balance * coinPrice;
             var balanceBTC = balancePrice / coinBTCPrice;
 
-            $('#donations').html(`<small class="form-check-label"><b>${endowment.tickerBTC}</b> ${endowment.address}</small><br>
+            $('#donations').html(`<small class="form-check-label"><b>Wallet</b> ${endowment.address}</small><br>
                 <small class="text-muted">Statistics</small><br>
                 <small class="form-check-label">${balanceBTC.toFixed(8)} ${endowment.tickerBTC} &asymp; $${balancePrice.toFixed(2)}</small>`);
         }
