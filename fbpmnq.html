@@ -248,6 +248,8 @@
                                 <label class="text-muted mb-0">Quality</label>
                                 <small class="form-text text-muted mb-0">Evaluation of business process model quality and correctness</small>
                                 <p class="h4 mb-0 mt-1"><span id="model-quality">0</span>%</p>
+
+                                <div id="order-redesign"></div>
                             </div>
                         </div>
 
@@ -886,6 +888,13 @@
 
                     var modelCost = calculateCost(modelQuality, modelSize);
 
+                    var redesignCost = calculateCost(1, modelSize) - modelCost;
+
+                    var basePrice = 5;
+                    var redesignCostFinal = basePrice + Math.ceil(redesignCost) - 0.01;
+
+                    $('#order-redesign').html(`<button class="btn mb-0 mt-2" onclick="orderRedesign(${redesignCostFinal});" role="button">Order redesign for $${redesignCostFinal.toFixed(2)} only!</button>`);
+
                     $('#model-cost').text(modelCost.toFixed(2));
 
                     if (messages.length < 1) {
@@ -911,6 +920,26 @@
             var KLOC = (modelSize * modelQuality * taskLOC) / 1000;
 
             return coefficient * Math.pow(KLOC, exponent) * monthHours;
+        }
+
+        function tokenizeModel() {
+            displayMessage('To be appeared later!');
+        }
+
+        function orderRedesign(redesignCostFinal) {
+            displayMessage(`<div class="text-center">
+                <label class="text-muted mb-0">Order BPMN redesign</label>
+                <label class="text-muted mb-0"><small>Send BTC to the address below equal to <b>$${redesignCostFinal.toFixed(2)}</b></small></label>
+                <label class="text-muted mb-0"><small>Send transaction ID and BPMN model for redesign to <a href="mailto:7960954@gmail.com" target="_blank">7960954@gmail.com</a></small></label>
+                <label class="text-muted mb-0"><small>Your model will be redesigned and emailed to you back in 24 hours</small></label>
+
+                <div class="mt-1 mb-1"><b>Wallet</b> ${endowment.address}</div>
+
+                <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail">
+                <small class="form-text text-muted mb-2">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
+
+                <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Cancel</button>
+            </div>`, 'Order');
         }
 
         function readSingleFile(e) {
@@ -993,10 +1022,6 @@
             $('#donations').html(`<small class="form-check-label"><b>Wallet</b> ${endowment.address}</small><br>
                 <small class="text-muted">Statistics</small><br>
                 <small class="form-check-label">${balanceBTC.toFixed(8)} ${endowment.tickerBTC} &asymp; $${balancePrice.toFixed(2)}</small>`);
-        }
-
-        function tokenizeModel() {
-            displayMessage('To be appeared later!');
         }
 
         function googleTranslateElementInit() {
