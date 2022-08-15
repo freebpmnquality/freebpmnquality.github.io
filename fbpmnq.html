@@ -1013,13 +1013,13 @@
                 var flows = processStructure[index].flows;
 
                 var cyclomaticNumber = flows - elements + 1;
-                var networkComplexity = flows / elements;
+                var networkConnectivity = flows / elements;
 
                 $('#list-metrics').append(`<button type="button" class="list-group-item list-group-item-action">
                     <small>
                         <span class="badge badge-pill badge-primary">Metrics</span> Process <b>${name}</b><br>
                         Cyclomatic number: ${cyclomaticNumber.toFixed(2)}<br>
-                        Network complexity: ${networkComplexity.toFixed(2)}
+                        Network connectivity: ${networkConnectivity.toFixed(2)}
                     </small>
                 </button>`);
             }
