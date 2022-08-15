@@ -137,6 +137,13 @@
         <div class="card-group mt-4">
             <div class="card" style="background-color: transparent; border: none;">
                 <div class="card-body">
+                    <p class="h3 mb-0"><span id="stats-guests">0</span></p>
+                    <span class="text-muted">Guests</span>
+                </div>
+            </div>
+
+            <div class="card" style="background-color: transparent; border: none;">
+                <div class="card-body">
                     <p class="h3 mb-0"><span id="stats-users">0</span></p>
                     <span class="text-muted">Users</span>
                 </div>
@@ -424,13 +431,14 @@
         }
 
         async function updateStats(stats) {
-            var resultStats = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/updateFBPMNQStats.php?users=' + stats.users + '&models=' + stats.models + '&value=' + stats.value, {
+            var resultStats = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/updateFBPMNQStats.php?users=' + stats.users + '&models=' + stats.models + '&value=' + stats.value + '&guests=' + stats.guests, {
                 method: 'GET'
             });
 
             var resultStatsJSON = await resultStats.json();
             var newStats = resultStatsJSON.result;
 
+            $('#stats-guests').text(newStats.guests);
             $('#stats-users').text(newStats.users);
             $('#stats-models').text(newStats.models);
             $('#stats-value').text(newStats.value.toFixed(2));
@@ -949,7 +957,8 @@
                         await updateStats({
                             users: 0,
                             models: 1,
-                            value: modelCost
+                            value: modelCost,
+                            guests: 0
                         });
                     }
                 }
@@ -1041,7 +1050,8 @@
                 await updateStats({
                     users: 1,
                     models: 0,
-                    value: 0
+                    value: 0,
+                    guests: 0
                 });
             } catch (err) {
                 displayMessage(err.message);
@@ -1115,7 +1125,8 @@
             await updateStats({
                 users: 0,
                 models: 0,
-                value: 0
+                value: 0,
+                guests: 1
             });
         });
     </script>
