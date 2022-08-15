@@ -1015,14 +1015,27 @@
                 var cyclomaticNumber = flows - elements + 1;
                 var networkConnectivity = flows / elements;
 
+                var cyclomaticNumberColor = getColorCode(cyclomaticNumber, 4, 7);
+                var networkConnectivityColor = getColorCode(networkConnectivity, 1.1, 1.7);
+
                 $('#list-metrics').append(`<button type="button" class="list-group-item list-group-item-action">
-                    <small>
-                        <span class="badge badge-pill badge-primary">Metrics</span> Process <b>${name}</b><br>
-                        Cyclomatic number: ${cyclomaticNumber.toFixed(2)}<br>
-                        Network connectivity: ${networkConnectivity.toFixed(2)}
-                    </small>
-                </button>`);
+                        <small>
+                            <span class="badge badge-pill badge-primary">Metrics</span> Process <b>${name}</b><br>
+                            Cyclomatic number: <span class="badge badge-pill badge-${cyclomaticNumberColor}" style="font-size: 11px;">${cyclomaticNumber.toFixed(2)}</span><br>
+                            Network connectivity: <span class="badge badge-pill badge-${networkConnectivityColor}" style="font-size: 11px;">${networkConnectivity.toFixed(2)}</span>
+                        </small>
+                    </button>`);
             }
+        }
+
+        function getColorCode(value, warningThreshold, dangerThreshold) {
+            if (value > warningThreshold) {
+                return 'warning';
+            } else if (value > dangerThreshold) {
+                return 'danger';
+            }
+
+            return 'success';
         }
 
         function calculateQuality(errorsCount, warningsCount, possibleErrors) {
