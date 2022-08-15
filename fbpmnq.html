@@ -304,15 +304,29 @@
 
                 <div class="row">
                     <div class="col-sm-12">
+                        <small class="form-text text-muted mb-2">Messages</small>
                         <ul class="list-group mb-2" id="detected-mistakes"></ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="form-group mt-2">
-            <small class="form-text text-muted mb-2">BPMN 2.0 code</small>
-            <pre id="code-area"><code class="language-xml" id="bpmn-input"></code></pre>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group mt-2">
+                    <small class="form-text text-muted mb-2">Metrics</small>
+                    <div class="list-group" id="list-metrics">
+                        <button type="button" class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="form-group mt-2">
+                    <small class="form-text text-muted mb-2">BPMN 2.0 code</small>
+                    <pre id="code-area"><code class="language-xml" id="bpmn-input"></code></pre>
+                </div>
+            </div>
         </div>
 
         <img src="/images/fbpmnq/iteration-rafiki.png" class="img-fluid banner-img mt-4" alt="iteration-rafiki">
@@ -485,6 +499,7 @@
             canvas.zoom('fit-viewport');
 
             $('#detected-mistakes').html(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
+            $('#list-metrics').html(`<button type="button" class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></button>`);
 
             clearQualityCostBlock();
         }
@@ -544,6 +559,8 @@
                         inclusiveGatewayChecks = 1;
 
                     var modelSize = 0;
+
+                    var processStructure = [];
 
                     for (var j in processes) {
                         var processName = processes[j]._name === undefined ? id : processes[j]._name;
@@ -915,7 +932,17 @@
 
                         possibleErrors += taskChecks * tasks.length + intermediateEventChecks * intermediateEvents.length + startEventChecks * startEvents.length + startEventNumberChecks + endEventChecks * endEvents.length + endEventNumberChecks + gatewayChecks * gateways.length + inclusiveGatewayChecks;
 
-                        modelSize += tasks.length + intermediateEvents.length + startEvents.length + endEvents.length + gateways.length;
+                        var processElementsNumber = tasks.length + intermediateEvents.length + startEvents.length + endEvents.length + gateways.length;
+
+                        modelSize += processElementsNumber;
+
+                        var processFlows = processes[j]['sequenceFlow'] === undefined ? [] : (Array.isArray(processes[j]['sequenceFlow']) ? processes[j]['sequenceFlow'] : [processes[j]['sequenceFlow']]);
+
+                        processStructure.push({
+                            name: processName,
+                            elements: processElementsNumber,
+                            flows: processFlows.length
+                        });
                     }
 
                     $('#detected-mistakes').empty();
@@ -969,9 +996,32 @@
                             guests: 0
                         });
                     }
+
+                    calculateMetrics(processStructure);
                 }
             } catch (err) {
                 displayMessage(err.message);
+            }
+        }
+
+        function calculateMetrics(processStructure) {
+            $('#list-metrics').empty();
+
+            for (var index in processStructure) {
+                var name = processStructure[index].name;
+                var elements = processStructure[index].elements;
+                var flows = processStructure[index].flows;
+
+                var cyclomaticNumber = flows - elements + 1;
+                var flowComplexity = flows / elements;
+
+                $('#list-metrics').append(`<button type="button" class="list-group-item list-group-item-action">
+                    <small>
+                        <span class="badge badge-pill badge-primary">Metrics</span> Process <b>${name}</b><br>
+                        Cyclomatic number: ${cyclomaticNumber.toFixed(2)}<br>
+                        Flow complexity: ${flowComplexity.toFixed(2)}
+                    </small>
+                </button>`);
             }
         }
 
@@ -1049,6 +1099,7 @@
                     canvas.zoom('fit-viewport');
 
                     $('#detected-mistakes').html(`<li class="list-group-item"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
+                    $('#list-metrics').html(`<button type="button" class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></button>`);
                 };
 
                 reader.readAsText(file);
