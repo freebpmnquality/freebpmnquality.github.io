@@ -400,6 +400,12 @@
             $('#order-redesign').empty();
         }
 
+        async function updateStats(stats) {
+            await fetch('https://cloudfreebpmnquality.herokuapp.com/api/updateFBPMNQStats.php?users=' + stats.users + '&models=' + stats.models + '&value=' + stats.value, {
+                method: 'GET'
+            });
+        }
+
         async function displayExample() {
             $('#file-input').val('');
             $('#file-name').text('01-tasks.bpmn');
