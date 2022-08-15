@@ -424,6 +424,10 @@
             tagBTC: 'bitcoin'
         };
 
+        function getURLParam(param) {
+            return new URL(window.location.href).searchParams.get(param);
+        }
+
         function clearQualityCostBlock() {
             $('#model-quality').text(0);
             $('#model-cost').text(0);
@@ -431,17 +435,21 @@
         }
 
         async function updateStats(stats) {
-            var resultStats = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/updateFBPMNQStats.php?users=' + stats.users + '&models=' + stats.models + '&value=' + stats.value + '&guests=' + stats.guests, {
-                method: 'GET'
-            });
+            var devMode = getURLParam('dev');
 
-            var resultStatsJSON = await resultStats.json();
-            var newStats = resultStatsJSON.result;
+            if (devMode === null) {
+                var resultStats = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/updateFBPMNQStats.php?users=' + stats.users + '&models=' + stats.models + '&value=' + stats.value + '&guests=' + stats.guests, {
+                    method: 'GET'
+                });
 
-            $('#stats-guests').text(newStats.guests);
-            $('#stats-users').text(newStats.users);
-            $('#stats-models').text(newStats.models);
-            $('#stats-value').text(newStats.value.toFixed(2));
+                var resultStatsJSON = await resultStats.json();
+                var newStats = resultStatsJSON.result;
+
+                $('#stats-guests').text(newStats.guests);
+                $('#stats-users').text(newStats.users);
+                $('#stats-models').text(newStats.models);
+                $('#stats-value').text(newStats.value.toFixed(2));
+            }
         }
 
         async function displayExample() {
