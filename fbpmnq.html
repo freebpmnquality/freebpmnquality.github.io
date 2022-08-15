@@ -1111,6 +1111,12 @@
             $('#slider').trigger('change');
 
             await showDonations();
+
+            await updateStats({
+                users: 0,
+                models: 0,
+                value: 0
+            });
         });
     </script>
 
