@@ -134,20 +134,26 @@
         <h1>FBPMNQ validate BPMN 2.0 models free online to design high-quality business process diagrams</h1>
         <h3>Free online check BPMN diagrams to find workflow modeling mistakes. Design high-quality business process models with this online BPMN validation and analysis tool.</h3>
 
-        <div class="row mt-4">
-            <div class="col-4">
-                <p class="h3 mb-0"><span id="stats-users">0</span></p>
-                <small class="text-muted">Users</small>
+        <div class="card-group mt-4">
+            <div class="card" style="background-color: transparent; border: none;">
+                <div class="card-body">
+                    <p class="h3 mb-0"><span id="stats-users">0</span></p>
+                    <span class="text-muted">Users</span>
+                </div>
             </div>
 
-            <div class="col-4">
-                <p class="h3"><span id="stats-models">0</span></p>
-                <small class="text-muted">Checked models</small>
+            <div class="card" style="background-color: transparent; border: none;">
+                <div class="card-body">
+                    <p class="h3"><span id="stats-models">0</span></p>
+                    <span class="text-muted">Checked models</span>
+                </div>
             </div>
 
-            <div class="col-4">
-                <p class="h3">$<span id="stats-value">0</span></p>
-                <small class="text-muted">Value of checked models</small>
+            <div class="card" style="background-color: transparent; border: none;">
+                <div class="card-body">
+                    <p class="h3">$<span id="stats-value">0</span></p>
+                    <span class="text-muted">Value of checked models</span>
+                </div>
             </div>
         </div>
 
@@ -425,9 +431,9 @@
             var resultStatsJSON = await resultStats.json();
             var newStats = resultStatsJSON.result;
 
-            $('#stats-users').text(resultStats.users);
-            $('#stats-models').text(resultStats.models);
-            $('#stats-value').text(resultStats.value.toFixed(2));
+            $('#stats-users').text(newStats.users);
+            $('#stats-models').text(newStats.models);
+            $('#stats-value').text(newStats.value.toFixed(2));
         }
 
         async function displayExample() {
@@ -939,11 +945,13 @@
                         $('#detected-mistakes').append(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</small></li>`);
                     }
 
-                    await updateStats({
-                        users: 0,
-                        models: 1,
-                        value: modelCost
-                    });
+                    if (modelInWork !== '01-tasks.bpmn') {
+                        await updateStats({
+                            users: 0,
+                            models: 1,
+                            value: modelCost
+                        });
+                    }
                 }
             } catch (err) {
                 displayMessage(err.message);
@@ -986,7 +994,7 @@
             </div>`, 'Order');
         }
 
-        function readSingleFile(e) {
+        async function readSingleFile(e) {
             try {
                 isChecked = false;
 
@@ -1029,6 +1037,12 @@
                 reader.readAsText(file);
 
                 clearQualityCostBlock();
+
+                await updateStats({
+                    users: 1,
+                    models: 0,
+                    value: 0
+                });
             } catch (err) {
                 displayMessage(err.message);
             }
@@ -1097,12 +1111,6 @@
             $('#slider').trigger('change');
 
             await showDonations();
-
-            await updateStats({
-                users: 1,
-                models: 0,
-                value: 0
-            });
         });
     </script>
 
