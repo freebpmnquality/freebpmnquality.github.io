@@ -316,7 +316,7 @@
                 <div class="form-group mt-2">
                     <small class="form-text text-muted mb-2">Metrics</small>
                     <div class="list-group" id="list-metrics">
-                        <button type="button" class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></button>
+                        <li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></li>
                     </div>
                 </div>
             </div>
@@ -499,7 +499,7 @@
             canvas.zoom('fit-viewport');
 
             $('#detected-mistakes').html(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
-            $('#list-metrics').html(`<button type="button" class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></button>`);
+            $('#list-metrics').html(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></li>`);
 
             clearQualityCostBlock();
         }
@@ -1018,13 +1018,13 @@
                 var cyclomaticNumberColor = getColorCode(cyclomaticNumber, 4, 7);
                 var networkConnectivityColor = getColorCode(networkConnectivity, 1.1, 1.7);
 
-                $('#list-metrics').append(`<button type="button" class="list-group-item list-group-item-action">
+                $('#list-metrics').append(`<li class="list-group-item list-group-item-action">
                         <small>
                             <span class="badge badge-pill badge-primary">Metrics</span> Process <b>${name}</b><br>
                             Cyclomatic number: <span class="badge badge-pill badge-${cyclomaticNumberColor}" style="font-size: 11px;">${cyclomaticNumber.toFixed(2)}</span><br>
                             Network connectivity: <span class="badge badge-pill badge-${networkConnectivityColor}" style="font-size: 11px;">${networkConnectivity.toFixed(2)}</span>
                         </small>
-                    </button>`);
+                    </li>`);
             }
         }
 
@@ -1112,7 +1112,7 @@
                     canvas.zoom('fit-viewport');
 
                     $('#detected-mistakes').html(`<li class="list-group-item"><small><span class="badge badge-pill badge-info">Info</span> Detected mistakes will be displayed here</small></li>`);
-                    $('#list-metrics').html(`<button type="button" class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></button>`);
+                    $('#list-metrics').html(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-info">Info</span> Calculated metrics will be displayed here</small></li>`);
                 };
 
                 reader.readAsText(file);
