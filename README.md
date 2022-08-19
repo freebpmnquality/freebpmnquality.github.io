@@ -5,10 +5,10 @@ This is a simple but powerful online service you can use to validate quality of 
 Our virtual organization **freebpmnquality** provides various online autonomous services.
 
 ### Core services:
-- [BlockPMN](https://freebpmnquality.github.io/blockpmn.html) - BPMN business process examples of crypto saving, staking, DeFi, and investing activities.
 - [FBPMNQ Demo](https://freebpmnquality.github.io/fbpmnq.html) - validate BPMN 2.0 models free online to design high-quality business process diagrams.
 - [BPMN Scorecard Validation Tool](https://freebpmnquality.github.io/bpmn-scorecard.html) - the industry benchmark of BPMN model quality.
 - [bumonft](https://freebpmnquality.github.io/nft-business-models.html) - a blockchain-driven NFT protocol for BPMN, ARIS, ArchiMate, and other business models.
+- [BlockPMN](https://freebpmnquality.github.io/blockpmn.html) - BPMN business process examples of crypto saving, staking, DeFi, and investing activities.
 
 ### Our comprehensive digital ecosystem for BPMN models exchange, quality analysis, and cost estimation:
 - [EtherBPMN](https://cloudfreebpmnquality.herokuapp.com/storage/) - free online software to exchange BPMN models in a distributed blockchain-driven collection.
