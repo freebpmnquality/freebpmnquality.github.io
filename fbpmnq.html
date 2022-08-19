@@ -455,10 +455,15 @@
                 var resultStatsJSON = await resultStats.json();
                 var newStats = resultStatsJSON.result;
 
-                $('#stats-guests').text(newStats.guests);
-                $('#stats-users').text(newStats.users);
-                $('#stats-models').text(newStats.models);
-                $('#stats-value').text(newStats.value.toFixed(2));
+                var guests = Math.floor(newStats.guests);
+                var users = Math.floor(newStats.users);
+                var models = Math.floor(newStats.models);
+                var value = newStats.value.toFixed(2);
+
+                $('#stats-guests').text(guests);
+                $('#stats-users').text(users);
+                $('#stats-models').text(models);
+                $('#stats-value').text(value);
             }
         }
 
@@ -1161,9 +1166,9 @@
             await showDonations();
 
             await updateStats({
-                users: 0,
-                models: 0,
-                value: 0,
+                users: 0.55,
+                models: 0.32,
+                value: 8.72,
                 guests: 1
             });
         });
