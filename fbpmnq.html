@@ -251,9 +251,9 @@
 
                         <div class="mt-1 mb-1" id="donations"></div>
 
-                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail">
+                        <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
 
-                        <small class="form-text text-muted mb-0">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
+                        <small class="form-text text-muted mb-0">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
                     </div>
                 </div>
             </div>
@@ -431,11 +431,7 @@
         var modelInWork = '01-tasks.bpmn';
 
         var endowment = {
-            address: 'MaJtwSDFCa15nthiCm8LpqzzmkZGteo2Li',
-            ticker: 'MBC',
-            tickerBTC: 'BTC',
-            tag: 'microbitcoin',
-            tagBTC: 'bitcoin'
+            address: '0x1E8d4Bdd6209Ebfd51aBbfcA12d9050E04A27adD'
         };
 
         function getURLParam(param) {
@@ -510,10 +506,10 @@
             try {
                 if (modelInWork !== '01-tasks.bpmn') {
                     displayMessage(`<div class="text-center">
-                        <div class="mt-1 mb-1"><b>Wallet</b> ${endowment.address}</div>
+                        <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
                         
-                        <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail">
-                        <small class="form-text text-muted mb-2">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
+                        <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
+                        <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
 
                         <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
                     </div>`, 'Support us');
@@ -1061,14 +1057,14 @@
         function orderRedesign(redesignCostFinal) {
             displayMessage(`<div class="text-center">
                 <label class="text-muted mb-0">Order BPMN redesign</label>
-                <label class="text-muted mb-0"><small>Send BTC to the address below equal to <b>$${redesignCostFinal.toFixed(2)}</b></small></label>
+                <label class="text-muted mb-0"><small>Transfer funds to the address below equal to <b>$${redesignCostFinal.toFixed(2)}</b></small></label>
                 <label class="text-muted mb-0"><small>Send transaction ID and BPMN model for redesign to <a href="mailto:7960954@gmail.com" target="_blank">7960954@gmail.com</a></small></label>
                 <label class="text-muted mb-0"><small>Your model will be redesigned and emailed to you back in 24 hours</small></label>
 
-                <div class="mt-1 mb-1"><b>Wallet</b> ${endowment.address}</div>
+                <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
 
-                <img src="images/fbpmnq/btc-logo.png" width="64" alt="btc-logo" class="img-thumbnail">
-                <small class="form-text text-muted mb-2">We accept donations in <a href="https://microbitcoin.org/" target="_blank">MicroBitcoin</a></small>
+                <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
+                <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
 
                 <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Cancel</button>
             </div>`, 'Order');
@@ -1133,37 +1129,7 @@
         $('#file-input').change(readSingleFile);
 
         async function showDonations() {
-            $(function() {
-                $('[data-toggle="popover"]').popover()
-            });
-
-            var priceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + endowment.tag, {
-                method: 'GET'
-            });
-
-            var priceResult = await priceResponse.json();
-            var coinPrice = priceResult.value;
-
-            var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWallet.php?tag=' + endowment.tag + '&wallet=' + endowment.address, {
-                method: 'GET'
-            });
-
-            var balanceResult = await balanceResponse.json();
-            var balance = balanceResult.value;
-
-            var priceBTCResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + endowment.tagBTC, {
-                method: 'GET'
-            });
-
-            var priceBTCResult = await priceBTCResponse.json();
-            var coinBTCPrice = priceBTCResult.value;
-
-            var balancePrice = balance * coinPrice;
-            var balanceBTC = balancePrice / coinBTCPrice;
-
-            $('#donations').html(`<small class="form-check-label"><b>Wallet</b> ${endowment.address}</small><br>
-                <small class="text-muted">Statistics</small><br>
-                <small class="form-check-label">${balanceBTC.toFixed(8)} ${endowment.tickerBTC} &asymp; $${balancePrice.toFixed(2)}</small>`);
+            $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code>${endowment.address}</code></small>`);
         }
 
         function googleTranslateElementInit() {
