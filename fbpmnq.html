@@ -253,7 +253,7 @@
 
                         <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
 
-                        <small class="form-text text-muted mb-0">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
+                        <small class="form-text text-muted mb-0">Transfer funds you are willing to contribute to our cause to this MetaMask address or <a href="https://goerli-faucet.pk910.de/" target="_blank">mine some GöETH</a> for us to support the development.</small>
                     </div>
                 </div>
             </div>
@@ -431,7 +431,9 @@
         var modelInWork = '01-tasks.bpmn';
 
         var endowment = {
-            address: '0x1E8d4Bdd6209Ebfd51aBbfcA12d9050E04A27adD'
+            address: '0x1E8d4Bdd6209Ebfd51aBbfcA12d9050E04A27adD',
+            tag: 'ethereum',
+            ticker: 'ETH'
         };
 
         function getURLParam(param) {
@@ -514,7 +516,7 @@
                         <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
                         
                         <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
-                        <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
+                        <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address or <a href="https://goerli-faucet.pk910.de/" target="_blank">mine some GöETH</a> for us to support the development.</small>
 
                         <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
                     </div>`, 'Support us');
@@ -1134,7 +1136,25 @@
         $('#file-input').change(readSingleFile);
 
         async function showDonations() {
-            $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code>${endowment.address}</code></small>`);
+            var priceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + endowment.tag, {
+                method: 'GET'
+            });
+
+            var priceResult = await priceResponse.json();
+            var price = priceResult.value;
+
+            var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWalletGoerli.php?wallet=' + endowment.address, {
+                method: 'GET'
+            });
+
+            var balanceResult = await balanceResponse.json();
+            var balance = Number.parseInt(balanceResult.value, 16) / 1e18;
+
+            var balancePrice = balance * price;
+
+            $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code>${endowment.address}</code></small><br>
+                <small class="text-muted">Statistics</small><br>
+                <small class="form-check-label">${balance.toFixed(8)} ${endowment.ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
         }
 
         function googleTranslateElementInit() {
