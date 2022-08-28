@@ -5,6 +5,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3TJ27QQ4T"></script>
     <script>
+        // [start] GA Tag
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -13,6 +14,35 @@
         gtag('js', new Date());
 
         gtag('config', 'G-W3TJ27QQ4T');
+        // [end] GA Tag
+
+        function getURLParam(param) {
+            return new URL(window.location.href).searchParams.get(param);
+        }
+
+        var eComMeasures = {
+            transaction: 'T_' + Math.floor(Date.now() * Math.random()).toString(),
+            affiliation: 'freebpmnquality.github.io',
+            sku: 'SKU_FBPMNQ001',
+            product: 'Download Ads-Free FBPMNQ',
+            price: {
+                value: 29.00,
+                currency: 'USD'
+            }
+        };
+
+        if (getURLParam('utm_content') === 'ads-free' && getURLParam('utm_content') === null) {
+            gtag('event', 'purchase', {
+                transaction_id: eComMeasures.transaction,
+                affiliation: eComMeasures.affiliation,
+                value: eComMeasures.price.value,
+                currency: eComMeasures.price.currency,
+                items: [{
+                    item_id: eComMeasures.sku,
+                    item_name: eComMeasures.product
+                }]
+            });
+        }
     </script>
 
     <title>FBPMNQ validate BPMN 2.0 models free online to design high-quality business process diagrams</title>
@@ -168,7 +198,10 @@
             </div>
         </div>
 
-        <a href="#tryArea" class="btn btn-lg mt-4" role="button">TRY FOR FREE</a>
+        <div class="mt-4">
+            <a href="#tryArea" class="btn btn-lg mt-1" role="button">TRY FOR FREE</a>
+            <a href="/fbpmnq.html?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free" class="btn btn-lg mt-1" role="button" style="background-color: #92E3A9; border-color: #92E3A9;">DOWNLOAD ADS-FREE</a>
+        </div>
         <br>
 
         <img src="/images/fbpmnq/iteration-bro.png" class="img-fluid banner-img mt-4" alt="iteration-bro">
@@ -358,38 +391,6 @@
         </div>
     </div>
 
-    <!-- Welcome pop-up -->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="welcomeModal">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content" style="border-radius: 1rem; background-color: #f8f9fa;">
-                <div class="modal-header">
-                    <h5 class="modal-title">Welcome!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 text-center" id="season-banner">
-                                <div class="mt-4 mb-4">
-                                    <img src="images/blockpmn/logo.png" alt="logo" style="width: 100%;">
-                                </div>
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <div class="mt-4 mb-4">
-                                    <p>Free BPMN business process examples of crypto saving, staking, DeFi, and investing activities. Examples of smart contracts to handle blockchain BPMN modeling.</p>
-                                    <a type="button" class="btn btn-warning" style="border-radius: 1rem; font-weight: bold; color: #212529; background-color: #ffc107; border-color: #ffc107;" href="blockpmn.html" target="_blank">SEE MODELS</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Welcome pop-up -->
-
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -439,10 +440,6 @@
             tag: 'ethereum',
             ticker: 'ETH'
         };
-
-        function getURLParam(param) {
-            return new URL(window.location.href).searchParams.get(param);
-        }
 
         function clearQualityCostBlock() {
             $('#model-quality').text(0);
@@ -1179,9 +1176,6 @@
         });
 
         $(document).ready(async function() {
-            // welcome pop-up
-            // $('#welcomeModal').modal('show');
-
             displayExample();
 
             $('#slider').val(800);
@@ -1196,18 +1190,43 @@
                 guests: 1
             });
 
-            displayMessage(`<div class="text-center">
-                    <div class="mt-1 mb-1">Kindly support us — disable your adblock extension and click on several banner ads 🙏</div>
-                    <img src="images/fbpmnq/ads-logo.png" width="64" alt="ads-logo" class="img-thumbnail mb-2">
+            var utmContent = getURLParam('utm_content');
 
-                    <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this MetaMask address 💰</div>
-                    <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
+            if (utmContent === 'ads-free') {
+                displayMessage(`<div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-6 align-self-center">
+                                <img src="images/fbpmnq/logo.png" alt="product-logo" class="img-fluid mt-1 mb-1">
+                            </div>
+                            <div class="col-sm-6 align-self-center">
+                                <div class="mt-1 mb-1"><b>Ads-Free FBPMNQ BPMN validation and analysis tool is a paid product!</b></div>
+                                <div class="mt-1 mb-1"><small>You are allowed to fully test it. Please buy then.</small></div>
+                                <div class="mt-1 mb-1">
+                                    <span style="font-size: 18px; font-weight: 700;"><s>$${59}</s></span>
+                                    <span style="font-size: 32px; font-weight: 900; color: #dc3545;">$${eComMeasures.price.value}</span>
+                                </div>
+                            </div>
+                        </div>
 
-                    <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
-                    <small class="form-text text-muted mb-2">Or <a href="https://goerli-faucet.pk910.de/" target="_blank">mine some GöETH</a> for us to support the development ⛏️</small>
-                    
-                    <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
-                </div>`, 'Support us');
+                        <div class="mt-1 mb-1">Transfer funds to this MetaMask address:</div>
+                        <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
+
+                        <a type="button" class="btn btn-sm" style="background-color: #92E3A9; border-color: #92E3A9;" href="" target="_blank">DOWNLOAD</a> <button type="button" class="btn btn-sm" data-dismiss="modal">CONTINUE</button>
+                    </div>`, 'Download Ads-Free Tool');
+            } else {
+                displayMessage(`<div class="text-center">
+                        <div class="mt-1 mb-1">Kindly support us — disable your adblock extension and click on several banner ads!</div>
+                        <img src="images/fbpmnq/ads-logo.png" width="64" alt="ads-logo" class="img-thumbnail mb-2">
+
+                        <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this MetaMask address:</div>
+                        <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
+
+                        <img src="images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
+                        <small class="form-text text-muted mb-2">Or <a href="https://goerli-faucet.pk910.de/" target="_blank">mine some GöETH</a> for us to support the development.</small>
+                        
+                        <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
+                    </div>`, 'Support us');
+            }
         });
     </script>
 
