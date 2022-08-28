@@ -5,5 +5,5 @@
     "background_color": "#90CAF9",
     "display": "browser",
     "scope": "/",
-    "start_url": "index.html"
+    "start_url": "/"
 }

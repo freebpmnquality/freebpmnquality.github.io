@@ -97,8 +97,7 @@
 
     <link rel="icon" type="image/png" href="https://freebpmnquality.github.io/images/fbpmnq/logo.png" />
 
-    <link rel="manifest" href="/fbpmnq.webmanifest">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 
     <!-- Styles -->
     <style>
@@ -1098,17 +1097,6 @@
                 } catch (error) {
                     displayMessage(error.message);
                 }
-            }
-        });
-
-        window.addEventListener('beforeinstallprompt', function(event) {
-            event.preventDefault();
-
-            if (event) {
-                event.prompt();
-                endowment.userChoice.then(function(choiceResult) {
-                    event = null;
-                });
             }
         });
 
