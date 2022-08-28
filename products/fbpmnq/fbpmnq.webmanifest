@@ -1,0 +1,14 @@
+{
+    "name": "Ads-Free FBPMNQ",
+    "short_name": "FBPMNQ",
+    "description": "Validate BPMN 2.0 models free online to design high-quality business process diagrams.",
+    "icons": [{
+        "src": "img/logo.png",
+        "sizes": "32x32",
+        "type": "image/png"
+    }],
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "theme_color": "#eee9f4",
+    "background_color": "#eee9f4"
+}
