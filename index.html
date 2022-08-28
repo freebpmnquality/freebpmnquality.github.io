@@ -5,6 +5,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3TJ27QQ4T"></script>
     <script>
+        // [start] GA Tag
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -13,6 +14,35 @@
         gtag('js', new Date());
 
         gtag('config', 'G-W3TJ27QQ4T');
+        // [end] GA Tag
+
+        function getURLParam(param) {
+            return new URL(window.location.href).searchParams.get(param);
+        }
+
+        var eComMeasures = {
+            transaction: 'T_' + Math.floor(Date.now() * Math.random()).toString(),
+            affiliation: 'freebpmnquality.github.io',
+            sku: 'SKU_FBPMNQ001',
+            product: 'Ads-Free FBPMNQ',
+            price: {
+                value: 29.00,
+                currency: 'USD'
+            }
+        };
+
+        if (getURLParam('dev') === null) {
+            gtag('event', 'purchase', {
+                transaction_id: eComMeasures.transaction,
+                affiliation: eComMeasures.affiliation,
+                value: eComMeasures.price.value,
+                currency: eComMeasures.price.currency,
+                items: [{
+                    item_id: eComMeasures.sku,
+                    item_name: eComMeasures.product
+                }]
+            });
+        }
     </script>
 
     <title>freebpmnquality — Free Online BPMN Quality Analysis Service</title>
