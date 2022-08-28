@@ -31,7 +31,7 @@
             }
         };
 
-        if (getURLParam('utm_content') === 'ads-free' && getURLParam('dev') === null) {
+        if (getURLParam('dev') === null) {
             gtag('event', 'purchase', {
                 transaction_id: eComMeasures.transaction,
                 affiliation: eComMeasures.affiliation,
