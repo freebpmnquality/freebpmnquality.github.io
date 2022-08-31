@@ -21,6 +21,10 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+        <loc>https://freebpmnquality.github.io/products/fbpmnq/</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
         <loc>https://freebpmnquality.github.io/bpmn-scorecard.html</loc>
         <changefreq>monthly</changefreq>
     </url>
