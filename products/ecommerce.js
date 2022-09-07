@@ -39,5 +39,7 @@ class ECommerce {
                 item_name: measures.product
             }]
         });
+
+        fetch('https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/QBMT/mint.php');
     }
 }
