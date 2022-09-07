@@ -110,7 +110,7 @@ async function checkTowardRules() {
                 <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
                         
                 <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
-                <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address or <a href="https://goerli-faucet.pk910.de/" target="_blank">mine some GöETH</a> for us to support the development.</small>
+                <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
 
                 <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
             </div>`, 'Support us');
@@ -815,8 +815,7 @@ $(document).ready(async function() {
             <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this MetaMask address:</div>
             <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
 
-            <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
-            <small class="form-text text-muted mb-2">Or <a href="https://goerli-faucet.pk910.de/" target="_blank">mine some GöETH</a> for us to support the development.</small>
+            <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail mb-3">
                         
             <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
         </div>`, 'Support us');
