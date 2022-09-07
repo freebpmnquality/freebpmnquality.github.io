@@ -737,7 +737,7 @@ async function showDonations() {
     var priceResult = await priceResponse.json();
     var price = priceResult.value;
 
-    var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWalletGoerli.php?wallet=' + endowment.address, {
+    var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWalletNative.php?ticker=QBMT-ETH&wallet=' + endowment.address, {
         method: 'GET'
     });
 
@@ -747,7 +747,7 @@ async function showDonations() {
     var balancePrice = balance * price;
 
     $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code>${endowment.address}</code></small><br>
-        <small class="text-muted">Statistics</small><br>
+        <small class="text-muted">Statistics <strong>(testnet)</strong></small><br>
         <small class="form-check-label">${balance.toFixed(8)} ${endowment.ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
 }
 
