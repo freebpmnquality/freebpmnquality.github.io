@@ -87,7 +87,14 @@
             border-color: #92E3A9;
             font-weight: bold;
         }
+        
+        #sql-output {
+            max-height: 360px;
+            text-align: left;
+        }
     </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css">
 </head>
 
 <body>
@@ -159,7 +166,8 @@
 
         <div class="form-group mt-4">
             <label for="sql-output" class="text-muted">SQL Output (copy, paste, adjust, and deploy to the MySQL/MariaDB database server)</label>
-            <textarea class="form-control" id="sql-output" rows="10" placeholder="DDL Statements" readonly></textarea>
+
+            <pre id="code-area"><code class="language-sql" id="sql-output"></code></pre>
         </div>
 
         <img src="/images/br2sql/server-amico.png" class="img-fluid banner-img mt-4" alt="data-amico.png">
@@ -191,6 +199,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.2.0/languages/go.min.js"></script>
+
     <!-- App -->
     <script src="/js/br2sql.js"></script>
     <script type="text/javascript">
@@ -218,6 +229,8 @@
                 brToSQLTranslator.tablesToSQL($('#drop-db').is(':checked'), $('#create-db').is(':checked'));
 
                 $('#sql-output').text(brToSQLTranslator.script);
+
+                hljs.highlightAll();
             }
         }
 
@@ -236,6 +249,11 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        $(document).ready(function() {
+            displayExample();
+            translateIntoSQL();
         });
     </script>
 
