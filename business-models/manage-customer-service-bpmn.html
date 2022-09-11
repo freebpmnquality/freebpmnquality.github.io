@@ -4,7 +4,9 @@
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3TJ27QQ4T"></script>
+    <script src="/products/ecommerce.js"></script>
     <script>
+        // [start] GA Tag
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -13,6 +15,15 @@
         gtag('js', new Date());
 
         gtag('config', 'G-W3TJ27QQ4T');
+        // [end] GA Tag
+
+        function getURLParam(param) {
+            return new URL(window.location.href).searchParams.get(param);
+        }
+
+        if (getURLParam('dev') === null) {
+            ECommerce.clickEvent();
+        }
     </script>
 
     <title>Manage Customer Service — BPMN business process model based on the APQC PCF framework</title>
