@@ -181,7 +181,7 @@
             <!-- [start] test #1 -->
             <div class="row mt-4">
                 <div class="col-sm-12">
-                    <h5 style="font-weight: bold;">Test #1</h5>
+                    <h5 style="font-weight: bold;">Test #1: Products</h5>
                     <p>When buying food, it is important to make sure it is fresh and not expired. You are given the following 'Products' list. Write a query to select the ProductName, ProductionDate and ExpirationDate. Use the SELECT statement and separate
                         the required columns by commas.</p>
                 </div>
@@ -199,7 +199,7 @@
             <!-- [start] test #2 -->
             <div class="row mt-4">
                 <div class="col-sm-12">
-                    <h5 style="font-weight: bold;">Test #2</h5>
+                    <h5 style="font-weight: bold;">Test #2: Cakes</h5>
                     <p>A local bakery creates unique cake sets. Each cake set contains three different cakes. Here is the cakes table. Today a customer want a cake set that has minimal calories. Write a query to sort the cakes by calorie count and select
                         the first 3 cakes from the list to offer the customer. Try to combine ORDER BY and LIMIT keywords.</p>
                 </div>
@@ -217,7 +217,7 @@
             <!-- [start] test #3 -->
             <div class="row mt-4">
                 <div class="col-sm-12">
-                    <h5 style="font-weight: bold;">Test #3</h5>
+                    <h5 style="font-weight: bold;">Test #3: Apartments</h5>
                     <p>You want to rent an apartment and have the following table named Apartments. Write a query to output the apartments whose prices are greater than the average and are also not rented, sorted by the 'Price' column. Recall the AVG keyword.</p>
                 </div>
             </div>
@@ -234,7 +234,7 @@
             <!-- [start] test #4 -->
             <div class="row mt-4">
                 <div class="col-sm-12">
-                    <h5 style="font-weight: bold;">Test #4</h5>
+                    <h5 style="font-weight: bold;">Test #4: Zoo</h5>
                     <p>You manage a zoo. Each animal in the zoo comes from a different country. Here are the tables you have: Animals and Countries. 1) A new animal has come in, with the following details: name - "Slim", type - "Giraffe", country_id – 1
                         Add him to the Animals table. 2) You want to make a complete list of the animals for the zoo's visitors. Write a query to output a new table with each animal's name, type and country fields, sorted by countries. Recall INSERT and
                         INNER JOIN keywords.</p>
@@ -317,9 +317,10 @@
 
         function translateTests() {
             const testNumber = 4;
+            const testDbs = ['products', 'cakes', 'apartments', 'zoo'];
 
             for (let num = 1; num <= testNumber; num++) {
-                brToSQLTranslator.dbName = `test${num}db`;
+                brToSQLTranslator.dbName = testDbs[num - 1];
                 brToSQLTranslator.businessRulesText = $(`#test${num}-input`).val();
 
                 brToSQLTranslator.extractBusinessRules();
