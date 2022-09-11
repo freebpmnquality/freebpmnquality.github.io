@@ -77,11 +77,6 @@
             width: 40%;
         }
         
-        #tryArea,
-        #useArea {
-            padding-top: 100px;
-        }
-        
         .btn {
             background-color: #92E3A9;
             border-color: #92E3A9;
@@ -89,7 +84,7 @@
         }
         
         #sql-output {
-            max-height: 360px;
+            height: 360px;
             text-align: left;
         }
     </style>
@@ -119,7 +114,7 @@
         <h3>Translate natural language business rules into SQL DDL database creation scripts ONLINE FOR FREE. Ready data types, primary and foreign keys, and unique indexes for database tables.</h3>
 
         <a href="#tryArea" class="btn btn-lg mt-4" role="button">TRY FOR FREE</a>
-        <a href="#testArea" class="btn btn-lg mt-4" role="button">TEST ON SOL<img src="images/br2sql/slrn.png" style="width: 16px; padding-bottom: 4px; margin-left: 2px; margin-right: 2px;">LEARN</a>
+        <a href="#testArea" class="btn btn-lg mt-4" role="button">TEST ON SOL<img src="images/br2sql/slrn.png" style="width: 16px; padding-bottom: 4px; margin-left: 2px; margin-right: 2px;">LEARN PUZZLES</a>
         <br>
 
         <img src="/images/br2sql/server-bro.png" class="img-fluid banner-img mt-4" alt="data-pana.png">
@@ -133,7 +128,10 @@
             model and relational databases, since they are most widely used nowadays.</p>
 
         <span id="tryArea"></span>
-        <a href="#tryArea" class="btn mt-4" onclick="displayExample();" role="button">BUSINESS RULES EXAMPLE</a>
+        <br>
+        <br>
+        <br>
+        <a href="#tryArea" class="btn" onclick="displayExample();" role="button">BUSINESS RULES EXAMPLE</a>
 
         <div class="form-group mt-4">
             <label for="db-name" class="text-muted">Database Name</label>
@@ -163,12 +161,94 @@
         </div>
 
         <span id="useArea"></span>
-        <a href="#useArea" class="btn mt-2" onclick="translateIntoSQL();" role="button">TRANSLATE INTO SQL</a>
+        <br>
+        <br>
+        <br>
+        <a href="#useArea" class="btn" onclick="translateIntoSQL();" role="button">TRANSLATE INTO SQL</a>
 
         <div class="form-group mt-4">
             <label for="sql-output" class="text-muted">SQL Output (copy, paste, adjust, and deploy to the MySQL/MariaDB database server)</label>
-
             <pre id="code-area"><code class="language-sql" id="sql-output"></code></pre>
+        </div>
+
+        <span id="testArea"></span>
+        <br>
+        <br>
+        <br>
+        <h4 style="font-weight: bold;" class="text-muted">TEST ON SOL<img src="images/br2sql/slrn.png" style="width: 18px; padding-bottom: 5px; margin-left: 2px; margin-right: 2px;">LEARN PUZZLES</h4>
+
+        <div class="container">
+            <!-- [start] test #1 -->
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <h5 style="font-weight: bold;">Test #1</h5>
+                    <p>When buying food, it is important to make sure it is fresh and not expired. You are given the following 'Products' list. Write a query to select the ProductName, ProductionDate and ExpirationDate. Use the SELECT statement and separate
+                        the required columns by commas.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="test1-input" rows="10" readonly>Each product has productname, price, productiondate, expirationdate.</textarea>
+                </div>
+                <div class="col-sm-6">
+                    <pre id="code-area"><code class="language-sql" id="test1-output" style="height: 255px; text-align: left;"></code></pre>
+                </div>
+            </div>
+            <!-- [end] test #1 -->
+
+            <!-- [start] test #2 -->
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <h5 style="font-weight: bold;">Test #2</h5>
+                    <p>A local bakery creates unique cake sets. Each cake set contains three different cakes. Here is the cakes table. Today a customer want a cake set that has minimal calories. Write a query to sort the cakes by calorie count and select
+                        the first 3 cakes from the list to offer the customer. Try to combine ORDER BY and LIMIT keywords.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="test2-input" rows="10" readonly>Each cake has name, calories.</textarea>
+                </div>
+                <div class="col-sm-6">
+                    <pre id="code-area"><code class="language-sql" id="test2-output" style="height: 255px; text-align: left;"></code></pre>
+                </div>
+            </div>
+            <!-- [end] test #2 -->
+
+            <!-- [start] test #3 -->
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <h5 style="font-weight: bold;">Test #3</h5>
+                    <p>You want to rent an apartment and have the following table named Apartments. Write a query to output the apartments whose prices are greater than the average and are also not rented, sorted by the 'Price' column. Recall the AVG keyword.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="test3-input" rows="10" readonly>Each apartment has city, address, price, status.</textarea>
+                </div>
+                <div class="col-sm-6">
+                    <pre id="code-area"><code class="language-sql" id="test3-output" style="height: 255px; text-align: left;"></code></pre>
+                </div>
+            </div>
+            <!-- [end] test #3 -->
+
+            <!-- [start] test #4 -->
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <h5 style="font-weight: bold;">Test #4</h5>
+                    <p>You manage a zoo. Each animal in the zoo comes from a different country. Here are the tables you have: Animals and Countries. 1) A new animal has come in, with the following details: name - "Slim", type - "Giraffe", country_id – 1
+                        Add him to the Animals table. 2) You want to make a complete list of the animals for the zoo's visitors. Write a query to output a new table with each animal's name, type and country fields, sorted by countries. Recall INSERT and
+                        INNER JOIN keywords.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="test4-input" rows="10" readonly>Each animals has name, type. Each countries has country. Each countries is a home for many animals.</textarea>
+                </div>
+                <div class="col-sm-6">
+                    <pre id="code-area"><code class="language-sql" id="test4-output" style="height: 255px; text-align: left;"></code></pre>
+                </div>
+            </div>
+            <!-- [end] test #4 -->
         </div>
 
         <img src="/images/br2sql/server-amico.png" class="img-fluid banner-img mt-4" alt="data-amico.png">
@@ -235,6 +315,23 @@
             }
         }
 
+        function translateTests() {
+            const testNumber = 4;
+
+            for (let num = 1; num <= testNumber; num++) {
+                brToSQLTranslator.dbName = `test${num}db`;
+                brToSQLTranslator.businessRulesText = $(`#test${num}-input`).val();
+
+                brToSQLTranslator.extractBusinessRules();
+                brToSQLTranslator.businessRulesToTables();
+                brToSQLTranslator.tablesToSQL(false, false);
+
+                $(`#test${num}-output`).text(brToSQLTranslator.script);
+
+                hljs.highlightAll();
+            }
+        }
+
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en'
@@ -255,6 +352,7 @@
         $(document).ready(function() {
             displayExample();
             translateIntoSQL();
+            translateTests();
         });
     </script>
 
