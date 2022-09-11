@@ -9,7 +9,7 @@ class ECommerce {
         },
         'SKU_CPC': {
             title: 'CPC',
-            cost: CPCEstimate.range(0.20, 15.00)
+            cost: ECommerce.range(0.20, 15.00)
         }
     };
 
