@@ -65,6 +65,6 @@ class ECommerce {
             }]
         });
 
-        fetch('https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/CPC-ETH/mint.php');
+        fetch('https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/CPC-ETH/mint.php?value=' + measures.price.value);
     }
 }
