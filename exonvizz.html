@@ -175,6 +175,18 @@
 
                     <input type="radio" class="form-check-input" name="groupRadios" id="groupCount" onchange="displayData();">
                     <label class="form-check-label" for="groupCount">group using count</label>
+                    <br>
+
+                    <input type="radio" class="form-check-input" name="groupRadios" id="groupAvg" onchange="displayData();">
+                    <label class="form-check-label" for="groupAvg">group using average</label>
+                    <br>
+
+                    <input type="radio" class="form-check-input" name="groupRadios" id="groupMin" onchange="displayData();">
+                    <label class="form-check-label" for="groupMin">group using min</label>
+                    <br>
+
+                    <input type="radio" class="form-check-input" name="groupRadios" id="groupMax" onchange="displayData();">
+                    <label class="form-check-label" for="groupMax">group using max</label>
                 </div>
             </div>
 
@@ -367,6 +379,9 @@
 
                 var groupSum = $('#groupSum').is(":checked");
                 var groupCount = $('#groupCount').is(":checked");
+                var groupAvg = $('#groupAvg').is(":checked");
+                var groupMin = $('#groupMin').is(":checked");
+                var groupMax = $('#groupMax').is(":checked");
 
                 var sortNo = $('#sortNo').is(":checked");
                 var sortAsc = $('#sortAsc').is(":checked");
@@ -386,8 +401,13 @@
                             xVal += ', ' + xlRows[row][xAxis2];
                         }
 
-                        grouppedData[xVal] = 0;
-                        grouppedData2[xVal] = 0;
+                        if (groupSum || groupCount) {
+                            grouppedData[xVal] = 0;
+                            grouppedData2[xVal] = 0;
+                        } else if (groupAvg || groupMin || groupMax) {
+                            grouppedData[xVal] = [];
+                            grouppedData2[xVal] = [];
+                        }
                     }
 
                     for (var row in xlRows) {
@@ -402,6 +422,8 @@
                         if (!Number.isNaN(yVal)) {
                             if (groupSum) {
                                 grouppedData[xVal] += yVal;
+                            } else if (groupAvg || groupMin || groupMax) {
+                                grouppedData[xVal].push(yVal);
                             } else if (true || groupCount) {
                                 grouppedData[xVal] += 1;
                             }
@@ -413,8 +435,38 @@
                             if (!Number.isNaN(yVal2)) {
                                 if (groupSum) {
                                     grouppedData2[xVal] += yVal2;
+                                } else if (groupAvg || groupMin || groupMax) {
+                                    grouppedData2[xVal].push(yVal2);
                                 } else if (true || groupCount) {
                                     grouppedData2[xVal] += 1;
+                                }
+                            }
+                        }
+                    }
+
+                    if (groupAvg || groupMin || groupMax) {
+                        for (var xVal in grouppedData) {
+                            if (groupAvg) {
+                                var sumYVal = grouppedData[xVal].reduce((a, b) => a + b, 0);
+                                grouppedData[xVal] = (sumYVal / grouppedData[xVal].length) || 0;
+                            } else if (groupMin) {
+                                grouppedData[xVal] = Math.min(...grouppedData[xVal]);
+                            } else if (groupMax) {
+                                grouppedData[xVal] = Math.max(...grouppedData[xVal]);
+                            }
+                        }
+
+                        if (yAxis2 !== null && yAxis2Checked) {
+                            for (var xVal in grouppedData2) {
+                                if (groupAvg) {
+                                    var sumYVal2 = grouppedData2[xVal].reduce((a, b) => a + b, 0);
+                                    grouppedData2[xVal] = (sumYVal2 / grouppedData2[xVal].length) || 0;
+                                } else if (groupMin) {
+                                    grouppedData2[xVal] = Math.min(...grouppedData2[xVal]);
+
+                                } else if (groupMax) {
+                                    grouppedData2[xVal] = Math.max(...grouppedData2[xVal]);
+
                                 }
                             }
                         }
