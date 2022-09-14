@@ -162,6 +162,16 @@
                             The given code includes a list of heights for various basketball players. You need to calculate and output how many players are in the range of one standard deviation from the mean.
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>
+                            <button class="btn mt-2" role="button" onclick="displayHousePricesExample();">House Prices
+                            </button>
+                        </td>
+                        <td>
+                            You are given an array that represents house prices. Calculate and output the percentage of houses that are within one standard deviation from the mean.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -733,6 +743,62 @@
             processDataSet(xlRows);
 
             $('#inputGroupFileName').text('Basketball Players');
+        }
+
+        function displayHousePricesExample() {
+            xlRows = [{
+                'house': 'House 1',
+                'price': 150000
+            }, {
+                'house': 'House 2',
+                'price': 125000
+            }, {
+                'house': 'House 3',
+                'price': 320000
+            }, {
+                'house': 'House 4',
+                'price': 540000
+            }, {
+                'house': 'House 5',
+                'price': 200000
+            }, {
+                'house': 'House 6',
+                'price': 120000
+            }, {
+                'house': 'House 7',
+                'price': 160000
+            }, {
+                'house': 'House 8',
+                'price': 230000
+            }, {
+                'house': 'House 9',
+                'price': 280000
+            }, {
+                'house': 'House 10',
+                'price': 290000
+            }, {
+                'house': 'House 11',
+                'price': 300000
+            }, {
+                'house': 'House 12',
+                'price': 500000
+            }, {
+                'house': 'House 13',
+                'price': 420000
+            }, {
+                'house': 'House 14',
+                'price': 100000
+            }, {
+                'house': 'House 15',
+                'price': 150000
+            }, {
+                'house': 'House 16',
+                'price': 280000
+            }];
+
+            processDataSet(xlRows);
+
+            $('#inputGroupFileName').text('House Prices');
         }
 
         function googleTranslateElementInit() {
