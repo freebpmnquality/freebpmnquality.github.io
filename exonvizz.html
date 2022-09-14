@@ -153,6 +153,15 @@
                             the number of vaccinations the corresponding person had.
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>
+                            <button class="btn mt-2" role="button" onclick="displayBasketballPlayersExample();">Basketball Players</button>
+                        </td>
+                        <td>
+                            The given code includes a list of heights for various basketball players. You need to calculate and output how many players are in the range of one standard deviation from the mean.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -686,6 +695,44 @@
             processDataSet(xlRows);
 
             $('#inputGroupFileName').text('Number of Vaccinations');
+        }
+
+        function displayBasketballPlayersExample() {
+            xlRows = [{
+                'player': 'Player A',
+                'height': 180
+            }, {
+                'player': 'Player B',
+                'height': 172
+            }, {
+                'player': 'Player C',
+                'height': 178
+            }, {
+                'player': 'Player D',
+                'height': 185
+            }, {
+                'player': 'Player E',
+                'height': 190
+            }, {
+                'player': 'Player F',
+                'height': 195
+            }, {
+                'player': 'Player G',
+                'height': 192
+            }, {
+                'player': 'Player H',
+                'height': 200
+            }, {
+                'player': 'Player I',
+                'height': 210
+            }, {
+                'player': 'Player J',
+                'height': 190
+            }];
+
+            processDataSet(xlRows);
+
+            $('#inputGroupFileName').text('Basketball Players');
         }
 
         function googleTranslateElementInit() {
