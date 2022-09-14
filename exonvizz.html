@@ -96,10 +96,6 @@
             width: 40%;
         }
         
-        #uploadArea {
-            padding-top: 100px;
-        }
-        
         .btn {
             background-color: #FF81AE;
             border-color: #FF81AE;
@@ -140,7 +136,28 @@
             by us or by third parties.</p>
 
         <span id="uploadArea"></span>
-        <a href="/resources/viz/supermarket_sales.xls" class="btn mt-4" role="button">SAMPLE EXCEL REPORT</a>
+        <br>
+        <br>
+        <br>
+        <div class="mb-2 mt-4">
+            <h4 style="font-weight: bold;" class="text-muted">TRY ON SOL<img src="images/br2sql/slrn.png" style="width: 18px; padding-bottom: 5px; margin-left: 2px; margin-right: 2px;">LEARN DATASETS</h4>
+
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>
+                            <button class="btn mt-2" role="button" onclick="displayVaccinationsExample();">Number of Vaccinations</button>
+                        </td>
+                        <td>
+                            We have a report on the number of flu vaccinations in a class of 20 people. It has the following numbers: never: 5, once: 8, twice: 4, 3 times: 3. What is the mean number of times those people have been vaccinated? Data contains 20 values, each representing
+                            the number of vaccinations the corresponding person had.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/resources/viz/supermarket_sales.xls" class="mt-2">Download sample Excel report</a>
 
         <div class="input-group mb-4 mt-4">
             <div class="input-group-prepend">
@@ -294,6 +311,35 @@
         var fileName = null;
         var xlRows = null;
 
+        function processDataSet(xlRows) {
+            $('#xAxis').empty();
+            $('#yAxis').empty();
+
+            $('#xAxis2').empty();
+            $('#yAxis2').empty();
+
+            $('#xAxis').append(`<option selected disabled value="">Select...</option>`);
+            $('#yAxis').append(`<option selected disabled value="">Select...</option>`);
+
+            $('#xAxis2').append(`<option selected disabled value="">Select...</option>`);
+            $('#yAxis2').append(`<option selected disabled value="">Select...</option>`);
+
+            for (var col in xlRows[0]) {
+                var numVal = Number.parseFloat(xlRows[0][col]);
+
+                if (Number.isNaN(numVal)) {
+                    $('#xAxis').append(`<option value="${col}">${col}</option>`);
+                    $('#xAxis2').append(`<option value="${col}">${col}</option>`);
+                } else {
+                    $('#yAxis').append(`<option value="${col}">${col}</option>`);
+                    $('#yAxis2').append(`<option value="${col}">${col}</option>`);
+                }
+            }
+
+            $('#chartarea').empty();
+            $('#dashboard').empty();
+        }
+
         var ExcelToJSON = function() {
             this.parseExcel = function(file) {
                 try {
@@ -310,32 +356,7 @@
                             xlRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 
                             if (xlRows.length > 0) {
-                                $('#xAxis').empty();
-                                $('#yAxis').empty();
-
-                                $('#xAxis2').empty();
-                                $('#yAxis2').empty();
-
-                                $('#xAxis').append(`<option selected disabled value="">Выбрать...</option>`);
-                                $('#yAxis').append(`<option selected disabled value="">Выбрать...</option>`);
-
-                                $('#xAxis2').append(`<option selected disabled value="">Выбрать...</option>`);
-                                $('#yAxis2').append(`<option selected disabled value="">Выбрать...</option>`);
-
-                                for (var col in xlRows[0]) {
-                                    var numVal = Number.parseFloat(xlRows[0][col]);
-
-                                    if (Number.isNaN(numVal)) {
-                                        $('#xAxis').append(`<option value="${col}">${col}</option>`);
-                                        $('#xAxis2').append(`<option value="${col}">${col}</option>`);
-                                    } else {
-                                        $('#yAxis').append(`<option value="${col}">${col}</option>`);
-                                        $('#yAxis2').append(`<option value="${col}">${col}</option>`);
-                                    }
-                                }
-
-                                $('#chartarea').empty();
-                                $('#dashboard').empty();
+                                processDataSet(xlRows);
                             }
                         })
                     };
@@ -645,6 +666,26 @@
                 $('#message-text').text(`First upload your Excel document and build the chart!`);
                 $('#messageModal').modal('show');
             }
+        }
+
+        function displayVaccinationsExample() {
+            xlRows = [{
+                'vaccinated': 'never',
+                'people': 5
+            }, {
+                'vaccinated': 'once',
+                'people': 8
+            }, {
+                'vaccinated': 'twice',
+                'people': 4
+            }, {
+                'vaccinated': '3 times',
+                'people': 3
+            }];
+
+            processDataSet(xlRows);
+
+            $('#inputGroupFileName').text('Number of Vaccinations');
         }
 
         function googleTranslateElementInit() {
