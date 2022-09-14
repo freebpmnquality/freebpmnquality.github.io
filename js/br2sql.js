@@ -1,23 +1,17 @@
 const attributeDomainsClassifier = {
     vocabulary: {
-        'DateTime': ['birth_date', 'enrollment_date', 'completion_date', 'approval_date'],
-        'Number': ['value', 'semester'],
-        'Text': ['full_name', 'student_card_id', 'title'],
-        'Boolean': []
+        'DateTime': ['date', 'time', 'when'],
+        'Number': ['number', 'price', 'amount', 'cost', 'total', 'min', 'max', 'rate', 'salary']
     },
 
     suggestDomain: function(attributeTitle) {
-        const dataTypes = ['DATETIME', 'DECIMAL(8,2)', 'VARCHAR(255)', 'TINYINT(1)'];
-        const domains = [];
+        const dataTypes = ['TIMESTAMP', 'DECIMAL(8,2)', 'VARCHAR(255)'];
+        const domains = Array(dataTypes.length).fill(0);
 
-        if (this.vocabulary['DateTime'].includes(attributeTitle)) {
+        if (this.vocabulary['DateTime'].some(substring => attributeTitle.includes(substring))) {
             domains[0]++;
-        } else if (this.vocabulary['Number'].includes(attributeTitle)) {
+        } else if (this.vocabulary['Number'].some(substring => attributeTitle.includes(substring))) {
             domains[1]++;
-        } else if (this.vocabulary['Text'].includes(attributeTitle)) {
-            domains[2]++;
-        } else if (this.vocabulary['Boolean'].includes(attributeTitle)) {
-            domains[3]++;
         } else {
             domains[2]++;
         }
