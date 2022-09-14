@@ -180,6 +180,18 @@
                             <button class="btn mt-2" role="button" onclick="displayHousePricesExample();">Load</button>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>
+                            <strong>COVID Data Analysis</strong>
+                        </td>
+                        <td>
+                            You are working with the COVID dataset for California, which includes the number of cases and deaths for each day of 2020. Find the day when the deaths/cases ratio was largest.
+                        </td>
+                        <td>
+                            <button class="btn mt-2" role="button" onclick="displayCOVIDExample();">Load</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -352,9 +364,9 @@
             $('#yAxis2').append(`<option selected disabled value="">Select...</option>`);
 
             for (var col in xlRows[0]) {
-                var numVal = Number.parseFloat(xlRows[0][col]);
+                var firstVal = xlRows[0][col].toString();
 
-                if (Number.isNaN(numVal)) {
+                if (!firstVal.match(/^-?\d+\.?\d+$/)) {
                     $('#xAxis').append(`<option value="${col}">${col}</option>`);
                     $('#xAxis2').append(`<option value="${col}">${col}</option>`);
                 } else {
@@ -807,6 +819,74 @@
             processDataSet(xlRows);
 
             $('#inputGroupFileName').text('House Prices');
+        }
+
+        function displayCOVIDExample() {
+            xlRows = [{
+                'day': '1-May-22',
+                'cases': 250,
+                'deaths': 15
+            }, {
+                'day': '2-May-22',
+                'cases': 296,
+                'deaths': 29
+            }, {
+                'day': '3-May-22',
+                'cases': 386,
+                'deaths': 52
+            }, {
+                'day': '4-May-22',
+                'cases': 342,
+                'deaths': 26
+            }, {
+                'day': '5-May-22',
+                'cases': 400,
+                'deaths': 20
+            }, {
+                'day': '6-May-22',
+                'cases': 461,
+                'deaths': 35
+            }, {
+                'day': '7-May-22',
+                'cases': 381,
+                'deaths': 26
+            }, {
+                'day': '8-May-22',
+                'cases': 324,
+                'deaths': 6
+            }, {
+                'day': '9-May-22',
+                'cases': 346,
+                'deaths': 48
+            }, {
+                'day': '10-May-22',
+                'cases': 489,
+                'deaths': 17
+            }, {
+                'day': '11-May-22',
+                'cases': 413,
+                'deaths': 8
+            }, {
+                'day': '12-May-22',
+                'cases': 419,
+                'deaths': 5
+            }, {
+                'day': '13-May-22',
+                'cases': 523,
+                'deaths': 8
+            }, {
+                'day': '14-May-22',
+                'cases': 428,
+                'deaths': 22
+            }, {
+                'day': '15-May-22',
+                'cases': 321,
+                'deaths': 18
+            }];
+
+            processDataSet(xlRows);
+
+            $('#inputGroupFileName').text('COVID Data Analysis');
         }
 
         function googleTranslateElementInit() {
