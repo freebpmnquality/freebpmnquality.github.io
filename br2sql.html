@@ -199,7 +199,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="test1-input" rows="10" readonly>Each product has productname, price, productiondate, expirationdate.</textarea>
+                    <textarea class="form-control" id="test1-input" rows="10" readonly>Each product has product name, price, production date, expiration date.</textarea>
                 </div>
                 <div class="col-sm-6">
                     <pre id="code-area"><code class="language-sql" id="test1-output" style="height: 255px; text-align: left;"></code></pre>
@@ -217,7 +217,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="test2-input" rows="10" readonly>Each cake has name, calories.</textarea>
+                    <textarea class="form-control" id="test2-input" rows="10" readonly>Each cake has name, calories amount.</textarea>
                 </div>
                 <div class="col-sm-6">
                     <pre id="code-area"><code class="language-sql" id="test2-output" style="height: 255px; text-align: left;"></code></pre>
@@ -304,7 +304,7 @@
 
         function displayExample() {
             $('#db-name').val('Students');
-            $('#rules-input').val(`Each student has full name, student card id, birth date, enrollment date. Each student is given by many score. Each course has title, semester, approval date. Each course is evaluated by many score. Each score has value, completion date.`);
+            $('#rules-input').val(`Each student has full name, student card ID, birth date, enrollment date. Each student is given by many score. Each course has title, semester number, approval date. Each course is evaluated by many score. Each score has ECTS mark, points amount, completion date.`);
         }
 
         function translateIntoSQL() {
