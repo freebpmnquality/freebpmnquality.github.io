@@ -16,13 +16,13 @@ Free online software to exchange BPMN models in a distributed blockchain-driven 
 - "Parent collection" link is shown for each collection that extends another collection.
 - Use "Share" button to exchange collections with others.
 - Inside the collection, models could be filtered using "Search..." input field by several properties.
-- Each collection item can be clicked to see model information, download a BPMN 2.0 file, analyze model using [QualiBPMN](https://github.com/freebpmnquality/cloud-services/tree/main/analytics) service, and estimate model implementation and fixing cost using [FinBPMN](https://github.com/freebpmnquality/cloud-services/tree/main/analytics) service.
+- Each collection item can be clicked to see model information, download a BPMN 2.0 file, analyze model using [QualiBPMN](https://github.com/freebpmnquality/freebpmnquality.github.io/tree/master/services/analytics) service, and estimate model implementation and fixing cost using [FinBPMN](https://github.com/freebpmnquality/freebpmnquality.github.io/tree/master/services/finance) service.
 
 ## How it works?
 
 ### Tokenomics
 
-Shared models are validated using [QualiBPMN](https://github.com/freebpmnquality/cloud-services/tree/main/analytics) service and then their cost is estimated using [FinBPMN](https://freebpmnquality.github.io/services/finance) service.
+Shared models are validated using [QualiBPMN](https://github.com/freebpmnquality/freebpmnquality.github.io/tree/master/services/analytics) service and then their cost is estimated using [FinBPMN](https://github.com/freebpmnquality/freebpmnquality.github.io/tree/master/services/finance) service.
 
 *Shared models are **"tokenized"** as **NFT-alike objects** with their own ID, metadata, and owner (i.e. a SHA256 value of the passphrase). This token is not transferrable, exchangeable, or tradeable! Denoted monetary values reflect only the "value" of shared models based on the average hourly wage for business process modeling also taking into account correctness of shared models.*
 
