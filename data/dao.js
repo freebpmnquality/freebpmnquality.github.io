@@ -23,6 +23,8 @@ class DAO {
                 const constant = Number.parseInt(tokensObject['holders'][address]['constant'], 16);
 
                 tokensObject['holders'][address] = parameter * timestampDec + constant;
+            } else {
+                tokensObject['holders'][address] = Number.parseInt(tokensObject['holders'][address], 16);
             }
 
             tokensObject['supply'] += tokensObject['holders'][address];
