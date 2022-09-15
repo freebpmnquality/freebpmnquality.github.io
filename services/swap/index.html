@@ -115,7 +115,7 @@
                                 <label for="from" class="bold">Swap</label>
 
                                 <div class="bold mb-2">
-                                    <img src="../swap/img/token.png" width="48" class="bordered"> QBMT
+                                    <img src="../explorer/img/eth.png" width="48" class="bordered"> QBMT
                                 </div>
 
                                 <input type="number" class="form-control rounded" id="from" aria-describedby="fromHelp" placeholder="0" step="0.00000001">
@@ -142,6 +142,8 @@
             <div class="col-sm-3"></div>
         </div>
     </div>
+
+    <script src="/data/dao.js"></script>
 
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -179,11 +181,7 @@
                 const address = (await AMMUtil.getMetaMaskAccounts())[0];
 
                 if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
-                    const holders = JSON.parse($.ajax({
-                        type: 'get',
-                        url: '../../data/tokens.json',
-                        async: false
-                    }).responseText).holders;
+                    const holders = DAO.getTokensData().holders;
 
                     const accountValue = holders.hasOwnProperty(address) ? holders[address] : 0;
 

@@ -38,11 +38,7 @@ class AMMUtil {
     }
 
     static getLiquidityFromStorage() {
-        return Number.parseFloat(JSON.parse($.ajax({
-            type: 'get',
-            url: '../../data/tokens.json',
-            async: false
-        }).responseText).liquidity);
+        return Number.parseFloat(DAO.getTokensData().liquidity);
     }
 
     static makePrice(buy) {
@@ -54,19 +50,11 @@ class AMMUtil {
     }
 
     static getTotal() {
-        return Number.parseFloat(JSON.parse($.ajax({
-            type: 'get',
-            url: '../../data/tokens.json',
-            async: false
-        }).responseText).supply);
+        return Number.parseFloat(DAO.getTokensData().supply);
     }
 
     static getPricing() {
-        return Number.parseFloat(JSON.parse($.ajax({
-            type: 'get',
-            url: '../../data/tokens.json',
-            async: false
-        }).responseText).price);
+        return Number.parseFloat(DAO.getTokensData().price);
     }
 
     static async getMetaMaskAccounts() {

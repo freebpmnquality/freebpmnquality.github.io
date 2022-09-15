@@ -1,12 +1,6 @@
 class Payment {
     static isSubscribed(account) {
-        const code = JSON.parse($.ajax({
-            type: 'GET',
-            url: '../../data/users.json',
-            async: false
-        }).responseText).code;
-
-        return account === code;
+        return account === DAO.getUsersData().code;
     }
 
     static orderPromoCode() {
