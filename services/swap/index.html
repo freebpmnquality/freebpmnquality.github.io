@@ -84,7 +84,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
                             <div class="modal-body">
-                                <p>Transfer funds <span id="buyOffer"></span> to the MetaMask address <code style="overflow-wrap: break-word;">0xfB457d40ef1d3f774409d3e15C67aABD260F220C</code>.</p>
+                                <p>Transfer funds <span id="buyOffer"></span> to the MetaMask address <code style="overflow-wrap: break-word;" id="tokenAddress"></code>.</p>
                                 <p><small><span style="color: #dc3545; font-weight: bold;">Warning!</span> Our token sale address will be displayed only here, so don't trust any unofficial ones that may send you the address.</small></p>
                             </div>
                             <div class="modal-footer">
@@ -222,6 +222,8 @@
             $('#from').val(AMMUtil.getPricing().toFixed(DECIMAL_PART));
 
             $('#liquidity').text(AMMUtil.getLiquidity().toLocaleString('en-US'));
+
+            $('#tokenAddress').text(Ledger.getTokenData('QBMT')['owner']);
         });
     </script>
 </body>
