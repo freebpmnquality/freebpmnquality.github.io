@@ -1,6 +1,6 @@
 class Payment {
     static isSubscribed(account) {
-        return account === Ledger.getUsersData().code;
+        return account === Payment.getPROCode();
     }
 
     static orderPromoCode() {
@@ -27,5 +27,9 @@ class Payment {
         hashCode = s => s.split('').reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0);
 
         return hashCode(month.toString() + date.getFullYear().toString() + base);
+    }
+
+    static getPROCode() {
+        return 'FREEQUALIBPMN';
     }
 }

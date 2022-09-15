@@ -1,6 +1,5 @@
 class Ledger {
     static TOKENS_DATA = '../../data/tokens.json';
-    static USERS_DATA = '../../data/users.json';
 
     static GENESIS = 1661688000;
 
@@ -31,15 +30,5 @@ class Ledger {
         }
 
         return tokensObject;
-    }
-
-    static getUsersData() {
-        const usersObject = JSON.parse($.ajax({
-            type: 'get',
-            url: Ledger.USERS_DATA,
-            async: false
-        }).responseText);
-
-        return usersObject;
     }
 }
