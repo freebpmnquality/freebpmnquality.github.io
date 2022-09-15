@@ -54,7 +54,7 @@ class AMMUtil {
     }
 
     static getPricing() {
-        return Number.parseFloat(DAO.getTokensData().price);
+        return Number.parseInt(ECommerce.PRODUCTS['SKU_FBPMNQ001'].cost / AMMUtil.makePrice(1));
     }
 
     static async getMetaMaskAccounts() {
