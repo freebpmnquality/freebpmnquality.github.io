@@ -463,7 +463,7 @@
             const addressBalance = Number.parseFloat(accountValue);
             const addressBalanceUSD = AMMUtil.makePrice(addressBalance);
 
-            $('#ethBalance').val(addressBalance.toFixed(2) + ' QBMT');
+            $('#ethBalance').val(addressBalance.toLocaleString('en-US') + ' QBMT');
 
             if (addressBalance < pricing) {
                 $('#loginBtn').attr('disabled', true);
@@ -495,7 +495,7 @@
                         if ($('#loginBalance').length === 0) {
                             $('#navbarElements').append(`<li class="nav-item" id="loginBalance">
                                 <span class="nav-link" style="font-weight: bold;">
-                                    ${ethAddress.substring(0, 5)}...${ethAddress.substring(38)} ♦ ${ethAddressBalance.addressBalance.toFixed(2)} QBMT ($${ethAddressBalance.addressBalanceUSD.toLocaleString('en-US')})
+                                    ${ethAddress.substring(0, 5)}...${ethAddress.substring(38)} ♦ ${ethAddressBalance.addressBalance.toLocaleString('en-US')} QBMT ($${ethAddressBalance.addressBalanceUSD.toLocaleString('en-US')})
                                 </span>
                             </li>`);
                         }
@@ -526,7 +526,7 @@
                 'filter': 'blur(3px)'
             });
 
-            $('#ethStatus').val(`Requires ${pricing.toFixed(2)} QBMT tokens`);
+            $('#ethStatus').val(`Requires ${pricing.toLocaleString('en-US')} QBMT tokens`);
 
             $('#bmModal').modal('show');
 
