@@ -1,5 +1,8 @@
 {
     "liquidity": 1000000,
     "supply": 100000000000,
-    "price": 2900000
+    "price": 2900000,
+    "holders": {
+        "0xfB457d40ef1d3f774409d3e15C67aABD260F220C": 100000000000
+    }
 }

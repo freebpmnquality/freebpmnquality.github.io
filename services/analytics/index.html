@@ -323,7 +323,7 @@
                                     <div class="form-group mb-2">
                                         <label for="promoCode">Enter your promo code</label>
                                         <input type="text" class="form-control" id="promoCode" style="border-radius: 1rem;" placeholder="Promo Code">
-                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(JSON.parse($.ajax({ type: 'get', url: '../backoffice/index.php?getUserCode=true', async: false }).responseText).result);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
+                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(JSON.parse($.ajax({ type: 'get', url: '../../data/users/promo.json', async: false }).responseText).code);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
                                     </div>
 
                                     <button type="submit" class="btn btn-success mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;">USE PROMO CODE</button>
@@ -438,23 +438,15 @@
         }
 
         function getEthAddressBalance(ethAddress) {
-            const jsonResponse = JSON.parse($.ajax({
-                type: 'post',
-                url: '../backoffice/contract/QBMT/index.php',
-                async: false,
-                dataType: 'json',
-                data: JSON.stringify({
-                    "jsonrpc": "2.0",
-                    "method": "eth_getBalance",
-                    "params": [
-                        ethAddress,
-                        "latest"
-                    ],
-                    "id": 1
-                })
-            }).responseText);
+            let holders = JSON.parse($.ajax({
+                type: 'get',
+                url: '../../data/tokens/qbmt.json',
+                async: false
+            }).responseText).holders;
 
-            const addressBalance = Number.parseInt(jsonResponse.result, 16) / 1e18;
+            accountValue = holders.hasOwnProperty(ethAddress) ? holders[ethAddress] : 0;
+
+            const addressBalance = Number.parseInt(accountValue);
             const addressBalanceUSD = AMMUtil.makePrice(addressBalance);
 
             $('#ethBalance').val(addressBalance + ' QBMT');
@@ -484,9 +476,9 @@
                     if (ethAddressBalance.addressBalance >= ethAddressBalance.pricing) {
                         $('#promoCode').val(JSON.parse($.ajax({
                             type: 'get',
-                            url: '../backoffice/index.php?getUserCode=true',
+                            url: '../../data/users/promo.json',
                             async: false
-                        }).responseText).result);
+                        }).responseText).code);
 
                         $('#bmModal').modal('hide');
 

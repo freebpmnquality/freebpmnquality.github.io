@@ -1,12 +1,12 @@
 class Payment {
     static isSubscribed(account) {
-        const response = JSON.parse($.ajax({
+        const code = JSON.parse($.ajax({
             type: 'GET',
-            url: '../backoffice/index.php?doesAccountExist=' + account,
+            url: '../../data/users/promo.json',
             async: false
-        }).responseText);
+        }).responseText).code;
 
-        return !response.error && response.result;
+        return account === code;
     }
 
     static orderPromoCode() {
