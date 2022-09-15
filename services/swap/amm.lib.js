@@ -24,7 +24,7 @@ class AMMUtil {
     }
 
     static getLiquidity() {
-        return Number.parseFloat(Ledger.getTokensData().supply);
+        return Number.parseFloat(Ledger.getTokenData('QBMT').supply);
     }
 
     static makePrice(buy) {
@@ -32,7 +32,7 @@ class AMMUtil {
     }
 
     static getTotal() {
-        return Number.parseFloat(Ledger.getTokensData().supply);
+        return Number.parseFloat(Ledger.getTokenData('QBMT').supply);
     }
 
     static getPricing() {

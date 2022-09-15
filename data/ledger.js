@@ -1,20 +1,21 @@
 class Ledger {
     static TOKENS_DATA = '../../data/tokens.json';
 
-    static GENESIS = 1661688000;
-
-    static getTokensData() {
-        const tokensObject = JSON.parse($.ajax({
+    static getTokenData(symbol) {
+        let tokensObject = JSON.parse($.ajax({
             type: 'get',
             url: Ledger.TOKENS_DATA,
             async: false
         }).responseText);
 
+        tokensObject = tokensObject[symbol];
+
         tokensObject['price'] = Number.parseInt(tokensObject['price'], 16);
         tokensObject['supply'] = Number.parseInt(tokensObject['supply'], 16);
+        tokensObject['created'] = Number.parseInt(tokensObject['created'], 16);
 
         const timestampUNIX = Date.now() / 1000;
-        const timestampDec = (timestampUNIX - Ledger.GENESIS) / 86400;
+        const timestampDec = (timestampUNIX - tokensObject['created']) / 86400;
 
         for (let address in tokensObject['holders']) {
             if (address === tokensObject['owner']) {

@@ -453,7 +453,7 @@
         }
 
         function getEthAddressBalance(ethAddress) {
-            const holders = Ledger.getTokensData().holders;
+            const holders = Ledger.getTokenData('QBMT').holders;
 
             const accountValue = holders.hasOwnProperty(ethAddress) ? holders[ethAddress] : 0;
 

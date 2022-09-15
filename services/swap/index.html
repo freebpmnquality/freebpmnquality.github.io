@@ -181,7 +181,7 @@
                 const address = (await AMMUtil.getMetaMaskAccounts())[0];
 
                 if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
-                    const holders = Ledger.getTokensData().holders;
+                    const holders = Ledger.getTokenData('QBMT').holders;
 
                     const accountValue = holders.hasOwnProperty(address) ? holders[address] : 0;
 
