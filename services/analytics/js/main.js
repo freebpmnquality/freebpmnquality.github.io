@@ -146,7 +146,7 @@ function loadDocumentByLink() {
     $.get(bpmnLink, function(data) {
         editor = data;
 
-        $('#file-name').html(`<span class="badge badge-pill badge-info">Model</span> <a href="${bpmnLink}" target="_blank">${bpmnLink}</a><br><a role="button" class="btn btn-sm btn-primary mt-2" style="border-radius: 1rem; font-weight: bold;" href="https://cloudfreebpmnquality.herokuapp.com/finance/index.html?doc=${bpmnLink}" target="_blank">Estimate cost</a>`);
+        $('#file-name').html(`<span class="badge badge-pill badge-info">Model</span> <a href="${bpmnLink}" target="_blank">${bpmnLink}</a><br><a role="button" class="btn btn-sm btn-primary mt-2" style="border-radius: 1rem; font-weight: bold;" href="/services/finance/index.html?doc=${bpmnLink}" target="_blank">Estimate cost</a>`);
 
         defineXMLNamespace(data);
 

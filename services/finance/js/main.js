@@ -95,7 +95,7 @@ const colorNode = (elementId, overlays, isCorrect) => {
         status = 'danger';
 
         const bpmnLinkParam = getParameterByName('doc');
-        let link = 'https://cloudfreebpmnquality.herokuapp.com/analytics/'
+        let link = '/services/analytics/'
 
         if (bpmnLinkParam) {
             link += '?doc=' + bpmnLinkParam;
@@ -359,7 +359,7 @@ $(document).ready(() => {
         bpmnLinkParam = 'https://raw.githubusercontent.com/freebpmnquality/freebpmnquality.github.io/master/samples/01-tasks.bpmn';
     }
 
-    $("#modelFile").html(`<span class="badge badge-pill badge-info">Model</span> <a href="${bpmnLinkParam}" target="_blank">${bpmnLinkParam}</a><br><a role="button" class="btn btn-sm btn-primary mt-2" style="border-radius: 1rem; font-weight: bold;" href="https://cloudfreebpmnquality.herokuapp.com/analytics/index.html?doc=${bpmnLinkParam}" target="_blank">Analyze model</a>`);
+    $("#modelFile").html(`<span class="badge badge-pill badge-info">Model</span> <a href="${bpmnLinkParam}" target="_blank">${bpmnLinkParam}</a><br><a role="button" class="btn btn-sm btn-primary mt-2" style="border-radius: 1rem; font-weight: bold;" href="/services/analytics/index.html?doc=${bpmnLinkParam}" target="_blank">Analyze model</a>`);
 
     bpmnXML = QualiBPMNUtilPlainOld.getBPMNByURL(bpmnLinkParam);
 

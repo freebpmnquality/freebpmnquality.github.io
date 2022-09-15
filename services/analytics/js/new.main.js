@@ -23,7 +23,7 @@ const loadRecentBPMNModel = function(recentModelName) {
             if (uploadedFiles.includes(modelName)) {
                 $('#file-name').html('<span class="badge badge-pill badge-info">Model</span> ' + modelName);
             } else {
-                $('#file-name').html(`<span class="badge badge-pill badge-info">Model</span> <a href="${modelName}" target="_blank">${modelName}</a><br><a role="button" class="btn btn-sm btn-primary mt-2" style="border-radius: 1rem; font-weight: bold;" href="https://cloudfreebpmnquality.herokuapp.com/finance/index.html?doc=${modelName}" target="_blank">Estimate cost</a>`);
+                $('#file-name').html(`<span class="badge badge-pill badge-info">Model</span> <a href="${modelName}" target="_blank">${modelName}</a><br><a role="button" class="btn btn-sm btn-primary mt-2" style="border-radius: 1rem; font-weight: bold;" href="/services/finance/index.html?doc=${modelName}" target="_blank">Estimate cost</a>`);
             }
 
             const loadedModel = recentBPMNModels[i].content;

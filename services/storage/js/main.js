@@ -97,7 +97,7 @@ const EtherBPMNContract = {
                             // ERC721 properties
                             name: EtherBPMNContract._models[tokenId][0],
                             description: EtherBPMNContract._models[tokenId][2],
-                            image: 'https://cloudfreebpmnquality.herokuapp.com/storage/img/favicon.png',
+                            image: '/services/storage/img/favicon.png',
 
                             // Extra meta-data
                             link: EtherBPMNContract._models[tokenId][1],
@@ -305,8 +305,8 @@ const showModelData = function(title, link, annotation, industry, timestamp, own
             </div>
         </div>
         <button type="button" class="btn btn-sm btn-success" onclick="downloadModel('${link}', '${title}');" style="border-radius: 1rem; font-weight: bold;">Download</button>
-        <a role="button" class="btn btn-sm btn-warning" href="https://cloudfreebpmnquality.herokuapp.com/analytics/index.html?doc=${link}" target="_blank" style="border-radius: 1rem; font-weight: bold;">Analyze model</a>
-        <a role="button" class="btn btn-sm btn-warning"  href="https://cloudfreebpmnquality.herokuapp.com/finance/index.html?doc=${link}" target="_blank" style="border-radius: 1rem; font-weight: bold;">Estimate cost</a>
+        <a role="button" class="btn btn-sm btn-warning" href="/services/analytics/index.html?doc=${link}" target="_blank" style="border-radius: 1rem; font-weight: bold;">Analyze model</a>
+        <a role="button" class="btn btn-sm btn-warning"  href="/services/finance/index.html?doc=${link}" target="_blank" style="border-radius: 1rem; font-weight: bold;">Estimate cost</a>
     </form>`);
 };
 
@@ -348,7 +348,7 @@ const processExternalCollection = () => {
 
     // get parent collection info if exists
     if (EtherBPMNContractDAO.contract._collection.parent) {
-        parentInfo = `<a href="https://cloudfreebpmnquality.herokuapp.com/storage/index.html?collection=${EtherBPMNContractDAO.contract._collection.parent}" target="_blank"><small>Parent collection</small></a>`;
+        parentInfo = `<a href="/services/storage/index.html?collection=${EtherBPMNContractDAO.contract._collection.parent}" target="_blank"><small>Parent collection</small></a>`;
     }
 
     $('#collection-status').html(`<div class="alert alert-success" role="alert" style="border-radius: 1rem;">
@@ -470,7 +470,7 @@ const shareCollection = () => {
     const collectionURL = $('#collectionURL').val().trim();
 
     if (collectionURL) {
-        $('#collectionLink').val('https://cloudfreebpmnquality.herokuapp.com/storage/index.html?collection=' + collectionURL);
+        $('#collectionLink').val('/services/storage/index.html?collection=' + collectionURL);
     }
 };
 

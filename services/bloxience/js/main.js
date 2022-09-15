@@ -5,7 +5,7 @@ let CHAIN_DATA_JSON = null;
 const LEAVING_WARNING_MESSAGE = 'Are you sure to reset the blockchain? Your data will be lost!';
 const LARGE_LINK_WARNING_MESSAGE = 'Oops! The link is too large (larger than 2048 characters) for sharing.';
 
-const SERVICE_URL = 'https://cloudfreebpmnquality.herokuapp.com/bloxience/';
+const SERVICE_URL = '/services/bloxience/';
 
 let FORM_DATA_FIELDS = [];
 

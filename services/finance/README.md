@@ -2,7 +2,7 @@
 
 Free online software to estimate design efforts and cost of BPMN business process diagrams.
 
-- Go to the [homepage](https://cloudfreebpmnquality.herokuapp.com/finance/).
+- Go to the [homepage](https://freebpmnquality.github.io/services/finance/).
 - Clik "Open BPMN 2.0 File" and choose BPMN 2.0 file from your device.
 - Enter the hourly wage and click "Recalculate" button if necessary.
 - Scroll down to see general estimation results.

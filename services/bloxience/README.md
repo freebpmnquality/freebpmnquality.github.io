@@ -2,7 +2,7 @@
 
 Educational and research implementation of the blockchain data structure in JavaScript.
 
-- Go to the [homepage](https://cloudfreebpmnquality.herokuapp.com/bloxience/).
+- Go to the [homepage](https://freebpmnquality.github.io/services/bloxience/).
 - A sandbox for experiments with the blockchain includes "Account" area where private key and public key are randomly generated, put some text data, and add new block to the chain using "Add block" button.
 - New blocks added to the chain are shown on top in the right side. "Valid blocks" counter reflects "health" of the chain.
 - "Alter block" button is shown for each new block and simulates situation when chain data was tampered. Then invalid blocks will be colored with red and invalid chain will be cut off from the ledger. This means next new block will reference to the last valid block.

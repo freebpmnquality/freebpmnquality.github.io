@@ -4,7 +4,7 @@ Free online software to exchange BPMN models in a distributed blockchain-driven 
 
 ## How to share models?
 
-- Go to the [homepage](https://cloudfreebpmnquality.herokuapp.com/storage).
+- Go to the [homepage](https://freebpmnquality.github.io/services/storage).
 - Click "Create collection" button.
 - Use a form in the left side of a modal window to add pending models ("Link to a BPMN 2.0 file..." input).
 - If necessary, edit properties of pending models using "Model name", "Model annotation", and "Model industry" fields of each pending model.
@@ -22,7 +22,7 @@ Free online software to exchange BPMN models in a distributed blockchain-driven 
 
 ### Tokenomics
 
-Shared models are validated using [QualiBPMN](https://github.com/freebpmnquality/cloud-services/tree/main/analytics) service and then their cost is estimated using [FinBPMN](https://cloudfreebpmnquality.herokuapp.com/finance) service.
+Shared models are validated using [QualiBPMN](https://github.com/freebpmnquality/cloud-services/tree/main/analytics) service and then their cost is estimated using [FinBPMN](https://freebpmnquality.github.io/services/finance) service.
 
 *Shared models are **"tokenized"** as **NFT-alike objects** with their own ID, metadata, and owner (i.e. a SHA256 value of the passphrase). This token is not transferrable, exchangeable, or tradeable! Denoted monetary values reflect only the "value" of shared models based on the average hourly wage for business process modeling also taking into account correctness of shared models.*
 
