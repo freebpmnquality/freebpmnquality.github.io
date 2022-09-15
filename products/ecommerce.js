@@ -47,8 +47,6 @@ class ECommerce {
                 item_name: measures.product
             }]
         });
-
-        fetch('https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/QBMT/mint.php');
     }
 
     static clickEvent() {
@@ -64,7 +62,5 @@ class ECommerce {
                 item_name: measures.product
             }]
         });
-
-        fetch('https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/CPC-ETH/mint.php?value=' + measures.price.value);
     }
 }
