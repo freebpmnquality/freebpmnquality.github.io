@@ -223,7 +223,7 @@
 
             $('#liquidity').text(AMMUtil.getLiquidity().toLocaleString('en-US'));
 
-            $('#tokenAddress').text(Ledger.getTokenData('QBMT')['owner']);
+            $('#tokenAddress').html(`<a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: Ledger.getTokenData('QBMT')['owner'], value: Ledger.getTokenData('QBMT')['holders'][Ledger.getTokenData('QBMT')['owner']] }))}" target="_blank">${Ledger.getTokenData('QBMT')['owner']}</a>`);
         });
     </script>
 </body>
