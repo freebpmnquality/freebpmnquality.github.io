@@ -24,29 +24,11 @@ class AMMUtil {
     }
 
     static getLiquidity() {
-        let liquidityAssets = [];
-
-        liquidityAssets = liquidityAssets.concat(AMMUtil.getSitemapURLs('https://freebpmnquality.github.io/'));
-
-        let liquidity = 0;
-
-        for (let asset in liquidityAssets) {
-            liquidity += EffortsLib.getValue(liquidityAssets[asset]);
-        }
-
-        return liquidity;
-    }
-
-    static getLiquidityFromStorage() {
-        return Number.parseFloat(DAO.getTokensData().liquidity);
+        return Number.parseFloat(DAO.getTokensData().supply);
     }
 
     static makePrice(buy) {
-        let liquidity = AMMUtil.getLiquidityFromStorage();
-
-        const total = AMMUtil.getTotal();
-
-        return buy * (liquidity / total);
+        return buy * (AMMUtil.getLiquidity() / AMMUtil.getTotal());
     }
 
     static getTotal() {
@@ -54,7 +36,7 @@ class AMMUtil {
     }
 
     static getPricing() {
-        return Number.parseInt(ECommerce.PRODUCTS['SKU_FBPMNQ001'].cost / AMMUtil.makePrice(1));
+        return Number.parseFloat(ECommerce.PRODUCTS['SKU_FBPMNQ001'].cost);
     }
 
     static async getMetaMaskAccounts() {

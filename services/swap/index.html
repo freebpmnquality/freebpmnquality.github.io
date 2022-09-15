@@ -118,7 +118,7 @@
                                     <img src="../explorer/img/eth.png" width="48" class="bordered"> QBMT
                                 </div>
 
-                                <input type="number" class="form-control rounded" id="from" aria-describedby="fromHelp" placeholder="0" step="0.00000001">
+                                <input type="number" class="form-control rounded" id="from" aria-describedby="fromHelp" placeholder="0" step="0.01">
 
                                 <small id="fromHelp" class="form-text text-muted mb-0">Total: <span id="total">0</span></small>
 
@@ -156,14 +156,14 @@
     <script src="../swap/amm.lib.js"></script>
 
     <script>
-        const DECIMAL_PART = 8;
+        const DECIMAL_PART = 2;
 
         const price = AMMUtil.makePrice(1);
         const total = AMMUtil.getTotal();
 
         function swap() {
             try {
-                const from = Number.parseInt($('#from').val().trim());
+                const from = Number.parseFloat($('#from').val().trim());
                 const to = AMMUtil.makePrice(from);
 
                 $('#to').val(to.toFixed(DECIMAL_PART));
@@ -186,7 +186,7 @@
 
                     const accountValue = holders.hasOwnProperty(address) ? holders[address] : 0;
 
-                    const addressBalance = Number.parseInt(accountValue);
+                    const addressBalance = Number.parseFloat(accountValue);
 
                     const usdBalance = AMMUtil.makePrice(addressBalance);
 
@@ -205,7 +205,7 @@
 
         function buyTokens(from, to) {
             if (from !== null && to !== null) {
-                $('#buyOffer').text(`equal to ${to.toFixed(DECIMAL_PART)} USD to receive ${from.toFixed(DECIMAL_PART)} QBMT`);
+                $('#buyOffer').text(`equal to $${to.toLocaleString('en-US')} to receive ${from.toFixed(DECIMAL_PART)} QBMT`);
             } else {
                 $('#buyOffer').text('you are willing to contribute to our cause');
             }
@@ -215,11 +215,11 @@
 
         $(document).ready(function() {
             $('#total').text(total.toFixed(DECIMAL_PART));
-            $('#exchangeRate').text(price.toFixed(DECIMAL_PART));
+            $('#exchangeRate').text(price.toLocaleString('en-US'));
 
-            $('#from').val(AMMUtil.getPricing());
+            $('#from').val(AMMUtil.getPricing().toFixed(DECIMAL_PART));
 
-            $('#liquidity').text(AMMUtil.getLiquidityFromStorage().toFixed(DECIMAL_PART));
+            $('#liquidity').text(AMMUtil.getLiquidity().toLocaleString('en-US'));
         });
     </script>
 </body>
