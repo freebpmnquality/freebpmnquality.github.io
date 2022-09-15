@@ -1,0 +1,17 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.btn-sm {
+    border-radius: 1rem;
+    font-weight: bold;
+}
+
+.badge-pill {
+    font-size: 1rem;
+}
+
+#chainDataFull {
+    border-radius: 1rem;
+}

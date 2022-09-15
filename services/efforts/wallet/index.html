@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../efforts/wallet/css/main.css">
+
+    <title>Efforteum — Wallet</title>
+    <meta name="title" content="Efforteum — Wallet">
+    <meta name="description" content="Tokenized web software development efforts.">
+
+    <link rel="icon" type="image/png" href="../../efforts/img/logo.png" />
+
+    <link rel="manifest" href="../../efforts/wallet/efforteumwallet.webmanifest">
+
+    <style>
+        body {
+            background: rgb(186, 29, 253);
+            background: radial-gradient(circle, rgba(186, 29, 253, 1) 50%, rgba(148, 69, 252, 1) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <span class="navbar-brand mb-0 h1">Efforteum Wallet</span>
+    </nav>
+
+    <div class="container">
+        <div class="text-center" id="wallet-top">
+            <p class="mb-0 light-color" id="account">0x0</p>
+            <p class="mb-0 white-color balance-value"><span id="balance-eth">0</span> Ξ</p>
+            <p class="light-color usd-value"><span id="balance-usd">0</span> USD</p>
+
+            <div class="spinner-border text-light mt-2" role="status" id="loadingSpinner">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="card mt-4 mb-4">
+                    <div class="card-body text-center">
+                        <div id="qrData" class="mb-2"></div>
+                        <div id="qrAccess"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="../../efforts/wallet/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #f8f9fa;
+}
+
+#modelFile {
+    word-wrap: break-word;
+}
+
+#footer {
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+.highlight-overlay {
+    border-style: none;
+}
+
+.highlight-overlay .tiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: #17a2b8;
+    border: 1px solid #17a2b8;
+    border-radius: 1rem;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: -5px;
+    left: 105%;
+    z-index: 1;
+}
+
+.highlight-overlay:hover .tiptext {
+    visibility: visible;
+}

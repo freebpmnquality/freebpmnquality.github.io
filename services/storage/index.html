@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <title>EtherBPMN — Free Online Distributed Collection of BPMN Models</title>
+    <meta name="title" content="EtherBPMN — Free Online Distributed Collection of BPMN Models">
+    <meta name="description" content="Free online software to exchange BPMN models in a distributed blockchain-driven collection.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EtherBPMN — Free Online Distributed Collection of BPMN Models">
+    <meta property="og:description" content="Free online software to exchange BPMN models in a distributed blockchain-driven collection.">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="EtherBPMN — Free Online Distributed Collection of BPMN Models">
+    <meta property="twitter:description" content="Free online software to exchange BPMN models in a distributed blockchain-driven collection.">
+
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../storage/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link rel="shortcut icon" href="../storage/img/favicon.png" type="image/x-icon">
+
+    <style>
+        body {
+            background: rgb(253, 197, 29);
+            background: radial-gradient(circle, rgba(253, 197, 29, 0.2) 50%, rgba(252, 102, 69, 0.2) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="javascript:void(0);" style="font-weight: bold;">EtherBPMN</a>
+        <a href="javascript:void(0);" class="btn btn-sm btn-info" style="border-radius: 1rem; font-weight: bold;" data-toggle="modal" data-target="#createModal">Create collection</a>
+    </nav>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span class="text-muted" style="font-weight: bold;">EtherBPMN by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
+    </nav>
+
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Create collection</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="create-link" style="border-radius: 1rem;" placeholder="Link to a BPMN 2.0 file...">
+                            </div>
+                            <button class="btn btn-primary btn-block mb-1" style="border-radius: 1rem; font-weight: bold;" onclick="createModel();">Add model</button>
+                            <button class="btn btn-danger btn-block mb-3" style="border-radius: 1rem; font-weight: bold;" onclick="clearPending();">Clear pending models</button>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="parent-link" style="border-radius: 1rem;" placeholder="Parent EtherBPMN collection file...">
+                                <small class="form-text text-muted">Link to the parent EtherBPMN collection file <span style="color: #dc3545;">(optional)</span></small>
+                            </div>
+                            <div class="form-group mb-1">
+                                <a href="javascript:void(0);" onclick="generatePassphrase();">Generate new passphrase</a>
+                            </div>
+                            <div class="form-group form-check mb-1">
+                                <input type="checkbox" class="form-check-input" id="togglePassphrase" onclick="togglePassphrase();">
+                                <label class="form-check-label" for="togglePassphrase">Show passphrase</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="owner-id" style="border-radius: 1rem;" placeholder="Owner passphrase...">
+                                <small class="form-text text-muted">Owner passphrase <span style="color: #dc3545;">(remember to store your passphrase securely)</span></small>
+                                <small class="form-text text-muted">Use a phrase with at least 64 characters, letters, and numbers.</small>
+                            </div>
+                            <button class="btn btn-warning btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="downloadCollection();" aria-describedby="downloadCollectionHelp">Download collection file</button>
+                            <small id="downloadCollectionHelp" class="form-text text-muted">Make the collection file accessible by a link. Use the URL of a collection file in order to open it ("Link to the EtherBPMN collection file" input).</small>
+                            <div class="mt-2 mb-2">Pending models:</div>
+                            <ul class="list-group" id="staging-models">
+                                <div class="alert alert-warning" role="alert" style="border-radius: 1rem; margin-bottom: 0rem;"><small>Models were not added yet...</small></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [start] suspension notice -->
+    <div class="alert alert-danger mt-2 mr-4 mb-2 ml-4" role="alert" style="border-radius: 1rem;">
+        Due to the lack of resources the support and development of this service is suspended until further notice. Use our comprehensive <a href="https://freebpmnquality.github.io/products/fbpmnq/?utm_source=cloudfreebpmnquality.herokuapp.com&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free"
+            target="_blank">lightweight solution</a> for BPMN analysis.
+    </div>
+    <!-- [end] suspension notice -->
+
+    <div class="card ml-4 mr-4 mb-4 mt-2" style="border-radius: 1rem;">
+        <div class="card-body text-center">
+            <img src="../storage/img/favicon.png" width="240" class="mx-auto d-block">
+            <h1>Free Online Distributed Collection of BPMN Models</h1>
+            <p style="font-weight: bold;">Free online software to exchange BPMN models in a distributed blockchain-driven collection.</p>
+            <p style="font-weight: bold; color: #dc3545;">Disclaimer: it is a proof of concept that should be used with maximum discretion.</p>
+        </div>
+    </div>
+
+    <div class="ml-4 mr-4">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-row mb-3">
+                    <div class="col">
+                        <input type="text" value="https://raw.githubusercontent.com/freebpmnquality/freebpmnquality.github.io/master/samples/a88cad4b7eeec22fe7b4a6e361280ed8b55fbab7e1e1308b13697a33790f39ce.etherbpmn" class="form-control" id="collectionURL" aria-describedby="collectionURLHelp"
+                            style="border-radius: 1rem;" placeholder="Browse collection..." onkeyup="loadCollection();">
+                        <small id="collectionURLHelp" class="form-text">Link to the EtherBPMN collection file</small>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-warning mb-1" style="border-radius: 1rem; font-weight: bold;" onclick="shareCollection();">Share</button>
+                        <button class="btn btn-success mb-1" style="border-radius: 1rem; font-weight: bold;" onclick="fetchCollection();">Fetch</button>
+                        <button class="btn btn-primary mb-1" style="border-radius: 1rem; font-weight: bold;" onclick="uploadCollection();">Upload</button>
+
+                        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="border-radius: 1rem;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="shareModalLabel">Share</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="collectionLink">Get the link</label>
+                                            <textarea class="form-control form-control-sm" id="collectionLink" style="border-radius: 1rem;" readonly rows="3" aria-describedby="collectionLinkHelp"></textarea>
+                                            <small id="collectionLinkHelp" class="form-text text-muted">The collection will be publicly available to anyone with this link</small>
+                                        </div>
+                                        <button class="btn btn-primary btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="copyToClipboard();">Copy to clipboard</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary mb-3" role="status" id="loadingSection">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card mb-4" style="border-radius: 1rem;">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="index.html" style="font-weight: bold;">Home</a></li>
+                            <li class="list-group-item"><a href="https://freebpmnquality.github.io/" target="_blank" style="font-weight: bold;">Website</a></li>
+                            <li class="list-group-item"><a href="https://github.com/freebpmnquality" target="_blank" style="font-weight: bold;">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div id="dashboard">
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col mb-4">
+                            <div class="card" style="border-radius: 1rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title" style="color: #17a2b8;"><b>Stats</b></h2>
+                                    <p class="card-text">
+                                        <div id="collection-status"></div>
+                                        <div class="mt-1"><b>Total models:</b> <span class="badge badge-pill badge-danger"><span id="total-models">0</span></span>
+                                        </div>
+                                        <div class="mt-1" style="color: #dc3545;"><b>Disclaimer:</b> Denoted monetary values reflect only the "value" of shared models based on the average hourly wage for business process modeling also taking into account correctness of shared models.</div>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card mt-4" style="border-radius: 1rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title" style="color: #17a2b8;"><b>Collection</b></h2>
+                                    <p class="card-text">
+                                        <form onsubmit="searchModel(); return false;" id="search-form">
+                                            <input type="text" class="form-control" id="search-text" placeholder="Search..." aria-describedby="searchHelp" style="border-radius: 1rem;">
+                                            <small id="searchHelp" class="form-text text-muted">Search models by titles, annotations, and industries</small>
+                                        </form>
+                                        <div class="list-group mt-3" id="models-list"></div>
+                                        <div class="modal fade" id="view-model" tabindex="-1" role="dialog" aria-labelledby="viewModelLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content" style="border-radius: 1rem;">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModelLabel">Model details</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body" id="selected-model"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card" style="border-radius: 1rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title" style="color: #17a2b8;"><b>News</b></h2>
+                                    <p class="card-text">
+                                        <a class="twitter-timeline" data-height="600" href="https://twitter.com/freebpmnquality?ref_src=twsrc%5Etfw">Tweets by freebpmnquality</a>
+                                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/web3.min.js"></script>
+    <script src="../js/crypto-js.min.js"></script>
+    <script src="../js/xml2json.min.js"></script>
+
+    <script src="../analytics/lib/qualibpmn.semantic.js"></script>
+    <script src="../analytics/lib/qualibpmn.plain-old.js"></script>
+
+    <script src="../finance/lib/finbpmn.js"></script>
+
+    <script src="../storage/lib/etherbpmn.js"></script>
+
+    <script src="../storage/js/main.js"></script>
+</body>
+
+</html>

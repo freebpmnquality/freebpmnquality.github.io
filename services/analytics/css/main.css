@@ -1,0 +1,114 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #f8f9fa;
+}
+
+#header {
+    border-radius: 0px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.bpmn-warning {
+    padding: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    border-radius: 1rem;
+}
+
+#canvas {
+    height: 400px;
+}
+
+#editor {
+    height: 170px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.highlight-overlay {
+    border-style: none;
+}
+
+.highlight-dropzone {
+    border-color: #007bff;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff !important;
+    background-color: #007bff;
+}
+
+#drop_zone {
+    height: 200px;
+    border-color: #007bff;
+}
+
+#dragFileName {
+    margin-top: 60px;
+    color: #007bff !important;
+}
+
+.highlight-dropzone-text {
+    color: #fff !important;
+}
+
+#workzone {
+    margin-top: 0px;
+}
+
+.highlight-overlay .tiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 1rem;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: -5px;
+    left: 105%;
+    z-index: 1;
+}
+
+.highlight-overlay:hover .tiptext {
+    visibility: visible;
+}
+
+.highlight-overlay .finetext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 1rem;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: -5px;
+    left: 105%;
+    z-index: 1;
+}
+
+.highlight-overlay:hover .finetext {
+    visibility: visible;
+}
+
+.recent-item {
+    word-wrap: break-word;
+}
+
+#recent-models {
+    margin-bottom: 10px;
+    overflow-y: scroll;
+    height: 350px;
+    padding-right: 5px;
+}
+
+#file-name {
+    word-wrap: break-word;
+}

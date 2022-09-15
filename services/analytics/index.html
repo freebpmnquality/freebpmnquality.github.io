@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <title>QualiBPMN — Free Online Quality Analysis Tool for BPMN Models</title>
+    <meta name="title" content="QualiBPMN — Free Online Quality Analysis Tool for BPMN Models">
+    <meta name="description" content="Free online software to validate BPMN business process diagrams and find modeling mistakes.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="QualiBPMN — Free Online Quality Analysis Tool for BPMN Models">
+    <meta property="og:description" content="Free online software to validate BPMN business process diagrams and find modeling mistakes.">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="QualiBPMN — Free Online Quality Analysis Tool for BPMN Models">
+    <meta property="twitter:description" content="Free online software to validate BPMN business process diagrams and find modeling mistakes.">
+
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../analytics/css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link rel="shortcut icon" href="../analytics/img/favicon.png" type="image/x-icon">
+
+    <style>
+        body {
+            background: rgb(150, 253, 29);
+            background: radial-gradient(circle, rgba(150, 253, 29, 0.2) 50%, rgba(69, 252, 157, 0.2) 100%);
+        }
+    </style>
+</head>
+
+<body id="home">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="javascript:void(0);" style="font-weight: bold;">QualiBPMN <span id="pro-badge"><span class="badge badge-primary">PRO</span></span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" id="navbarElements">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://freebpmnquality.github.io/" target="_blank">Website</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/freebpmnquality" target="_blank">GitHub</a>
+                </li>
+                <li class="nav-item" id="pro-activate">
+                    <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#bmModal">PRO version</a>
+                </li>
+                <li class="nav-item" id="pro-config">
+                    <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#configModal">Configure</a>
+                </li>
+                <li class="nav-item" id="pro-moon">
+                    <a class="nav-link" href="javascript:void(0);" onclick="toggleDark();">
+                        <img src="../analytics/img/moon.png" alt="night" width="20">
+                    </a>
+                </li>
+                <li class="nav-item" id="pro-sun">
+                    <a class="nav-link" href="javascript:void(0);" onclick="toggleLight();">
+                        <img src="../analytics/img/sun.png" alt="day" width="20">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span class="text-muted" style="font-weight: bold;">QualiBPMN by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
+    </nav>
+
+    <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="configModalLabel">Configure</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label style="font-weight: bold;">Syntactic quality</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkTasks" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkTasks">Tasks should have one incoming and one outgoing flow.</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkStartEvents" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkStartEvents">Start events should have one outgoing flow.</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkEndEvents" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkEndEvents">End events should have one incoming flow.</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkIntermediateEvents" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkIntermediateEvents">Intermediate events should have one incoming and one outgoing flow.</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkGateways" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkGateways">Gateways should be either splits or joins.</label>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: bold;">Semantic quality</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkSemanticsShort" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkSemanticsShort">This activity seems to be too short and too broad to be useful.</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkSemanticsLong" checked onchange="captureConfigs();">
+                        <label class="form-check-label" for="checkSemanticsLong">This activity seems to be too long and too detailed.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [start] suspension notice -->
+    <div class="alert alert-danger mt-2 mr-4 mb-2 ml-4" role="alert" style="border-radius: 1rem;">
+        Due to the lack of resources the support and development of this service is suspended until further notice. Use our comprehensive <a href="https://freebpmnquality.github.io/products/fbpmnq/?utm_source=cloudfreebpmnquality.herokuapp.com&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free"
+            target="_blank">lightweight solution</a> for BPMN analysis.
+    </div>
+    <!-- [end] suspension notice -->
+
+    <div class="card ml-4 mr-4 mb-0 mt-2" style="border-radius: 1rem;">
+        <div class="card-body text-center">
+            <img src="../analytics/img/favicon.png" width="240" class="mx-auto d-block">
+            <h1>Free Online Quality Analysis Tool for BPMN Models</h1>
+            <p style="font-weight: bold;">Free online software to validate BPMN business process diagrams and find modeling mistakes.</p>
+            <p>
+                <a href="https://sourceforge.net/projects/freebpmnquality/" target="_blank"><span class="badge badge-pill badge-warning" style="font-weight: bold;">Get the client-side tool (v1.5.3)</span></a>
+            </p>
+        </div>
+    </div>
+
+    <div class="ml-4 mr-4">
+        <div class="row">
+            <div class="col-sm-3 mt-4">
+                <div id="workzone">
+                    <div class="card btn btn-primary" id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" onclick="selectFile();" onmouseover="dropMouseOver(event);" onmouseleave="dropMouseLeave(event);" ondragleave="dragOverLeave(event);" style="border-radius: 1rem;">
+                        <div class="card-body">
+                            <p class="text-center text-muted" id="dragFileName" style="font-weight: bold;">Drag & drop or click to upload the BPMN 2.0 file</p>
+                        </div>
+                    </div>
+                    <div class="card mt-4" style="border-radius: 1rem;">
+                        <div class="card-body">
+                            <h5 style="font-weight: bold;">Recent models</h5>
+                            <div id="recent-models" class="list-group"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="card mt-4" style="border-radius: 1rem;">
+                            <div class="card-body">
+                                <div id="file-name" style="font-weight: bold;"></div>
+
+                                <div class="btn-group mt-3 mb-3">
+                                    <input type="range" min="400" max="1200" value="400" step="200" id="slider">
+                                </div>
+
+                                <div id="canvas"></div>
+
+                                <!-- [required hidden elements] -->
+                                <div id="editor" hidden></div>
+                                <input type="hidden" class="form-control" id="bpmnPrefix" />
+                                <input type="hidden" id="bpmnLink" />
+                                <!-- [/required hidden elements] -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card mt-4" style="border-radius: 1rem;">
+                            <div class="card-body text-center" id="pro-fin">
+                                <img src="../finance/img/favicon.png" alt="FinBPMN" style="width: 100%;">
+                                <p class="card-text">
+                                    <span id="effortsEstimated"></span><br>
+                                    <small class="text-muted">Person-hours</small>
+                                </p>
+                                <p class="card-text">
+                                    <span id="costEstimated"></span><br>
+                                    <small class="text-muted">Cost, USD ($)</small>
+                                </p>
+                                <p class="card-text">
+                                    <a href="../finance/" target="_blank"><small>Estimate model</small></a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card mt-4" style="border-radius: 1rem;">
+                            <div class="card-body text-center" id="pro-eth">
+                                <img src="../storage/img/favicon.png" alt="EtherBPMN" style="width: 100%;">
+                                <p class="card-text">
+                                    <span id="qualityEstimated"></span><br>
+                                    <small class="text-muted">Quality, %</small>
+                                </p>
+                                <p class="card-text">
+                                    <span id="valueEstimated"></span><br>
+                                    <small class="text-muted">Value, USD ($)</small>
+                                </p>
+                                <p class="card-text">
+                                    <a href="../storage/" target="_blank"><small>Create collection</small></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2" id="pro-quality">
+                    <div class="col">
+                        <div class="card mt-4" style="border-radius: 1rem;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-weight: bold;">Syntactic quality</h5>
+                                <h6 class="card-title" style="font-weight: bold;" id="totalSyntacticQuality">0%</h6>
+                                <p class="card-text" id="syntacticQuality">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mt-4" style="border-radius: 1rem;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-weight: bold;">Semantic quality</h5>
+                                <h6 class="card-title" style="font-weight: bold;" id="totalSemanticQuality">0%</h6>
+                                <p class="card-text" id="semanticQuality">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4" style="border-radius: 1rem;">
+                    <div class="card-body">
+                        <h5 style="font-weight: bold;">Recommendations</h5>
+                        <div id="recommendations"></div>
+
+                        <!-- Suggestion modal -->
+                        <div class="modal fade" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="suggestionModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="border-radius: 1rem;">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="suggestionModalLabel"><span class="badge badge-pill badge-info">i</span> Suggestion</h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body" id="tipText">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bpmn-viewer.development.js"></script>
+    <script src="../js/web3.min.js"></script>
+
+    <script src="../analytics/lib/qualibpmn.semantic.js"></script>
+    <script src="../analytics/lib/qualibpmn.plain-old.js"></script>
+
+    <script src="../finance/lib/finbpmn.js"></script>
+
+    <script src="../storage/lib/etherbpmn.js"></script>
+
+    <script src="../analytics/js/bpmn-samples.js"></script>
+    <script src="../analytics/js/main.js"></script>
+    <script src="../analytics/js/new.main.js"></script>
+
+    <script src="../analytics/js/payment.js"></script>
+
+    <script src="../efforts/efforts.lib.js"></script>
+    <script src="../swap/amm.lib.js"></script>
+
+    <!-- BM patch -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 1rem; background-color: #f8f9fa;">
+                <div class="modal-header">
+                    <h5 class="modal-title">Welcome to QualiBPMN by <b>freebpmnquality</b>!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 text-center" id="season-banner">
+                                <img src="https://freebpmnquality.github.io/images/logo_transparent.png" alt="logo" style="width: 100%;">
+                                <br>
+                                <div id="target-season" style="font-size: 20px;" class="mb-4"></div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <form onsubmit="return usePromoCode();">
+                                    <div class="form-group mb-2">
+                                        <label for="promoCode">Enter your promo code</label>
+                                        <input type="text" class="form-control" id="promoCode" style="border-radius: 1rem;" placeholder="Promo Code">
+                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(JSON.parse($.ajax({ type: 'get', url: '../backoffice/index.php?getUserCode=true', async: false }).responseText).result);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;">USE PROMO CODE</button>
+                                    <a type="button" class="btn btn-info mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;" href="https://freebpmnquality.github.io/fbpmnq.html" target="_blank">DEMO</a>
+                                </form>
+
+                                <form onsubmit="return false;">
+                                    <div class="form-group mt-2 mb-1">
+                                        <label for="ethAddress">Login using MetaMask address</label>
+                                        <p class="mt-0">
+                                            <img src="https://freebpmnquality.github.io/images/payment/metamask.png" alt="metamask" width="160">
+                                        </p>
+                                        <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="MetaMask Address" readonly>
+
+                                        <button class="btn btn-danger btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="getEthAddress();" id="connectBtn">CONNECT</button>
+                                    </div>
+                                    <div class="form-group mt-0 mb-1">
+                                        <input type="text" class="form-control" id="ethBalance" style="border-radius: 1rem;" placeholder="Address Balance" value="N/A QBMT" readonly>
+                                    </div>
+                                    <div class="form-group mt-0 mb-2">
+                                        <input type="text" class="form-control" id="ethStatus" style="border-radius: 1rem;" placeholder="Address Status" readonly>
+                                    </div>
+
+                                    <button class="btn btn-primary mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="checkEthAddress();" id="loginBtn" disabled>LOGIN</button>
+                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('../swap/', '_blank').focus();">GET TOKENS</button>
+
+                                    <small class="form-text text-muted">Tokens provide lifetime access to <span style="color: #dc3545; font-weight: bold;">PRO</span> features</small>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            $('[data-toggle="popover"]').popover();
+        });
+
+        var actualPromoCode = Payment.orderPromoCode();
+        var enteredPromoCode = '';
+
+        var pricing = AMMUtil.getPricing();
+
+        function usePromoCode() {
+            $('#bmModal').modal('hide');
+
+            return false;
+        };
+
+        $('#bmModal').on('hidden.bs.modal', function() {
+            enteredPromoCode = $('#promoCode').val().trim();
+
+            if (Payment.isSubscribed(enteredPromoCode)) {
+                $('#pro-activate').hide();
+                $('#pro-config').show();
+                $('#pro-moon').show();
+                $('#pro-sun').show();
+
+                $('#pro-quality').css({
+                    'filter': 'blur(0px)'
+                });
+                $('#pro-fin').css({
+                    'filter': 'blur(0px)'
+                });
+                $('#pro-eth').css({
+                    'filter': 'blur(0px)'
+                });
+
+                $('#pro-badge').html(`<span class="badge badge-primary">PRO</span>`);
+            } else {
+                if (actualPromoCode.toLowerCase() === enteredPromoCode.toLowerCase()) {
+                    $('#pro-badge').html(`<span class="badge badge-danger">FREE</span>`);
+
+                    $('#pro-activate').show();
+                    $('#pro-config').hide();
+                    $('#pro-moon').hide();
+                    $('#pro-sun').hide();
+
+                    $('#pro-quality').css({
+                        'filter': 'blur(3px)'
+                    });
+                    $('#pro-fin').css({
+                        'filter': 'blur(3px)'
+                    });
+                    $('#pro-eth').css({
+                        'filter': 'blur(3px)'
+                    });
+                } else {
+                    $('#bmModal').modal('show');
+
+                    $('#promoCode').val(actualPromoCode);
+                }
+            }
+        });
+
+        async function getEthAddress() {
+            try {
+                const ethAddress = (await AMMUtil.getMetaMaskAccounts())[0];
+
+                $('#ethAddress').val(ethAddress);
+                $('#connectBtn').text(`${ethAddress.substring(0, 5)}...${ethAddress.substring(38)}`);
+
+                getEthAddressBalance(ethAddress);
+            } catch (err) {
+                alert('Oops! ' + err.message);
+            }
+
+            return false;
+        }
+
+        function getEthAddressBalance(ethAddress) {
+            const jsonResponse = JSON.parse($.ajax({
+                type: 'post',
+                url: '../backoffice/contract/QBMT/index.php',
+                async: false,
+                dataType: 'json',
+                data: JSON.stringify({
+                    "jsonrpc": "2.0",
+                    "method": "eth_getBalance",
+                    "params": [
+                        ethAddress,
+                        "latest"
+                    ],
+                    "id": 1
+                })
+            }).responseText);
+
+            const addressBalance = Number.parseInt(jsonResponse.result, 16) / 1e18;
+            const addressBalanceUSD = AMMUtil.makePrice(addressBalance);
+
+            $('#ethBalance').val(addressBalance + ' QBMT');
+
+            if (addressBalance < pricing) {
+                $('#loginBtn').attr('disabled', true);
+                $('#ethStatus').val('Not enough tokens!');
+            } else {
+                $('#loginBtn').removeAttr('disabled');
+                $('#ethStatus').val('Access granted!');
+            }
+
+            return {
+                addressBalance: addressBalance,
+                addressBalanceUSD: addressBalanceUSD,
+                pricing: pricing
+            };
+        }
+
+        function checkEthAddress() {
+            try {
+                const ethAddress = $('#ethAddress').val();
+
+                if (ethAddress && ethAddress.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
+                    const ethAddressBalance = getEthAddressBalance(ethAddress);
+
+                    if (ethAddressBalance.addressBalance >= ethAddressBalance.pricing) {
+                        $('#promoCode').val(JSON.parse($.ajax({
+                            type: 'get',
+                            url: '../backoffice/index.php?getUserCode=true',
+                            async: false
+                        }).responseText).result);
+
+                        $('#bmModal').modal('hide');
+
+                        if ($('#loginBalance').length === 0) {
+                            $('#navbarElements').append(`<li class="nav-item" id="loginBalance">
+                                <span class="nav-link" style="font-weight: bold;">
+                                    ${ethAddress.substring(0, 5)}...${ethAddress.substring(38)} ♦ ${ethAddressBalance.addressBalance} QBMT ($${ethAddressBalance.addressBalanceUSD.toLocaleString('en-US')})
+                                </span>
+                            </li>`);
+                        }
+                    }
+                } else {
+                    throw new Error('Invalid MetaMask address.');
+                }
+            } catch (err) {
+                alert('Oops! ' + err.message);
+            }
+
+            return false;
+        }
+
+        $(document).ready(function() {
+            $('#pro-activate').hide();
+            $('#pro-config').hide();
+            $('#pro-moon').hide();
+            $('#pro-sun').hide();
+
+            $('#pro-quality').css({
+                'filter': 'blur(3px)'
+            });
+            $('#pro-fin').css({
+                'filter': 'blur(3px)'
+            });
+            $('#pro-eth').css({
+                'filter': 'blur(3px)'
+            });
+
+            $('#ethStatus').val(`Requires ${pricing} QBMT tokens`);
+
+            $('#bmModal').modal('show');
+
+            const date = new Date();
+            const month = date.getMonth();
+            const opacity = `linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4))`;
+
+            if (month >= 8 && month <= 9) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-warning">HALLOWEEN</span> <span class="badge badge-danger">PROMO</span>`);
+            } else if (month == 10) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/bf.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-dark">BLACK FRIDAY</span> <span class="badge badge-danger">PROMO</span>`);
+            } else if (month == 11) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/ny.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-success">NEW YEAR</span> <span class="badge badge-danger">PROMO</span>`);
+            } else if (month == 0) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/ln.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-primary">LUNAR NEW YEAR</span> <span class="badge badge-danger">PROMO</span>`);
+            } else if (month == 1) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/vd.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-danger">VALENTINES DAY</span> <span class="badge badge-dark">PROMO</span>`);
+            } else if (month >= 2 && month <= 4) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/ed.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-info">SPRING HOLIDAYS</span> <span class="badge badge-danger">PROMO</span>`);
+            } else if (month >= 5 && month <= 7) {
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/id.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#target-season').html(`<span class="badge badge-light">SUMMER HOLIDAYS</span> <span class="badge badge-danger">PROMO</span>`);
+            } else {
+                $('#season-banner').attr('style', `border-radius: 1rem; background-image: url('https://freebpmnquality.github.io/images/bg-1.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+            }
+
+            $('#promoCode').val(actualPromoCode);
+        });
+    </script>
+    <!-- /BM patch -->
+</body>
+
+</html>

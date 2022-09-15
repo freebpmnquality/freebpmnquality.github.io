@@ -1,0 +1,14 @@
+{
+    "name": "Efforteum Wallet",
+    "short_name": "Efforteum Wallet",
+    "description": "Tokenized web software development efforts.",
+    "icons": [{
+        "src": "../../efforts/img/logo.png",
+        "sizes": "32x32",
+        "type": "image/png"
+    }],
+    "start_url": "../../efforts/wallet/index.html",
+    "display": "fullscreen",
+    "theme_color": "#6958b6",
+    "background_color": "#6958b6"
+}

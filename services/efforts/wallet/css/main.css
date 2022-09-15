@@ -1,0 +1,31 @@
+body {
+    background-color: #6958b6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.white-color {
+    color: #f8f9fa;
+}
+
+.light-color {
+    color: #e3dcff;
+}
+
+.balance-value {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.usd-value {
+    font-weight: bold;
+}
+
+#wallet-top {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+}
+
+.card,
+.btn {
+    border-radius: 1rem;
+}

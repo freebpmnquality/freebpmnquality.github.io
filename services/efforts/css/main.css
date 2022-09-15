@@ -1,0 +1,43 @@
+.card,
+.form-control,
+.btn,
+.rounded-corners {
+    border-radius: 1rem;
+}
+
+.btn-prpl,
+.btn-prpl:hover,
+.btn-prpl:active,
+.btn-prpl:focus {
+    background-color: #7E57C2;
+    border-color: #90CAF9;
+    color: #fff;
+}
+
+a,
+a:hover {
+    color: #7E57C2;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Kanit', sans-serif;
+}
+
+.banner {
+    height: 100%;
+    width: 100%;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #2E1953;
+}
+
+.banner-sm {
+    width: 20rem;
+}
+
+.banner-lg {
+    width: 100%;
+}

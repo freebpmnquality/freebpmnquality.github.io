@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <title>FinBPMN — Free Online Efforts Estimation Tool for BPMN Models</title>
+    <meta name="title" content="FinBPMN — Free Online Efforts Estimation Tool for BPMN Models">
+    <meta name="description" content="Free online software to estimate design efforts and cost of BPMN business process diagrams.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FinBPMN — Free Online Efforts Estimation Tool for BPMN Models">
+    <meta property="og:description" content="Free online software to estimate design efforts and cost of BPMN business process diagrams.">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="FinBPMN — Free Online Efforts Estimation Tool for BPMN Models">
+    <meta property="twitter:description" content="Free online software to estimate design efforts and cost of BPMN business process diagrams.">
+
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../finance/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link rel="shortcut icon" href="../finance/img/favicon.png" type="image/x-icon">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+    </script>
+
+    <style>
+        body {
+            background: rgb(253, 29, 29);
+            background: radial-gradient(circle, rgba(253, 29, 29, 0.2) 50%, rgba(71, 69, 252, 0.2) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="javascript:void(0);" style="font-weight: bold;">FinBPMN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://freebpmnquality.github.io/" target="_blank">Website</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/freebpmnquality" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span class="text-muted" style="font-weight: bold;">FinBPMN by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
+    </nav>
+
+    <!-- [start] suspension notice -->
+    <div class="alert alert-danger mt-2 mr-4 mb-2 ml-4" role="alert" style="border-radius: 1rem;">
+        Due to the lack of resources the support and development of this service is suspended until further notice. Use our comprehensive <a href="https://freebpmnquality.github.io/products/fbpmnq/?utm_source=cloudfreebpmnquality.herokuapp.com&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free"
+            target="_blank">lightweight solution</a> for BPMN analysis.
+    </div>
+    <!-- [end] suspension notice -->
+
+    <div class="card ml-4 mr-4 mb-4 mt-2" style="border-radius: 1rem;">
+        <div class="card-body text-center">
+            <img src="../finance/img/favicon.png" width="240" class="mx-auto d-block">
+            <h1>Free Online Efforts Estimation Tool for BPMN Models</h1>
+            <p style="font-weight: bold;">Free online software to estimate design efforts and cost of BPMN business process diagrams.</p>
+            <p style="font-weight: bold; color: #dc3545;">Disclaimer: it is a proof of concept that should be used with maximum discretion.</p>
+        </div>
+    </div>
+
+    <div class="ml-4 mr-4" id="dashboard">
+        <div class="row">
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary btn-block mb-3" style="border-radius: 1rem; font-weight: bold;" onclick="openBPMNFile();">Open BPMN 2.0 File</button>
+
+                <label class="mb-2" for="hourlyWage">Hourly wage, $</label>
+                <input type="number" min="1" step="1" class="form-control mb-2" id="hourlyWage" value="1" style="border-radius: 1rem;">
+
+                <button type="button" class="btn btn-warning btn-block mb-4" style="border-radius: 1rem; font-weight: bold;" onclick="setHourlyWage();">Recalculate</button>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span id="modelFile" style="font-weight: bold;"></span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-sm-12 text-center">
+                                <h4 style="font-weight: bold;">General</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <small class="text-center">Efforts growth</small>
+                                <div class="card" style="border-radius: 1rem;">
+                                    <div class="card-body" id="data-all"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-2">
+                                <small class="text-center">Efforts ratio</small>
+                                <div class="card" style="border-radius: 1rem;">
+                                    <div class="card-body" id="summ-all"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-2" id="text-all"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4 mb-4" style="border-radius: 1rem;">
+            <div class="card-body">
+                <div class="btn-group mb-3">
+                    <input type="range" min="400" max="1200" value="400" step="200" id="slider" onchange="scaleDiagram();">
+                </div>
+
+                <div id="canvas" style="height: 400px;"></div>
+            </div>
+        </div>
+
+        <div id="detail-estimation" class="row row-cols-1 row-cols-md-2"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bpmn-viewer.development.js"></script>
+
+    <script src="../analytics/lib/qualibpmn.semantic.js"></script>
+    <script src="../analytics/lib/qualibpmn.plain-old.js"></script>
+
+    <script src="../finance/lib/finbpmn.js"></script>
+
+    <script src="../finance/js/main.js"></script>
+</body>
+
+</html>

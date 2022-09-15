@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../efforts/css/main.css">
+    <link rel="icon" type="image/png" href="../efforts/img/logo.png" />
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+
+    <title>Efforteum — Web Development Efforts Tokenization</title>
+    <meta name="title" content="Efforteum — Web Development Efforts Tokenization">
+    <meta name="description" content="Tokenize web software development efforts using the address of a website.">
+
+    <style>
+        body {
+            background: rgb(29, 211, 253);
+            background: radial-gradient(circle, rgba(29, 211, 253, 0.2) 50%, rgba(252, 69, 251, 0.2) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="home">
+        <span class="navbar-brand mb-0 h1"><img src="../efforts/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="eth" width="64"> Efforteum</span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#start">Get Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tech">Technology</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container text-center mt-4">
+        <h1>Efforteum — Web Development Efforts Tokenization</h1>
+        <h3>Tokenize web software development efforts using the address of a website</h3>
+    </div>
+
+    <div class="text-center">
+        <img src="../efforts/img/banner-left.png" class="img-fluid mt-4 banner" alt="banner" style="width: 40rem;">
+    </div>
+
+    <div class="container">
+        <div class="text-center" id="start">
+            <br>
+            <br>
+            <br>
+            <h2 class="card-title">GET STARTED</h2>
+            <h5>ESTIMATE WEBSITE DEVELOPMENT EFFORTS</h5>
+        </div>
+        <div class="card-deck mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">TOKENIZE EFFORTS</h5>
+
+                    <form onsubmit="return estimateEfforts();">
+                        <div class="form-group">
+                            <label for="website">Website URL</label>
+                            <textarea rows="5" type="text" class="form-control" id="website" placeholder="Website URL" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Ethereum address</label>
+                            <input type="text" class="form-control" id="address" placeholder="Ethereum address" required>
+                        </div>
+                        <div class="form-group form-check mb-0">
+                            <input type="checkbox" class="form-check-input" id="nativeWallet" checked="true">
+                            <label class="form-check-label" for="nativeWallet">Show in a native "wallet"</label>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="parseSitemap">
+                            <label class="form-check-label" for="parseSitemap">Parse a sitemap</label>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-prpl">Submit</button>
+                    </form>
+
+                    <p class="card-text text-muted mt-3">You can provide a single ULR or multiple URLs. If you wish to estimate a project of several URLs, you should separate them using a semicolon symbol.</p>
+
+                    <p class="card-text text-muted mt-3"><a href="javascript:void(0);" onclick="$('#website').val(window.location.href); $('#address').val('0x0000000000000000000000000000000000000000');">Click here to see the example</a></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">OBSERVE AS ETH IN METAMASK</h5>
+
+                    <div class="form-group">
+                        <label for="nw-name">Name</label>
+                        <input type="text" class="form-control" id="nw-name" placeholder="Name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="nw-rpc">RPC URL</label>
+                        <textarea rows="5" type="text" class="form-control" id="nw-rpc" placeholder="RPC URL" readonly></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="nw-chainid">Chain ID</label>
+                        <input type="text" class="form-control" id="nw-chainid" placeholder="Chain ID" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="nw-symbol">Symbol</label>
+                        <input type="text" class="form-control" id="nw-symbol" placeholder="Symbol" readonly>
+                    </div>
+
+                    <a href="https://metamask.zendesk.com/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC" target="_blank">How to connect your MetaMask?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <img src="../efforts/img/banner-right.png" class="img-fluid mt-4 banner" alt="banner" style="width: 40rem;">
+    </div>
+
+    <div class="container">
+        <div class="text-center" id="tech">
+            <br>
+            <br>
+            <br>
+            <h2 class="card-title">TECHNOLOGY</h2>
+            <h5>HAVE AN ETHEREUM-ALIKE EXPERIENCE</h5>
+        </div>
+        <div class="card-deck mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">BASIC CONSTRUCTIVE COST MODEL</h5>
+
+                    <div class="text-center">
+                        <img src="../efforts/img/cocomo.png" class="img-fluid rounded-corners banner-sm" alt="banner">
+                    </div>
+
+                    <p class="card-text mt-3">The efforts equation is as follows:</p>
+                    <p class="card-text mt-3 text-center"><b>E</b> = <b>a</b> &#215; <b>∑</b>(<b>KLOC</b>)<sup><b>b</b></sup></p>
+                    <p class="card-text">Where:</p>
+                    <ul>
+                        <li><b>E</b> is the effort applied in person-months</li>
+                        <li><b>KLOC</b> is the estimated thousands of lines of code delivered for the project</li>
+                        <li><b>a</b> = 2.4 and <b>b</b> = 1.05 are model coefficients</li>
+                    </ul>
+
+                    <a href="https://en.wikipedia.org/wiki/COCOMO" target="_blank">See more about COCOMO</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CONSTANT PRODUCT MARKET MAKER</h5>
+
+                    <div class="text-center">
+                        <img src="../efforts/img/amm.png" class="img-fluid rounded-corners banner-sm" alt="banner">
+                    </div>
+
+                    <p class="card-text mt-3">The price in ETH is calculated as follows:</p>
+                    <p class="card-text mt-3 text-center"><b>X</b> &#215; <b>Y</b> = <b>K</b></p>
+                    <p class="card-text">Where:</p>
+                    <ul>
+                        <li><b>X</b> and <b>Y</b> stand for the number of tokens in the pool</li>
+                        <li><b>K</b> is a constant</li>
+                        <li>we have <b>Y</b> for the price of 1 ETH in USD and <b>K</b> = 1, so <b>X</b> is the price of 1 USD in ETH</li>
+                        <li>then <b>Cost</b> (in ETH) = <b>E</b> &#215; 152 (hours per person-month) &#215; 28 (the average hourly wage for a HTML developer) &#215; <b>X</b></li>
+                    </ul>
+
+                    <a href="https://tezos.org.ua/en/blog/how-does-dex-work" target="_blank">See more about AMM</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <img src="../efforts/img/blockchain.png" class="img-fluid mt-4 banner" alt="banner" style="width: 40rem;">
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span class="text-muted" style="font-weight: bold;">Efforteum by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
+    </nav>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="../swap/amm.lib.js"></script>
+
+    <script src="../efforts/efforts.lib.js"></script>
+
+    <script src="../efforts/js/main.js"></script>
+</body>
+
+</html>

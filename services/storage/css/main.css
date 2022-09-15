@@ -1,0 +1,18 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    margin-top: 1%;
+    background-color: #f8f9fa;
+}
+
+.tab-pane {
+    margin-top: 1%;
+}
+
+.sticky-top {
+    margin-top: -1%;
+}
+
+#rating {
+    overflow-y: scroll;
+    height: 350px;
+}

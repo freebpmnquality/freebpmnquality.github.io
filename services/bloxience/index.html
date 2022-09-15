@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <title>Bloxience — JavaScript Blockchain Implementation</title>
+    <meta name="title" content="Bloxience — JavaScript Blockchain Implementation">
+    <meta name="description" content="Educational and research implementation of the blockchain data structure in JavaScript.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bloxience — JavaScript Blockchain Implementation">
+    <meta property="og:description" content="Educational and research implementation of the blockchain data structure in JavaScript.">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Bloxience — JavaScript Blockchain Implementation">
+    <meta property="twitter:description" content="Educational and research implementation of the blockchain data structure in JavaScript.">
+
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bloxience/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link rel="shortcut icon" href="../bloxience/img/favicon.png" type="image/x-icon">
+
+    <style>
+        body {
+            background: rgb(29, 128, 253);
+            background: radial-gradient(circle, rgba(29, 128, 253, 0.2) 50%, rgba(190, 252, 69, 0.2) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="javascript:void(0);" style="font-weight: bold;">Bloxience</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://freebpmnquality.github.io/" target="_blank">Website</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/freebpmnquality" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <span class="text-muted" style="font-weight: bold;">Bloxience by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
+    </nav>
+
+    <div class="card ml-4 mr-4 mb-4 mt-2" style="border-radius: 1rem;">
+        <div class="card-body text-center">
+            <img src="../bloxience/img/favicon.png" width="240" class="mx-auto d-block">
+            <h1>JavaScript Blockchain Implementation</h1>
+            <p style="font-weight: bold;">Educational and research implementation of the blockchain data structure in JavaScript.</p>
+            <p style="font-weight: bold; color: #dc3545;">Disclaimer: it is a proof of concept that should be used with maximum discretion.<br>This service is fully decentralized and P2P, so it never stores neither your keys nor your ledgers.</p>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 ml-2 mr-2">
+        <div class="col mb-4">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="card-body">
+                    <div class="media">
+                        <img src="../bloxience/img/financial.png" class="mr-3" alt="financial">
+                        <div class="media-body">
+                            <h5 class="mt-0">Financial transaction processing</h5>
+                            <small>Track and verify transactions without a centralized server.</small>
+                            <br>
+                            <a href='./?form=["Account name","Current balance","Account details","Counterparty name","Counterparty details","Payment method","Service date","Service details","Status","Type","Timestamp","Amount","Other details"]' target="_blank">Try now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="card-body">
+                    <div class="media">
+                        <img src="../bloxience/img/medical.png" class="mr-3" alt="medical">
+                        <div class="media-body">
+                            <h5 class="mt-0">Medical data management</h5>
+                            <small>Create a public ledger is both transparent and anonymous.</small>
+                            <br>
+                            <a href='./?form=["Medical center","Manager","Contact","Medical center address","Medical center details","First name","Middle name","Last name","Gender","Date of birth","Date became patient","Patient address","Patient details"]' target="_blank">Try now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="card-body">
+                    <div class="media">
+                        <img src="../bloxience/img/supply.png" class="mr-3" alt="supply">
+                        <div class="media-body">
+                            <h5 class="mt-0">Supply chain management</h5>
+                            <small>Record the journey of goods from the supplier to the customer.</small>
+                            <br>
+                            <a href='./?form=["Order number","Order status","Date order placed","Order details","Customer name","Customer details","Invoice number","Invoice date","Invoice details","Shipment tracking number","Shipment date","Shipment details"]' target="_blank">Try now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="card-body">
+                    <div class="media">
+                        <img src="../bloxience/img/business.png" class="mr-3" alt="business">
+                        <div class="media-body">
+                            <h5 class="mt-0">Replacement of intermediaries</h5>
+                            <small>Do not rely on lawyers to both draw up the contract.</small>
+                            <br>
+                            <a href='./?form=["Entity 1 type","Entity 1 official name","Entity 1 date assignment","Entity 1 date of expiry","Entity 1 role","Entity 1 details","Entity 2 type","Entity 2 official name","Entity 2 date assignment","Entity 2 date of expiry","Entity 2 role","Entity 2 details","Transaction date","Transaction type","Transaction details"]'
+                                target="_blank">Try now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="objectModal" tabindex="-1" role="dialog" aria-labelledby="objectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 1rem;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="objectModalLabel">New record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="objectFields">
+                        <div class="form-group">
+                            <label for="record_id">Record ID</label>
+                            <input type="text" class="form-control" id="record_id" style="border-radius: 1rem;">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="addFieldObject();">Add field</button>
+                    <button class="btn btn-primary btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="saveDataObject();">Save data</button>
+                    <button class="btn btn-light btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="shareDataForm();">Share form</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ml-4 mr-4">
+        <button type="button" class="btn btn-info btn-block mb-4" onclick="displayObjectModal();" style="border-radius: 1rem;">New record</button>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <!-- Write data to the blockchain -->
+                <h4 class="badge badge-pill badge-light">Account</h4>
+                <div class="card mb-4" style="border-radius: 1rem;">
+                    <div class="card-body">
+                        <form onsubmit="addBlock(); return false;">
+                            <div class="form-group">
+                                <label for="privateKey">Private key</label>
+                                <input type="password" class="form-control" id="privateKey" aria-describedby="privateKeyHelp" style="border-radius: 1rem;">
+                                <small id="privateKeyHelp" class="form-text text-muted">Your private key to sign the message. <span style="color: #dc3545;">Please remember to store your private key securely.</span></small>
+
+                                <button type="button" class="btn btn-danger btn-sm mt-2" onclick="generateWallet();">New wallet</button>
+                                <button type="button" class="btn btn-warning btn-sm mt-2" onclick="decryptWallet();">Decrypt wallet</button>
+                                <button type="button" class="btn btn-light btn-sm mt-2" onclick="clearWallet();">Clear</button>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="showPrivateKey" onclick="displayPrivateKey();">
+                                <label class="form-check-label" for="showPrivateKey">Show private key</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="publicKey">Public key</label>
+                                <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" style="border-radius: 1rem;">
+                                <small id="publicKeyHelp" class="form-text text-muted">Your public key to verify your identity. <span style="color: #28a745;">Use your public key to prove your identity.</span></small>
+
+                                <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="verifyIdentity();">Verify identity</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" aria-describedby="addressHelp" readonly style="border-radius: 1rem;">
+                                <small id="paddressHelp" class="form-text text-muted">Your address as the pseudonym.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="blockData">Block data</label>
+                                <textarea class="form-control" id="blockData" aria-describedby="blockDataHelp" style="border-radius: 1rem;" placeholder="Text..." rows="10" readonly></textarea>
+                                <small id="blockDataHelp" class="form-text text-muted">Any text data that you want to store on the blockchain.</small>
+
+                                <button type="submit" class="btn btn-info btn-sm mt-2">Add block</button>
+                                <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="resetBlockchain();">Reset</button>
+                                <br>
+
+                                <button type="button" class="btn btn-success btn-sm mt-2" onclick="downloadChain();">Download chain data</button>
+                                <button type="button" class="btn btn-primary btn-sm mt-2" onclick="uploadChain();">Upload chain data</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h4 class="badge badge-pill badge-dark">Blockchain</h4>
+                <span class="badge badge-pill badge-warning" id="status">N/A</span>
+
+                <!-- Chain data -->
+                <div class="form-group">
+                    <label for="chainDataFull">Full chain data (copy and paste it to <a href="http://json2table.com/" target="_blank">Json 2 Table</a> to view in table and treeview format)</label>
+                    <textarea class="form-control" id="chainDataFull" rows="15" readonly></textarea>
+
+                    <button type="button" class="btn btn-success btn-sm mt-2" onclick="downloadJSONChain();">Download data</button>
+                    <button type="button" class="btn btn-primary btn-sm mt-2" onclick="shareData();">Share data</button>
+
+                    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="border-radius: 1rem;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="shareModalLabel">Share</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="chainDataLink">Get the link</label>
+                                        <textarea class="form-control form-control-sm" id="chainDataLink" style="border-radius: 1rem;" readonly rows="3" aria-describedby="chainDataLinkHelp"></textarea>
+                                        <small id="chainDataLinkHelp" class="form-text text-muted">The shared resource will be publicly available to anyone with this link</small>
+                                    </div>
+                                    <button class="btn btn-primary btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="copyToClipboard();">Copy to clipboard</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Ledger printed -->
+                <label for="blocks">Blocks</label>
+                <div id="blocks"></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/crypto-js.min.js"></script>
+
+    <!-- Blockchain lib -->
+    <script src="../bloxience/lib/bloxience.js"></script>
+
+    <!-- Application scripts -->
+    <script src="../bloxience/js/main.js"></script>
+</body>
+
+</html>
