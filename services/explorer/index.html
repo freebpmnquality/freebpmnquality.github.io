@@ -70,38 +70,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Token:</th>
-                                        <td><img src="img/eth2.png" width="32"> ETH</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Price:</th>
-                                        <td>$<span id="eth-price"></span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Market Cap:</th>
-                                        <td>$<span id="eth-cap"></span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">Total Supply:</th>
-                                        <td><span id="eth-supply"></span> ETH</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-7 mb-4">
-                <div class="card h-100" style="border-radius: 1rem;">
-                    <div class="card-body">
-                        <div class="table-responsive mb-0">
-                            <table class="table table-borderless mb-0">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Token:</th>
-                                        <td><img src="img/eth.png" width="32"> QBMT</td>
+                                        <td><img src="/data/icons/qbmt.png" width="32"> QBMT</td>
                                     </tr>
 
                                     <tr>
@@ -124,9 +93,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 mb-4">
+            <div class="col-sm-7 mb-4">
                 <div class="card h-100" style="border-radius: 1rem;">
                     <div class="card-body">
                         <div class="table-responsive mb-0">
@@ -134,7 +101,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row" colspan="2">
-                                            <h5 class="badge badge-primary">QBMT-ETH Ledger</h5>
+                                            <h5 class="badge badge-primary">Ledger</h5>
                                         </th>
                                     </tr>
                                     <tr>
@@ -162,7 +129,14 @@
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
+    <script src="/data/ledger.js"></script>
+
     <script>
+        const tokenData = Ledger.getTokenData('QBMT');
+
+        $('#qbmt-price').text(tokenData['price'].toLocaleString('en-US'));
+        $('#qbmt-cap').text(tokenData['supply'].toLocaleString('en-US'));
+        $('#qbmt-supply').text(tokenData['supply'].toLocaleString('en-US'));
     </script>
 </body>
 
