@@ -1,54 +1,32 @@
-<?php
-require_once '../config.php';
-
-require_once SITE_ROOT . '/backoffice/database/repository.php';
-
-require_once SITE_ROOT . '/backoffice/contract/QBMT/contract.php';
-
-require_once SITE_ROOT . '/backoffice/contract/QBMT-ETH/contract.php';
-
-require_once SITE_ROOT . '/backoffice/contract/CPC-ETH/contract.php';
-
-require_once SITE_ROOT . '/efforts/functions.php';
-
-require_once SITE_ROOT . '/backoffice/chain/qbmtLedger.php';
-
-require_once SITE_ROOT . '/backoffice/chain/cpcLedger.php';
-
-$tokenPrice = floatval(read('liquidity')['liquidity']) / QBMTContract::totalSupply();
-$marketCap = $tokenPrice * QBMTContract::TOTAL_SUPPLY;
-$ethPrice = getETHPrice();
-$qbmtEthTotalSupply = QBMT_ETHContract::totalSupply();
-$cpcEthTotalSupply = CPCETHContract::totalSupply();
-$cpcLastBlock = CPCLedger::getLastBlock();
-$qbmtLastBlock = QBMTLedger::getLastBlock();
-
-function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
-{
-    arsort($holders);
-    $reservedTokens = 0;
-
-    foreach (array_keys($holders) as $address) {
-        $reservedTokens += $holders[$address];
-    }
-?>
-
-    <p class="mb-0">
-        <kbd><?= count($holders) ?></kbd> <?= $reservedTokens ?> <?= $symbol ?> <span class="text-muted">$<?= number_format($reservedTokens * $tokenPrice, 2) ?></span>
-    </p>
-
-    <?php foreach ($holders as $address => $amount) : ?>
-        <p class="mb-0">
-            <code><?= $address ?></code>: <?= $amount ?> <?= $symbol ?> <span class="text-muted">$<?= number_format($amount * $tokenPrice, 2) ?> <kbd><?= number_format($amount / $totalSupply * 100, 2) ?>%</kbd></span>
-        </p>
-<?php endforeach;
-}
-?>
-
 <!doctype html>
+
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3TJ27QQ4T"></script>
+    <script src="/products/ecommerce.js"></script>
+    <script>
+        // [start] GA Tag
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W3TJ27QQ4T');
+        // [end] GA Tag
+
+        function getURLParam(param) {
+            return new URL(window.location.href).searchParams.get(param);
+        }
+
+        if (getURLParam('dev') === null) {
+            ECommerce.clickEvent();
+        }
+    </script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -59,6 +37,8 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
     <title>freebpmnqualityScan</title>
     <meta name="title" content="freebpmnqualityScan">
     <meta name="description" content="A blockchain token explorer of the freebpmnquality ecosystem.">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8990058470889069" crossorigin="anonymous"></script>
 
     <style>
         body {
@@ -108,9 +88,8 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                         </br>
                         <span class="text-muted mb-1">RPC URL:</span> <a href="../backoffice/contract/QBMT/" target="_blank" style="word-wrap: break-word;">https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/QBMT/</a>
                         </br>
-                        <span class="text-muted mb-1">Chain ID:</span> <?= QBMTChain::ID ?>
-                        </br>
-                        <span class="text-muted mb-1">Currency Symbol:</span> <span><?= QBMTContract::SYMBOL ?></span>
+                        <span class="text-muted mb-1">Chain ID:</span> 24122020 </br>
+                        <span class="text-muted mb-1">Currency Symbol:</span> <span>QBMT</span>
                     </p>
                     <hr>
                     <p>
@@ -120,9 +99,8 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                         </br>
                         <span class="text-muted mb-1">RPC URL:</span> <a href="../backoffice/contract/QBMT-ETH/" target="_blank" style="word-wrap: break-word;">https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/QBMT-ETH/</a>
                         </br>
-                        <span class="text-muted mb-1">Chain ID:</span> <?= QBMT_ETHChain::ID ?>
-                        </br>
-                        <span class="text-muted mb-1">Currency Symbol:</span> <span><?= QBMT_ETHContract::SYMBOL ?></span>
+                        <span class="text-muted mb-1">Chain ID:</span> 24122021 </br>
+                        <span class="text-muted mb-1">Currency Symbol:</span> <span>ETH</span>
                     </p>
                     <hr>
 
@@ -134,9 +112,8 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                         </br>
                         <span class="text-muted mb-1">RPC URL:</span> <a href="../backoffice/contract/CPC-ETH/" target="_blank" style="word-wrap: break-word;">https://cloudfreebpmnquality.herokuapp.com/backoffice/contract/CPC-ETH/</a>
                         </br>
-                        <span class="text-muted mb-1">Chain ID:</span> <?= CPCETHChain::ID ?>
-                        </br>
-                        <span class="text-muted mb-1">Currency Symbol:</span> <span><?= CPCETHContract::SYMBOL ?></span>
+                        <span class="text-muted mb-1">Chain ID:</span> 24122022 </br>
+                        <span class="text-muted mb-1">Currency Symbol:</span> <span>ETH</span>
                     </p>
                 </div>
             </div>
@@ -154,32 +131,40 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                                 <tbody>
                                     <tr>
                                         <th scope="row">Token:</th>
-                                        <td><img src="img/eth.png" width="32"> QBMT-<?= QBMT_ETHContract::SYMBOL ?></td>
+                                        <td><img src="img/eth.png" width="32"> QBMT-ETH</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Price:</th>
-                                        <td>$<?= number_format($ethPrice, 8) ?></td>
+                                        <td>$1,606.64000000</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Market Cap:</th>
-                                        <td>$<?= number_format($ethPrice * $qbmtEthTotalSupply, 2) ?></td>
+                                        <td>$910.83</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Total Supply:</th>
-                                        <td><?= number_format($qbmtEthTotalSupply, 18) ?> <?= QBMT_ETHContract::SYMBOL ?></td>
+                                        <td>0.566913236895318140 ETH</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Circulating Supply:</th>
-                                        <td><?= number_format($qbmtEthTotalSupply, 18) ?> <?= QBMT_ETHContract::SYMBOL ?></td>
+                                        <td>0.566913236895318140 ETH</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Holders:</th>
-                                        <td><?php printHolders(QBMT_ETHContract::balanceOf(), $ethPrice, QBMT_ETHContract::SYMBOL, $qbmtEthTotalSupply); ?></td>
+                                        <td>
+                                            <p class="mb-0">
+                                                <kbd>1</kbd> 0.56688854739566 ETH <span class="text-muted">$910.79</span>
+                                            </p>
+
+                                            <p class="mb-0">
+                                                <code>0xfB457d40ef1d3f774409d3e15C67aABD260F220C</code>: 0.56688854739566 ETH <span class="text-muted">$910.79 <kbd>100.00%</kbd></span>
+                                            </p>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -197,32 +182,46 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                                 <tbody>
                                     <tr>
                                         <th scope="row">Token:</th>
-                                        <td><img src="../swap/img/token.png" width="32"> <?= QBMTContract::SYMBOL ?></td>
+                                        <td><img src="../swap/img/token.png" width="32"> QBMT</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Price:</th>
-                                        <td>$<?= number_format($tokenPrice, 8) ?></td>
+                                        <td>$0.00001000</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Market Cap:</th>
-                                        <td>$<?= number_format($marketCap, 2) ?></td>
+                                        <td>$1,000,000.00</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Total Supply:</th>
-                                        <td><?= QBMTContract::TOTAL_SUPPLY ?> <?= QBMTContract::SYMBOL ?></td>
+                                        <td>100000000000 QBMT</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Circulating Supply:</th>
-                                        <td><?= QBMTContract::totalSupply() ?> <?= QBMTContract::SYMBOL ?></td>
+                                        <td>100000000000 QBMT</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Holders:</th>
-                                        <td><?php printHolders(QBMTContract::balanceOf(), $tokenPrice, QBMTContract::SYMBOL, QBMTContract::TOTAL_SUPPLY); ?></td>
+                                        <td>
+                                            <p class="mb-0">
+                                                <kbd>3</kbd> 100000000000 QBMT <span class="text-muted">$1,000,000.00</span>
+                                            </p>
+
+                                            <p class="mb-0">
+                                                <code>0xfB457d40ef1d3f774409d3e15C67aABD260F220C</code>: 99908882870 QBMT <span class="text-muted">$999,088.83 <kbd>99.91%</kbd></span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <code>0x631854B03E8Af3c838E60D7Fc68503728610E068</code>: 91117130 QBMT <span class="text-muted">$911.17 <kbd>0.09%</kbd></span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <code>0x0000000000000000000000000000000000000000</code>: 0 QBMT <span class="text-muted">$0.00 <kbd>0.00%</kbd></span>
+                                            </p>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -247,15 +246,15 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                                     </tr>
                                     <tr>
                                         <th scope="row">Last block:</th>
-                                        <td><code><?= $qbmtLastBlock['hash'] ?></code></td>
+                                        <td><code>9d2cadfba65491f33d8412c55f2ce54493be6fe1a94088913422e571360912d4</code></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Timestamp:</th>
-                                        <td><?= date('Y-m-d H:i:s', $qbmtLastBlock['timestamp']) ?></td>
+                                        <td>2022-09-15 06:55:26</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Previous block:</th>
-                                        <td><code><?= $qbmtLastBlock['prevHash'] ?></code></td>
+                                        <td><code>6ed183577c45fefe3d9c921cff4799dc255a5dd68537623b592a724c57a1bd11</code></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -275,32 +274,40 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                                 <tbody>
                                     <tr>
                                         <th scope="row">Token:</th>
-                                        <td><img src="img/eth2.png" width="32"> CPC-<?= CPCETHContract::SYMBOL ?></td>
+                                        <td><img src="img/eth2.png" width="32"> CPC-ETH</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Price:</th>
-                                        <td>$<?= number_format($ethPrice, 8) ?></td>
+                                        <td>$1,606.64000000</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Market Cap:</th>
-                                        <td>$<?= number_format($ethPrice * $cpcEthTotalSupply, 2) ?></td>
+                                        <td>$357.61</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Total Supply:</th>
-                                        <td><?= number_format($cpcEthTotalSupply, 18) ?> <?= CPCETHContract::SYMBOL ?></td>
+                                        <td>0.222582152312723991 ETH</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Circulating Supply:</th>
-                                        <td><?= number_format($cpcEthTotalSupply, 18) ?> <?= CPCETHContract::SYMBOL ?></td>
+                                        <td>0.222582152312723991 ETH</td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Holders:</th>
-                                        <td><?php printHolders(CPCETHContract::balanceOf(), $ethPrice, CPCETHContract::SYMBOL, $cpcEthTotalSupply); ?></td>
+                                        <td>
+                                            <p class="mb-0">
+                                                <kbd>1</kbd> 0.22254749299284 ETH <span class="text-muted">$357.55</span>
+                                            </p>
+
+                                            <p class="mb-0">
+                                                <code>0xfB457d40ef1d3f774409d3e15C67aABD260F220C</code>: 0.22254749299284 ETH <span class="text-muted">$357.55 <kbd>99.98%</kbd></span>
+                                            </p>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -325,15 +332,15 @@ function printHolders($holders, $tokenPrice, $symbol, $totalSupply)
                                     </tr>
                                     <tr>
                                         <th scope="row">Last block:</th>
-                                        <td><code><?= $cpcLastBlock['hash'] ?></code></td>
+                                        <td><code>9d2cadfba65491f33d8412c55f2ce54493be6fe1a94088913422e571360912d4</code></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Timestamp:</th>
-                                        <td><?= date('Y-m-d H:i:s', $cpcLastBlock['timestamp']) ?></td>
+                                        <td>2022-09-15 06:55:26</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Previous block:</th>
-                                        <td><code><?= $cpcLastBlock['prevHash'] ?></code></td>
+                                        <td><code>6ed183577c45fefe3d9c921cff4799dc255a5dd68537623b592a724c57a1bd11</code></td>
                                     </tr>
                                 </tbody>
                             </table>

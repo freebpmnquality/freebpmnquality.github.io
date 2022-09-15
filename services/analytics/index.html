@@ -336,7 +336,7 @@
                                     <div class="form-group mb-2">
                                         <label for="promoCode">Enter your promo code</label>
                                         <input type="text" class="form-control" id="promoCode" style="border-radius: 1rem;" placeholder="Promo Code">
-                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(JSON.parse($.ajax({ type: 'get', url: '../../data/users/promo.json', async: false }).responseText).code);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
+                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(JSON.parse($.ajax({ type: 'get', url: '../../data/users.json', async: false }).responseText).code);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
                                     </div>
 
                                     <button type="submit" class="btn btn-success mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;">USE PROMO CODE</button>
@@ -453,7 +453,7 @@
         function getEthAddressBalance(ethAddress) {
             const holders = JSON.parse($.ajax({
                 type: 'get',
-                url: '../../data/tokens/qbmt.json',
+                url: '../../data/tokens.json',
                 async: false
             }).responseText).holders;
 
@@ -489,7 +489,7 @@
                     if (ethAddressBalance.addressBalance >= ethAddressBalance.pricing) {
                         $('#promoCode').val(JSON.parse($.ajax({
                             type: 'get',
-                            url: '../../data/users/promo.json',
+                            url: '../../data/users.json',
                             async: false
                         }).responseText).code);
 

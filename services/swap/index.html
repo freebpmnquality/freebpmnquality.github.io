@@ -181,7 +181,7 @@
                 if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
                     const holders = JSON.parse($.ajax({
                         type: 'get',
-                        url: '../../data/tokens/qbmt.json',
+                        url: '../../data/tokens.json',
                         async: false
                     }).responseText).holders;
 

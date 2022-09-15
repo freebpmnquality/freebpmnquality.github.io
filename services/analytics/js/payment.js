@@ -2,7 +2,7 @@ class Payment {
     static isSubscribed(account) {
         const code = JSON.parse($.ajax({
             type: 'GET',
-            url: '../../data/users/promo.json',
+            url: '../../data/users.json',
             async: false
         }).responseText).code;
 

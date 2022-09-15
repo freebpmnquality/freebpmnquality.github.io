@@ -40,7 +40,7 @@ class AMMUtil {
     static getLiquidityFromStorage() {
         return Number.parseFloat(JSON.parse($.ajax({
             type: 'get',
-            url: '../../data/tokens/qbmt.json',
+            url: '../../data/tokens.json',
             async: false
         }).responseText).liquidity);
     }
@@ -56,7 +56,7 @@ class AMMUtil {
     static getTotal() {
         return Number.parseFloat(JSON.parse($.ajax({
             type: 'get',
-            url: '../../data/tokens/qbmt.json',
+            url: '../../data/tokens.json',
             async: false
         }).responseText).supply);
     }
@@ -64,7 +64,7 @@ class AMMUtil {
     static getPricing() {
         return Number.parseFloat(JSON.parse($.ajax({
             type: 'get',
-            url: '../../data/tokens/qbmt.json',
+            url: '../../data/tokens.json',
             async: false
         }).responseText).price);
     }
