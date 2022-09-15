@@ -59,7 +59,7 @@
                     <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://freebpmnquality.github.io/" target="_blank">Website</a>
+                    <a class="nav-link" href="/" target="_blank">Website</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/freebpmnquality" target="_blank">GitHub</a>
@@ -84,7 +84,7 @@
         </div>
     </nav>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <span class="text-muted" style="font-weight: bold;">QualiBPMN by <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
+        <span class="text-muted" style="font-weight: bold;">QualiBPMN by <a href="/" target="_blank">freebpmnquality</a>, <script>document.write(new Date().getFullYear());</script> <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">CC BY-ND</a></span>
     </nav>
 
     <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
@@ -136,7 +136,7 @@
 
     <!-- [start] suspension notice -->
     <div class="alert alert-danger mt-2 mr-4 mb-2 ml-4" role="alert" style="border-radius: 1rem;">
-        Due to the lack of resources the support and development of this service is suspended until further notice. Use our comprehensive <a href="https://freebpmnquality.github.io/products/fbpmnq/?utm_source=cloudfreebpmnquality.herokuapp.com&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free"
+        Due to the lack of resources the support and development of this service is suspended until further notice. Use our comprehensive <a href="/products/fbpmnq/?utm_source=cloudfreebpmnquality.herokuapp.com&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free"
             target="_blank">lightweight solution</a> for BPMN analysis.
     </div>
     <!-- [end] suspension notice -->
@@ -314,7 +314,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6 text-center" id="season-banner">
-                                <img src="https://freebpmnquality.github.io/images/logo_transparent.png" alt="logo" style="width: 100%;">
+                                <img src="/images/logo_transparent.png" alt="logo" style="width: 100%;">
                                 <br>
                                 <div id="target-season" style="font-size: 20px;" class="mb-4"></div>
                             </div>
@@ -327,14 +327,14 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-success mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;">USE PROMO CODE</button>
-                                    <a type="button" class="btn btn-info mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;" href="https://freebpmnquality.github.io/fbpmnq.html" target="_blank">DEMO</a>
+                                    <a type="button" class="btn btn-info mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;" href="/fbpmnq.html" target="_blank">DEMO</a>
                                 </form>
 
                                 <form onsubmit="return false;">
                                     <div class="form-group mt-2 mb-1">
                                         <label for="ethAddress">Login using MetaMask address</label>
                                         <p class="mt-0">
-                                            <img src="https://freebpmnquality.github.io/images/payment/metamask.png" alt="metamask" width="160">
+                                            <img src="/images/payment/metamask.png" alt="metamask" width="160">
                                         </p>
                                         <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="MetaMask Address" readonly>
 
@@ -525,28 +525,28 @@
             const opacity = `linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4))`;
 
             if (month >= 8 && month <= 9) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/hw.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-warning">HALLOWEEN</span> <span class="badge badge-danger">PROMO</span>`);
             } else if (month == 10) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/bf.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/bf.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-dark">BLACK FRIDAY</span> <span class="badge badge-danger">PROMO</span>`);
             } else if (month == 11) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/ny.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/ny.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-success">NEW YEAR</span> <span class="badge badge-danger">PROMO</span>`);
             } else if (month == 0) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/ln.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/ln.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-primary">LUNAR NEW YEAR</span> <span class="badge badge-danger">PROMO</span>`);
             } else if (month == 1) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/vd.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/vd.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-danger">VALENTINES DAY</span> <span class="badge badge-dark">PROMO</span>`);
             } else if (month >= 2 && month <= 4) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/ed.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/ed.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-info">SPRING HOLIDAYS</span> <span class="badge badge-danger">PROMO</span>`);
             } else if (month >= 5 && month <= 7) {
-                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('https://freebpmnquality.github.io/images/season/id.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background: ${opacity}, url('/images/season/id.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
                 $('#target-season').html(`<span class="badge badge-light">SUMMER HOLIDAYS</span> <span class="badge badge-danger">PROMO</span>`);
             } else {
-                $('#season-banner').attr('style', `border-radius: 1rem; background-image: url('https://freebpmnquality.github.io/images/bg-1.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
+                $('#season-banner').attr('style', `border-radius: 1rem; background-image: url('/images/bg-1.png'); background-repeat: no-repeat; background-size: 100% 100%;`);
             }
 
             $('#promoCode').val(actualPromoCode);
