@@ -38,11 +38,11 @@ class AMMUtil {
     }
 
     static getLiquidityFromStorage() {
-        return Number.parseInt(JSON.parse($.ajax({
+        return Number.parseFloat(JSON.parse($.ajax({
             type: 'get',
-            url: '../backoffice/index.php?getLiquidity=true',
+            url: '../../data/tokens/qbmt.json',
             async: false
-        }).responseText).result);
+        }).responseText).liquidity);
     }
 
     static makePrice(buy) {
@@ -56,17 +56,17 @@ class AMMUtil {
     static getTotal() {
         return Number.parseFloat(JSON.parse($.ajax({
             type: 'get',
-            url: '../backoffice/index.php?totalSupply=true',
+            url: '../../data/tokens/qbmt.json',
             async: false
-        }).responseText).result);
+        }).responseText).supply);
     }
 
     static getPricing() {
-        return Number.parseInt(JSON.parse($.ajax({
+        return Number.parseFloat(JSON.parse($.ajax({
             type: 'get',
-            url: '../backoffice/index.php?getPricing=true',
+            url: '../../data/tokens/qbmt.json',
             async: false
-        }).responseText).result);
+        }).responseText).price);
     }
 
     static async getMetaMaskAccounts() {
