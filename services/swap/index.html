@@ -21,7 +21,10 @@
             return new URL(window.location.href).searchParams.get(param);
         }
 
+        var eComMeasures = ECommerce.getECommerceMeasures('SKU_FBPMNQ001');
+
         if (getURLParam('dev') === null) {
+            ECommerce.purchaseEvent(eComMeasures);
             ECommerce.clickEvent();
         }
     </script>
