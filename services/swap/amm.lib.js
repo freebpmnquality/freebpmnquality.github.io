@@ -27,7 +27,6 @@ class AMMUtil {
         let liquidityAssets = [];
 
         liquidityAssets = liquidityAssets.concat(AMMUtil.getSitemapURLs('https://freebpmnquality.github.io/'));
-        liquidityAssets = liquidityAssets.concat(AMMUtil.getSitemapURLs('https://cloudfreebpmnquality.herokuapp.com/'));
 
         let liquidity = 0;
 
