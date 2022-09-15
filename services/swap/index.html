@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03Y9FVH7EZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-03Y9FVH7EZ');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+    <link rel="shortcut icon" href="../swap/img/favicon.png" type="image/x-icon">
+
+    <title>Lusterswap Interface</title>
+    <meta name="title" content="Lusterswap Interface">
+    <meta name="description" content="Manage utility tokens of the freebpmnquality ecosystem.">
+
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: rgb(34, 193, 195);
+            background: radial-gradient(circle, rgba(34, 193, 195, 0.4) 0%, rgba(253, 187, 45, 0.4) 100%);
+        }
+        
+        .rounded {
+            border-radius: 1rem!important;
+        }
+        
+        .bold {
+            font-weight: bold;
+        }
+        
+        .bordered {
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand">
+            <img src="../swap/img/favicon.png" width="30" height="30" class="d-inline-block align-top" alt="icon"> Lusterswap
+        </span>
+    </nav>
+
+    <div class="container mb-4 mt-4">
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-center mb-0 h5">QBMT are utility tokens of the <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a> ecosystem</p>
+
+                <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content rounded">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="sendModalLabel">Send</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form onsubmit="return false;">
+                                    <div class="form-group">
+                                        <label for="sendTo">Address</label>
+                                        <input type="text" class="form-control rounded" id="sendTo" placeholder="0x0000000000000000000000000000000000000000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sendAmount">Amount</label>
+                                        <input type="number" class="form-control rounded" id="sendAmount" placeholder="0" step="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sendPass">Secret Phrase</label>
+                                        <input type="password" class="form-control rounded" id="sendPass" placeholder="Secret Phrase">
+                                        <small class="form-text text-muted">Only the token sale owner can send tokens.</small>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary rounded" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary rounded" onclick="sendTokens();">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content rounded">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="buyModalLabel">Buy</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Transfer funds <span id="buyOffer"></span> to the MetaMask address <code style="overflow-wrap: break-word;">0xfB457d40ef1d3f774409d3e15C67aABD260F220C</code>.</p>
+                                <p><small><span style="color: #dc3545; font-weight: bold;">Warning!</span> Our token sale address will be displayed only here, so don't trust any unofficial ones that may send you the address.</small></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary rounded" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <ul class="nav justify-content-center mt-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="connectAddress();" id="connectLink">Connect</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../explorer/" target="_blank">Scan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" onclick="buyTokens(null, null);">Buy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#sendModal">Send</a>
+                    </li>
+                </ul>
+
+                <div class="card mt-2 rounded">
+                    <div class="card-body">
+                        <form onsubmit="return swap();">
+                            <div class="form-group">
+                                <label for="from" class="bold">Swap</label>
+
+                                <div class="bold mb-2">
+                                    <img src="../swap/img/token.png" width="48" class="bordered"> QBMT
+                                </div>
+
+                                <input type="number" class="form-control rounded" id="from" aria-describedby="fromHelp" placeholder="0" step="0.00000001">
+
+                                <small id="fromHelp" class="form-text text-muted mb-0">Total: <span id="total">0</span></small>
+
+                                <small class="form-text text-muted mt-0">Liquidity: $<span id="liquidity">0</span></small>
+                            </div>
+                            <div class="form-group">
+                                <div class="bold mb-2">
+                                    <img src="../swap/img/usdc.png" width="48" class="bordered"> USD
+                                </div>
+
+                                <input type="text" class="form-control rounded" id="to" aria-describedby="toHelp" placeholder="0" readonly>
+                            </div>
+
+                            <label class="form-check-label text-muted mb-3">1 QBMT = <span id="exchangeRate">0</span> USD</label>
+
+                            <button type="submit" class="btn btn-warning btn-block rounded">Swap</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/web3.min.js"></script>
+    <script src="../js/crypto-js.min.js"></script>
+
+    <script src="../efforts/efforts.lib.js"></script>
+    <script src="../swap/amm.lib.js"></script>
+
+    <script>
+        const DECIMAL_PART = 8;
+
+        const price = AMMUtil.makePrice(1);
+        const total = AMMUtil.getTotal();
+
+        function swap() {
+            try {
+                const from = Number.parseInt($('#from').val().trim());
+                const to = AMMUtil.makePrice(from);
+
+                $('#to').val(to.toFixed(DECIMAL_PART));
+                $('#exchangeRate').text((to / from).toFixed(DECIMAL_PART));
+
+                buyTokens(from, to);
+            } catch (err) {
+                alert('Oops! ' + err.message);
+            }
+
+            return false;
+        }
+
+        async function connectAddress() {
+            try {
+                const address = (await AMMUtil.getMetaMaskAccounts())[0];
+
+                if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
+                    const jsonResponse = JSON.parse($.ajax({
+                        type: 'post',
+                        url: '../backoffice/contract/QBMT/index.php',
+                        async: false,
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            "jsonrpc": "2.0",
+                            "method": "eth_getBalance",
+                            "params": [
+                                address,
+                                "latest"
+                            ],
+                            "id": 1
+                        })
+                    }).responseText);
+
+                    const addressBalance = parseInt(jsonResponse.result, 16) / 1e18;
+
+                    const usdBalance = AMMUtil.makePrice(addressBalance);
+
+                    $('#from').val(addressBalance.toFixed(DECIMAL_PART));
+                    $('#to').val(usdBalance.toFixed(DECIMAL_PART));
+                    $('#exchangeRate').text((usdBalance / addressBalance).toFixed(DECIMAL_PART));
+
+                    $('#connectLink').text(`${address.substring(0, 5)}...${address.substring(38)}`);
+                } else {
+                    throw new Error('Invalid MetaMask address.');
+                }
+            } catch (err) {
+                alert('Oops! ' + err.message);
+            }
+        }
+
+        async function sendTokens() {
+            try {
+                const address = (await AMMUtil.getMetaMaskAccounts())[0];
+
+                if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
+                    const recipient = $('#sendTo').val().trim();
+                    const amount = Number.parseInt($('#sendAmount').val().trim());
+                    const passphrase = $('#sendPass').val().trim();
+
+                    if (confirm(`Send ${amount.toFixed(DECIMAL_PART)} QBMT to ${recipient}?`)) {
+                        const jsonResponse = JSON.parse($.ajax({
+                            type: 'post',
+                            url: '../backoffice/contract/QBMT/transfer.php',
+                            async: false,
+                            data: {
+                                from: address,
+                                to: recipient,
+                                amount: amount,
+                                sign: await AMMUtil.signMessage(passphrase)
+                            }
+                        }).responseText);
+
+                        $('#sendModal').modal('hide');
+
+                        if (jsonResponse.error) {
+                            alert('Oops! ' + jsonResponse.result);
+                        } else {
+                            alert(`${amount.toFixed(DECIMAL_PART)} QBMT was sent to ${recipient}!`);
+                        }
+                    }
+                }
+            } catch (err) {
+                alert('Oops! ' + err.message);
+            }
+        }
+
+        function buyTokens(from, to) {
+            if (from !== null && to !== null) {
+                $('#buyOffer').text(`equal to ${to.toFixed(DECIMAL_PART)} USD to receive ${from.toFixed(DECIMAL_PART)} QBMT`);
+            } else {
+                $('#buyOffer').text('you are willing to contribute to our cause');
+            }
+
+            $('#buyModal').modal('show');
+        }
+
+        $(document).ready(function() {
+            $('#total').text(total.toFixed(DECIMAL_PART));
+            $('#exchangeRate').text(price.toFixed(DECIMAL_PART));
+
+            $('#from').val(AMMUtil.getPricing());
+
+            $('#liquidity').text(AMMUtil.getLiquidityFromStorage().toFixed(DECIMAL_PART));
+        });
+    </script>
+</body>
+
+</html>
