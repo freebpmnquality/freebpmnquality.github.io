@@ -1,6 +1,6 @@
 class Payment {
     static isSubscribed(account) {
-        return account === DAO.getUsersData().code;
+        return account === Ledger.getUsersData().code;
     }
 
     static orderPromoCode() {

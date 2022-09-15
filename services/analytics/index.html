@@ -291,7 +291,7 @@
     <br>
     <br>
 
-    <script src="/data/dao.js"></script>
+    <script src="/data/ledger.js"></script>
 
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -338,7 +338,7 @@
                                     <div class="form-group mb-2">
                                         <label for="promoCode">Enter your promo code</label>
                                         <input type="text" class="form-control" id="promoCode" style="border-radius: 1rem;" placeholder="Promo Code">
-                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(DAO.getUsersData().code);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
+                                        <small class="form-text text-muted"><a href="javascript:void(0);" onclick="$('#promoCode').val(Ledger.getUsersData().code);">Get FREE 2-hour <span style="color: #dc3545; font-weight: bold;">PRO</span> access code!</a></small>
                                     </div>
 
                                     <button type="submit" class="btn btn-success mb-1 mt-0" style="border-radius: 1rem; font-weight: bold;">USE PROMO CODE</button>
@@ -453,7 +453,7 @@
         }
 
         function getEthAddressBalance(ethAddress) {
-            const holders = DAO.getTokensData().holders;
+            const holders = Ledger.getTokensData().holders;
 
             const accountValue = holders.hasOwnProperty(ethAddress) ? holders[ethAddress] : 0;
 
@@ -485,7 +485,7 @@
                     const ethAddressBalance = getEthAddressBalance(ethAddress);
 
                     if (ethAddressBalance.addressBalance >= ethAddressBalance.pricing) {
-                        $('#promoCode').val(DAO.getUsersData().code);
+                        $('#promoCode').val(Ledger.getUsersData().code);
 
                         $('#bmModal').modal('hide');
 

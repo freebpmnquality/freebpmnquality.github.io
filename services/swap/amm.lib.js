@@ -24,7 +24,7 @@ class AMMUtil {
     }
 
     static getLiquidity() {
-        return Number.parseFloat(DAO.getTokensData().supply);
+        return Number.parseFloat(Ledger.getTokensData().supply);
     }
 
     static makePrice(buy) {
@@ -32,7 +32,7 @@ class AMMUtil {
     }
 
     static getTotal() {
-        return Number.parseFloat(DAO.getTokensData().supply);
+        return Number.parseFloat(Ledger.getTokensData().supply);
     }
 
     static getPricing() {

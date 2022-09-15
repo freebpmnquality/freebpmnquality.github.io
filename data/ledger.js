@@ -1,4 +1,4 @@
-class DAO {
+class Ledger {
     static TOKENS_DATA = '../../data/tokens.json';
     static USERS_DATA = '../../data/users.json';
 
@@ -7,7 +7,7 @@ class DAO {
     static getTokensData() {
         const tokensObject = JSON.parse($.ajax({
             type: 'get',
-            url: DAO.TOKENS_DATA,
+            url: Ledger.TOKENS_DATA,
             async: false
         }).responseText);
 
@@ -15,7 +15,7 @@ class DAO {
         tokensObject['supply'] = Number.parseInt(tokensObject['supply'], 16);
 
         const timestampUNIX = Date.now() / 1000;
-        const timestampDec = (timestampUNIX - DAO.GENESIS) / 86400;
+        const timestampDec = (timestampUNIX - Ledger.GENESIS) / 86400;
 
         for (let address in tokensObject['holders']) {
             if (address === tokensObject['owner']) {
@@ -36,7 +36,7 @@ class DAO {
     static getUsersData() {
         const usersObject = JSON.parse($.ajax({
             type: 'get',
-            url: DAO.USERS_DATA,
+            url: Ledger.USERS_DATA,
             async: false
         }).responseText);
 

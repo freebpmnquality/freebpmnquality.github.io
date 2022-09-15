@@ -143,7 +143,7 @@
         </div>
     </div>
 
-    <script src="/data/dao.js"></script>
+    <script src="/data/ledger.js"></script>
 
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -181,7 +181,7 @@
                 const address = (await AMMUtil.getMetaMaskAccounts())[0];
 
                 if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
-                    const holders = DAO.getTokensData().holders;
+                    const holders = Ledger.getTokensData().holders;
 
                     const accountValue = holders.hasOwnProperty(address) ? holders[address] : 0;
 

@@ -1269,7 +1269,7 @@
                 const SIZE = bpmnModels.length - 1;
                 const MAX_RANK = 9;
 
-                const businessModels = await blockPMNContractDAO.getBusinessModels(0, SIZE);
+                const businessModels = await blockPMNContractLedger.getBusinessModels(0, SIZE);
 
                 businessModels.forEach(function(model, index) {
                     $(`#yield-${index}`).text((model.yield / MAX_RANK * 100).toFixed(2));
@@ -1277,7 +1277,7 @@
                     $(`#flexibility-${index}`).text((model.flexibility / MAX_RANK * 100).toFixed(2));
                 });
 
-                const investmentPlatforms = await blockPMNContractDAO.getInvestmentPlatforms(0, SIZE);
+                const investmentPlatforms = await blockPMNContractLedger.getInvestmentPlatforms(0, SIZE);
 
                 $('#options').empty();
 
@@ -1303,7 +1303,7 @@
 
                 const etherBPMNContractDAO = new EtherBPMNContractDAO('0x2ac07fe7007e8f9a8aca375d7227ff526d782fba', JSON.parse(`[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"businessProcesses","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"activities","type":"uint256"},{"internalType":"uint256","name":"flows","type":"uint256"},{"internalType":"uint256","name":"common","type":"uint256"},{"internalType":"uint256","name":"total","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"uint256","name":"_activities","type":"uint256"},{"internalType":"uint256","name":"_flows","type":"uint256"},{"internalType":"uint256","name":"_common","type":"uint256"},{"internalType":"uint256","name":"_total","type":"uint256"}],"name":"storeBusinessProcess","outputs":[],"stateMutability":"nonpayable","type":"function"}]`), blockchainProvider);
 
-                const businessProcesses = await etherBPMNContractDAO.getBusinessProcesses(0, SIZE);
+                const businessProcesses = await etherBPMNContractLedger.getBusinessProcesses(0, SIZE);
 
                 const COMPLEXITY_CYCLOMATIC_MIN = 0,
                     COMPLEXITY_CYCLOMATIC_MAX = 1;
