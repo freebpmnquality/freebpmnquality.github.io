@@ -216,7 +216,7 @@
         }
 
         $(document).ready(function() {
-            $('#total').text(total.toFixed(DECIMAL_PART));
+            $('#total').text(total.toLocaleString('en-US'));
             $('#exchangeRate').text(price.toLocaleString('en-US'));
 
             $('#from').val(AMMUtil.getPricing().toFixed(DECIMAL_PART));

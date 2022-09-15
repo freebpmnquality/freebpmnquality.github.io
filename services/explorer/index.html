@@ -62,7 +62,7 @@
 
     <div class="mt-4 mb-4 ml-4 mr-4">
         <div class="row">
-            <div class="col-sm-5 mb-4">
+            <div class="col-sm-6 mb-4">
                 <div class="card h-100" style="border-radius: 1rem;">
                     <div class="card-body">
                         <div class="table-responsive mb-0">
@@ -87,13 +87,18 @@
                                         <th scope="row">Total Supply:</th>
                                         <td><span id="qbmt-supply"></span> QBMT</td>
                                     </tr>
+
+                                    <tr>
+                                        <th scope="row">Holders:</th>
+                                        <td id="qbmt-holders"></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-7 mb-4">
+            <div class="col-sm-6 mb-4">
                 <div class="card h-100" style="border-radius: 1rem;">
                     <div class="card-body">
                         <div class="table-responsive mb-0">
@@ -142,6 +147,14 @@
 
         $('#ledger-hash').text(blockData['hash']);
         $('#ledger-timestamp').text(new Date(blockData['timestamp'] * 1000).toLocaleString());
+
+        $('#qbmt-holders').empty();
+
+        for (let address in Ledger.getTokenData(tokenSymbol)['holders']) {
+            $('#qbmt-holders').append(`<p class="mb-0">
+                    <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: address, value: Ledger.getTokenData('QBMT')['holders'][address] }))}" target="_blank">${address}</a></code>: ${Ledger.getTokenData(tokenSymbol)['holders'][address].toLocaleString('en-US')} ${tokenSymbol} <span class="text-muted">$${Ledger.getTokenData(tokenSymbol)['holders'][address].toLocaleString('en-US')}</span>
+                </p>`);
+        }
     </script>
 </body>
 
