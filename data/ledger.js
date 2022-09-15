@@ -1,6 +1,10 @@
 class Ledger {
     static TOKENS_DATA = '../../data/tokens.json';
 
+    static getTimestamp() {
+        return Date.now() / 1000;
+    }
+
     static getTokenData(symbol) {
         let tokenObject = JSON.parse($.ajax({
             type: 'get',
@@ -14,7 +18,7 @@ class Ledger {
         tokenObject['supply'] = Number.parseInt(tokenObject['supply'], 16);
         tokenObject['created'] = Number.parseInt(tokenObject['created'], 16);
 
-        const timestampUNIX = Date.now() / 1000;
+        const timestampUNIX = Ledger.getTimestamp();
         const timestampDec = (timestampUNIX - tokenObject['created']) / 86400;
 
         for (let address in tokenObject['holders']) {
@@ -31,5 +35,15 @@ class Ledger {
         }
 
         return tokenObject;
+    }
+
+    static getBlockData(symbol) {
+        const timestampUNIX = Ledger.getTimestamp();
+        const hashValue = CryptoJS.SHA256(JSON.stringify(Ledger.getTokenData(symbol))).toString();
+
+        return {
+            hash: hashValue,
+            timestamp: timestampUNIX
+        };
     }
 }

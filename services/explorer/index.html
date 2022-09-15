@@ -105,16 +105,12 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Last block:</th>
-                                        <td><code><span id="ledger-last"></span></code></td>
+                                        <th scope="row">Hash:</th>
+                                        <td><code><span id="ledger-hash"></span></code></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Timestamp:</th>
                                         <td><span id="ledger-timestamp"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Previous block:</th>
-                                        <td><code><span id="ledger-prev"></span></code></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -129,14 +125,23 @@
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
+    <script src="../js/crypto-js.min.js"></script>
+
     <script src="/data/ledger.js"></script>
 
     <script>
-        const tokenData = Ledger.getTokenData('QBMT');
+        const tokenSymbol = 'QBMT';
+
+        const tokenData = Ledger.getTokenData(tokenSymbol);
 
         $('#qbmt-price').text(tokenData['price'].toLocaleString('en-US'));
         $('#qbmt-cap').text(tokenData['supply'].toLocaleString('en-US'));
         $('#qbmt-supply').text(tokenData['supply'].toLocaleString('en-US'));
+
+        const blockData = Ledger.getBlockData(tokenSymbol);
+
+        $('#ledger-hash').text(blockData['hash']);
+        $('#ledger-timestamp').text(new Date(blockData['timestamp'] * 1000).toLocaleString());
     </script>
 </body>
 
