@@ -14,35 +14,19 @@ $(document).ready(function() {
             success: function(data) {
                 var USDinETH = data.USD;
 
-                $.ajax({
-                    type: 'POST',
-                    url: '../rpc.php?p=' + encodedParams,
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        'jsonrpc': '2.0',
-                        'method': 'eth_getBlockByNumber',
-                        'params': ['0x0', true],
-                        'id': 1
-                    }),
-                    success: function(data) {
-                        var balanceETH = parseInt(data.result.alloc[address].balance, 16) / 1e18;
-                        var balanceUSD = USDinETH * balanceETH;
+                var balanceETH = value / USDinETH;
+                var balanceUSD = value;
 
-                        $('#balance-eth').text(balanceETH.toLocaleString('en-US'));
-                        $('#balance-usd').text(balanceUSD.toLocaleString('en-US'));
+                $('#balance-eth').text(balanceETH.toLocaleString('en-US'));
+                $('#balance-usd').text(balanceUSD.toLocaleString('en-US'));
 
-                        var qrData = 'https://cloudfreebpmnquality.herokuapp.com/efforts/wallet/?p=' + encodedParams;
+                var qrData = '/services/efforts/wallet/?p=' + encodedParams;
 
-                        $('#qrData').html(`<a href="${qrData}" target="_blank">Your Efforteum Tokenized Efforts</a>`);
+                $('#qrData').html(`<a href="${qrData}" target="_blank">Your Efforteum Tokenized Efforts</a>`);
 
-                        $('#qrAccess').html(`<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrData}" alt="qr-code" style="width: 150px;">`);
+                $('#qrAccess').html(`<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrData}" alt="qr-code" style="width: 150px;">`);
 
-                        $('#loadingSpinner').hide();
-                    },
-                    error: function(err) {
-                        throw new Error(err);
-                    }
-                });
+                $('#loadingSpinner').hide();
             },
             error: function(err) {
                 throw new Error(err);

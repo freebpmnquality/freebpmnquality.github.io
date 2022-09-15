@@ -99,7 +99,7 @@
                             <label for="address">Ethereum address</label>
                             <input type="text" class="form-control" id="address" placeholder="Ethereum address" required>
                         </div>
-                        <div class="form-group form-check mb-0">
+                        <div class="form-group form-check mb-0" hidden>
                             <input type="checkbox" class="form-check-input" id="nativeWallet" checked="true">
                             <label class="form-check-label" for="nativeWallet">Show in a native "wallet"</label>
                         </div>
@@ -113,31 +113,6 @@
                     <p class="card-text text-muted mt-3">You can provide a single ULR or multiple URLs. If you wish to estimate a project of several URLs, you should separate them using a semicolon symbol.</p>
 
                     <p class="card-text text-muted mt-3"><a href="javascript:void(0);" onclick="$('#website').val(window.location.href); $('#address').val('0x0000000000000000000000000000000000000000');">Click here to see the example</a></p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">OBSERVE AS ETH IN METAMASK</h5>
-
-                    <div class="form-group">
-                        <label for="nw-name">Name</label>
-                        <input type="text" class="form-control" id="nw-name" placeholder="Name" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="nw-rpc">RPC URL</label>
-                        <textarea rows="5" type="text" class="form-control" id="nw-rpc" placeholder="RPC URL" readonly></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="nw-chainid">Chain ID</label>
-                        <input type="text" class="form-control" id="nw-chainid" placeholder="Chain ID" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="nw-symbol">Symbol</label>
-                        <input type="text" class="form-control" id="nw-symbol" placeholder="Symbol" readonly>
-                    </div>
-
-                    <a href="https://metamask.zendesk.com/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC" target="_blank">How to connect your MetaMask?</a>
                 </div>
             </div>
         </div>
