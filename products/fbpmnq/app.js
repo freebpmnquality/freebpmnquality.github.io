@@ -40,29 +40,6 @@ function clearQualityCostBlock() {
     $('#order-redesign').empty();
 }
 
-async function updateStats(stats) {
-    var devMode = getURLParam('dev');
-
-    if (devMode === null) {
-        var resultStats = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/updateFBPMNQStats.php?users=' + stats.users + '&models=' + stats.models + '&value=' + stats.value + '&guests=' + stats.guests, {
-            method: 'GET'
-        });
-
-        var resultStatsJSON = await resultStats.json();
-        var newStats = resultStatsJSON.result;
-
-        var guests = Math.floor(newStats.guests);
-        var users = Math.floor(newStats.users);
-        var models = Math.floor(newStats.models);
-        var value = newStats.value.toFixed(2);
-
-        $('#stats-guests').text(guests);
-        $('#stats-users').text(users);
-        $('#stats-models').text(models);
-        $('#stats-value').text(value);
-    }
-}
-
 async function displayExample() {
     $('#file-input').val('');
     $('#file-name').text('01-tasks.bpmn');
@@ -585,15 +562,6 @@ async function checkTowardRules() {
                 $('#detected-mistakes').append(`<li class="list-group-item list-group-item-action"><small><span class="badge badge-pill badge-success">Success</span> No mistakes detected!</small></li>`);
             }
 
-            if (modelInWork !== '01-tasks.bpmn') {
-                await updateStats({
-                    users: 0,
-                    models: 1,
-                    value: modelCost,
-                    guests: 0
-                });
-            }
-
             calculateMetrics(processStructure);
         }
     } catch (err) {
@@ -715,13 +683,6 @@ async function readSingleFile(e) {
         reader.readAsText(file);
 
         clearQualityCostBlock();
-
-        await updateStats({
-            users: 1,
-            models: 0,
-            value: 0,
-            guests: 0
-        });
     } catch (err) {
         displayMessage(err.message);
     }
@@ -730,25 +691,8 @@ async function readSingleFile(e) {
 $('#file-input').change(readSingleFile);
 
 async function showDonations() {
-    var priceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/getPrice.php?tag=' + endowment.tag, {
-        method: 'GET'
-    });
-
-    var priceResult = await priceResponse.json();
-    var price = priceResult.value;
-
-    var balanceResponse = await fetch('https://cloudfreebpmnquality.herokuapp.com/api/checkWalletNative.php?ticker=QBMT-ETH&wallet=' + endowment.address, {
-        method: 'GET'
-    });
-
-    var balanceResult = await balanceResponse.json();
-    var balance = Number.parseInt(balanceResult.value, 16) / 1e18;
-
-    var balancePrice = balance * price;
-
     $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code>${endowment.address}</code></small><br>
-        <small class="text-muted">Statistics <strong>(<a href="https://cloudfreebpmnquality.herokuapp.com/explorer/" target="_blank">testnet</a>)</strong></small><br>
-        <small class="form-check-label">${balance.toFixed(8)} ${endowment.ticker} &asymp; $${balancePrice.toFixed(2)}</small>`);
+        <small class="text-muted">Statistics <strong>(<a href="/services/explorer/" target="_blank">testnet</a>)</strong></small>`);
 }
 
 function googleTranslateElementInit() {
@@ -776,13 +720,6 @@ $(document).ready(async function() {
 
     await showDonations();
 
-    await updateStats({
-        users: 0.55,
-        models: 0.32,
-        value: 8.72,
-        guests: 1
-    });
-
     var utmContent = getURLParam('utm_content');
 
     if (utmContent === 'ads-free') {
@@ -804,7 +741,7 @@ $(document).ready(async function() {
             <div class="mt-1 mb-1">Transfer funds to this MetaMask address:</div>
             <div class="mt-1 mb-1"><b>Wallet</b> <code>${endowment.address}</code></div>
 
-            <div class="mt-1 mb-3">Donors will also receive QBMT tokens in our <a href="https://cloudfreebpmnquality.herokuapp.com/explorer/" target="_blank">test network</a> to access the <span class="badge badge-primary">PRO</span> features of the <a href="https://cloudfreebpmnquality.herokuapp.com/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service.</div>
+            <div class="mt-1 mb-3">Donors will also receive QBMT tokens in our <a href="/services/explorer/" target="_blank">test network</a> to access the <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service.</div>
 
             <a type="button" class="btn btn-block" style="background-color: #92E3A9; border-color: #92E3A9;" href="/products/fbpmnq/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free" target="_blank">TRY ADS-FREE TOOL</a>
             <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
