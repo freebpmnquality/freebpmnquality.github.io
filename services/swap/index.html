@@ -60,38 +60,6 @@
             <div class="col-sm-12">
                 <p class="text-center mb-0 h5">QBMT are utility tokens of the <a href="https://freebpmnquality.github.io/" target="_blank">freebpmnquality</a> ecosystem</p>
 
-                <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content rounded">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="sendModalLabel">Send</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <form onsubmit="return false;">
-                                    <div class="form-group">
-                                        <label for="sendTo">Address</label>
-                                        <input type="text" class="form-control rounded" id="sendTo" placeholder="0x0000000000000000000000000000000000000000">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sendAmount">Amount</label>
-                                        <input type="number" class="form-control rounded" id="sendAmount" placeholder="0" step="1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sendPass">Secret Phrase</label>
-                                        <input type="password" class="form-control rounded" id="sendPass" placeholder="Secret Phrase">
-                                        <small class="form-text text-muted">Only the token sale owner can send tokens.</small>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary rounded" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary rounded" onclick="sendTokens();">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content rounded">
@@ -124,9 +92,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0);" onclick="buyTokens(null, null);">Buy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#sendModal">Send</a>
                     </li>
                 </ul>
 
@@ -201,23 +166,15 @@
                 const address = (await AMMUtil.getMetaMaskAccounts())[0];
 
                 if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
-                    const jsonResponse = JSON.parse($.ajax({
-                        type: 'post',
-                        url: '../backoffice/contract/QBMT/index.php',
-                        async: false,
-                        dataType: 'json',
-                        data: JSON.stringify({
-                            "jsonrpc": "2.0",
-                            "method": "eth_getBalance",
-                            "params": [
-                                address,
-                                "latest"
-                            ],
-                            "id": 1
-                        })
-                    }).responseText);
+                    const holders = JSON.parse($.ajax({
+                        type: 'get',
+                        url: '../../data/tokens/qbmt.json',
+                        async: false
+                    }).responseText).holders;
 
-                    const addressBalance = parseInt(jsonResponse.result, 16) / 1e18;
+                    const accountValue = holders.hasOwnProperty(address) ? holders[address] : 0;
+
+                    const addressBalance = Number.parseInt(accountValue);
 
                     const usdBalance = AMMUtil.makePrice(addressBalance);
 
@@ -228,42 +185,6 @@
                     $('#connectLink').text(`${address.substring(0, 5)}...${address.substring(38)}`);
                 } else {
                     throw new Error('Invalid MetaMask address.');
-                }
-            } catch (err) {
-                alert('Oops! ' + err.message);
-            }
-        }
-
-        async function sendTokens() {
-            try {
-                const address = (await AMMUtil.getMetaMaskAccounts())[0];
-
-                if (address && address.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
-                    const recipient = $('#sendTo').val().trim();
-                    const amount = Number.parseInt($('#sendAmount').val().trim());
-                    const passphrase = $('#sendPass').val().trim();
-
-                    if (confirm(`Send ${amount.toFixed(DECIMAL_PART)} QBMT to ${recipient}?`)) {
-                        const jsonResponse = JSON.parse($.ajax({
-                            type: 'post',
-                            url: '../backoffice/contract/QBMT/transfer.php',
-                            async: false,
-                            data: {
-                                from: address,
-                                to: recipient,
-                                amount: amount,
-                                sign: await AMMUtil.signMessage(passphrase)
-                            }
-                        }).responseText);
-
-                        $('#sendModal').modal('hide');
-
-                        if (jsonResponse.error) {
-                            alert('Oops! ' + jsonResponse.result);
-                        } else {
-                            alert(`${amount.toFixed(DECIMAL_PART)} QBMT was sent to ${recipient}!`);
-                        }
-                    }
                 }
             } catch (err) {
                 alert('Oops! ' + err.message);

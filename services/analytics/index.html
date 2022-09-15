@@ -438,13 +438,13 @@
         }
 
         function getEthAddressBalance(ethAddress) {
-            let holders = JSON.parse($.ajax({
+            const holders = JSON.parse($.ajax({
                 type: 'get',
                 url: '../../data/tokens/qbmt.json',
                 async: false
             }).responseText).holders;
 
-            accountValue = holders.hasOwnProperty(ethAddress) ? holders[ethAddress] : 0;
+            const accountValue = holders.hasOwnProperty(ethAddress) ? holders[ethAddress] : 0;
 
             const addressBalance = Number.parseInt(accountValue);
             const addressBalanceUSD = AMMUtil.makePrice(addressBalance);
