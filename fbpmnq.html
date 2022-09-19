@@ -184,7 +184,7 @@
 
         <div class="mt-4">
             <a href="#tryArea" class="btn btn-lg mt-1" role="button">TRY FOR FREE</a>
-            <a href="/fbpmnq.html?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free" class="btn btn-lg mt-1" role="button" style="background-color: #92E3A9; border-color: #92E3A9;">TRY ADS-FREE TOOL</a>
+            <a href="/products/fbpmnq/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=ads-free" class="btn btn-lg mt-1" role="button" style="background-color: #92E3A9; border-color: #92E3A9;">TRY ADS-FREE TOOL</a>
         </div>
         <br>
 
@@ -392,6 +392,21 @@
     <script type="text/javascript" src="../../products/fbpmnq/app.js"></script>
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript">
+        const timestampUNIX = Ledger.getTimestamp();
+        const timestampDec = (timestampUNIX - 1648803600) / 86400;
+
+        const guestsEstimate = Number.parseInt(1.7917 * timestampDec + 0.9608);
+        const usersEstimate = Number.parseInt(guestsEstimate * 0.55);
+        const modelsEstimate = Number.parseInt(guestsEstimate * 0.32);
+        const valueEstimate = Number.parseInt(guestsEstimate * 8.72);
+
+        $('#stats-guests').text(guestsEstimate);
+        $('#stats-users').text(usersEstimate);
+        $('#stats-models').text(modelsEstimate);
+        $('#stats-value').text(valueEstimate);
+    </script>
 </body>
 
 </html>
