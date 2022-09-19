@@ -135,7 +135,7 @@ const EtherBPMNContractDAO = {
      * Displays total models.
      */
     modelsCount: function() {
-        EtherBPMNContractLedger.contract.methods.totalSupply().call(null, function(err, data) {
+        EtherBPMNContractDAO.contract.methods.totalSupply().call(null, function(err, data) {
             if (err === null) {
                 $("#total-models").text(data);
             } else {
@@ -148,7 +148,7 @@ const EtherBPMNContractDAO = {
      * Displays all models from the collection.
      */
     readAllModels: function() {
-        EtherBPMNContractLedger.searchModels(null);
+        EtherBPMNContractDAO.searchModels(null);
     },
 
     /**
@@ -158,14 +158,14 @@ const EtherBPMNContractDAO = {
         $("#models-list").empty();
         $("#selected-model").empty();
 
-        EtherBPMNContractLedger.contract.methods.totalSupply().call(null, function(err, totalSupply) {
+        EtherBPMNContractDAO.contract.methods.totalSupply().call(null, function(err, totalSupply) {
             if (err === null) {
                 let foundModels = 0;
 
                 for (let tokenId = 0; tokenId < totalSupply; tokenId++) {
-                    EtherBPMNContractLedger.contract.methods.tokenURI(tokenId).call(null, function(err, tokenURI) {
+                    EtherBPMNContractDAO.contract.methods.tokenURI(tokenId).call(null, function(err, tokenURI) {
                         if (err === null) {
-                            EtherBPMNContractLedger.contract.methods.ownerOf(tokenId).call(null, function(err, ownerOf) {
+                            EtherBPMNContractDAO.contract.methods.ownerOf(tokenId).call(null, function(err, ownerOf) {
                                 if (err === null) {
                                     const tokenData = JSON.parse(tokenURI);
 
@@ -332,9 +332,9 @@ const searchModel = () => {
     const searchText = $("#search-text").val();
 
     if (searchText !== undefined && searchText !== null && searchText.length > 0) {
-        EtherBPMNContractLedger.searchModels(searchText);
+        EtherBPMNContractDAO.searchModels(searchText);
     } else {
-        EtherBPMNContractLedger.readAllModels();
+        EtherBPMNContractDAO.readAllModels();
     }
 };
 
@@ -342,13 +342,13 @@ const searchModel = () => {
  * Shows collection uploaded by URL or from file.
  */
 const processExternalCollection = () => {
-    EtherBPMNContractLedger.modelsCount();
+    EtherBPMNContractDAO.modelsCount();
     searchModel();
     let parentInfo = '';
 
     // get parent collection info if exists
-    if (EtherBPMNContractLedger.contract._collection.parent) {
-        parentInfo = `<a href="/services/storage/index.html?collection=${EtherBPMNContractLedger.contract._collection.parent}" target="_blank"><small>Parent collection</small></a>`;
+    if (EtherBPMNContractDAO.contract._collection.parent) {
+        parentInfo = `<a href="/services/storage/index.html?collection=${EtherBPMNContractDAO.contract._collection.parent}" target="_blank"><small>Parent collection</small></a>`;
     }
 
     $('#collection-status').html(`<div class="alert alert-success" role="alert" style="border-radius: 1rem;">
@@ -365,7 +365,7 @@ const loadCollection = () => {
             const collectionURL = $('#collectionURL').val().trim();
 
             if (collectionURL) {
-                EtherBPMNContractLedger.contract._load(collectionURL);
+                EtherBPMNContractDAO.contract._load(collectionURL);
                 processExternalCollection();
             }
         } catch (err) {
@@ -391,7 +391,7 @@ const readFile = (file) => {
         if (fileContent) {
             $('#loadingSection').show('slow', () => {
                 try {
-                    EtherBPMNContractLedger.contract._loadRaw(fileContent);
+                    EtherBPMNContractDAO.contract._loadRaw(fileContent);
                     processExternalCollection();
 
                     $('#collectionURL').val(`etherbpmn://${file.name}`);
@@ -638,7 +638,7 @@ const downloadCollection = () => {
 
             if (parentURL) {
                 // preliminary check if parent collection can be processed
-                const parentData = JSON.parse(atob(EtherBPMNContractLedger.contract._oracle(parentURL)));
+                const parentData = JSON.parse(atob(EtherBPMNContractDAO.contract._oracle(parentURL)));
 
                 let parentHash = null;
 
