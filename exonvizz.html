@@ -366,7 +366,7 @@
             for (var col in xlRows[0]) {
                 var firstVal = xlRows[0][col].toString();
 
-                if (!firstVal.match(/^-?\d+\.?\d+$/)) {
+                if (!firstVal.match(/^-?\d+\.?\d*$/)) {
                     $('#xAxis').append(`<option value="${col}">${col}</option>`);
                     $('#xAxis2').append(`<option value="${col}">${col}</option>`);
                 } else {
