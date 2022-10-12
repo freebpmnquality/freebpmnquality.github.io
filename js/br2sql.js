@@ -21,20 +21,10 @@ const attributeDomainsClassifier = {
 };
 
 const attributeUniqueClassifier = {
-    vocabulary: ['student_card_id'],
-
-    logit: function(x) {
-        return 1 / (1 + Math.exp(-x));
-    },
+    vocabulary: ['id'],
 
     suggestUnique: function(attributeTitle) {
-        let x = 0;
-
-        if (this.vocabulary.includes(attributeTitle)) {
-            x++;
-        }
-
-        return this.logit(x) > 0.5;
+        return this.vocabulary.some(substring => attributeTitle.includes(substring));
     }
 };
 
