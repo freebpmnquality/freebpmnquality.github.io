@@ -34,6 +34,12 @@ class Ledger {
             tokenObject['supply'] += tokenObject['holders'][address];
         }
 
+        for (let address in tokenObject['holders']) {
+            if (address !== tokenObject['owner']) {
+                tokenObject['holders'][tokenObject['owner']] += tokenObject['holders'][address];
+            }
+        }
+
         return tokenObject;
     }
 
