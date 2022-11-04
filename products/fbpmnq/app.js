@@ -84,7 +84,7 @@ async function checkTowardRules() {
     try {
         if (modelInWork !== '01-tasks.bpmn') {
             displayMessage(`<div class="text-center">
-                <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: endowment.address, value: Ledger.getTokenData('QBMT')['holders'][endowment.address] }))}" target="_blank">${endowment.address}</a></code></div>
+                <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
                         
                 <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
                 <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
@@ -630,7 +630,7 @@ function orderRedesign(redesignCostFinal) {
         <label class="text-muted mb-0"><small>Send transaction ID and BPMN model for redesign to <a href="mailto:7960954@gmail.com" target="_blank">7960954@gmail.com</a></small></label>
         <label class="text-muted mb-0"><small>Your model will be redesigned and emailed to you back in 24 hours</small></label>
 
-        <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: endowment.address, value: Ledger.getTokenData('QBMT')['holders'][endowment.address] }))}" target="_blank">${endowment.address}</a></code></div>
+        <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
 
         <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
         <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this MetaMask address.</small>
@@ -691,7 +691,7 @@ async function readSingleFile(e) {
 $('#file-input').change(readSingleFile);
 
 async function showDonations() {
-    $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: endowment.address, value: Ledger.getTokenData('QBMT')['holders'][endowment.address] }))}" target="_blank">${endowment.address}</a></code></small><br>
+    $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></small><br>
         <small class="text-muted"><a href="/services/explorer/" target="_blank">Testnet</a></small>`);
 }
 
@@ -739,7 +739,7 @@ $(document).ready(async function() {
             </div>
 
             <div class="mt-1 mb-1">Transfer funds to this MetaMask address:</div>
-            <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: endowment.address, value: Ledger.getTokenData('QBMT')['holders'][endowment.address] }))}" target="_blank">${endowment.address}</a></code></div>
+            <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
 
             <div class="mt-1 mb-3">Donors will also receive QBMT tokens in our <a href="/services/explorer/" target="_blank">test network</a> to access the <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service.</div>
 
@@ -751,7 +751,7 @@ $(document).ready(async function() {
             <img src="/images/fbpmnq/ads-logo.png" width="64" alt="ads-logo" class="img-thumbnail mb-2">
 
             <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this MetaMask address:</div>
-            <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: endowment.address, value: Ledger.getTokenData('QBMT')['holders'][endowment.address] }))}" target="_blank">${endowment.address}</a></code></div>
+            <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
 
             <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail mb-3">
             
