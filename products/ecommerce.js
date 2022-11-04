@@ -1,3 +1,10 @@
+/**
+ * It is a sort of estimation tool to understand the future efficiency of the project in terms of monetization.
+ * There are two value streams:
+ * - revenue from the purchasing of the product itself;
+ * - revenue from the advertisement provided with the Google AdSense partnership.
+ * The Google Analytics service collects insights about the expected revenue.
+ */
 class ECommerce {
     static AFFILIATION = 'freebpmnquality.github.io';
     static CURRENCY = 'USD';
