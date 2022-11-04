@@ -18,26 +18,18 @@ class Ledger {
         tokenObject['supply'] = Number.parseInt(tokenObject['supply'], 16);
         tokenObject['created'] = Number.parseInt(tokenObject['created'], 16);
 
-        const timestampUNIX = Ledger.getTimestamp();
-        const timestampDec = (timestampUNIX - tokenObject['created']) / 86400;
-
         for (let address in tokenObject['holders']) {
-            if (address === tokenObject['owner']) {
-                const parameter = Number.parseInt(tokenObject['holders'][address]['parameter'], 16);
-                const constant = Number.parseInt(tokenObject['holders'][address]['constant'], 16);
-
-                tokenObject['holders'][address] = parameter * timestampDec + constant;
-            } else {
-                tokenObject['holders'][address] = Number.parseInt(tokenObject['holders'][address], 16);
-            }
-
-            tokenObject['supply'] += tokenObject['holders'][address];
+            tokenObject['holders'][address] = Number.parseInt(tokenObject['holders'][address], 16);
         }
 
         for (let address in tokenObject['holders']) {
             if (address !== tokenObject['owner']) {
-                tokenObject['holders'][tokenObject['owner']] += tokenObject['holders'][address];
+                tokenObject['holders'][tokenObject['owner']] -= tokenObject['holders'][address];
             }
+        }
+
+        for (let address in tokenObject['holders']) {
+            tokenObject['supply'] += tokenObject['holders'][address];
         }
 
         return tokenObject;
