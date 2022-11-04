@@ -692,7 +692,7 @@ $('#file-input').change(readSingleFile);
 
 async function showDonations() {
     $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: endowment.address, value: Ledger.getTokenData('QBMT')['holders'][endowment.address] }))}" target="_blank">${endowment.address}</a></code></small><br>
-        <small class="text-muted">Statistics <strong>(<a href="/services/explorer/" target="_blank">testnet</a>)</strong></small>`);
+        <small class="text-muted"><a href="/services/explorer/" target="_blank">Testnet</a></small>`);
 }
 
 function googleTranslateElementInit() {
