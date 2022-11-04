@@ -152,7 +152,7 @@
 
         for (let address in Ledger.getTokenData(tokenSymbol)['holders']) {
             $('#qbmt-holders').append(`<p class="mb-0">
-                    <code><a href="/services/efforts/wallet/?p=${btoa(JSON.stringify({ address: address, value: Ledger.getTokenData('QBMT')['holders'][address] }))}" target="_blank">${address}</a></code>: ${Ledger.getTokenData(tokenSymbol)['holders'][address].toLocaleString('en-US')} ${tokenSymbol} <span class="text-muted">$${Ledger.getTokenData(tokenSymbol)['holders'][address].toLocaleString('en-US')}</span>
+                    <code><a href="https://blockscan.com/address/${address}" target="_blank">${address}</a></code>: ${Ledger.getTokenData(tokenSymbol)['holders'][address].toLocaleString('en-US')} ${tokenSymbol} <span class="text-muted">$${Ledger.getTokenData(tokenSymbol)['holders'][address].toLocaleString('en-US')}</span>
                 </p>`);
         }
     </script>
