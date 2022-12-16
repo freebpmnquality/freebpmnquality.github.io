@@ -315,8 +315,8 @@
 
     <script src="../analytics/js/payment.js"></script>
 
+    <script src="../efforts/amm.lib.js"></script>
     <script src="../efforts/efforts.lib.js"></script>
-    <script src="../swap/amm.lib.js"></script>
 
     <!-- BM patch -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
@@ -350,11 +350,11 @@
 
                                 <form onsubmit="return false;">
                                     <div class="form-group mt-2 mb-1">
-                                        <label for="ethAddress">Login using MetaMask address</label>
+                                        <label for="ethAddress">Login using Ethereum address</label>
                                         <p class="mt-0">
                                             <img src="/images/payment/metamask.png" alt="metamask" width="160">
                                         </p>
-                                        <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="MetaMask Address" readonly>
+                                        <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="Ethereum Address" readonly>
 
                                         <button class="btn btn-danger btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="getEthAddress();" id="connectBtn">CONNECT</button>
                                     </div>
@@ -366,7 +366,7 @@
                                     </div>
 
                                     <button class="btn btn-primary mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="checkEthAddress();" id="loginBtn" disabled>LOGIN</button>
-                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('../swap/', '_blank').focus();">GET TOKENS</button>
+                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('https:\/\/goerli.etherscan.io/token/0x31ffaede8505413e06d8f1ad6d3a313edcc2347e', '_blank').focus();">GET TOKENS</button>
 
                                     <small class="form-text text-muted">Tokens provide lifetime access to <span style="color: #dc3545; font-weight: bold;">PRO</span> features</small>
                                 </form>
@@ -501,7 +501,7 @@
                         }
                     }
                 } else {
-                    throw new Error('Invalid MetaMask address.');
+                    throw new Error('Invalid Ethereum address.');
                 }
             } catch (err) {
                 alert('Oops! ' + err.message);

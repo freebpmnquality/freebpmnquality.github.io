@@ -85,14 +85,6 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://freebpmnquality.github.io/services/swap/</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://freebpmnquality.github.io/services/explorer/</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
         <loc>https://freebpmnquality.github.io/business-models/develop-vision-and-strategy-bpmn.html</loc>
         <changefreq>monthly</changefreq>
     </url>
