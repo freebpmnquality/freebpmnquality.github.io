@@ -29,7 +29,7 @@ $('#slider').change(async function() {
 var modelInWork = '01-tasks.bpmn';
 
 var endowment = {
-    address: Ledger.OWNER,
+    address: '0xfB457d40ef1d3f774409d3e15C67aABD260F220C',
     tag: 'ethereum',
     ticker: 'ETH'
 };
@@ -691,8 +691,7 @@ async function readSingleFile(e) {
 $('#file-input').change(readSingleFile);
 
 async function showDonations() {
-    $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></small><br>
-        <small class="text-muted"><a href="https://goerli.etherscan.io/token/0x31ffaede8505413e06d8f1ad6d3a313edcc2347e" target="_blank">Testnet</a></small>`);
+    $('#donations').html(`<small class="form-check-label"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></small>`);
 }
 
 function googleTranslateElementInit() {
@@ -738,12 +737,11 @@ $(document).ready(async function() {
                 </div>
             </div>
 
-            <div class="mt-1 mb-1">Transfer funds to this Ethereum address:</div>
-            <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
+            <div class="mt-1 mb-1">Buy <a href="https://goerli.etherscan.io/token/0x5A6497F53abB7AEf3e3faCEF91DD53820041F111" target="_blank">QBMT tokens</a> and get the access to <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service!</div>
 
-            <div class="mt-1 mb-3">Donors will also receive QBMT tokens in our <a href="https://goerli.etherscan.io/token/0x31ffaede8505413e06d8f1ad6d3a313edcc2347e" target="_blank">test network</a> to access the <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service.</div>
+            <div class="mt-1 mb-1">Paste token address <code>0x5A6497F53abB7AEf3e3faCEF91DD53820041F111</code></div>
 
-            <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
+            <a href="https://app.uniswap.org/#/swap" class="btn btn-sm btn-block" target="_blank"><img src="https://app.uniswap.org/favicon.png" width="16"> CONTINUE TO UNISWAP</a>
         </div>`, 'Try Ads-Free FBPMNQ');
     } else {
         displayMessage(`<div class="text-center">

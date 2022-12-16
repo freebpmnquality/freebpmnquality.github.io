@@ -294,8 +294,6 @@
     <br>
     <br>
 
-    <script src="/data/ledger.js"></script>
-
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -317,6 +315,8 @@
 
     <script src="../efforts/amm.lib.js"></script>
     <script src="../efforts/efforts.lib.js"></script>
+
+    <script src="/js/QualiBPMNToken.js"></script>
 
     <!-- BM patch -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
@@ -352,7 +352,7 @@
                                     <div class="form-group mt-2 mb-1">
                                         <label for="ethAddress">Login using Ethereum address</label>
                                         <p class="mt-0">
-                                            <img src="/images/payment/metamask.png" alt="metamask" width="160">
+                                            <img src="/images/payment/web3.png" alt="metamask" width="160">
                                         </p>
                                         <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="Ethereum Address" readonly>
 
@@ -366,8 +366,9 @@
                                     </div>
 
                                     <button class="btn btn-primary mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="checkEthAddress();" id="loginBtn" disabled>LOGIN</button>
-                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('https:\/\/goerli.etherscan.io/token/0x31ffaede8505413e06d8f1ad6d3a313edcc2347e', '_blank').focus();">GET TOKENS</button>
+                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('https:\/\/app.uniswap.org/#/swap', '_blank').focus();"><img src="https://app.uniswap.org/favicon.png" width="16"> GET TOKENS</button>
 
+                                    <small class="form-text text-muted">Paste token address <code>0x5A6497F53abB7AEf3e3faCEF91DD53820041F111</code></small>
                                     <small class="form-text text-muted">Tokens provide lifetime access to <span style="color: #dc3545; font-weight: bold;">PRO</span> features</small>
                                 </form>
                             </div>
@@ -455,13 +456,11 @@
             return false;
         }
 
-        function getEthAddressBalance(ethAddress) {
-            const holders = Ledger.getTokenData('QBMT').holders;
-
-            const accountValue = holders.hasOwnProperty(ethAddress) ? holders[ethAddress] : 0;
+        async function getEthAddressBalance(ethAddress) {
+            const accountValue = await QualiBPMNToken.balanceOf(ethAddress);
 
             const addressBalance = Number.parseFloat(accountValue);
-            const addressBalanceUSD = AMMUtil.makePrice(addressBalance);
+            const addressBalanceUSD = await AMMUtil.makePrice(addressBalance);
 
             $('#ethBalance').val(addressBalance.toLocaleString('en-US') + ' QBMT');
 
@@ -480,12 +479,12 @@
             };
         }
 
-        function checkEthAddress() {
+        async function checkEthAddress() {
             try {
                 const ethAddress = $('#ethAddress').val();
 
                 if (ethAddress && ethAddress.match(/(\b0x[a-fA-F0-9]{40}\b)/g)) {
-                    const ethAddressBalance = getEthAddressBalance(ethAddress);
+                    const ethAddressBalance = await getEthAddressBalance(ethAddress);
 
                     if (ethAddressBalance.addressBalance >= ethAddressBalance.pricing) {
                         $('#promoCode').val(Payment.getPROCode());

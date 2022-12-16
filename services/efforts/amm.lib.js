@@ -23,20 +23,20 @@ class AMMUtil {
         return results;
     }
 
-    static getLiquidity() {
-        return Number.parseFloat(Ledger.getTokenData('QBMT').supply);
+    static async getLiquidity() {
+        return Number.parseFloat(await AMMUtil.getTotal() / QualiBPMNTokenVendor.tokensPerUSD());
     }
 
-    static makePrice(buy) {
-        return buy * (AMMUtil.getLiquidity() / AMMUtil.getTotal());
+    static async makePrice(buy) {
+        return buy / QualiBPMNTokenVendor.tokensPerUSD;
     }
 
-    static getTotal() {
-        return Number.parseFloat(Ledger.getTokenData('QBMT').supply);
+    static async getTotal() {
+        return Number.parseFloat(await QualiBPMNToken.totalSupply());
     }
 
     static getPricing() {
-        return Number.parseFloat(ECommerce.PRODUCTS['SKU_FBPMNQ001'].cost);
+        return Number.parseFloat(ECommerce.PRODUCTS['SKU_FBPMNQ001'].cost * QualiBPMNTokenVendor.tokensPerUSD);
     }
 
     static async getMetaMaskAccounts() {
