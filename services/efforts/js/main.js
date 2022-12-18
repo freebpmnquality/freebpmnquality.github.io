@@ -28,7 +28,7 @@ function estimateEfforts() {
                 window.open('../efforts/wallet/?p=' + encodedParams);
             }
         } else {
-            throw new Error('Enter your Website URL and Ethereum address!');
+            throw new Error('Enter your Website URL and Web3 Wallet address!');
         }
     } catch (err) {
         console.error(err);

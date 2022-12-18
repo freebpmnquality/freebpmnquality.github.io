@@ -23,20 +23,27 @@ class AMMUtil {
         return results;
     }
 
-    static async getLiquidity() {
-        return Number.parseFloat(await AMMUtil.getTotal() / QualiBPMNTokenVendor.tokensPerUSD());
+    static async getCap() {
+        return Number.parseFloat(await AMMUtil.getTotal() * await Tokenomics.tokenPrice());
     }
 
     static async makePrice(buy) {
-        return buy / QualiBPMNTokenVendor.tokensPerUSD;
+        return buy * (await AMMUtil.getTokenPriceUSD());
     }
 
     static async getTotal() {
-        return Number.parseFloat(await QualiBPMNToken.totalSupply());
+        return Number.parseFloat(await Tokenomics.totalSupply());
     }
 
-    static getPricing() {
-        return Number.parseFloat(ECommerce.PRODUCTS['SKU_FBPMNQ001'].cost * QualiBPMNTokenVendor.tokensPerUSD);
+    static async getTokenPriceUSD() {
+        const coingeckoPriceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd');
+        const coingeckoPriceJSON = await coingeckoPriceResponse.json();
+
+        return coingeckoPriceJSON.binancecoin.usd * (await Tokenomics.tokenPrice());
+    }
+
+    static async getPricing(priceUSD) {
+        return priceUSD / (await AMMUtil.getTokenPriceUSD());
     }
 
     static async getMetaMaskAccounts() {

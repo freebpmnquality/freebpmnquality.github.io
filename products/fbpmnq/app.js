@@ -86,8 +86,8 @@ async function checkTowardRules() {
             displayMessage(`<div class="text-center">
                 <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
                         
-                <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
-                <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this Ethereum address.</small>
+                <img src="/images/payment/web3.png" width="128" alt="wallet-logo" class="img-thumbnail">
+                <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this Web3 Wallet address.</small>
 
                 <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
             </div>`, 'Support us');
@@ -632,8 +632,8 @@ function orderRedesign(redesignCostFinal) {
 
         <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
 
-        <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail">
-        <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this Ethereum address.</small>
+        <img src="/images/payment/web3.png" width="128" alt="wallet-logo" class="img-thumbnail">
+        <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this Web3 Wallet address.</small>
 
         <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Cancel</button>
     </div>`, 'Order');
@@ -737,21 +737,19 @@ $(document).ready(async function() {
                 </div>
             </div>
 
-            <div class="mt-1 mb-1">Buy <a href="https://goerli.etherscan.io/token/0x5A6497F53abB7AEf3e3faCEF91DD53820041F111" target="_blank">QBMT tokens</a> and get the access to <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service!</div>
+            <div class="mt-1 mb-2">Buy <a href="https://testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5" target="_blank">our tokens</a> and get the access to <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service!</div>
 
-            <div class="mt-1 mb-1">Paste token address <code>0x5A6497F53abB7AEf3e3faCEF91DD53820041F111</code></div>
-
-            <a href="https://app.uniswap.org/#/swap" class="btn btn-sm btn-block" target="_blank"><img src="https://app.uniswap.org/favicon.png" width="16"> CONTINUE TO UNISWAP</a>
+            <a href="https://testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5#writeContract#F1" class="btn btn-sm btn-block" target="_blank">BUY TOKENS</a>
         </div>`, 'Try Ads-Free FBPMNQ');
     } else {
         displayMessage(`<div class="text-center">
             <div class="mt-1 mb-1">Kindly support us — disable your adblock extension and click on several banner ads!</div>
             <img src="/images/fbpmnq/ads-logo.png" width="64" alt="ads-logo" class="img-thumbnail mb-2">
 
-            <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this Ethereum address:</div>
+            <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this Web3 Wallet address:</div>
             <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
 
-            <img src="/images/fbpmnq/wallet-logo.png" width="64" alt="wallet-logo" class="img-thumbnail mb-3">
+            <img src="/images/payment/web3.png" width="128" alt="wallet-logo" class="img-thumbnail mb-3">
             
             <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
         </div>`, 'Support us');

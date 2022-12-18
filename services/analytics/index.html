@@ -316,7 +316,7 @@
     <script src="../efforts/amm.lib.js"></script>
     <script src="../efforts/efforts.lib.js"></script>
 
-    <script src="/js/QualiBPMNToken.js"></script>
+    <script src="/js/tokenomics.js"></script>
 
     <!-- BM patch -->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="bmModal">
@@ -350,25 +350,24 @@
 
                                 <form onsubmit="return false;">
                                     <div class="form-group mt-2 mb-1">
-                                        <label for="ethAddress">Login using Ethereum address</label>
+                                        <label for="ethAddress">Login using Web3 Wallet address</label>
                                         <p class="mt-0">
                                             <img src="/images/payment/web3.png" alt="metamask" width="160">
                                         </p>
-                                        <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="Ethereum Address" readonly>
+                                        <input type="hidden" class="form-control" id="ethAddress" style="border-radius: 1rem;" placeholder="Web3 Wallet Address" readonly>
 
                                         <button class="btn btn-danger btn-block" style="border-radius: 1rem; font-weight: bold;" onclick="getEthAddress();" id="connectBtn">CONNECT</button>
                                     </div>
                                     <div class="form-group mt-0 mb-1">
-                                        <input type="text" class="form-control" id="ethBalance" style="border-radius: 1rem;" placeholder="Address Balance" value="N/A QBMT" readonly>
+                                        <input type="text" class="form-control" id="ethBalance" style="border-radius: 1rem;" placeholder="Address Balance" value="N/A" readonly>
                                     </div>
                                     <div class="form-group mt-0 mb-2">
                                         <input type="text" class="form-control" id="ethStatus" style="border-radius: 1rem;" placeholder="Address Status" readonly>
                                     </div>
 
                                     <button class="btn btn-primary mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="checkEthAddress();" id="loginBtn" disabled>LOGIN</button>
-                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('https:\/\/app.uniswap.org/#/swap', '_blank').focus();"><img src="https://app.uniswap.org/favicon.png" width="16"> GET TOKENS</button>
+                                    <button class="btn btn-warning mb-0 mt-0" style="border-radius: 1rem; font-weight: bold;" onclick="window.open('https:\/\/testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5#writeContract#F1', '_blank').focus();">BUY TOKENS</button>
 
-                                    <small class="form-text text-muted">Paste token address <code>0x5A6497F53abB7AEf3e3faCEF91DD53820041F111</code></small>
                                     <small class="form-text text-muted">Tokens provide lifetime access to <span style="color: #dc3545; font-weight: bold;">PRO</span> features</small>
                                 </form>
                             </div>
@@ -387,7 +386,7 @@
         var actualPromoCode = Payment.orderPromoCode();
         var enteredPromoCode = '';
 
-        var pricing = AMMUtil.getPricing();
+        var pricing = 0;
 
         function usePromoCode() {
             $('#bmModal').modal('hide');
@@ -457,12 +456,12 @@
         }
 
         async function getEthAddressBalance(ethAddress) {
-            const accountValue = await QualiBPMNToken.balanceOf(ethAddress);
+            const accountValue = await Tokenomics.balanceOf(ethAddress);
 
             const addressBalance = Number.parseFloat(accountValue);
             const addressBalanceUSD = await AMMUtil.makePrice(addressBalance);
 
-            $('#ethBalance').val(addressBalance.toLocaleString('en-US') + ' QBMT');
+            $('#ethBalance').val(addressBalance.toLocaleString('en-US') + ' FBPMNQ');
 
             if (addressBalance < pricing) {
                 $('#loginBtn').attr('disabled', true);
@@ -494,13 +493,13 @@
                         if ($('#loginBalance').length === 0) {
                             $('#navbarElements').append(`<li class="nav-item" id="loginBalance">
                                 <span class="nav-link" style="font-weight: bold;">
-                                    ${ethAddress.substring(0, 5)}...${ethAddress.substring(38)} ♦ ${ethAddressBalance.addressBalance.toLocaleString('en-US')} QBMT ($${ethAddressBalance.addressBalanceUSD.toLocaleString('en-US')})
+                                    ${ethAddress.substring(0, 5)}...${ethAddress.substring(38)} ♦ ${ethAddressBalance.addressBalance.toLocaleString('en-US')} FBPMNQ ($${ethAddressBalance.addressBalanceUSD.toLocaleString('en-US')})
                                 </span>
                             </li>`);
                         }
                     }
                 } else {
-                    throw new Error('Invalid Ethereum address.');
+                    throw new Error('Invalid Web3 Wallet address.');
                 }
             } catch (err) {
                 alert('Oops! ' + err.message);
@@ -509,7 +508,9 @@
             return false;
         }
 
-        $(document).ready(function() {
+        $(document).ready(async function() {
+            pricing = await AMMUtil.getPricing(29);
+
             $('#pro-activate').hide();
             $('#pro-config').hide();
             $('#pro-moon').hide();
@@ -525,7 +526,7 @@
                 'filter': 'blur(3px)'
             });
 
-            $('#ethStatus').val(`Requires ${pricing.toLocaleString('en-US')} QBMT tokens`);
+            $('#ethStatus').val(`Requires ${pricing.toLocaleString('en-US')} FBPMNQ tokens`);
 
             $('#bmModal').modal('show');
 
