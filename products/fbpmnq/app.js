@@ -729,17 +729,11 @@ $(document).ready(async function() {
                 </div>
                 <div class="col-sm-6 align-self-center">
                     <div class="mt-1 mb-1"><b>Ads-Free FBPMNQ BPMN validation and analysis tool is a paid product!</b></div>
-                    <div class="mt-1 mb-1"><small>You are allowed to fully test it. Please buy then.</small></div>
-                    <div class="mt-1 mb-1">
-                        <span style="font-size: 18px; font-weight: 700;"><s>$${59}</s></span>
-                        <span style="font-size: 32px; font-weight: 900; color: #dc3545;">$${eComMeasures.price.value}</span>
-                    </div>
+                    <div class="mt-1 mb-1"><small>You are allowed to fully test it. Please pay then.</small></div>
                 </div>
             </div>
 
-            <div class="mt-1 mb-2">Buy <a href="https://testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5" target="_blank">our tokens</a> and get the access to <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service!</div>
-
-            <a href="https://testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5#writeContract#F1" class="btn btn-sm btn-block" target="_blank">BUY TOKENS</a>
+            <div class="mt-1 mb-2"><a href="https://www.buymeacoffee.com/freebpmnquality" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a></div>
         </div>`, 'Try Ads-Free FBPMNQ');
     } else {
         displayMessage(`<div class="text-center">
