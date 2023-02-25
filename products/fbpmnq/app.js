@@ -37,7 +37,6 @@ var endowment = {
 function clearQualityCostBlock() {
     $('#model-quality').text(0);
     $('#model-cost').text(0);
-    $('#order-redesign').empty();
 }
 
 async function displayExample() {
@@ -84,12 +83,12 @@ async function checkTowardRules() {
     try {
         if (modelInWork !== '01-tasks.bpmn') {
             displayMessage(`<div class="text-center">
-                <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
-                        
-                <img src="/images/payment/web3.png" width="128" alt="wallet-logo" class="img-thumbnail">
-                <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this Web3 Wallet address.</small>
+                <div class="mt-1 mb-1">Kindly support us — disable your adblock extension and click on several banner ads!</div>
+                <img src="/images/fbpmnq/ads-logo.png" width="64" alt="ads-logo" class="img-thumbnail mb-2">
 
-                <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Continue without endowment</button>
+                <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause.</div>
+                
+                <div class="mt-1 mb-2"><a href="https://www.buymeacoffee.com/freebpmnquality" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a></div>
             </div>`, 'Support us');
         }
 
@@ -549,13 +548,6 @@ async function checkTowardRules() {
 
             var modelCost = calculateCost(modelQuality, modelSize);
 
-            var redesignCost = calculateCost(1, modelSize) - modelCost;
-
-            var basePrice = 5;
-            var redesignCostFinal = basePrice + Math.ceil(redesignCost) - 0.01;
-
-            $('#order-redesign').html(`<button class="btn mb-0 mt-2" onclick="orderRedesign(${redesignCostFinal});" role="button">Order redesign for $${redesignCostFinal.toFixed(2)} only!</button>`);
-
             $('#model-cost').text(modelCost.toFixed(2));
 
             if (messages.length < 1) {
@@ -621,22 +613,6 @@ function calculateCost(modelQuality, modelSize) {
 
 function tokenizeModel() {
     displayMessage('To be appeared later!');
-}
-
-function orderRedesign(redesignCostFinal) {
-    displayMessage(`<div class="text-center">
-        <label class="text-muted mb-0">Order BPMN redesign</label>
-        <label class="text-muted mb-0"><small>Transfer funds to the address below equal to <b>$${redesignCostFinal.toFixed(2)}</b></small></label>
-        <label class="text-muted mb-0"><small>Send transaction ID and BPMN model for redesign to <a href="mailto:7960954@gmail.com" target="_blank">7960954@gmail.com</a></small></label>
-        <label class="text-muted mb-0"><small>Your model will be redesigned and emailed to you back in 24 hours</small></label>
-
-        <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
-
-        <img src="/images/payment/web3.png" width="128" alt="wallet-logo" class="img-thumbnail">
-        <small class="form-text text-muted mb-2">Transfer funds you are willing to contribute to our cause to this Web3 Wallet address.</small>
-
-        <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">Cancel</button>
-    </div>`, 'Order');
 }
 
 async function readSingleFile(e) {
@@ -729,29 +705,20 @@ $(document).ready(async function() {
                 </div>
                 <div class="col-sm-6 align-self-center">
                     <div class="mt-1 mb-1"><b>Ads-Free FBPMNQ BPMN validation and analysis tool is a paid product!</b></div>
-                    <div class="mt-1 mb-1"><small>You are allowed to fully test it. Please buy then.</small></div>
-                    <div class="mt-1 mb-1">
-                        <span style="font-size: 18px; font-weight: 700;"><s>$${59}</s></span>
-                        <span style="font-size: 32px; font-weight: 900; color: #dc3545;">$${eComMeasures.price.value}</span>
-                    </div>
+                    <div class="mt-1 mb-1"><small>You are allowed to fully test it. Please pay then.</small></div>
                 </div>
             </div>
 
-            <div class="mt-1 mb-2">Buy <a href="https://testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5" target="_blank">our tokens</a> and get the access to <span class="badge badge-primary">PRO</span> features of the <a href="/services/analytics/?utm_source=freebpmnquality.github.io&utm_medium=button&utm_campaign=fbpmnq-demo&utm_content=qualibpmn-pro" target="_blank">QualiBPMN</a> service!</div>
-
-            <a href="https://testnet.bscscan.com/token/0x3b0c4a38a7f651f172bf50bd7f6687a8a8624db5#writeContract#F1" class="btn btn-sm btn-block" target="_blank">BUY TOKENS</a>
+            <div class="mt-1 mb-2"><a href="https://www.buymeacoffee.com/freebpmnquality" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a></div>
         </div>`, 'Try Ads-Free FBPMNQ');
     } else {
         displayMessage(`<div class="text-center">
             <div class="mt-1 mb-1">Kindly support us — disable your adblock extension and click on several banner ads!</div>
             <img src="/images/fbpmnq/ads-logo.png" width="64" alt="ads-logo" class="img-thumbnail mb-2">
 
-            <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause directly to this Web3 Wallet address:</div>
-            <div class="mt-1 mb-1"><b>Wallet</b> <code><a href="https://blockscan.com/address/${endowment.address}" target="_blank">${endowment.address}</a></code></div>
-
-            <img src="/images/payment/web3.png" width="128" alt="wallet-logo" class="img-thumbnail mb-3">
+            <div class="mt-1 mb-1">Or transfer funds you are willing to contribute to our cause.</div>
             
-            <button type="button" class="btn btn-sm btn-block" data-dismiss="modal">CONTINUE</button>
+            <div class="mt-1 mb-2"><a href="https://www.buymeacoffee.com/freebpmnquality" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a></div>
         </div>`, 'Support us');
     }
 });
