@@ -1,9 +1,0 @@
-{
-    "name": "Ads-Free FBPMNQ",
-    "short_name": "FBPMNQ",
-    "theme_color": "#90caf9",
-    "background_color": "#90CAF9",
-    "display": "browser",
-    "scope": "/",
-    "start_url": "/"
-}
