@@ -611,10 +611,6 @@ function calculateCost(modelQuality, modelSize) {
     return coefficient * Math.pow(KLOC, exponent) * monthHours;
 }
 
-function tokenizeModel() {
-    displayMessage('To be appeared later!');
-}
-
 async function readSingleFile(e) {
     try {
         isChecked = false;
