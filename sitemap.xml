@@ -1412,4 +1412,8 @@
         <loc>https://freebpmnquality.github.io/business-models/process-taxes-bpmn.html</loc>
         <changefreq>monthly</changefreq>
     </url>
+    <url>
+        <loc>https://freebpmnquality.github.io/privacy-policy.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
 </urlset>
